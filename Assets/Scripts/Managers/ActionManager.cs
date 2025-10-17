@@ -35,19 +35,20 @@ public class ActionManager : MonoBehaviour
     //of extreme importance
     private IEnumerator Flow(GameAction action, Action OnFlowFinished = null)
     {
-        Debug.Log("flow Start");
+        //Debug.Log("flow Start");
         //sets "reactions" to the current actions prereactions
         reactions = action.preReactions;
+        Debug.Log("flow PRE, reactions count: " + reactions.Count);
         PerformSubscribers(action, preSubs);
         yield return PerformReactions();
 
-        Debug.Log("flow activate");
         reactions = action.performReactions;
+        Debug.Log("flow activate, reactions count: " + reactions.Count);
         yield return PerformPerformer(action);
         yield return PerformReactions();
 
-        Debug.Log("flow close");
         reactions = action.postReactions;
+        Debug.Log("flow POST, reactions count: " + reactions.Count);
         PerformSubscribers(action, postSubs);
         yield return PerformReactions();
 
@@ -65,11 +66,11 @@ public class ActionManager : MonoBehaviour
     }
     private void PerformSubscribers(GameAction action, Dictionary<Type, List<Action<GameAction>>> subs)
     {
-        //tells presubscribers that this action is in the PRE phases
+        //tells subscribers what phase this action is in
         Type type = action.GetType();
         if (subs.ContainsKey(type))
         {
-            Debug.Log("subs contains key");
+            //Debug.Log("subs contains key");
 
             foreach (var sub in subs[type])
             {
@@ -78,13 +79,13 @@ public class ActionManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("subs does not contain key");
+            //Debug.Log("subs does not contain key");
         }
     }
     private IEnumerator PerformReactions()
     {
         //does all the actions in "reactions" with Flow
-        Debug.Log("reactions count: " + reactions.Count);
+        //Debug.Log("reactions count: " + reactions.Count);
         foreach (GameAction reaction in reactions)
         {
             yield return Flow(reaction);

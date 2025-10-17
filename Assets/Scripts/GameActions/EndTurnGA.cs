@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class DrawCardGA : GameAction
+public class EndTurnGA : GameAction
 {
     public int playerId;
-    public DrawCardGA(int playerIdInput)
+    public EndTurnGA(int playerIdInput)
     {
         playerId = playerIdInput;
     }

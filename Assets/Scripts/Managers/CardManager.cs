@@ -13,22 +13,26 @@ public class CardManager : MonoBehaviour
     [SerializeField] private Transform cardCanvas;
     [SerializeField] private Transform playerHand;
     [SerializeField] private TMP_Text deckCountUI;
-    private List<Card> deck = new List<Card>();
     private int deckSize = 10;
 
     void Awake()
     {
         instance = this;
     }
-    public void DrawCard()
+    public void DrawCard(int playerId)
     {
-        Debug.Log("card Draw Called");
         if (ActionManager.instance.isPerforming) return;
 
-        DrawCardGA drawCardGA = new();
+        DrawCardGA drawCardGA = new(playerId);
         ActionManager.instance.Perform(drawCardGA);
     }
+    public void CurrentPlayerDrawCard()
+    {
+        if (ActionManager.instance.isPerforming) return;
 
+        DrawCardGA drawCardGA = new(GameManager.instance.currentPlayer);
+        ActionManager.instance.Perform(drawCardGA);
+    }
     private void OnEnable()
     {
         ActionManager.AttachPerformer<DrawCardGA>(DrawCardPerformer);
@@ -42,35 +46,42 @@ public class CardManager : MonoBehaviour
         Debug.Log("card Draw Performed");
 
         //CardVisual card = Instantiate(cardVisual, playerHand.position, Quaternion.identity);
-        if (deck.Count < 1)
+        if (GameManager.instance.players[drawCardGA.playerId].deck.Count < 1)
         {
-            ShuffleDiscardIntoDeck();
+            ShuffleDiscardIntoDeck(drawCardGA.playerId);
         }
-        Card drawnCard = deck[0];
-        deck.Remove(drawnCard);
-        CardVisual newCardVisual = Instantiate(cardVisual, playerHand);
-        newCardVisual.Initiate(drawnCard);
+        Card drawnCard = GameManager.instance.players[drawCardGA.playerId].deck[0];
+        GameManager.instance.players[drawCardGA.playerId].deck.Remove(drawnCard);
+        if (drawCardGA.playerId == GameManager.instance.currentPlayer)
+        {
+            CardVisual newCardVisual = Instantiate(cardVisual, playerHand);
+            newCardVisual.Initiate(drawnCard);
+        }
+        else
+        {
+            Debug.Log("other player draws card");
+        }
         UpdateDeckUI();
         yield return null;
     }
-    public void CreateDeck()
+    public void CreateDeck(int playerId)
     {
-        deck = new();
+        GameManager.instance.players[playerId].deck = new();
         for (int i = 0; i < deckSize; i++)
         {
             CardData data = cardDatas[Random.Range(0, cardDatas.Count)];
             Card newCard = new(data);
-            deck.Add(newCard);
+            GameManager.instance.players[playerId].deck.Add(newCard);
         }
         UpdateDeckUI();
     }
-    public void ShuffleDiscardIntoDeck()
+    public void ShuffleDiscardIntoDeck(int playerId)
     {
-        CreateDeck();
+        CreateDeck(playerId);
         UpdateDeckUI();
     }
     public void UpdateDeckUI()
     {
-        deckCountUI.text = deck.Count.ToString();
+        deckCountUI.text = GameManager.instance.players[GameManager.instance.currentPlayer].deck.Count.ToString();
     }
 }
