@@ -14,6 +14,10 @@ public class CardManager : MonoBehaviour
     [SerializeField] private Transform cardCanvas;
     [SerializeField] private Transform playerHand;
     [SerializeField] private TMP_Text deckCountUI;
+
+    //handWidthVar
+    [SerializeField] private float maxHandWidth;
+    [SerializeField] private float handWidthScaleRate;
     private int deckSize = 10;
 
     void Awake()
@@ -58,16 +62,17 @@ public class CardManager : MonoBehaviour
         GameManager.instance.players[drawCardGA.playerId].hand.Add(drawnCard);
 
         //frontend
-        if (drawCardGA.playerId == GameManager.instance.currentPlayer)
-        {
-            CardVisual newCardVisual = Instantiate(cardVisual, playerHand);
-            newCardVisual.Initiate(drawnCard);
-            currentHeldCards.Add(newCardVisual);
-        }
-        else
-        {
-            Debug.Log("other player draws card");
-        }
+        UpdateHandUI();
+        // if (drawCardGA.playerId == GameManager.instance.currentPlayer)
+        // {
+        //     CardVisual newCardVisual = Instantiate(cardVisual, playerHand);
+        //     newCardVisual.Initiate(drawnCard);
+        //     currentHeldCards.Add(newCardVisual);
+        // }
+        // else
+        // {
+        //     Debug.Log("other player draws card");
+        // }
         UpdateDeckUI();
         yield return null;
     }
@@ -104,5 +109,17 @@ public class CardManager : MonoBehaviour
             newCardVisual.Initiate(item);
             currentHeldCards.Add(newCardVisual);
         }
-    } 
+        PositionHeldCards();
+    }
+    private void PositionHeldCards()
+    {
+        int i = -1;
+        float cardsHeld = currentHeldCards.Count;
+        float handWidth = -(maxHandWidth * handWidthScaleRate) / (cardsHeld + handWidthScaleRate) + maxHandWidth;
+        foreach (CardVisual item in currentHeldCards)
+        {
+            i++;
+            item.transform.position = new Vector2(playerHand.position.x-handWidth/2 + (handWidth/(cardsHeld+1))*(i+1), playerHand.position.y);
+        }
+    }
 }
