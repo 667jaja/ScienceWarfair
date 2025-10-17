@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator StartTurnPerformer(StartTurnGA startTurnGA)
     {
         Debug.Log("turnStart player id: " + startTurnGA.playerId);
-        CardManager.instance.UpdateDeckUI();
+        GlobalUIUpdate();
         yield return null;
     }
     private void OnEnable()
@@ -77,5 +77,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("turn end detected");
         StartTurnGA startTurnGA = new(currentPlayer);
         ActionManager.instance.AddReaction(startTurnGA);
+    }
+    public void GlobalUIUpdate()
+    {
+        CardManager.instance.UpdateDeckUI();
+        CardManager.instance.UpdateHandUI();
     }
 }

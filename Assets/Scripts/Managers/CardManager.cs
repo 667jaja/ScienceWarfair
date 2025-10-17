@@ -10,6 +10,7 @@ public class CardManager : MonoBehaviour
     public static CardManager instance;
     [SerializeField] private List<CardData> cardDatas;
     [SerializeField] private CardVisual cardVisual;
+    [SerializeField] private List<CardVisual> currentHeldCards = new List<CardVisual>();
     [SerializeField] private Transform cardCanvas;
     [SerializeField] private Transform playerHand;
     [SerializeField] private TMP_Text deckCountUI;
@@ -46,16 +47,22 @@ public class CardManager : MonoBehaviour
         Debug.Log("card Draw Performed");
 
         //CardVisual card = Instantiate(cardVisual, playerHand.position, Quaternion.identity);
+
+        //backend
         if (GameManager.instance.players[drawCardGA.playerId].deck.Count < 1)
         {
             ShuffleDiscardIntoDeck(drawCardGA.playerId);
         }
         Card drawnCard = GameManager.instance.players[drawCardGA.playerId].deck[0];
         GameManager.instance.players[drawCardGA.playerId].deck.Remove(drawnCard);
+        GameManager.instance.players[drawCardGA.playerId].hand.Add(drawnCard);
+
+        //frontend
         if (drawCardGA.playerId == GameManager.instance.currentPlayer)
         {
             CardVisual newCardVisual = Instantiate(cardVisual, playerHand);
             newCardVisual.Initiate(drawnCard);
+            currentHeldCards.Add(newCardVisual);
         }
         else
         {
@@ -84,4 +91,18 @@ public class CardManager : MonoBehaviour
     {
         deckCountUI.text = GameManager.instance.players[GameManager.instance.currentPlayer].deck.Count.ToString();
     }
+    public void UpdateHandUI()
+    {
+        foreach (CardVisual item in currentHeldCards)
+        {
+            Destroy(item.gameObject);
+        }
+        currentHeldCards = new();
+        foreach (Card item in GameManager.instance.players[GameManager.instance.currentPlayer].hand)
+        {
+            CardVisual newCardVisual = Instantiate(cardVisual, playerHand);
+            newCardVisual.Initiate(item);
+            currentHeldCards.Add(newCardVisual);
+        }
+    } 
 }
