@@ -414,6 +414,7 @@ GameObject:
   - component: {fileID: 78848197}
   - component: {fileID: 78848196}
   - component: {fileID: 78848198}
+  - component: {fileID: 78848199}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -495,6 +496,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40cc62ca5dde29742a1339b49bc8bd7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &78848199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78848190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f97772b1e09686f449acd2ed39931813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLaneHeight: 5
+  laneHeightScaleRate: 5
+  cardVisual: {fileID: 6868798076806503581, guid: 30febd3bb3ece5441882a792accb956f, type: 3}
+  laneTransforms:
+  - {fileID: 93797165}
+  - {fileID: 93797165}
+  - {fileID: 93797165}
+  - {fileID: 93797165}
+  - {fileID: 93797165}
+  - {fileID: 93797165}
+  units:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &93797164
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b21f04b683f31e34c8676c0a8db5caa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laneId: 0
 --- !u!1 &215020336
 GameObject:
   m_ObjectHideFlags: 0

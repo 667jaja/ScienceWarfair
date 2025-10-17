@@ -14,10 +14,6 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TMP_Text placementCostUI;
     private Card card;
 
-    private bool isHeld;
-    private float isHeldTimer;
-    private float holdTimeDropMin;
-
     void Start()
     {
         col = GetComponent<Collider2D>();
@@ -26,7 +22,6 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     {
         startDragPos = transform.position;
         transform.position = MousePos();
-
     }
     void OnMouseDrag()
     {
@@ -40,7 +35,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
         col.enabled = true;
         if (hitCollider != null && hitCollider.TryGetComponent(out ICardDropArea cardDropArea))
         {
-            cardDropArea.OnCardDrop(this);
+            cardDropArea.OnCardDrop(card);
         }
         else
         {
@@ -51,11 +46,6 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
-    void Update()
-    {
-
-    }
-
     public void Initiate(Card newCard)
     {
         card = newCard;
@@ -68,9 +58,9 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     {
 
     }
-    public void DropCard()
-    {
-        card.PerformEffect();
-        Destroy(gameObject);
-    }
+    // public void DropCard()
+    // {
+    //     card.PerformEffect();
+    //     Destroy(gameObject);
+    // }
 }

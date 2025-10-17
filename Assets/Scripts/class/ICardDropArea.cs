@@ -4,5 +4,5 @@ public interface ICardDropArea
 {
     //hand left middle right board
     //deck out
-    void OnCardDrop(CardVisual card);
+    void OnCardDrop(Card card);
 }

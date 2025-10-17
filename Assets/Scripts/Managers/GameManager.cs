@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
             CardManager.instance.CreateDeck(i);
         }
         currentPlayer = 0;
+        StartTurn();
     }
     public void TurnEndButton()
     {
@@ -82,5 +83,6 @@ public class GameManager : MonoBehaviour
     {
         CardManager.instance.UpdateDeckUI();
         CardManager.instance.UpdateHandUI();
+        UnitManager.instance.UpdateUnitUI();
     }
 }
