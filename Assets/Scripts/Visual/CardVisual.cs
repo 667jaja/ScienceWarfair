@@ -51,7 +51,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
         card = newCard;
         cardArtUI.sprite = newCard.cardArt;
         titleUI.text = newCard.title;
-        placementCostUI.text = newCard.placementCost.ToString();
+        if (placementCostUI != null) placementCostUI.text = newCard.placementCost.ToString();
     }
 
     public void OnPointerClick(PointerEventData eventdata)
