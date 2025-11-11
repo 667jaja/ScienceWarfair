@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Intern
   m_EditorClassIdentifier: 
   <title>k__BackingField: Intern
+  <description>k__BackingField: does nothing
   <cardArt>k__BackingField: {fileID: 21300000, guid: 1da878c6b6bfa47438e49442e2056183, type: 3}
   <placementCost>k__BackingField: 1
-  <cardEffect>k__BackingField: does nothing
+  <iq>k__BackingField: 1
+  <health>k__BackingField: 1
+  <cardEffect>k__BackingField: 

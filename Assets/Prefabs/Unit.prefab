@@ -125,9 +125,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583073392412420101}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 77c626bd2f886ed4da917143f9dce622, type: 2}
+  m_Controller: {fileID: 9100000, guid: e5034f4bbde214c4b92977e7d3181c9d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -151,9 +151,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d610fddccca63a14ab2161a29f502ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardArtUI: {fileID: 6381715276770193922}
-  titleUI: {fileID: 3835632815598681176}
-  placementCostUI: {fileID: 0}
+  cardArtUI:
+  - {fileID: 6381715276770193922}
+  titleUI:
+  - {fileID: 3835632815598681176}
+  - {fileID: 7137001156882736029}
+  placementCostUI:
+  - {fileID: 4976710449468112419}
+  iqUI:
+  - {fileID: 2519919634983549569}
+  - {fileID: 1375296176980345269}
+  healthUI:
+  - {fileID: 998707502501299412}
+  - {fileID: 3568931315722399256}
+  descriptionUI:
+  - {fileID: 7187853556636849122}
 --- !u!61 &6255750677620037767
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -314,7 +326,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -525,7 +537,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -937,7 +949,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -1148,7 +1160,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -1368,7 +1380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5637096320164002696
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1469,7 +1481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.5882353}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8235294}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1675,7 +1687,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1

@@ -640,6 +640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardDatas:
   - {fileID: 11400000, guid: 33cf9720279384f4c9bd070a67c1ad82, type: 2}
+  - {fileID: 11400000, guid: b8c4627ce80ef35459d5b1803147d0ac, type: 2}
   cardVisual: {fileID: 6868798076806503581, guid: 30febd3bb3ece5441882a792accb956f, type: 3}
   currentHeldCards: []
   cardCanvas: {fileID: 956074738}
@@ -671,11 +672,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f97772b1e09686f449acd2ed39931813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLaneHeight: 5
-  laneHeightScaleRate: 5
+  maxLaneHeight: 4
+  laneHeightScaleRate: 1
   columnCount: 3
   rowCount: 3
-  cardVisual: {fileID: 4713792105585538583, guid: 7532553673445b8439d7206d0c7cfcc9, type: 3}
+  unitVisual: {fileID: 4713792105585538583, guid: 7532553673445b8439d7206d0c7cfcc9, type: 3}
   laneTransforms:
   - {fileID: 8875439011829756050}
   - {fileID: 40625848}

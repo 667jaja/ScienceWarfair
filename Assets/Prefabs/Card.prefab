@@ -189,7 +189,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -461,7 +461,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -1145,7 +1145,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -1801,9 +1801,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d610fddccca63a14ab2161a29f502ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardArtUI: {fileID: 701977647048639495}
-  titleUI: {fileID: 2763472425713267848}
-  placementCostUI: {fileID: 3671223702287507899}
+  cardArtUI:
+  - {fileID: 701977647048639495}
+  titleUI:
+  - {fileID: 2763472425713267848}
+  - {fileID: 2690400039752961571}
+  placementCostUI:
+  - {fileID: 3671223702287507899}
+  - {fileID: 4315701837363420799}
+  iqUI:
+  - {fileID: 3636365536975981757}
+  - {fileID: 8416827754332222446}
+  healthUI:
+  - {fileID: 6483919724771545181}
+  - {fileID: 8318934287831777646}
+  descriptionUI:
+  - {fileID: 5400900226465726152}
+  - {fileID: 4210685997170242118}
 --- !u!61 &4709723283097492233
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2100,7 +2114,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1

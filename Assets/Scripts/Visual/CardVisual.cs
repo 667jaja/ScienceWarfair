@@ -1,5 +1,6 @@
 using TMPro;
 using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,9 +10,8 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     //[SerializeField] private SpriteRenderer cardArtUI;
     Collider2D col;
     private Vector3 startDragPos;
-    [SerializeField] private Image cardArtUI;
-    [SerializeField] private TMP_Text titleUI;
-    [SerializeField] private TMP_Text placementCostUI;
+    [SerializeField] private List<Image> cardArtUI = new List<Image>();
+    [SerializeField] private List<TMP_Text> titleUI, placementCostUI, iqUI, healthUI, descriptionUI = new List<TMP_Text>();
     private Card card;
 
     void Start()
@@ -49,9 +49,31 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     public void Initiate(Card newCard)
     {
         card = newCard;
-        cardArtUI.sprite = newCard.cardArt;
-        titleUI.text = newCard.title;
-        if (placementCostUI != null) placementCostUI.text = newCard.placementCost.ToString();
+
+        foreach (Image item in cardArtUI)
+        {
+            item.sprite = newCard.cardArt;
+        }
+        foreach (TMP_Text item in titleUI)
+        {
+            item.text = newCard.title;
+        }
+        foreach (TMP_Text item in descriptionUI)
+        {
+            item.text = newCard.description;
+        }
+        foreach (TMP_Text item in placementCostUI)
+        {
+            item.text = newCard.placementCost.ToString();
+        }
+        foreach (TMP_Text item in iqUI)
+        {
+            item.text = newCard.iq.ToString();
+        }
+        foreach (TMP_Text item in healthUI)
+        {
+            item.text = newCard.health.ToString();
+        }
     }
 
     public void OnPointerClick(PointerEventData eventdata)
