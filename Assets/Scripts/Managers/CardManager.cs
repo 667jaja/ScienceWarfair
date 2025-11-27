@@ -8,12 +8,19 @@ public class CardManager : MonoBehaviour
     // manages backend actions of cards while is deck, discard
     // controls frontend actions of deck and discard
     public static CardManager instance;
+
     [SerializeField] private List<CardData> cardDatas;
     [SerializeField] private CardVisual cardVisual;
     [SerializeField] private List<CardVisual> currentHeldCards = new List<CardVisual>();
+
     [SerializeField] private Transform cardCanvas;
     [SerializeField] private Transform playerHand;
+    [SerializeField] private Transform deck;
     [SerializeField] private TMP_Text deckCountUI;
+    [SerializeField] private GameObject cardFlipPrefab; //placeholder draw anim
+    [SerializeField] private GameObject cardFlip; //placeholder draw anim
+
+
 
     //handWidthVar
     [SerializeField] private float maxHandWidth;
@@ -48,9 +55,26 @@ public class CardManager : MonoBehaviour
     }
     private IEnumerator DrawCardPerformer(DrawCardGA drawCardGA)
     {
-        Debug.Log("card Draw Performed");
+        Debug.Log("card Draw Started");
 
-        //CardVisual card = Instantiate(cardVisual, playerHand.position, Quaternion.identity);
+        //
+        if (cardFlip == null)
+        {
+            cardFlip = Instantiate(cardFlipPrefab, cardCanvas);
+        }
+        cardFlip.SetActive(true);
+        cardFlip.transform.position = deck.position;
+        cardFlip.GetComponent<Animator>().SetTrigger("flip");
+        float moveRate = 2;
+        float timer = 0;
+        //move 
+        while (timer < 1/moveRate)
+        {
+            timer += Time.deltaTime;
+            cardFlip.transform.position = Vector3.Lerp(deck.position, playerHand.position, moveRate*timer);
+            yield return null;
+        }
+        cardFlip.SetActive(false);
 
         //backend
         if (GameManager.instance.players[drawCardGA.playerId].deck.Count < 1)
@@ -63,7 +87,7 @@ public class CardManager : MonoBehaviour
 
         //frontend
         UpdateHandUI();
-        // if (drawCardGA.playerId == GameManager.instance.currentPlayer)
+        // if (drawCardGA.playerId == GameManager.instance.)
         // {
         //     CardVisual newCardVisual = Instantiate(cardVisual, playerHand);
         //     newCardVisual.Initiate(drawnCard);
@@ -74,6 +98,8 @@ public class CardManager : MonoBehaviour
         //     Debug.Log("other player draws card");
         // }
         UpdateDeckUI();
+
+        Debug.Log("Draw Card Ended");
         yield return null;
     }
     public void CreateDeck(int playerId)
@@ -94,7 +120,7 @@ public class CardManager : MonoBehaviour
     }
     public void UpdateDeckUI()
     {
-        deckCountUI.text = GameManager.instance.players[GameManager.instance.currentPlayer].deck.Count.ToString();
+        deckCountUI.text = GameManager.instance.players[GameManager.instance.displayPlayer].deck.Count.ToString();
     }
     public void UpdateHandUI()
     {
@@ -103,7 +129,7 @@ public class CardManager : MonoBehaviour
             Destroy(item.gameObject);
         }
         currentHeldCards = new();
-        foreach (Card item in GameManager.instance.players[GameManager.instance.currentPlayer].hand)
+        foreach (Card item in GameManager.instance.players[GameManager.instance.displayPlayer].hand)
         {
             CardVisual newCardVisual = Instantiate(cardVisual, playerHand);
             newCardVisual.Initiate(item);
@@ -121,5 +147,6 @@ public class CardManager : MonoBehaviour
             i++;
             item.transform.position = new Vector2(playerHand.position.x-handWidth/2 + (handWidth/(cardsHeld+1))*(i+1), playerHand.position.y);
         }
+
     }
 }

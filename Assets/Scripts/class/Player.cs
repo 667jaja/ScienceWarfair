@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class Player
 {
     public int id;
+    public int sciencePoints;
+    public int money;
     public List<Card> deck = new List<Card>();
     public List<Card> hand = new List<Card>();
     // public Card[] lane1 = new Card[3];

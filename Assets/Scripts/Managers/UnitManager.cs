@@ -121,8 +121,8 @@ public class UnitManager : MonoBehaviour
         foreach (Player player in GameManager.instance.players)
         {
             //for units from a player who is not the current player, add the amount of columns to the column index number
-            bool isCurrentPlayer = player.id == GameManager.instance.currentPlayer;
-            int playerAdd = (isCurrentPlayer) ? 0 : columnCount;
+            bool isCurrentDisplayPlayer = player.id == GameManager.instance.displayPlayer;
+            int playerAdd = (isCurrentDisplayPlayer) ? 0 : columnCount;
             //empty UI objects
 
             
@@ -137,7 +137,7 @@ public class UnitManager : MonoBehaviour
 
                 //always create lowest on screen unit last
                 //this isn't a pretty way of doing this
-                if (!isCurrentPlayer)
+                if (!isCurrentDisplayPlayer)
                 {
                     for (int j = rowCount - 1; j > -1; j--)
                     {

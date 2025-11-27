@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int playerCount = 2;    
     public List<Player> players = new List<Player>();
     public int currentPlayer;
+    public int displayPlayer;
+    public Slider moneySlider;
+
     //public int perspective player
     void Awake()
     {
@@ -17,7 +21,12 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        displayPlayer = currentPlayer;
         BeginGame();
+    }
+    void Update()
+    {
+        displayPlayer = currentPlayer;
     }
     private void BeginGame()
     {
@@ -43,7 +52,8 @@ public class GameManager : MonoBehaviour
     private IEnumerator EndTurnPerformer(EndTurnGA endTurnGA)
     {
         Debug.Log("turnEnd player id: " + endTurnGA.playerId);
-        currentPlayer = (endTurnGA.playerId < players.Count-1)? endTurnGA.playerId + 1 : 0;
+        currentPlayer = (endTurnGA.playerId < players.Count - 1) ? endTurnGA.playerId + 1 : 0;
+        
         yield return null;
     }
     private void StartTurn()
@@ -84,5 +94,10 @@ public class GameManager : MonoBehaviour
         CardManager.instance.UpdateDeckUI();
         CardManager.instance.UpdateHandUI();
         UnitManager.instance.UpdateUnitUI();
+        UpdateMoneyUI(players[displayPlayer]);
     }
+    public void UpdateMoneyUI(Player updatePlayer)
+    {
+        moneySlider.value = updatePlayer.money;
+    } 
 }

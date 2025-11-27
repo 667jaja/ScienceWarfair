@@ -614,6 +614,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCount: 2
   currentPlayer: 0
+  displayPlayer: 0
+  moneySlider: {fileID: 1665267452}
 --- !u!114 &78848196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3470,12 +3472,12 @@ RectTransform:
   - {fileID: 1984554086}
   - {fileID: 1209544788}
   - {fileID: 421715232}
-  - {fileID: 8875439011829756050}
-  - {fileID: 40625848}
   - {fileID: 643750386}
-  - {fileID: 2131916169}
-  - {fileID: 482283849}
+  - {fileID: 40625848}
+  - {fileID: 8875439011829756050}
   - {fileID: 1864067764}
+  - {fileID: 482283849}
+  - {fileID: 2131916169}
   - {fileID: 748677006}
   - {fileID: 754369007}
   m_Father: {fileID: 0}
