@@ -15,10 +15,7 @@ public class LaneDropArea : MonoBehaviour, ICardDropArea
         // card.transform.position = Vector3.zero;
         if (currentPlayer == displayPlayer )
         {
-            if (!UnitManager.instance.TryPlaceCard(currentPlayer, laneId, card))
-            {
-                GameManager.instance.GlobalUIUpdate();
-            }
+            UnitManager.instance.PlaceCard(currentPlayer, laneId, card);
         }
     }
 }

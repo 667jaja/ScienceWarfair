@@ -56,23 +56,26 @@ public class CardManager : MonoBehaviour
         Debug.Log("card Draw Started");
 
         //
-        if (cardFlip == null)
+        if (drawCardGA.playerId == GameManager.instance.displayPlayer)
         {
-            cardFlip = Instantiate(cardFlipPrefab, cardCanvas);
+            if (cardFlip == null)
+            {
+                cardFlip = Instantiate(cardFlipPrefab, cardCanvas);
+            }
+            cardFlip.SetActive(true);
+            cardFlip.transform.position = deck.position;
+            cardFlip.GetComponent<Animator>().SetTrigger("flip");
+            float moveRate = 4;
+            float timer = 0;
+            //move 
+            while (timer < 1/moveRate)
+            {
+                timer += Time.deltaTime;
+                cardFlip.transform.position = Vector3.Lerp(deck.position, playerHand.position, moveRate*timer);
+                yield return null;
+            }
+            cardFlip.SetActive(false);
         }
-        cardFlip.SetActive(true);
-        cardFlip.transform.position = deck.position;
-        cardFlip.GetComponent<Animator>().SetTrigger("flip");
-        float moveRate = 4;
-        float timer = 0;
-        //move 
-        while (timer < 1/moveRate)
-        {
-            timer += Time.deltaTime;
-            cardFlip.transform.position = Vector3.Lerp(deck.position, playerHand.position, moveRate*timer);
-            yield return null;
-        }
-        cardFlip.SetActive(false);
 
         //backend
         if (GameManager.instance.players[drawCardGA.playerId].deck.Count < 1)

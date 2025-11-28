@@ -36,16 +36,15 @@ public class UnitManager : MonoBehaviour
         ActionManager.DetachPerformer<CreateUnitGA>();
     }
 
-    public bool TryPlaceCard(int playerId, int lane, Card card)
+    public void PlaceCard(int playerId, int lane, Card card)
     {
         //if (ActionManager.instance.isPerforming || GameManager.instance.players[playerId].units[lane, rowCount-1] != null) return false;
-        if (GameManager.instance.players[playerId].units[lane, rowCount-1] != null) return false;
+        //if (GameManager.instance.players[playerId].units[lane, rowCount-1] != null) return false;
 
         PlaceUnitGA placeUnitGA = new(playerId, lane, card);
         ActionManager.instance.Perform(placeUnitGA);
-        Debug.Log("Placement success: Player:" + playerId + " Lane:" + lane + " Card:" + card.title);
 
-        return true;
+        // return true;
     }
     public void CreateUnit(int playerId, int lane, Card card)
     {
@@ -61,11 +60,20 @@ public class UnitManager : MonoBehaviour
     }
     private IEnumerator PlaceUnitPerformer(PlaceUnitGA placeUnitGA)
     {
-        Debug.Log("unit placement performed");
-
-        GameManager.instance.players[placeUnitGA.playerId].hand.Remove(placeUnitGA.playedCard);
-        CardManager.instance.UpdateHandUI();
-        CreateUnitReaction(placeUnitGA.playerId, placeUnitGA.lane, placeUnitGA.playedCard);
+        if (GameManager.instance.players[placeUnitGA.playerId].units[placeUnitGA.lane, rowCount-1] == null && placeUnitGA.playedCard.placementCost <= GameManager.instance.players[placeUnitGA.playerId].money)
+        {
+            Debug.Log("Placement success: Player:" + placeUnitGA.playerId + " Lane:" + placeUnitGA.lane + " Card:" + placeUnitGA.playedCard.title);
+            GameManager.instance.players[placeUnitGA.playerId].hand.Remove(placeUnitGA.playedCard);
+            CardManager.instance.UpdateHandUI();
+            GameManager.instance.players[placeUnitGA.playerId].money -= placeUnitGA.playedCard.placementCost;
+            GameManager.instance.UpdateMoneyUI();
+            CreateUnitReaction(placeUnitGA.playerId, placeUnitGA.lane, placeUnitGA.playedCard);
+        }
+        else
+        {
+            Debug.Log("unit placement failed");
+            GameManager.instance.GlobalUIUpdate();
+        }
 
         //frontend
         yield return null;
@@ -177,7 +185,6 @@ public class UnitManager : MonoBehaviour
         }
 
     }
-
     private void UnitTriggerAnimation(string AnimName, Vector2Int index)
     {
         unitVisuals[index.x, index.y].GetComponent<Animator>().SetTrigger(AnimName);

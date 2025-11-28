@@ -34,8 +34,12 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < playerCount; i++)
         {
             players.Add(new Player(i));
+            players[i].money = 3;
             CardManager.instance.CreateDeck(i);
+            CardManager.instance.DrawCards(i, 5);
         }
+        
+        UpdateMoneyUI(players[0]);
         currentPlayer = 0;
         StartTurn();
     }
@@ -52,8 +56,9 @@ public class GameManager : MonoBehaviour
     private IEnumerator EndTurnPerformer(EndTurnGA endTurnGA)
     {
         Debug.Log("turnEnd player id: " + endTurnGA.playerId);
+
+        players[currentPlayer].money += 2;
         currentPlayer = (endTurnGA.playerId < players.Count - 1) ? endTurnGA.playerId + 1 : 0;
-        
         yield return null;
     }
     private void StartTurn()
@@ -94,8 +99,9 @@ public class GameManager : MonoBehaviour
         UnitManager.instance.UpdateUnitUI();
         UpdateMoneyUI(players[displayPlayer]);
     }
-    public void UpdateMoneyUI(Player updatePlayer)
+    public void UpdateMoneyUI(Player updatePlayer = null)
     {
+        if (updatePlayer == null) updatePlayer = players[displayPlayer];
         moneySlider.value = updatePlayer.money;
     } 
 }
