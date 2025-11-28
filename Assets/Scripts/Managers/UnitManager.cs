@@ -78,7 +78,8 @@ public class UnitManager : MonoBehaviour
 
         //backend
         //for every row
-        for (int i = 0; i < rowCount; i++)
+        int i = 0;
+        for (i = 0; i < rowCount; )
         {
             if (GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.lane, i] == null)
             {
@@ -89,11 +90,13 @@ public class UnitManager : MonoBehaviour
             {
                 Debug.Log("Lanes Full");
             }
+            i++;
         }
 
         //frontend
         UpdateUnitUI();
-        yield return null;
+        UnitTriggerAnimation("Placed", new Vector2Int(createUnitGA.lane, i));
+        yield return new WaitForSeconds(1/3);
     }
     public void UpdateUnitUI()
     {
@@ -175,6 +178,10 @@ public class UnitManager : MonoBehaviour
 
     }
 
+    private void UnitTriggerAnimation(string AnimName, Vector2Int index)
+    {
+        unitVisuals[index.x, index.y].GetComponent<Animator>().SetTrigger(AnimName);
+    }
     private void UpdateLanePositioning(Transform LanePos, List<CardVisual> cardVisuals)
     {
         int i = -1;

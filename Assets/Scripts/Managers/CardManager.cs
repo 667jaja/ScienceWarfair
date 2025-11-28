@@ -39,19 +39,17 @@ public class CardManager : MonoBehaviour
     {
         ActionManager.DetachPerformer<DrawCardGA>();
     }
-    public void DrawCard(int playerId)
+    public void DrawCards(int playerId, int count = 1)
     {
-        //if (ActionManager.instance.isPerforming) return;
-
-        DrawCardGA drawCardGA = new(playerId);
-        ActionManager.instance.Perform(drawCardGA);
+        for (int i = 0; i < count; i++)
+        {
+            DrawCardGA drawCardGA = new(playerId);
+            ActionManager.instance.Perform(drawCardGA);
+        }
     }
-    public void CurrentPlayerDrawCard()
+    public void CurrentPlayerDrawCards(int count = 1)
     {
-        //if (ActionManager.instance.isPerforming) return;
-        Debug.Log("draw");
-        DrawCardGA drawCardGA = new(GameManager.instance.currentPlayer);
-        ActionManager.instance.Perform(drawCardGA);
+        DrawCards(GameManager.instance.currentPlayer, count);
     }
     private IEnumerator DrawCardPerformer(DrawCardGA drawCardGA)
     {
@@ -65,7 +63,7 @@ public class CardManager : MonoBehaviour
         cardFlip.SetActive(true);
         cardFlip.transform.position = deck.position;
         cardFlip.GetComponent<Animator>().SetTrigger("flip");
-        float moveRate = 2;
+        float moveRate = 4;
         float timer = 0;
         //move 
         while (timer < 1/moveRate)
@@ -87,6 +85,8 @@ public class CardManager : MonoBehaviour
 
         //frontend
         UpdateHandUI();
+        UpdateDeckUI();
+
         // if (drawCardGA.playerId == GameManager.instance.)
         // {
         //     CardVisual newCardVisual = Instantiate(cardVisual, playerHand);
@@ -97,7 +97,6 @@ public class CardManager : MonoBehaviour
         // {
         //     Debug.Log("other player draws card");
         // }
-        UpdateDeckUI();
 
         Debug.Log("Draw Card Ended");
         yield return null;
