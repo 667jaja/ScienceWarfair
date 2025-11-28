@@ -41,8 +41,8 @@ public class GameManager : MonoBehaviour
     }
     public void TurnEndButton()
     {
-        if (ActionManager.instance.isPerforming) return;
-        else EndTurn();
+        //if (ActionManager.instance.isPerforming) return;
+        EndTurn();
     }
     private void EndTurn()
     {
@@ -58,8 +58,6 @@ public class GameManager : MonoBehaviour
     }
     private void StartTurn()
     {
-        if (ActionManager.instance.isPerforming) return;
-
         StartTurnGA startTurnGA = new(currentPlayer);
         ActionManager.instance.Perform(startTurnGA);
     }

@@ -5,9 +5,16 @@ using UnityEngine;
 
 public class ActionManager : MonoBehaviour
 {
+    // [SerializeField] private int actionQueueCount;    
+    // [SerializeField] private bool queueEnd1;    
+    // [SerializeField] private bool isPerforming1;    
     public static ActionManager instance;
     private List<GameAction> reactions = null;
+    private Queue<GameAction> actionQueue = new Queue<GameAction>();
     public bool isPerforming { get; private set; } = false;
+    public bool queueEnd { get; private set; } = false;
+    private bool currentActionIsQueueEnder = false;
+
     private static Dictionary<Type, List<Action<GameAction>>> preSubs = new();
     private static Dictionary<Type, List<Action<GameAction>>> postSubs = new();
     private static Dictionary<Type, Func<GameAction, IEnumerator>> performers = new();
@@ -17,14 +24,42 @@ public class ActionManager : MonoBehaviour
         if (instance != null) Destroy(instance);
         instance = this;
     }
+    // void Update()
+    // {
+    //     actionQueueCount = actionQueue.Count;
+    //     queueEnd1 = queueEnd;
+    //     isPerforming1 = isPerforming;
+    // }
     public void Perform(GameAction action, System.Action OnPerformFinished = null)
     {
-        if (isPerforming) return;
+        //Debug.Log("EnQueueAction");
+
+        if (queueEnd) return;
+        if (action.isQueueEnder) queueEnd = true;
+
+        actionQueue.Enqueue(action);
+
+        if (!isPerforming)
+        {
+            PerformNextQueued();
+        }
+    }
+    private void PerformNextQueued(System.Action OnPerformFinished = null)
+    {
+        //Debug.Log("DeQueueAction");
+        GameAction action = actionQueue.Dequeue();
         isPerforming = true;
+
         StartCoroutine( Flow (action, () =>
         {
             isPerforming = false;
+            if (currentActionIsQueueEnder) queueEnd = false;
             OnPerformFinished?.Invoke();
+            
+            if (actionQueue.Count > 0)
+            {
+                PerformNextQueued();
+            }
         }));
     }
     public void AddReaction(GameAction gameAction)
@@ -38,21 +73,23 @@ public class ActionManager : MonoBehaviour
         //Debug.Log("flow Start");
         //sets "reactions" to the current actions prereactions
         reactions = action.preReactions;
-        Debug.Log("flow PRE, reactions count: " + reactions.Count);
+        //Debug.Log("flow PRE, reactions count: " + reactions.Count);
         PerformSubscribers(action, preSubs);
         yield return PerformReactions();
 
         reactions = action.performReactions;
-        Debug.Log("flow activate, reactions count: " + reactions.Count);
+        //Debug.Log("flow activate, reactions count: " + reactions.Count);
         yield return PerformPerformer(action);
         yield return PerformReactions();
 
         reactions = action.postReactions;
-        Debug.Log("flow POST, reactions count: " + reactions.Count);
+        //Debug.Log("flow POST, reactions count: " + reactions.Count);
         PerformSubscribers(action, postSubs);
         yield return PerformReactions();
 
-        Debug.Log("flow end");
+        if (action.isQueueEnder) currentActionIsQueueEnder = true;
+        else currentActionIsQueueEnder = false;
+        Debug.Log("flow end, Action Queue Count: " + actionQueue.Count);
         OnFlowFinished?.Invoke();
     }
 

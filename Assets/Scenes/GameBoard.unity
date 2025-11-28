@@ -574,8 +574,8 @@ GameObject:
   m_Component:
   - component: {fileID: 78848194}
   - component: {fileID: 78848195}
-  - component: {fileID: 78848197}
   - component: {fileID: 78848196}
+  - component: {fileID: 78848197}
   - component: {fileID: 78848198}
   - component: {fileID: 78848199}
   m_Layer: 0
@@ -628,6 +628,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1cb9b25d19ea6948a99898c6604517e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionQueueCount: 0
+  queueEnd1: 0
+  isPerforming1: 0
 --- !u!114 &78848197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,7 +650,10 @@ MonoBehaviour:
   currentHeldCards: []
   cardCanvas: {fileID: 956074738}
   playerHand: {fileID: 421715232}
+  deck: {fileID: 943063049}
   deckCountUI: {fileID: 1522478033}
+  cardFlipPrefab: {fileID: 3925492094763907171, guid: 295a1dd8be6c54346a3332701286378d, type: 3}
+  cardFlip: {fileID: 0}
   maxHandWidth: 10
   handWidthScaleRate: 10
 --- !u!114 &78848198
@@ -2840,7 +2846,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &754369007
 RectTransform:
   m_ObjectHideFlags: 0

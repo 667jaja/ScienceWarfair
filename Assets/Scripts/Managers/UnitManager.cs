@@ -38,7 +38,8 @@ public class UnitManager : MonoBehaviour
 
     public bool TryPlaceCard(int playerId, int lane, Card card)
     {
-        if (ActionManager.instance.isPerforming || GameManager.instance.players[playerId].units[lane, rowCount-1] != null) return false;
+        //if (ActionManager.instance.isPerforming || GameManager.instance.players[playerId].units[lane, rowCount-1] != null) return false;
+        if (GameManager.instance.players[playerId].units[lane, rowCount-1] != null) return false;
 
         PlaceUnitGA placeUnitGA = new(playerId, lane, card);
         ActionManager.instance.Perform(placeUnitGA);

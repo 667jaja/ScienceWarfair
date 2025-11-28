@@ -41,15 +41,15 @@ public class CardManager : MonoBehaviour
     }
     public void DrawCard(int playerId)
     {
-        if (ActionManager.instance.isPerforming) return;
+        //if (ActionManager.instance.isPerforming) return;
 
         DrawCardGA drawCardGA = new(playerId);
         ActionManager.instance.Perform(drawCardGA);
     }
     public void CurrentPlayerDrawCard()
     {
-        if (ActionManager.instance.isPerforming) return;
-
+        //if (ActionManager.instance.isPerforming) return;
+        Debug.Log("draw");
         DrawCardGA drawCardGA = new(GameManager.instance.currentPlayer);
         ActionManager.instance.Perform(drawCardGA);
     }
