@@ -20,6 +20,15 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private CardVisual[,] unitVisuals = new CardVisual[6, 3];//[6, 3]; //all unit visuals currently in play
     //[SerializeField] private CardVisual[] units = new CardVisual[3];
 
+
+    //animations
+    [SerializeField] private string placementAnimationName = "Placed";
+    [SerializeField] private float placementAnimationLength;
+    [SerializeField] private string destroyAnimationName;
+    [SerializeField] private float destroyAnimationLength;
+    [SerializeField] private string damageAnimationName;
+    [SerializeField] private float damageAnimationLength;
+
     void Awake()
     {
         instance = this;
@@ -35,7 +44,6 @@ public class UnitManager : MonoBehaviour
         ActionManager.DetachPerformer<PlaceUnitGA>();
         ActionManager.DetachPerformer<CreateUnitGA>();
     }
-
     public void PlaceCard(int playerId, int lane, Card card)
     {
         //if (ActionManager.instance.isPerforming || GameManager.instance.players[playerId].units[lane, rowCount-1] != null) return false;
@@ -68,6 +76,10 @@ public class UnitManager : MonoBehaviour
             GameManager.instance.players[placeUnitGA.playerId].money -= placeUnitGA.playedCard.placementCost;
             GameManager.instance.UpdateMoneyUI();
             CreateUnitReaction(placeUnitGA.playerId, placeUnitGA.lane, placeUnitGA.playedCard);
+
+            //attack lane
+            AttackLaneGA attackLaneGA = new((placeUnitGA.playerId < GameManager.instance.players.Count-1)? placeUnitGA.playerId+1: 0, placeUnitGA.lane, 1);
+            ActionManager.instance.AddReaction(attackLaneGA);
         }
         else
         {
@@ -103,8 +115,33 @@ public class UnitManager : MonoBehaviour
 
         //frontend
         UpdateUnitUI();
-        UnitTriggerAnimation("Placed", new Vector2Int(createUnitGA.lane, i));
+        PlacementAnimation(GameManager.instance.currentPlayer, new Vector2Int(createUnitGA.lane, i));
         yield return new WaitForSeconds(1/3);
+    }
+    public void PushAllUnitsForward()
+    {
+        foreach (Player player in GameManager.instance.players)
+        {
+            //for every player
+            for (int n = 0; n < rowCount-1; n++)
+            {
+                for (int i = 0; i < columnCount; i++)
+                {
+                    //for every column
+                    for (int j = 0; j < rowCount-1; j++)
+                    {
+                        //for every row (except the last)
+                        if (player.units[i,j] == null && player.units[i,j+1] != null)
+                        {
+                            player.units[i,j] = player.units[i,j+1];
+                            player.units[i,j+1] = null;
+                        }
+                    }
+                }
+                //repeat as many times as there are rows -1 
+                //so that even if there is one just unit in the back it will move to the front
+            }
+        }
     }
     public void UpdateUnitUI()
     {
@@ -246,5 +283,32 @@ public class UnitManager : MonoBehaviour
                 }
             }
         }
+    }
+    public float PlacementAnimation(int playerId, Vector2Int position)
+    {
+        if (playerId != GameManager.instance.displayPlayer)
+        {
+            position = new Vector2Int(position.x + columnCount, position.y);
+        }
+        UnitTriggerAnimation(placementAnimationName, position);
+        return placementAnimationLength;
+    }
+    public float DestroyAnimation(int playerId, Vector2Int position)
+    {
+        if (playerId != GameManager.instance.displayPlayer)
+        {
+            position = new Vector2Int(position.x + columnCount, position.y);
+        }
+        UnitTriggerAnimation(destroyAnimationName, position);
+        return destroyAnimationLength;
+    }
+    public float DamageAnimation(int playerId, Vector2Int position)
+    {
+        if (playerId != GameManager.instance.displayPlayer)
+        {
+            position = new Vector2Int(position.x + columnCount, position.y);
+        }
+        UnitTriggerAnimation(damageAnimationName, position);
+        return damageAnimationLength;
     }
 }

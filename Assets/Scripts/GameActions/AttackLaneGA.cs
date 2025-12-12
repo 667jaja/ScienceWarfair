@@ -2,15 +2,15 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class DamageUnitGA : GameAction
+public class AttackLaneGA : GameAction
 {
     public int playerId;
-    public Vector2Int position;
+    public int lane;
     public int amount;
-    public DamageUnitGA( int playerId2, Vector2Int position2, int amount2)
+    public AttackLaneGA(int playerId2, int lane2, int amount2)
     {
         amount = amount2;
         playerId = playerId2;
-        position = position2;
+        lane = lane2;
     }
 }

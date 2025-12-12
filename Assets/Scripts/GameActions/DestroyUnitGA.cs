@@ -2,14 +2,12 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class DamageUnitGA : GameAction
+public class DestroyUnitGA : GameAction
 {
     public int playerId;
     public Vector2Int position;
-    public int amount;
-    public DamageUnitGA( int playerId2, Vector2Int position2, int amount2)
+    public DestroyUnitGA(int playerId2, Vector2Int position2)
     {
-        amount = amount2;
         playerId = playerId2;
         position = position2;
     }

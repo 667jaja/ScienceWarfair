@@ -14,7 +14,7 @@ public class DrawReactor : MonoBehaviour
     private void drawCardReaction(DrawCardGA drawCardGA)
     {
         Debug.Log("card draw detected");
-        DealDamageGA myAttack = new(3);
-        ActionManager.instance.AddReaction(myAttack);
+        //DealDamageGA myAttack = new(3);
+        //ActionManager.instance.AddReaction(myAttack);
     }
 }

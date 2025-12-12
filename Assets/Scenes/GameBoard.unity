@@ -689,6 +689,12 @@ MonoBehaviour:
   - {fileID: 2131916169}
   - {fileID: 482283849}
   - {fileID: 1864067764}
+  placementAnimationName: Placed
+  placementAnimationLength: 0.34
+  destroyAnimationName: Destroyed
+  destroyAnimationLength: 0.5
+  damageAnimationName: Damaged
+  damageAnimationLength: 0.25
 --- !u!1 &137656530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1294,7 +1300,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 803.1, y: -58.370117}
+  m_AnchoredPosition: {x: 803.09985, y: -58.370117}
   m_SizeDelta: {x: -1682.7, y: 37.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &329196553
@@ -2728,7 +2734,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -278.09973, y: 149}
+  m_AnchoredPosition: {x: -278.09985, y: 149}
   m_SizeDelta: {x: 548.19995, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &748677007
@@ -2873,7 +2879,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -278.09973, y: 385}
+  m_AnchoredPosition: {x: -278.09985, y: 385}
   m_SizeDelta: {x: 548.19995, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &754369008
@@ -3080,7 +3086,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 803.1, y: -21.199951}
+  m_AnchoredPosition: {x: 803.09985, y: -21.199951}
   m_SizeDelta: {x: -1682.7, y: 37.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &808352577
@@ -4975,7 +4981,7 @@ Transform:
   m_GameObject: {fileID: 1375468445}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6172,7 +6178,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 622014825}
   m_FillRect: {fileID: 0}
   m_HandleRect: {fileID: 622014824}

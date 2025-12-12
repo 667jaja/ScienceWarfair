@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class CardVisual : MonoBehaviour, IPointerClickHandler
 {
     //[SerializeField] private SpriteRenderer cardArtUI;
-    Collider2D col;
+    private Animator anim;
+    private Collider2D col;
     private Vector3 startDragPos;
     [SerializeField] private List<Image> cardArtUI = new List<Image>();
     [SerializeField] private List<TMP_Text> titleUI, placementCostUI, iqUI, healthUI, descriptionUI = new List<TMP_Text>();
@@ -17,6 +18,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         col = GetComponent<Collider2D>();
+        anim = GetComponent<Animator>();
     }
     void OnMouseDown()
     {
@@ -75,14 +77,8 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
             item.text = newCard.health.ToString();
         }
     }
-
     public void OnPointerClick(PointerEventData eventdata)
     {
 
     }
-    // public void DropCard()
-    // {
-    //     card.PerformEffect();
-    //     Destroy(gameObject);
-    // }
 }
