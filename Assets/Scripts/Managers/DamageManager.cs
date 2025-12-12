@@ -38,20 +38,21 @@ public class DamageManager : MonoBehaviour
     }
     //deal damage to one unit
     private IEnumerator DamageUnitPerformer(DamageUnitGA damageUnitGA)
-    {
-        // Card selectedUnit = GameManager.instance.players[damageUnitGA.playerId].units[damageUnitGA.position.x, damageUnitGA.position.y];
-        // int damageAmount = damageUnitGA.amount;
+    {   
+        Card selectedUnit = GameManager.instance.players[damageUnitGA.playerId].units[damageUnitGA.position.x, damageUnitGA.position.y]; //get only reference
+        int damageAmount = damageUnitGA.amount;
         yield return new WaitForSeconds(UnitManager.instance.DamageAnimation(damageUnitGA.playerId, damageUnitGA.position));
-        DestroyUnitGA destroyUnitGA = new(damageUnitGA.playerId, damageUnitGA.position);
-        ActionManager.instance.AddReaction(destroyUnitGA);
-        // if (selectedUnit.health <= damageAmount)
-        // {
 
-        // }
-        // else
-        // {
-            
-        // }
+        if (selectedUnit.health <= damageAmount)
+        {
+            DestroyUnitGA destroyUnitGA = new(damageUnitGA.playerId, damageUnitGA.position);
+            ActionManager.instance.AddReaction(destroyUnitGA);
+        }
+        else
+        {
+            GameManager.instance.players[damageUnitGA.playerId].units[damageUnitGA.position.x, damageUnitGA.position.y].health -= damageAmount;  
+            UnitManager.instance.UpdateCardVisual(damageUnitGA.playerId, damageUnitGA.position);
+        }
 
 
         // Debug.Log("dealt " + damageAmount + " damage to unit " + selectedUnit.title + " position " + damageUnitGA.position);
@@ -59,7 +60,7 @@ public class DamageManager : MonoBehaviour
     //destroy one unit
     private IEnumerator DestroyUnitPerformer(DestroyUnitGA destroyUnitGA)
     {
-        Card selectedUnit = GameManager.instance.players[destroyUnitGA.playerId].units[destroyUnitGA.position.x, destroyUnitGA.position.y];
+        Card selectedUnit = GameManager.instance.players[destroyUnitGA.playerId].units[destroyUnitGA.position.x, destroyUnitGA.position.y]; //get only reference
         yield return new WaitForSeconds(UnitManager.instance.DestroyAnimation(destroyUnitGA.playerId, destroyUnitGA.position));
         Debug.Log("unit Destroyed: " + selectedUnit.title);
         GameManager.instance.players[destroyUnitGA.playerId].units[destroyUnitGA.position.x, destroyUnitGA.position.y] = null;

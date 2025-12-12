@@ -81,4 +81,31 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     {
 
     }
+    public void UpdateVisuals()
+    {
+        foreach (Image item in cardArtUI)
+        {
+            item.sprite = card.cardArt;
+        }
+        foreach (TMP_Text item in titleUI)
+        {
+            item.text = card.title;
+        }
+        foreach (TMP_Text item in descriptionUI)
+        {
+            item.text = card.description;
+        }
+        foreach (TMP_Text item in placementCostUI)
+        {
+            item.text = card.placementCost.ToString();
+        }
+        foreach (TMP_Text item in iqUI)
+        {
+            item.text = card.iq.ToString();
+        }
+        foreach (TMP_Text item in healthUI)
+        {
+            item.text = card.health.ToString();
+        }
+    }
 }

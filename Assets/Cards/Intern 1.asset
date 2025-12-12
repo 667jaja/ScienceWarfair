@@ -17,5 +17,5 @@ MonoBehaviour:
   <cardArt>k__BackingField: {fileID: 21300000, guid: 1da878c6b6bfa47438e49442e2056183, type: 3}
   <placementCost>k__BackingField: 1
   <iq>k__BackingField: 1
-  <health>k__BackingField: 1
+  <health>k__BackingField: 2
   <cardEffect>k__BackingField: 

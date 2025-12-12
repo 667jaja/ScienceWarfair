@@ -239,29 +239,6 @@ public class UnitManager : MonoBehaviour
             //if (item != null) item.transform.position = new Vector2(LanePos.position.y, LanePos.position.x);// - laneHeight / 2 + (laneHeight / (unitsInLane + 1)) * (i + 1));
             if (item != null) item.transform.position = new Vector2(LanePos.position.x, LanePos.position.y- laneHeight / 2 + (laneHeight / (unitsInLane + 1)) * (i + 1));// ;
         }
-
-        // if (isEnemy)
-        // {
-        //     i = unitsInLane;
-        //     foreach (CardVisual item in cardVisuals)
-        //     {
-        //         i--;
-        //         //if (item != null) item.transform.position = new Vector2(LanePos.position.y, LanePos.position.x);// - laneHeight / 2 + (laneHeight / (unitsInLane + 1)) * (i + 1));
-        //         if (item != null) item.transform.position = new Vector2(LanePos.position.x, LanePos.position.y- laneHeight / 2 + (laneHeight / (unitsInLane + 1)) * (i + 1));// ;
-        //     }
-        // }
-        // else
-        // {
-        //     i = -1;
-
-        //     foreach (CardVisual item in cardVisuals)
-        //     {
-        //         i++;
-        //         //if (item != null) item.transform.position = new Vector2(LanePos.position.y, LanePos.position.x);// - laneHeight / 2 + (laneHeight / (unitsInLane + 1)) * (i + 1));
-        //         if (item != null) item.transform.position = new Vector2(LanePos.position.x, LanePos.position.y- laneHeight / 2 + (laneHeight / (unitsInLane + 1)) * (i + 1));// ;
-        //     }
-        // }
-
     }
     public void DebugUnitPositions()   
     {
@@ -310,5 +287,31 @@ public class UnitManager : MonoBehaviour
         }
         UnitTriggerAnimation(damageAnimationName, position);
         return damageAnimationLength;
+    }
+    public void UpdateAllCardVisuals()
+    {
+        for (int p = 0; p < GameManager.instance.players.Count; p++)
+        {
+            for (int i = 0; i < columnCount; i++)
+            {
+                //for every column
+                for (int j = 0; j < rowCount; j++)
+                {
+                    //for every row
+                    if (unitVisuals[i, j] != null)
+                    {
+                        UpdateCardVisual(p, new Vector2Int(i,j));
+                    }
+                }
+            }
+        }
+    }
+    public void UpdateCardVisual(int playerId, Vector2Int position)
+    {
+        if (playerId != GameManager.instance.displayPlayer)
+        {
+            position = new Vector2Int(position.x + columnCount, position.y);
+        }
+        unitVisuals[position.x, position.y].UpdateVisuals();
     }
 }
