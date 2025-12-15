@@ -34,6 +34,13 @@ public class UnitManager : MonoBehaviour
         instance = this;
         unitVisuals = new CardVisual[columnCount * 2, rowCount];
     }
+    void Start()
+    {
+        for (int i = 0; i < laneTransforms.Length; i++)
+        {
+            laneTransforms[i] = LaneManager.instance.lanePositions[i];
+        }
+    }
     private void OnEnable()
     {
         ActionManager.AttachPerformer<PlaceUnitGA>(PlaceUnitPerformer);
@@ -115,6 +122,7 @@ public class UnitManager : MonoBehaviour
 
         //frontend
         UpdateUnitUI();
+        LaneManager.instance.UpdateLaneVisuals();
         PlacementAnimation(GameManager.instance.currentPlayer, new Vector2Int(createUnitGA.lane, i));
         yield return new WaitForSeconds(1/3);
     }
@@ -313,5 +321,29 @@ public class UnitManager : MonoBehaviour
             position = new Vector2Int(position.x + columnCount, position.y);
         }
         unitVisuals[position.x, position.y].UpdateVisuals();
+    }
+    public int CountPlayerIQ(int playerid)
+    {
+        int sciencePoints = 0;
+        for (int i = 0; i < columnCount; i++)
+        {
+            // for every column
+            sciencePoints += CountLaneIQ(playerid, i);
+        }
+        return sciencePoints;
+    }
+    public int CountLaneIQ(int playerid, int lane)
+    {
+        int sciencePoints = 0;
+        for (int i = 0; i < columnCount; i++)
+        {
+            Card inspectedCard = GameManager.instance.players[playerid].units[lane, i];
+            //for every row
+            if (inspectedCard != null)
+            {
+                sciencePoints += inspectedCard.iq;
+            }
+        }
+        return sciencePoints;
     }
 }

@@ -22,8 +22,7 @@ public class DamageManager : MonoBehaviour
     {
         int damageAmount = attackLaneGA.amount;
         //Debug.Log("attacking...");
-        yield return null;//new WaitForSeconds(1);
-
+        
         if (GameManager.instance.players[attackLaneGA.playerId].units[attackLaneGA.lane, 0] == null)
         {
             Debug.Log("no unit to attack");
@@ -34,6 +33,9 @@ public class DamageManager : MonoBehaviour
             DamageUnitGA damageUnitGA = new(attackLaneGA.playerId, new Vector2Int(attackLaneGA.lane, 0), 1);
             ActionManager.instance.AddReaction(damageUnitGA);
             Debug.Log("dealt " + damageAmount + " damage to player " + attackLaneGA.playerId + " lane " + attackLaneGA.lane);
+            
+            if (attackLaneGA.playerId != GameManager.instance.displayPlayer) yield return new WaitForSeconds(LaneManager.instance.AttackAnimation(attackLaneGA.lane));
+            else yield return new WaitForSeconds(LaneManager.instance.AttackDownAnimation(attackLaneGA.lane));
         }
     }
     //deal damage to one unit
@@ -66,6 +68,7 @@ public class DamageManager : MonoBehaviour
         GameManager.instance.players[destroyUnitGA.playerId].units[destroyUnitGA.position.x, destroyUnitGA.position.y] = null;
         UnitManager.instance.PushAllUnitsForward();
         UnitManager.instance.UpdateUnitUI();
+        LaneManager.instance.UpdateLaneVisuals();
     }
     //deal damage to all units in lane 
 

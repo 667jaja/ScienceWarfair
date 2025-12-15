@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     public int displayPlayer;
     public Slider moneySlider;
 
+    public Slider plaSciencePointsSlider;
+    public Slider oppSciencePointsSlider;
+
     //public int perspective player
     void Awake()
     {
@@ -57,8 +60,16 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("turnEnd player id: " + endTurnGA.playerId);
 
+        //money
         players[currentPlayer].money += 2;
-        currentPlayer = (endTurnGA.playerId < players.Count - 1) ? endTurnGA.playerId + 1 : 0;
+        //iq
+        yield return LaneManager.instance.CountIqVisual();
+        players[currentPlayer].sciencePoints += UnitManager.instance.CountPlayerIQ(currentPlayer);
+
+        //currentplayer
+        currentPlayer = GetNextPLayerId();
+        Debug.Log("current player IQ: " + players[currentPlayer].sciencePoints);
+        Debug.Log("next player IQ: " + players[GetNextPLayerId()].sciencePoints);
         yield return null;
     }
     private void StartTurn()
@@ -85,7 +96,6 @@ public class GameManager : MonoBehaviour
         ActionManager.DetachPerformer<StartTurnGA>();
         ActionManager.UnubscribeReaction<EndTurnGA>(EndTurnReaction, ReactionTiming.POST);
     }
-
     private void EndTurnReaction(EndTurnGA endTurnGA)
     {
         Debug.Log("turn end detected");
@@ -98,10 +108,22 @@ public class GameManager : MonoBehaviour
         CardManager.instance.UpdateHandUI();
         UnitManager.instance.UpdateUnitUI();
         UpdateMoneyUI(players[displayPlayer]);
+        UpdateSciencePointSliders();
+        LaneManager.instance.UpdateLaneVisuals();
     }
     public void UpdateMoneyUI(Player updatePlayer = null)
     {
         if (updatePlayer == null) updatePlayer = players[displayPlayer];
         moneySlider.value = updatePlayer.money;
     } 
+    public void UpdateSciencePointSliders()
+    {
+        plaSciencePointsSlider.value = players[currentPlayer].sciencePoints;
+        oppSciencePointsSlider.value = players[GetNextPLayerId()].sciencePoints;
+    }
+    public int GetNextPLayerId(int playerId = -1)
+    {
+        if (playerId < 0) playerId = currentPlayer;
+        return (playerId < players.Count - 1) ? playerId + 1 : 0;
+    }
 }

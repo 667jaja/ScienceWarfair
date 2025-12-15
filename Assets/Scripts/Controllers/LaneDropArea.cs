@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LaneDropArea : MonoBehaviour, ICardDropArea
 {
-    [SerializeField] private int laneId;
+    public int laneId;
     public void OnCardDrop(Card card)
     {
         int currentPlayer = GameManager.instance.currentPlayer;
