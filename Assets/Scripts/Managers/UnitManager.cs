@@ -102,7 +102,7 @@ public class UnitManager : MonoBehaviour
         Debug.Log("unit creation performed");
 
         //CardVisual card = Instantiate(cardVisual, playerHand.position, Quaternion.identity);
-
+        bool unitCreationSuccess = false;
         //backend
         //for every row
         int i = 0;
@@ -111,20 +111,30 @@ public class UnitManager : MonoBehaviour
             if (GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.lane, i] == null)
             {
                 GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.lane, i] = createUnitGA.playedCard;
+                unitCreationSuccess = true;
                 break;
             }
             if (i == rowCount - 1)
             {
+                unitCreationSuccess = false;
                 Debug.Log("Lanes Full");
             }
             i++;
         }
+        if (unitCreationSuccess)
+        {
+            createUnitGA.playedCard.PlacementAbility(new ActionData(createUnitGA.playerId, new Vector2Int (createUnitGA.lane, i), createUnitGA.playedCard));
+        }
 
         //frontend
         UpdateUnitUI();
-        LaneManager.instance.UpdateLaneVisuals();
-        PlacementAnimation(GameManager.instance.currentPlayer, new Vector2Int(createUnitGA.lane, i));
-        yield return new WaitForSeconds(1/3);
+
+        if (unitCreationSuccess)
+        {
+            LaneManager.instance.UpdateLaneVisuals();
+            PlacementAnimation(GameManager.instance.currentPlayer, new Vector2Int(createUnitGA.lane, i));
+            yield return new WaitForSeconds(1/3);
+        }
     }
     public void PushAllUnitsForward()
     {

@@ -453,9 +453,14 @@ MonoBehaviour:
   playerCount: 2
   currentPlayer: 0
   displayPlayer: 0
+  maxSciencePoints: 30
   moneySlider: {fileID: 1665267452}
   plaSciencePointsSlider: {fileID: 329196553}
   oppSciencePointsSlider: {fileID: 808352577}
+  startingMoney: 5
+  startingCards: 2
+  moneyGain: 2
+  cardGain: 0
 --- !u!114 &78848196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,6 +488,7 @@ MonoBehaviour:
   cardDatas:
   - {fileID: 11400000, guid: 33cf9720279384f4c9bd070a67c1ad82, type: 2}
   - {fileID: 11400000, guid: b8c4627ce80ef35459d5b1803147d0ac, type: 2}
+  - {fileID: 11400000, guid: c5002b3150ce4fb48ab3397d80bd3807, type: 2}
   cardVisual: {fileID: 6868798076806503581, guid: 30febd3bb3ece5441882a792accb956f, type: 3}
   currentHeldCards: []
   cardCanvas: {fileID: 956074738}
@@ -561,7 +567,7 @@ MonoBehaviour:
   attackDownAnimationName: AttackUp
   attackDownAnimationLength: 0.25
   countIqAnimationName: IqCounted
-  countIqAnimationLength: 0.5
+  countIqAnimationLength: 0.3
 --- !u!1 &137656530
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,9 +1004,9 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.08235294, g: 0.08235294, b: 0.10980393, a: 1}
+    m_NormalColor: {r: 0.37087208, g: 0.37087208, b: 0.6754716, a: 1}
     m_HighlightedColor: {r: 0.08235294, g: 0.08235294, b: 0.10980393, a: 1}
     m_PressedColor: {r: 0.08235294, g: 0.08235294, b: 0.10980393, a: 1}
     m_SelectedColor: {r: 0.08235294, g: 0.08235294, b: 0.10980393, a: 1}
@@ -1023,7 +1029,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1513666265}
         m_TargetAssemblyTypeName: HotseatScreenController, Assembly-CSharp
         m_MethodName: StartScreenButton
         m_Mode: 1
@@ -1048,7 +1054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.08235294, g: 0.08235294, b: 0.10980393, a: 1}
+  m_Color: {r: 0.75476676, g: 0.75476676, b: 0.9547169, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1841,50 +1847,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6eaca16c99d889408efbd1688a916b9, type: 3}
---- !u!1 &493382030
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 493382032}
-  - component: {fileID: 493382031}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &493382031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493382030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccb5b4a5c98067b4c87d03f1b6fd43d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &493382032
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493382030}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.19080138, y: -0.29951775, z: 0.7234013}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &567482051
 GameObject:
   m_ObjectHideFlags: 0
@@ -2365,7 +2327,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1513666265}
         m_TargetAssemblyTypeName: HotseatScreenController, Assembly-CSharp
         m_MethodName: closeGame
         m_Mode: 1
@@ -2486,9 +2448,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2742,18 +2704,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 78848197}
-        m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
-        m_MethodName: CurrentPlayerDrawCards
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 78848195}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: TurnEndButton
@@ -3693,7 +3643,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Player 1
+  m_text: Player 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3829,7 +3779,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Player 2
+  m_text: Player 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3990,7 +3940,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1513666265}
         m_TargetAssemblyTypeName: HotseatScreenController, Assembly-CSharp
         m_MethodName: NextGuy
         m_Mode: 1
@@ -4112,7 +4062,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4716,7 +4666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.45490196}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4907,7 +4857,7 @@ Camera:
   m_GameObject: {fileID: 1375468445}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -4933,7 +4883,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4957,13 +4907,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375468445}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.005818495, z: -0, w: 0.9999831}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -0.667, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1377458292
 GameObject:
   m_ObjectHideFlags: 0
@@ -5805,6 +5755,7 @@ GameObject:
   - component: {fileID: 1513666263}
   - component: {fileID: 1513666262}
   - component: {fileID: 1513666261}
+  - component: {fileID: 1513666265}
   m_Layer: 5
   m_Name: ScreenBlock
   m_TagString: Untagged
@@ -5904,6 +5855,40 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1513666265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513666259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4412fb55123eb5419ba5da022556364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appearenceDelay: 0.2
+  mainMenuName: MainMenu
+  scienceSlider1: {fileID: 2023009697}
+  scienceSlider2: {fileID: 215020337}
+  startScreenObjects:
+  - {fileID: 1230870760}
+  - {fileID: 250979623}
+  - {fileID: 567482051}
+  turnScreenObjects:
+  - {fileID: 1230870760}
+  - {fileID: 1087883562}
+  - {fileID: 567482051}
+  winScreenObjects:
+  - {fileID: 1230870760}
+  - {fileID: 669680057}
+  - {fileID: 1837565103}
+  - {fileID: 2023009696}
+  - {fileID: 1087273140}
+  - {fileID: 215020336}
+  - {fileID: 1085521221}
+  - {fileID: 567482051}
+  Text: {fileID: 567482052}
 --- !u!1 &1522478031
 GameObject:
   m_ObjectHideFlags: 0
@@ -6428,7 +6413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.20392159, g: 0.1764706, b: 0.24705884, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6490,7 +6475,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.08235294, g: 0.08235294, b: 0.10980393, a: 1}
     m_HighlightedColor: {r: 0.08235294, g: 0.08235294, b: 0.10980393, a: 1}
@@ -6515,7 +6500,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1513666265}
         m_TargetAssemblyTypeName: HotseatScreenController, Assembly-CSharp
         m_MethodName: LoadMainMenu
         m_Mode: 1
@@ -6812,6 +6797,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 1375468449}
   - {fileID: 78848194}
-  - {fileID: 1513666264}
-  - {fileID: 493382032}
   - {fileID: 956074738}
+  - {fileID: 1513666264}

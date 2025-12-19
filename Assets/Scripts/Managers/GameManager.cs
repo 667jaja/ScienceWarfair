@@ -9,13 +9,20 @@ public class GameManager : MonoBehaviour
     //manages overarching elements of a game such as players, loss, victory, turn start, turn end
     public static GameManager instance;
     [SerializeField] private int playerCount = 2;    
+
     public List<Player> players = new List<Player>();
     public int currentPlayer;
     public int displayPlayer;
+    public int maxSciencePoints;
     public Slider moneySlider;
 
     public Slider plaSciencePointsSlider;
     public Slider oppSciencePointsSlider;
+
+    [SerializeField] private int startingMoney;
+    [SerializeField] private int startingCards;
+    [SerializeField] private int moneyGain = 2;    
+    [SerializeField] private int cardGain = 2;
 
     //public int perspective player
     void Awake()
@@ -25,21 +32,21 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         displayPlayer = currentPlayer;
-        BeginGame();
+        //BeginGame();
     }
     void Update()
     {
         displayPlayer = currentPlayer;
     }
-    private void BeginGame()
+    public void BeginGame()
     {
         players = new();
         for (int i = 0; i < playerCount; i++)
         {
             players.Add(new Player(i));
-            players[i].money = 3;
+            players[i].money = startingMoney;
             CardManager.instance.CreateDeck(i);
-            CardManager.instance.DrawCards(i, 5);
+            CardManager.instance.DrawCards(i, startingCards);
         }
         
         UpdateMoneyUI(players[0]);
@@ -53,6 +60,8 @@ public class GameManager : MonoBehaviour
     }
     private void EndTurn()
     {
+        CardManager.instance.CurrentPlayerDrawCards(cardGain);
+
         EndTurnGA endTurnGA = new(currentPlayer);
         ActionManager.instance.Perform(endTurnGA);
     }
@@ -61,18 +70,32 @@ public class GameManager : MonoBehaviour
         Debug.Log("turnEnd player id: " + endTurnGA.playerId);
 
         //money
-        players[currentPlayer].money += 2;
+        players[currentPlayer].money += moneyGain;
+
+        //cards
+        //CardManager.instance.CurrentPlayerDrawCards(cardGain);
+
         //iq
         yield return LaneManager.instance.CountIqVisual();
         players[currentPlayer].sciencePoints += UnitManager.instance.CountPlayerIQ(currentPlayer);
 
         //currentplayer
-        currentPlayer = GetNextPLayerId();
-        Debug.Log("current player IQ: " + players[currentPlayer].sciencePoints);
-        Debug.Log("next player IQ: " + players[GetNextPLayerId()].sciencePoints);
+        currentPlayer = GetNextPlayerId();
+
+        if (HotseatScreenController.instance == null)
+        {
+            StartTurnGA startTurnGA = new(currentPlayer);
+            ActionManager.instance.AddReaction(startTurnGA);
+        }
+        else
+        {
+            yield return HotseatScreenController.instance.OnTurnEnd();
+        }
+        // Debug.Log("current player IQ: " + players[currentPlayer].sciencePoints);
+        // Debug.Log("next player IQ: " + players[GetNextPlayerId()].sciencePoints);
         yield return null;
     }
-    private void StartTurn()
+    public void StartTurn()
     {
         StartTurnGA startTurnGA = new(currentPlayer);
         ActionManager.instance.Perform(startTurnGA);
@@ -87,21 +110,28 @@ public class GameManager : MonoBehaviour
     {
         ActionManager.AttachPerformer<EndTurnGA>(EndTurnPerformer);
         ActionManager.AttachPerformer<StartTurnGA>(StartTurnPerformer);
-        ActionManager.SubscribeReaction<EndTurnGA>(EndTurnReaction, ReactionTiming.POST);
+        //ActionManager.SubscribeReaction<EndTurnGA>(EndTurnReaction, ReactionTiming.POST);
 
     }
     private void OnDisable()
     {
         ActionManager.DetachPerformer<EndTurnGA>();
         ActionManager.DetachPerformer<StartTurnGA>();
-        ActionManager.UnubscribeReaction<EndTurnGA>(EndTurnReaction, ReactionTiming.POST);
+        //ActionManager.UnubscribeReaction<EndTurnGA>(EndTurnReaction, ReactionTiming.POST);
     }
-    private void EndTurnReaction(EndTurnGA endTurnGA)
-    {
-        Debug.Log("turn end detected");
-        StartTurnGA startTurnGA = new(currentPlayer);
-        ActionManager.instance.AddReaction(startTurnGA);
-    }
+    // private void EndTurnReaction(EndTurnGA endTurnGA)
+    // {
+    //     Debug.Log("turn end detected");
+    //     if (HotseatScreenController.instance == null)
+    //     {
+    //         StartTurnGA startTurnGA = new(currentPlayer);
+    //         ActionManager.instance.AddReaction(startTurnGA);
+    //     }
+    //     else
+    //     {
+    //         HotseatScreenController.instance.OnTurnEnd();
+    //     }
+    // }
     public void GlobalUIUpdate()
     {
         CardManager.instance.UpdateDeckUI();
@@ -119,9 +149,9 @@ public class GameManager : MonoBehaviour
     public void UpdateSciencePointSliders()
     {
         plaSciencePointsSlider.value = players[currentPlayer].sciencePoints;
-        oppSciencePointsSlider.value = players[GetNextPLayerId()].sciencePoints;
+        oppSciencePointsSlider.value = players[GetNextPlayerId()].sciencePoints;
     }
-    public int GetNextPLayerId(int playerId = -1)
+    public int GetNextPlayerId(int playerId = -1)
     {
         if (playerId < 0) playerId = currentPlayer;
         return (playerId < players.Count - 1) ? playerId + 1 : 0;

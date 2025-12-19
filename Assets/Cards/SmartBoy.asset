@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
-  m_Name: Intern 1
+  m_Name: SmartBoy
   m_EditorClassIdentifier: 
-  <title>k__BackingField: Intern 1
-  <description>k__BackingField: does nothing
-  <cardArt>k__BackingField: {fileID: 21300000, guid: 1da878c6b6bfa47438e49442e2056183, type: 3}
-  <placementCost>k__BackingField: 1
-  <iq>k__BackingField: 1
+  <title>k__BackingField: SmartBoy
+  <description>k__BackingField: draws a card
+  <cardArt>k__BackingField: {fileID: 21300000, guid: 0c8afd9a75c702a46819c71d17a65ceb, type: 3}
+  <placementCost>k__BackingField: 4
+  <iq>k__BackingField: 2
   <health>k__BackingField: 2
-  <cardEffect>k__BackingField: 
-  <effects>k__BackingField: []
+  <cardEffect>k__BackingField: cardDraw
+  <effects>k__BackingField:
+  - {fileID: 11400000, guid: cd98d78d218ff504e96bfc96d8ea6570, type: 2}

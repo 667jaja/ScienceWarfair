@@ -27,6 +27,6 @@ public class LaneVisual : MonoBehaviour
     public void UpdateVisual(int overrideNumber = -1)
     {
         if (overrideNumber >= 0) iqUI.text = overrideNumber.ToString();
-        iqUI.text = UnitManager.instance.CountLaneIQ((isDisplayPlayer)? GameManager.instance.displayPlayer : GameManager.instance.GetNextPLayerId(GameManager.instance.displayPlayer), lanePos).ToString();
+        iqUI.text = UnitManager.instance.CountLaneIQ((isDisplayPlayer)? GameManager.instance.displayPlayer : GameManager.instance.GetNextPlayerId(GameManager.instance.displayPlayer), lanePos).ToString();
     }
 }

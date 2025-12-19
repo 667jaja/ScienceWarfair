@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Card
 {
-    private readonly CardData cardData;
+    private CardData cardData;
     public Card(CardData cardData)
     {
         this.cardData = cardData;
@@ -24,9 +25,20 @@ public class Card
 
     //abilities
     public string cardEffect { get; set; }
+    public List<Effect> effects {get => cardData.effects;}
 
-    public void PerformEffect()
+    public void PlacementAbility(ActionData actionData)// Card card
+    {
+        PerformEffect(actionData);
+    }
+    public void PerformEffect(ActionData actionData)
     {
         Debug.Log("used ability " + cardEffect);
+        //foreach 
+        if (effects.Count > 0 && effects[0] != null)
+        {
+            cardData.effects[0].actionData = actionData;
+            ActionManager.instance.Perform(effects[0].effect);
+        }
     }
 }

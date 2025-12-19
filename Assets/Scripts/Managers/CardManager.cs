@@ -34,10 +34,12 @@ public class CardManager : MonoBehaviour
     private void OnEnable()
     {
         ActionManager.AttachPerformer<DrawCardGA>(DrawCardPerformer);
+        ActionManager.AttachPerformer<DrawCardsGA>(DrawCardsPerformer);
     }
     private void OnDisable()
     {
         ActionManager.DetachPerformer<DrawCardGA>();
+        ActionManager.DetachPerformer<DrawCardsGA>();
     }
     public void DrawCards(int playerId, int count = 1)
     {
@@ -50,6 +52,15 @@ public class CardManager : MonoBehaviour
     public void CurrentPlayerDrawCards(int count = 1)
     {
         DrawCards(GameManager.instance.currentPlayer, count);
+    }
+    private IEnumerator DrawCardsPerformer(DrawCardsGA drawCardsGA)
+    {
+        for (int i = 0; i < drawCardsGA.drawCount; i++)
+        {
+            DrawCardGA drawCardGA = new(drawCardsGA.playerId);
+            ActionManager.instance.AddReaction(drawCardGA);
+        }
+        yield return null;
     }
     private IEnumerator DrawCardPerformer(DrawCardGA drawCardGA)
     {
