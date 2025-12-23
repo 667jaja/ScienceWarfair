@@ -10,7 +10,7 @@ public class LaneVisual : MonoBehaviour
     [SerializeField] private TMP_Text iqUI;
     [SerializeField] private LaneDropArea laneDropArea;
     public Animator anim;
-    private int lanePos;
+    public int lanePos;
     private bool isDisplayPlayer;
 
     public void Initiate(bool newisDisplayPlayer, int newLanePos)

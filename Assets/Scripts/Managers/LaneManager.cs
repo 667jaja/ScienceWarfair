@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class LaneManager : MonoBehaviour
 {
@@ -8,6 +10,11 @@ public class LaneManager : MonoBehaviour
     [SerializeField] private List<LaneVisual> laneVisuals;
     [SerializeField] private List<LaneVisual> EnemyLaneVisuals;
     public List<Transform> lanePositions;
+
+    //ui
+    [SerializeField] private Slider iqAddSlider;
+    //[SerializeField] private Slider iqAddSliderEnemy;
+
     //animations
     [SerializeField] private string attackAnimationName;
     [SerializeField] private float attackAnimationLength;
@@ -20,6 +27,7 @@ public class LaneManager : MonoBehaviour
     {
         instance = this;
         intitiateLanes();
+        iqAddSlider.value = 0;
     }
     private void intitiateLanes()
     {
@@ -41,15 +49,19 @@ public class LaneManager : MonoBehaviour
     }
     public IEnumerator CountIqVisual()
     {
+        int currentPlayerSP = GameManager.instance.players[GameManager.instance.currentPlayer].sciencePoints;
+        int sciencePointsSum = currentPlayerSP;
         //if (currentPlayer == displayPlayer) {all}
         int i = 0;
-        //int sciencePointsSum = 0;
         foreach(LaneVisual lane in laneVisuals)
         {
             // + sciencePointsSum
             lane.UpdateVisual(UnitManager.instance.CountLaneIQ(GameManager.instance.displayPlayer,i));
             
-             
+            sciencePointsSum += UnitManager.instance.CountLaneIQ(GameManager.instance.currentPlayer, lane.lanePos);
+            iqAddSlider.value = sciencePointsSum;
+            // if (currentPlayer != DisplayPlayer)
+            //iqAddSliderEnemy
             yield return new WaitForSeconds(CountIqAnimation(i));
             i++;
         }
@@ -61,7 +73,9 @@ public class LaneManager : MonoBehaviour
         {
             lane.UpdateVisual();
         }
+        iqAddSlider.value = 0;
     }
+
     private void LaneTriggerAnimation(string AnimName, int index)
     {
         laneVisuals[index].GetComponent<Animator>().SetTrigger(AnimName);

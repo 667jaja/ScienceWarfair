@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int moneyGain = 2;    
     [SerializeField] private int cardGain = 2;
 
+    [SerializeField] private float endOfTurnWait = 0.2f;
+
     //public int perspective player
     void Awake()
     {
@@ -74,10 +76,15 @@ public class GameManager : MonoBehaviour
 
         //cards
         //CardManager.instance.CurrentPlayerDrawCards(cardGain);
+        yield return GainMoneyPerformer(new GainMoneyGA(currentPlayer, moneyGain));
 
         //iq
         yield return LaneManager.instance.CountIqVisual();
         players[currentPlayer].sciencePoints += UnitManager.instance.CountPlayerIQ(currentPlayer);
+        UpdateSciencePointSliders();
+
+        //stall
+        yield return new WaitForSeconds(endOfTurnWait);
 
         //currentplayer
         currentPlayer = GetNextPlayerId();
@@ -106,10 +113,17 @@ public class GameManager : MonoBehaviour
         GlobalUIUpdate();
         yield return null;
     }
+    private IEnumerator GainMoneyPerformer(GainMoneyGA gainMoneyGA)
+    {
+        players[gainMoneyGA.playerId].money += gainMoneyGA.gainCount;
+        UpdateMoneyUI(players[displayPlayer]);
+        yield return null;
+    }
     private void OnEnable()
     {
         ActionManager.AttachPerformer<EndTurnGA>(EndTurnPerformer);
         ActionManager.AttachPerformer<StartTurnGA>(StartTurnPerformer);
+        ActionManager.AttachPerformer<GainMoneyGA>(GainMoneyPerformer);
         //ActionManager.SubscribeReaction<EndTurnGA>(EndTurnReaction, ReactionTiming.POST);
 
     }
@@ -117,6 +131,7 @@ public class GameManager : MonoBehaviour
     {
         ActionManager.DetachPerformer<EndTurnGA>();
         ActionManager.DetachPerformer<StartTurnGA>();
+        ActionManager.DetachPerformer<GainMoneyGA>();
         //ActionManager.UnubscribeReaction<EndTurnGA>(EndTurnReaction, ReactionTiming.POST);
     }
     // private void EndTurnReaction(EndTurnGA endTurnGA)
@@ -149,11 +164,12 @@ public class GameManager : MonoBehaviour
     public void UpdateSciencePointSliders()
     {
         plaSciencePointsSlider.value = players[currentPlayer].sciencePoints;
-        oppSciencePointsSlider.value = players[GetNextPlayerId()].sciencePoints;
+        oppSciencePointsSlider.value = players[GetNextPlayerId(displayPlayer)].sciencePoints;
     }
     public int GetNextPlayerId(int playerId = -1)
     {
         if (playerId < 0) playerId = currentPlayer;
         return (playerId < players.Count - 1) ? playerId + 1 : 0;
     }
+
 }

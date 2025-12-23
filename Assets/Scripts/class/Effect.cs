@@ -6,4 +6,11 @@ public abstract class Effect : ScriptableObject
     public ActionData actionData { get; set;}
     //[field: SerializeField] public GameAction trigger { get; private set; }
     public abstract GameAction effect { get;}
+
+    // public void PerformEffect(ActionData actionData1)
+    // {
+    //     //foreach 
+    //     actionData = actionData1;
+    //     ActionManager.instance.Perform(effect);
+    // }
 }
