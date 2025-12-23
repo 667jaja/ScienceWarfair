@@ -112,6 +112,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator StartTurnPerformer(StartTurnGA startTurnGA)
     {
         Debug.Log("turnStart player id: " + startTurnGA.playerId);
+        players[currentPlayer].actionPoints = 1;
         GlobalUIUpdate();
         yield return null;
     }

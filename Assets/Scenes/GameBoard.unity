@@ -492,6 +492,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b8c4627ce80ef35459d5b1803147d0ac, type: 2}
   - {fileID: 11400000, guid: c5002b3150ce4fb48ab3397d80bd3807, type: 2}
   - {fileID: 11400000, guid: 2d2dbbb548d40c14ab1c280d95e0a0ca, type: 2}
+  - {fileID: 11400000, guid: ea1873d23da18a0448c87a213d8ed9e1, type: 2}
   cardVisual: {fileID: 6868798076806503581, guid: 30febd3bb3ece5441882a792accb956f, type: 3}
   currentHeldCards: []
   cardCanvas: {fileID: 956074738}

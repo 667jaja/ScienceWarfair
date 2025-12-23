@@ -23,6 +23,16 @@ public class LaneVisual : MonoBehaviour
             iqUI.gameObject.SetActive(false);
             laneDropArea.enabled = false;
         }
+        if (newLanePos < 0)
+        {
+            laneDropArea.isActionLane = true;
+            iqUI.gameObject.SetActive(false);
+            laneDropArea.enabled = false;
+        }
+        else
+        {
+            laneDropArea.isActionLane = false;
+        }
     }
     public void UpdateVisual(int overrideNumber = -1)
     {

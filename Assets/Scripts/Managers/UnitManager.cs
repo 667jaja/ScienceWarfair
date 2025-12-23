@@ -14,16 +14,18 @@ public class UnitManager : MonoBehaviour
     //[SerializeField] private int enemyColumnCount = 3;
     [SerializeField] private int rowCount = 3;
 
-
+    [SerializeField] private CardVisual actionVisual;
     [SerializeField] private CardVisual unitVisual;
     [SerializeField] private Transform[] laneTransforms = new Transform[6];//[6];
     [SerializeField] private CardVisual[,] unitVisuals = new CardVisual[6, 3];//[6, 3]; //all unit visuals currently in play
+
     //[SerializeField] private CardVisual[] units = new CardVisual[3];
 
 
     //animations
     [SerializeField] private string placementAnimationName = "Placed";
     [SerializeField] private float placementAnimationLength;
+    [SerializeField] private float actionPlayAnimationLength;
     [SerializeField] private string destroyAnimationName;
     [SerializeField] private float destroyAnimationLength;
     [SerializeField] private string damageAnimationName;
@@ -45,11 +47,18 @@ public class UnitManager : MonoBehaviour
     {
         ActionManager.AttachPerformer<PlaceUnitGA>(PlaceUnitPerformer);
         ActionManager.AttachPerformer<CreateUnitGA>(CreateUnitPerformer);
+        ActionManager.AttachPerformer<PlayActionGA>(PlayActionPerformer);
     }
     private void OnDisable()
     {
         ActionManager.DetachPerformer<PlaceUnitGA>();
         ActionManager.DetachPerformer<CreateUnitGA>();
+        ActionManager.DetachPerformer<PlayActionGA>();
+    }
+    public void PlayAction(int playerId, Card card)
+    {
+        PlayActionGA playActionGA = new(playerId, card);
+        ActionManager.instance.Perform(playActionGA);
     }
     public void PlaceCard(int playerId, int lane, Card card)
     {
@@ -72,6 +81,37 @@ public class UnitManager : MonoBehaviour
     {
         CreateUnitGA createUnitGA = new(playerId, lane, card);
         ActionManager.instance.AddReaction(createUnitGA);
+    }
+    private IEnumerator PlayActionPerformer(PlayActionGA playActionGA)
+    {
+        if (GameManager.instance.players[playActionGA.playerId].actionPoints > 0)
+        {
+            Debug.Log("Action Play success: Player:" + playActionGA.playerId + " Card:" + playActionGA.playedCard.title);
+            
+            //backend
+            playActionGA.playedCard.PlacementAbility(new ActionData(playActionGA.playerId, new Vector2Int (-1,-1), playActionGA.playedCard));
+            GameManager.instance.players[playActionGA.playerId].hand.Remove(playActionGA.playedCard);
+            GameManager.instance.players[playActionGA.playerId].actionPoints -= 1;
+
+            //frontend
+            CardManager.instance.UpdateHandUI();
+            CardVisual newCardVisual = Instantiate(actionVisual, LaneManager.instance.lanePositions[columnCount*2]);
+            newCardVisual.Initiate(playActionGA.playedCard);
+            yield return new WaitForSeconds(actionPlayAnimationLength);
+
+            if (newCardVisual != null)
+            {
+                Destroy(newCardVisual.gameObject);
+            }
+        }
+        else
+        {
+            Debug.Log("Action Card failed");
+            GameManager.instance.GlobalUIUpdate();
+        }
+
+        //frontend
+        yield return null;
     }
     private IEnumerator PlaceUnitPerformer(PlaceUnitGA placeUnitGA)
     {

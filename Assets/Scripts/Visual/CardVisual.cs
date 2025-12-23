@@ -12,6 +12,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     private Vector3 startDragPos;
     [SerializeField] private List<Image> cardArtUI = new List<Image>();
     [SerializeField] private List<TMP_Text> titleUI, placementCostUI, iqUI, healthUI, descriptionUI = new List<TMP_Text>();
+    [SerializeField] private List<GameObject> actionDisable = new List<GameObject>(); // objects to disable if this is an action card
     private Card card;
 
     void Start()
@@ -74,6 +75,13 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
         foreach (TMP_Text item in healthUI)
         {
             item.text = newCard.health.ToString();
+        }
+        if (card.isAction)
+        {
+            foreach (GameObject item in actionDisable)
+            {
+                item.SetActive(false);
+            }
         }
     }
     public void OnPointerClick(PointerEventData eventdata)

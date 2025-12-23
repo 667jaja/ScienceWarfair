@@ -13,10 +13,14 @@ public class Card
         iq = cardData.iq;
         health = cardData.health;
     }
+
     //non gameplay elements
     public Sprite cardArt { get => cardData.cardArt; }
     public string title { get => cardData.title; }
     public string description { get => cardData.description; }
+
+    //Action vs Unit
+    public bool isAction { get => cardData.isAction; }
 
     //stats
     public int placementCost { get; set; }

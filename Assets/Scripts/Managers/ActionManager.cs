@@ -89,7 +89,7 @@ public class ActionManager : MonoBehaviour
 
         if (action.isQueueEnder) currentActionIsQueueEnder = true;
         else currentActionIsQueueEnder = false;
-        Debug.Log("flow end, Action Queue Count: " + actionQueue.Count);
+        //Debug.Log("flow end, Action Queue Count: " + actionQueue.Count);
         OnFlowFinished?.Invoke();
     }
 
@@ -134,7 +134,7 @@ public class ActionManager : MonoBehaviour
     //must subscribe OnEnable and unsubscribe OnDisable
     public static void AttachPerformer<T>(Func<T, IEnumerator> performer) where T : GameAction
     {
-        Debug.Log("Performer Attached");
+        //Debug.Log("Performer Attached");
         Type type = typeof(T);
         IEnumerator wrappedPerformer(GameAction action) => performer((T)action);
         if (performers.ContainsKey(type)) performers[type] = wrappedPerformer;
@@ -150,7 +150,7 @@ public class ActionManager : MonoBehaviour
     //must subscribe OnEnable and unsubscribe OnDisable
     public static void SubscribeReaction<T>(Action<T> reaction, ReactionTiming timing) where T : GameAction
     {
-        Debug.Log("action Subscribed");
+        //Debug.Log("action Subscribed");
         Dictionary<Type, List<Action<GameAction>>> subs = timing == ReactionTiming.PRE ? preSubs : postSubs;
         void wrappedReaction(GameAction action) => reaction((T)action);
         if (subs.ContainsKey(typeof(T)))

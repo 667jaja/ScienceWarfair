@@ -3,6 +3,7 @@ using UnityEngine;
 public class LaneDropArea : MonoBehaviour, ICardDropArea
 {
     public int laneId;
+    public bool isActionLane;
     public void OnCardDrop(Card card)
     {
         int currentPlayer = GameManager.instance.currentPlayer;
@@ -11,11 +12,17 @@ public class LaneDropArea : MonoBehaviour, ICardDropArea
         // Debug.Log("player id: " + currentPlayer);
         // Debug.Log("lane id: " + laneId);
         // Debug.Log("card name: " + card.title);
-        // card.transform.parent = this.transform;
-        // card.transform.position = Vector3.zero;
+
         if (currentPlayer == displayPlayer )
         {
-            UnitManager.instance.PlaceCard(currentPlayer, laneId, card);
+            if (!isActionLane)
+            {
+                UnitManager.instance.PlaceCard(currentPlayer, laneId, card);
+            }
+            else
+            {
+                UnitManager.instance.PlayAction(currentPlayer, card);
+            }
         }
     }
 }

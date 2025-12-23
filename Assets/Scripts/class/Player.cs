@@ -7,6 +7,7 @@ public class Player
     public int id;
     public int sciencePoints;
     private int money;
+    public int actionPoints;
 
 
     public List<Card> deck = new List<Card>();

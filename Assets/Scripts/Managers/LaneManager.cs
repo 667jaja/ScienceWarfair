@@ -9,6 +9,7 @@ public class LaneManager : MonoBehaviour
     public static LaneManager instance;
     [SerializeField] private List<LaneVisual> laneVisuals;
     [SerializeField] private List<LaneVisual> EnemyLaneVisuals;
+    [SerializeField] private LaneVisual ActionCardLane;
     public List<Transform> lanePositions;
 
     //ui
@@ -46,6 +47,8 @@ public class LaneManager : MonoBehaviour
             lanePositions.Add(lane.gameObject.transform);
             i++;
         }
+        ActionCardLane.Initiate(true, -3);
+        lanePositions.Add(ActionCardLane.transform);
     }
     public IEnumerator CountIqVisual()
     {

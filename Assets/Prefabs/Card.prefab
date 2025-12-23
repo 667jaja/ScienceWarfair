@@ -1818,6 +1818,10 @@ MonoBehaviour:
   descriptionUI:
   - {fileID: 5400900226465726152}
   - {fileID: 4210685997170242118}
+  actionDisable:
+  - {fileID: 5821900481404503111}
+  - {fileID: 3788529969449824926}
+  - {fileID: 7916385207928544988}
 --- !u!61 &4709723283097492233
 BoxCollider2D:
   m_ObjectHideFlags: 0
