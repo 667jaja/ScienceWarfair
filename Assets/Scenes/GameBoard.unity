@@ -458,6 +458,7 @@ MonoBehaviour:
   plaSciencePointsSlider: {fileID: 329196553}
   oppSciencePointsSlider: {fileID: 808352577}
   startingMoney: 3
+  maxMoney: 10
   startingCards: 5
   moneyGain: 2
   cardGain: 2
@@ -499,8 +500,8 @@ MonoBehaviour:
   deckCountUI: {fileID: 1522478033}
   cardFlipPrefab: {fileID: 3925492094763907171, guid: 295a1dd8be6c54346a3332701286378d, type: 3}
   cardFlip: {fileID: 0}
-  maxHandWidth: 15
-  handWidthScaleRate: 10
+  maxHandWidth: 18
+  handWidthScaleRate: 8
 --- !u!114 &78848198
 MonoBehaviour:
   m_ObjectHideFlags: 0

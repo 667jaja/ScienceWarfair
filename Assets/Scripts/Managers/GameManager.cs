@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Slider oppSciencePointsSlider;
 
     [SerializeField] private int startingMoney;
+    [SerializeField] private int maxMoney;
     [SerializeField] private int startingCards;
     [SerializeField] private int moneyGain = 2;    
     [SerializeField] private int cardGain = 2;
@@ -46,7 +47,8 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < playerCount; i++)
         {
             players.Add(new Player(i));
-            players[i].money = startingMoney;
+            players[i].maxMoney = maxMoney;
+            players[i].Money = startingMoney;
             CardManager.instance.CreateDeck(i);
             CardManager.instance.DrawCards(i, startingCards);
         }
@@ -72,11 +74,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("turnEnd player id: " + endTurnGA.playerId);
 
         //money
-        players[currentPlayer].money += moneyGain;
+        //players[currentPlayer].money += moneyGain;
+        yield return GainMoneyPerformer(new GainMoneyGA(currentPlayer, moneyGain));
 
         //cards
         //CardManager.instance.CurrentPlayerDrawCards(cardGain);
-        yield return GainMoneyPerformer(new GainMoneyGA(currentPlayer, moneyGain));
 
         //iq
         yield return LaneManager.instance.CountIqVisual();
@@ -115,7 +117,7 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator GainMoneyPerformer(GainMoneyGA gainMoneyGA)
     {
-        players[gainMoneyGA.playerId].money += gainMoneyGA.gainCount;
+        players[gainMoneyGA.playerId].Money += gainMoneyGA.gainCount;
         UpdateMoneyUI(players[displayPlayer]);
         yield return null;
     }
@@ -159,7 +161,7 @@ public class GameManager : MonoBehaviour
     public void UpdateMoneyUI(Player updatePlayer = null)
     {
         if (updatePlayer == null) updatePlayer = players[displayPlayer];
-        moneySlider.value = updatePlayer.money;
+        moneySlider.value = updatePlayer.Money;
     } 
     public void UpdateSciencePointSliders()
     {

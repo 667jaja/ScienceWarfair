@@ -75,12 +75,12 @@ public class UnitManager : MonoBehaviour
     }
     private IEnumerator PlaceUnitPerformer(PlaceUnitGA placeUnitGA)
     {
-        if (GameManager.instance.players[placeUnitGA.playerId].units[placeUnitGA.lane, rowCount-1] == null && placeUnitGA.playedCard.placementCost <= GameManager.instance.players[placeUnitGA.playerId].money)
+        if (GameManager.instance.players[placeUnitGA.playerId].units[placeUnitGA.lane, rowCount-1] == null && placeUnitGA.playedCard.placementCost <= GameManager.instance.players[placeUnitGA.playerId].Money)
         {
             Debug.Log("Placement success: Player:" + placeUnitGA.playerId + " Lane:" + placeUnitGA.lane + " Card:" + placeUnitGA.playedCard.title);
             GameManager.instance.players[placeUnitGA.playerId].hand.Remove(placeUnitGA.playedCard);
             CardManager.instance.UpdateHandUI();
-            GameManager.instance.players[placeUnitGA.playerId].money -= placeUnitGA.playedCard.placementCost;
+            GameManager.instance.players[placeUnitGA.playerId].Money -= placeUnitGA.playedCard.placementCost;
             GameManager.instance.UpdateMoneyUI();
             CreateUnitReaction(placeUnitGA.playerId, placeUnitGA.lane, placeUnitGA.playedCard);
 

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 
 public class Player
 {
+    public int maxMoney = 10;
     public int id;
     public int sciencePoints;
-    public int money;
+    private int money;
+
+
     public List<Card> deck = new List<Card>();
     public List<Card> hand = new List<Card>();
     // public Card[] lane1 = new Card[3];
@@ -15,5 +18,24 @@ public class Player
     public Player(int numberOfPlayers)
     {
         id = numberOfPlayers;
+    }
+
+    public int Money
+    {
+        get
+        {
+            return money;
+        }
+        set
+        {
+            if (value > maxMoney)
+            {
+                money = maxMoney;
+            }
+            else
+            {
+                money = value;
+            }
+        }
     }
 }
