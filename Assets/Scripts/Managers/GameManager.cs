@@ -19,11 +19,15 @@ public class GameManager : MonoBehaviour
     public Slider plaSciencePointsSlider;
     public Slider oppSciencePointsSlider;
 
+    //money&Cards
     [SerializeField] private int startingMoney;
-    [SerializeField] private int maxMoney;
+    [SerializeField] private int turnOrderBonusMoney = 1;
     [SerializeField] private int startingCards;
-    [SerializeField] private int moneyGain = 2;    
+    [SerializeField] private int turnOrderBonusCards = 1;
+    [SerializeField] private int moneyGain = 2;
     [SerializeField] private int cardGain = 2;
+    [SerializeField] private int maxMoney;
+
 
     [SerializeField] private float endOfTurnWait = 0.2f;
 
@@ -48,9 +52,9 @@ public class GameManager : MonoBehaviour
         {
             players.Add(new Player(i));
             players[i].maxMoney = maxMoney;
-            players[i].Money = startingMoney;
+            players[i].Money = startingMoney + i*turnOrderBonusMoney;
             CardManager.instance.CreateDeck(i);
-            CardManager.instance.DrawCards(i, startingCards);
+            CardManager.instance.DrawCards(i, startingCards + i*turnOrderBonusCards);
         }
         
         UpdateMoneyUI(players[0]);
@@ -122,11 +126,17 @@ public class GameManager : MonoBehaviour
         UpdateMoneyUI(players[displayPlayer]);
         yield return null;
     }
+    private IEnumerator GainActionPointsPerformer(GainActionPointsGA gainActionPointsGA)
+    {
+        players[gainActionPointsGA.playerId].actionPoints += gainActionPointsGA.gainCount;
+        yield return null;
+    }
     private void OnEnable()
     {
         ActionManager.AttachPerformer<EndTurnGA>(EndTurnPerformer);
         ActionManager.AttachPerformer<StartTurnGA>(StartTurnPerformer);
         ActionManager.AttachPerformer<GainMoneyGA>(GainMoneyPerformer);
+        ActionManager.AttachPerformer<GainActionPointsGA>(GainActionPointsPerformer);
         //ActionManager.SubscribeReaction<EndTurnGA>(EndTurnReaction, ReactionTiming.POST);
 
     }
@@ -135,6 +145,7 @@ public class GameManager : MonoBehaviour
         ActionManager.DetachPerformer<EndTurnGA>();
         ActionManager.DetachPerformer<StartTurnGA>();
         ActionManager.DetachPerformer<GainMoneyGA>();
+        ActionManager.DetachPerformer<GainActionPointsGA>();
         //ActionManager.UnubscribeReaction<EndTurnGA>(EndTurnReaction, ReactionTiming.POST);
     }
     // private void EndTurnReaction(EndTurnGA endTurnGA)

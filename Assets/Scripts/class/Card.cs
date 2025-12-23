@@ -12,6 +12,7 @@ public class Card
         placementCost = cardData.placementCost;
         iq = cardData.iq;
         health = cardData.health;
+        noAttack = cardData.noAttack;
     }
 
     //non gameplay elements
@@ -28,6 +29,7 @@ public class Card
     public int health { get; set; }
 
     //abilities
+    public bool noAttack { get; set; }
     public string cardEffect { get; set; }
     public List<Effect> effects {get => cardData.effects;}
 
@@ -38,11 +40,21 @@ public class Card
     public void PerformEffect(ActionData actionData)
     {
         Debug.Log("used ability " + cardEffect);
-        //foreach 
-        if (effects.Count > 0 && effects[0] != null)
+
+        if (effects.Count > 0)
         {
-            cardData.effects[0].actionData = actionData;
-            ActionManager.instance.Perform(effects[0].effect);
-        }
+            foreach (Effect effect in effects)
+            {
+                if (effect != null)
+                {
+                    effect.actionData = actionData;
+                    foreach (GameAction action in effect.effect)
+                    {
+                        ActionManager.instance.Perform(action);
+                    }
+                }
+            }
+        } 
+
     }
 }

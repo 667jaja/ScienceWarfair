@@ -12,6 +12,10 @@ public class LaneManager : MonoBehaviour
     [SerializeField] private LaneVisual ActionCardLane;
     public List<Transform> lanePositions;
 
+    [SerializeField] private List<Collider2D> UnitPlacementArea;
+    [SerializeField] private List<GameObject> UnitPlacement;
+    [SerializeField] private List<Collider2D> ActionPlacementArea;
+    [SerializeField] private List<GameObject> ActionPlacement;
     //ui
     [SerializeField] private Slider iqAddSlider;
     //[SerializeField] private Slider iqAddSliderEnemy;
@@ -29,6 +33,7 @@ public class LaneManager : MonoBehaviour
         instance = this;
         intitiateLanes();
         iqAddSlider.value = 0;
+        PlaceActionToggle(false);
     }
     private void intitiateLanes()
     {
@@ -78,7 +83,25 @@ public class LaneManager : MonoBehaviour
         }
         iqAddSlider.value = 0;
     }
-
+    public void PlaceActionToggle(bool isPlacingAction)
+    {
+        foreach (Collider2D item in ActionPlacementArea)
+        {
+            item.enabled = isPlacingAction;
+        }
+        foreach (GameObject item in ActionPlacement)
+        {
+            item.SetActive(isPlacingAction);
+        }
+        foreach (Collider2D item in UnitPlacementArea)
+        {
+            item.enabled = !isPlacingAction;
+        }
+        foreach (GameObject item in UnitPlacement)
+        {
+            item.SetActive(!isPlacingAction);
+        }
+    }
     private void LaneTriggerAnimation(string AnimName, int index)
     {
         laneVisuals[index].GetComponent<Animator>().SetTrigger(AnimName);

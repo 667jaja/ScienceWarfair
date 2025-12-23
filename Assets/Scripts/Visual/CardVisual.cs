@@ -24,6 +24,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     {
         startDragPos = transform.position;
         transform.position = MousePos();
+        LaneManager.instance.PlaceActionToggle(card.isAction);
     }
     void OnMouseDrag()
     {
@@ -43,6 +44,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
         {
             transform.position = startDragPos;
         }
+        LaneManager.instance.PlaceActionToggle(false);
     }
     Vector2 MousePos()
     {

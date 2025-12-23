@@ -125,8 +125,12 @@ public class UnitManager : MonoBehaviour
             CreateUnitReaction(placeUnitGA.playerId, placeUnitGA.lane, placeUnitGA.playedCard);
 
             //attack lane
-            AttackLaneGA attackLaneGA = new((placeUnitGA.playerId < GameManager.instance.players.Count-1)? placeUnitGA.playerId+1: 0, placeUnitGA.lane, 1);
-            ActionManager.instance.AddReaction(attackLaneGA);
+            if (!placeUnitGA.playedCard.noAttack)
+            {
+                AttackLaneGA attackLaneGA = new((placeUnitGA.playerId < GameManager.instance.players.Count-1)? placeUnitGA.playerId+1: 0, placeUnitGA.lane, 1);
+                ActionManager.instance.AddReaction(attackLaneGA);
+            }
+
         }
         else
         {

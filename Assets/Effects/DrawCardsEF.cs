@@ -1,4 +1,4 @@
-using System.Buffers.Text;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DrawCardsEffect", menuName = "Draw Cards Effect")]
@@ -8,12 +8,15 @@ public class DrawCardsEF : Effect
     [field: SerializeField] public int cardCount { get; private set; }
     [field: SerializeField] public Card originCard { private get; set; }
 
-    public override GameAction effect
+    public override List<GameAction> effect
     {
         get
         {
+            List<GameAction> actionList = new List<GameAction>(); 
+
             DrawCardsGA drawCardsGA = new DrawCardsGA(base.actionData.playerId, cardCount);
-            return drawCardsGA;
+            actionList.Add(drawCardsGA);
+            return actionList;
         }
     }  
 

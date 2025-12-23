@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <title>k__BackingField: Goverment Grant
   <description>k__BackingField: Gain 2k
-  <cardArt>k__BackingField: {fileID: 21300000, guid: b60b7aeaf9ee9a24ab0442352a42346e, type: 3}
+  <cardArt>k__BackingField: {fileID: 1187480304868620637, guid: 0c9e42187211fab4aa3845887e008738, type: 3}
   isAction: 1
   <placementCost>k__BackingField: 0
   <iq>k__BackingField: 0

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
+  m_Name: ComicallyLargeShotgun
+  m_EditorClassIdentifier: 
+  <title>k__BackingField: ComicallyLargeShotgun
+  <description>k__BackingField: does not attack normally. Deal 4 damage to defending
+    unit in lane, excess damage carries over to the unit behind it
+  <cardArt>k__BackingField: {fileID: -8267762533296465828, guid: d593f5bcbcbc0304991a0aa36a578081, type: 3}
+  isAction: 0
+  <placementCost>k__BackingField: 4
+  <iq>k__BackingField: 1
+  <health>k__BackingField: 2
+  <noAttack>k__BackingField: 1
+  <cardEffect>k__BackingField: 4 Damage shotgun
+  <effects>k__BackingField:
+  - {fileID: 11400000, guid: 7094c1f5c1e422344b1064ce2b0fab8a, type: 2}
