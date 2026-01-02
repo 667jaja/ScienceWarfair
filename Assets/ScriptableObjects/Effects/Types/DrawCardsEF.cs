@@ -6,7 +6,6 @@ public class DrawCardsEF : Effect
 {
     
     [field: SerializeField] public int cardCount { get; private set; }
-    [field: SerializeField] public Card originCard { private get; set; }
 
     public override List<GameAction> effect
     {
@@ -14,7 +13,7 @@ public class DrawCardsEF : Effect
         {
             List<GameAction> actionList = new List<GameAction>(); 
 
-            DrawCardsGA drawCardsGA = new DrawCardsGA(base.actionData.playerId, cardCount);
+            DrawCardsGA drawCardsGA = new DrawCardsGA(base.actionData.originPlayerId, cardCount);
             actionList.Add(drawCardsGA);
             return actionList;
         }

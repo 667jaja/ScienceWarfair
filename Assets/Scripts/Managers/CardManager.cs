@@ -43,6 +43,8 @@ public class CardManager : MonoBehaviour
     }
     public void DrawCards(int playerId, int count = 1)
     {
+        Debug.Log("card Draws");
+
         for (int i = 0; i < count; i++)
         {
             DrawCardGA drawCardGA = new(playerId);
@@ -51,10 +53,14 @@ public class CardManager : MonoBehaviour
     }
     public void CurrentPlayerDrawCards(int count = 1)
     {
+        Debug.Log("Current Player card Draw");
+
         DrawCards(GameManager.instance.currentPlayer, count);
     }
     private IEnumerator DrawCardsPerformer(DrawCardsGA drawCardsGA)
     {
+        Debug.Log("Multi card Draw");
+
         for (int i = 0; i < drawCardsGA.drawCount; i++)
         {
             DrawCardGA drawCardGA = new(drawCardsGA.playerId);

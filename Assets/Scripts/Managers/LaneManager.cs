@@ -73,7 +73,13 @@ public class LaneManager : MonoBehaviour
             yield return new WaitForSeconds(CountIqAnimation(i));
             i++;
         }
-        
+    }
+    public IEnumerator AddIqVisual(int playerId, int AddAmount)
+    {
+        // if (currentPlayer != DisplayPlayer)
+        //iqAddSliderEnemy
+        iqAddSlider.value = GameManager.instance.players[GameManager.instance.currentPlayer].sciencePoints + AddAmount;
+        yield return new WaitForSeconds(countIqAnimationLength);
     }
     public void UpdateLaneVisuals()
     {

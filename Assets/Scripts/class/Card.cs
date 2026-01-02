@@ -5,6 +5,8 @@ using UnityEngine;
 public class Card
 {
     private CardData cardData;
+
+    //constructor
     public Card(CardData cardData)
     {
         this.cardData = cardData;
@@ -13,6 +15,9 @@ public class Card
         iq = cardData.iq;
         health = cardData.health;
         noAttack = cardData.noAttack;
+        effectTriggers = new List<EffectTrigger>() {cardData.effectTriggers};
+        effects = cardData.effects;
+        containedCard = cardData.containedCard;
     }
 
     //non gameplay elements
@@ -31,16 +36,28 @@ public class Card
     //abilities
     public bool noAttack { get; set; }
     public string cardEffect { get; set; }
-    public List<Effect> effects {get => cardData.effects;}
+    public List<EffectTrigger> effectTriggers {get; set;}
+    public List<Effect> effects {get; set;}
+    public CardData containedCard { get; set; }
 
     public void PlacementAbility(ActionData actionData)// Card card
     {
-        PerformEffect(actionData);
+        actionData.originCard = this;
+        Debug.Log("placementCalled");
+        if (effectTriggers.Count > 0)
+        {
+            foreach (EffectTrigger effectTrigger in effectTriggers)
+            {
+                if (effectTrigger != null)
+                {
+                    effectTrigger.Placement(actionData);
+                }
+            }
+        }     
     }
-    public void PerformEffect(ActionData actionData)
+    public void PerformAbility(ActionData actionData)
     {
-        Debug.Log("used ability " + cardEffect);
-
+        Debug.Log("performAbilityCalled");
         if (effects.Count > 0)
         {
             foreach (Effect effect in effects)
@@ -54,7 +71,20 @@ public class Card
                     }
                 }
             }
-        } 
+        }
+    }
+    public void Destruciton()
+    {
+        if (effectTriggers.Count > 0)
+        {
+            foreach (EffectTrigger effectTrigger in effectTriggers)
+            {
+                if (effectTrigger != null)
+                {
+                    effectTrigger.DestructionEffect();
+                }
+            }
+        }     
 
     }
 }

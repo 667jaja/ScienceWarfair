@@ -6,7 +6,6 @@ public class AttackLaneEF : Effect
 {
     
     [field: SerializeField] public int attackDamage { get; private set; }
-    [field: SerializeField] public Card originCard { private get; set; }
 
     public override List<GameAction> effect
     {
@@ -14,10 +13,9 @@ public class AttackLaneEF : Effect
         {
             List<GameAction> actionList = new List<GameAction>(); 
 
-            AttackLaneGA attackLaneGA = new AttackLaneGA(GameManager.instance.GetNextPlayerId(base.actionData.playerId), base.actionData.position.x,  attackDamage);
+            AttackLaneGA attackLaneGA = new AttackLaneGA(GameManager.instance.GetNextPlayerId(base.actionData.originPlayerId), base.actionData.originPosition.x,  attackDamage);
             actionList.Add(attackLaneGA);
             return actionList;
         }
     }  
-
 }

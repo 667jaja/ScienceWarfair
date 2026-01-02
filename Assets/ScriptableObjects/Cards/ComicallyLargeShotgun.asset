@@ -15,12 +15,20 @@ MonoBehaviour:
   <title>k__BackingField: ComicallyLargeShotgun
   <description>k__BackingField: does not attack normally. Deal 4 damage to defending
     unit in lane, excess damage carries over to the unit behind it
-  <cardArt>k__BackingField: {fileID: -8267762533296465828, guid: d593f5bcbcbc0304991a0aa36a578081, type: 3}
+  <cardArt>k__BackingField: {fileID: -4605054715444278153, guid: f1bbca426a7d88942bb89952077641a5, type: 3}
   isAction: 0
   <placementCost>k__BackingField: 4
   <iq>k__BackingField: 1
   <health>k__BackingField: 2
   <noAttack>k__BackingField: 1
   <cardEffect>k__BackingField: 4 Damage shotgun
+  <effectTriggers>k__BackingField:
+    <pre>k__BackingField: 0
+    effectTriggerType: 0
+    originPlayer: 0
+    <oneTimeUse>k__BackingField: 0
+    <countDown>k__BackingField: 0
+    countDownVal: 0
   <effects>k__BackingField:
   - {fileID: 11400000, guid: 7094c1f5c1e422344b1064ce2b0fab8a, type: 2}
+  <containedCard>k__BackingField: {fileID: 0}

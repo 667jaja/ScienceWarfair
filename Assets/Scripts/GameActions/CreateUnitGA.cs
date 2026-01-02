@@ -3,12 +3,12 @@ using UnityEngine;
 public class CreateUnitGA : GameAction
 {
     public int playerId;
-    public int lane;
+    public Vector2Int position;
     public Card playedCard;
-    public CreateUnitGA(int playerIdInput, int laneInput, Card cardInput)
+    public CreateUnitGA(int playerIdInput, Vector2Int positionInput, Card cardInput)
     {
         playerId = playerIdInput;
-        lane = laneInput;
+        position = positionInput;
         playedCard = cardInput;
     }
 }

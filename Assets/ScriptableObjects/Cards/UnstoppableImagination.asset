@@ -16,10 +16,18 @@ MonoBehaviour:
   <description>k__BackingField: Draw 2 cards
   <cardArt>k__BackingField: {fileID: 21300000, guid: 0c8afd9a75c702a46819c71d17a65ceb, type: 3}
   isAction: 1
-  <placementCost>k__BackingField: 0
+  <placementCost>k__BackingField: 3
   <iq>k__BackingField: 0
-  <health>k__BackingField: 0
+  <health>k__BackingField: 1
   <noAttack>k__BackingField: 0
   <cardEffect>k__BackingField: Draw 2 cards
+  <effectTriggers>k__BackingField:
+    <pre>k__BackingField: 0
+    effectTriggerType: 0
+    originPlayer: 0
+    <oneTimeUse>k__BackingField: 0
+    <countDown>k__BackingField: 0
+    countDownVal: 0
   <effects>k__BackingField:
   - {fileID: 11400000, guid: 2e5224af4da163545a0e052194a677e3, type: 2}
+  <containedCard>k__BackingField: {fileID: 0}

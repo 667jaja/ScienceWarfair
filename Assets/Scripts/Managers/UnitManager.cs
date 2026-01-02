@@ -10,9 +10,9 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private float maxLaneHeight;
     [SerializeField] private float laneHeightScaleRate;
     //
-    [SerializeField] private int columnCount = 3;
+    public int columnCount = 3;
     //[SerializeField] private int enemyColumnCount = 3;
-    [SerializeField] private int rowCount = 3;
+    public int rowCount = 3;
 
     [SerializeField] private CardVisual actionVisual;
     [SerializeField] private CardVisual unitVisual;
@@ -70,16 +70,16 @@ public class UnitManager : MonoBehaviour
 
         // return true;
     }
-    public void CreateUnit(int playerId, int lane, Card card)
+    public void CreateUnit(int playerId, Vector2Int position, Card card)
     {
         if (ActionManager.instance.isPerforming) return;
 
-        CreateUnitGA createUnitGA = new(playerId, lane, card);
+        CreateUnitGA createUnitGA = new(playerId, position, card);
         ActionManager.instance.Perform(createUnitGA);
     }
-    public void CreateUnitReaction(int playerId, int lane, Card card)
+    public void CreateUnitReaction(int playerId, Vector2Int position, Card card)
     {
-        CreateUnitGA createUnitGA = new(playerId, lane, card);
+        CreateUnitGA createUnitGA = new(playerId, position, card);
         ActionManager.instance.AddReaction(createUnitGA);
     }
     private IEnumerator PlayActionPerformer(PlayActionGA playActionGA)
@@ -115,14 +115,36 @@ public class UnitManager : MonoBehaviour
     }
     private IEnumerator PlaceUnitPerformer(PlaceUnitGA placeUnitGA)
     {
-        if (GameManager.instance.players[placeUnitGA.playerId].units[placeUnitGA.lane, rowCount-1] == null && placeUnitGA.playedCard.placementCost <= GameManager.instance.players[placeUnitGA.playerId].Money)
+        //find Open Spot
+        bool unitPlacementSuccess = false;
+        int i = 0;
+        for (i = 0; i < rowCount; )
+        {
+            if (GameManager.instance.players[placeUnitGA.playerId].units[placeUnitGA.lane, i] == null)
+            {
+                // GameManager.instance.players[placeUnitGA.playerId].units[placeUnitGA.lane, i] = placeUnitGA.playedCard;
+                unitPlacementSuccess = true;
+                break;
+            }
+            if (i == rowCount - 1)
+            {
+                unitPlacementSuccess = false;
+                Debug.Log("Lanes Full");
+            }
+            i++;
+        }
+        if (unitPlacementSuccess && GameManager.instance.players[placeUnitGA.playerId].units[placeUnitGA.lane, rowCount-1] == null && placeUnitGA.playedCard.placementCost <= GameManager.instance.players[placeUnitGA.playerId].Money)
         {
             Debug.Log("Placement success: Player:" + placeUnitGA.playerId + " Lane:" + placeUnitGA.lane + " Card:" + placeUnitGA.playedCard.title);
+            Vector2Int firstOpenSpot = new Vector2Int(placeUnitGA.lane, i);
+
             GameManager.instance.players[placeUnitGA.playerId].hand.Remove(placeUnitGA.playedCard);
             CardManager.instance.UpdateHandUI();
             GameManager.instance.players[placeUnitGA.playerId].Money -= placeUnitGA.playedCard.placementCost;
             GameManager.instance.UpdateMoneyUI();
-            CreateUnitReaction(placeUnitGA.playerId, placeUnitGA.lane, placeUnitGA.playedCard);
+
+
+            if (unitPlacementSuccess) CreateUnitReaction(placeUnitGA.playerId, firstOpenSpot, placeUnitGA.playedCard);
 
             //attack lane
             if (!placeUnitGA.playedCard.noAttack)
@@ -146,28 +168,41 @@ public class UnitManager : MonoBehaviour
         Debug.Log("unit creation performed");
 
         //CardVisual card = Instantiate(cardVisual, playerHand.position, Quaternion.identity);
+
+        PushAllUnitsForward();
         bool unitCreationSuccess = false;
-        //backend
-        //for every row
-        int i = 0;
-        for (i = 0; i < rowCount; )
+
+        // if target space empty use it :)
+        if (GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, createUnitGA.position.y] == null)
         {
-            if (GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.lane, i] == null)
-            {
-                GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.lane, i] = createUnitGA.playedCard;
-                unitCreationSuccess = true;
-                break;
-            }
-            if (i == rowCount - 1)
-            {
-                unitCreationSuccess = false;
-                Debug.Log("Lanes Full");
-            }
-            i++;
+            GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, createUnitGA.position.y] = createUnitGA.playedCard;
+            unitCreationSuccess = true;
         }
+        // else, check backmost space, if empty move all behind back 1
+        else if (GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, rowCount-1] == null)
+        {
+            for (int j = rowCount-1; j > createUnitGA.position.y; j--)
+            {
+                //for every row (except the last)
+                if (GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, j] == null && GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, j-1] != null)
+                {
+                    GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, j] = GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, j-1];
+                    GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, j-1] = null;
+                }
+            }
+            GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, createUnitGA.position.y] = createUnitGA.playedCard;
+            unitCreationSuccess = true;
+        }
+        // else, pack it up we lost
+        else
+        {
+            unitCreationSuccess = false;
+            Debug.Log("Lanes Full");
+        }
+
         if (unitCreationSuccess)
         {
-            createUnitGA.playedCard.PlacementAbility(new ActionData(createUnitGA.playerId, new Vector2Int (createUnitGA.lane, i), createUnitGA.playedCard));
+            createUnitGA.playedCard.PlacementAbility(new ActionData(createUnitGA.playerId, new Vector2Int (createUnitGA.position.x, createUnitGA.position.y), createUnitGA.playedCard));
         }
 
         //frontend
@@ -176,7 +211,7 @@ public class UnitManager : MonoBehaviour
         if (unitCreationSuccess)
         {
             LaneManager.instance.UpdateLaneVisuals();
-            PlacementAnimation(GameManager.instance.currentPlayer, new Vector2Int(createUnitGA.lane, i));
+            PlacementAnimation(GameManager.instance.currentPlayer, new Vector2Int(createUnitGA.position.x, createUnitGA.position.y));
             yield return new WaitForSeconds(1/3);
         }
     }
@@ -220,7 +255,7 @@ public class UnitManager : MonoBehaviour
                 if (unitVisuals[i, j] != null)
                 {
                     Destroy(unitVisuals[i, j].gameObject);
-                    Debug.Log("Destroyed Visuals: " + i + ": " + j);
+                    //Debug.Log("Destroyed Visuals: " + i + ": " + j);
                 }
                 // else
                 // {

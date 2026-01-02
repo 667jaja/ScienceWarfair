@@ -15,8 +15,18 @@ MonoBehaviour:
   <title>k__BackingField: Intern
   <description>k__BackingField: does nothing
   <cardArt>k__BackingField: {fileID: 21300000, guid: 1da878c6b6bfa47438e49442e2056183, type: 3}
+  isAction: 0
   <placementCost>k__BackingField: 0
   <iq>k__BackingField: 1
   <health>k__BackingField: 1
+  <noAttack>k__BackingField: 0
   <cardEffect>k__BackingField: 
+  <effectTriggers>k__BackingField:
+    <pre>k__BackingField: 0
+    effectTriggerType: 0
+    originPlayer: 0
+    <oneTimeUse>k__BackingField: 0
+    <countDown>k__BackingField: 0
+    countDownVal: 0
   <effects>k__BackingField: []
+  <containedCard>k__BackingField: {fileID: 0}

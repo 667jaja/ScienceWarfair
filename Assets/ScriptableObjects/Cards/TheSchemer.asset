@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
+  m_Name: TheSchemer
+  m_EditorClassIdentifier: 
+  <title>k__BackingField: The Schemer
+  <description>k__BackingField: Does Not Attack Normally. Gain 2k at the start of
+    every turn
+  <cardArt>k__BackingField: {fileID: -8567022068340828743, guid: 7a0976be7d0760c438397fa23cad7357, type: 3}
+  isAction: 0
+  <placementCost>k__BackingField: 3
+  <iq>k__BackingField: 0
+  <health>k__BackingField: 1
+  <noAttack>k__BackingField: 1
+  <cardEffect>k__BackingField: 
+  <effectTriggers>k__BackingField:
+    <pre>k__BackingField: 0
+    effectTriggerType: 1
+    originPlayer: 0
+    <oneTimeUse>k__BackingField: 0
+    <countDown>k__BackingField: 0
+    countDownVal: 0
+  <effects>k__BackingField:
+  - {fileID: 11400000, guid: 23dcd3450b21b8a478053732cf12b703, type: 2}
+  <containedCard>k__BackingField: {fileID: 0}

@@ -78,7 +78,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("turnEnd player id: " + endTurnGA.playerId);
 
         //money
-        //players[currentPlayer].money += moneyGain;
         yield return GainMoneyPerformer(new GainMoneyGA(currentPlayer, moneyGain));
 
         //cards
@@ -126,6 +125,12 @@ public class GameManager : MonoBehaviour
         UpdateMoneyUI(players[displayPlayer]);
         yield return null;
     }
+    private IEnumerator GainSciencePointsPerformer(GainSciencePointsGA gainSciencePointsGA)
+    {
+        yield return LaneManager.instance.AddIqVisual(gainSciencePointsGA.playerId, gainSciencePointsGA.gainCount);
+        players[gainSciencePointsGA.playerId].sciencePoints += gainSciencePointsGA.gainCount;
+        UpdateSciencePointSliders();
+    }
     private IEnumerator GainActionPointsPerformer(GainActionPointsGA gainActionPointsGA)
     {
         players[gainActionPointsGA.playerId].actionPoints += gainActionPointsGA.gainCount;
@@ -137,6 +142,7 @@ public class GameManager : MonoBehaviour
         ActionManager.AttachPerformer<StartTurnGA>(StartTurnPerformer);
         ActionManager.AttachPerformer<GainMoneyGA>(GainMoneyPerformer);
         ActionManager.AttachPerformer<GainActionPointsGA>(GainActionPointsPerformer);
+        ActionManager.AttachPerformer<GainSciencePointsGA>(GainSciencePointsPerformer);
         //ActionManager.SubscribeReaction<EndTurnGA>(EndTurnReaction, ReactionTiming.POST);
 
     }
@@ -146,6 +152,7 @@ public class GameManager : MonoBehaviour
         ActionManager.DetachPerformer<StartTurnGA>();
         ActionManager.DetachPerformer<GainMoneyGA>();
         ActionManager.DetachPerformer<GainActionPointsGA>();
+        ActionManager.DetachPerformer<GainSciencePointsGA>();
         //ActionManager.UnubscribeReaction<EndTurnGA>(EndTurnReaction, ReactionTiming.POST);
     }
     // private void EndTurnReaction(EndTurnGA endTurnGA)
