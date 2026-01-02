@@ -65,7 +65,8 @@ public class DamageManager : MonoBehaviour
         Card selectedUnit = GameManager.instance.players[destroyUnitGA.playerId].units[destroyUnitGA.position.x, destroyUnitGA.position.y]; //get only reference
         yield return new WaitForSeconds(UnitManager.instance.DestroyAnimation(destroyUnitGA.playerId, destroyUnitGA.position));
         Debug.Log("unit Destroyed: " + selectedUnit.title);
-        selectedUnit.Destruciton();
+        
+        GameManager.instance.players[destroyUnitGA.playerId].units[destroyUnitGA.position.x, destroyUnitGA.position.y].Destruciton();
 
         Card containedCard = (selectedUnit.containedCard != null)? new Card(selectedUnit.containedCard): null;
         GameManager.instance.players[destroyUnitGA.playerId].units[destroyUnitGA.position.x, destroyUnitGA.position.y] = null;

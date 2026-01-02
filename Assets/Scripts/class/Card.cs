@@ -15,7 +15,7 @@ public class Card
         iq = cardData.iq;
         health = cardData.health;
         noAttack = cardData.noAttack;
-        effectTriggers = new List<EffectTrigger>() {cardData.effectTriggers};
+        effectTriggers = new List<EffectTrigger>();
         effects = cardData.effects;
         containedCard = cardData.containedCard;
     }
@@ -44,47 +44,40 @@ public class Card
     {
         actionData.originCard = this;
         Debug.Log("placementCalled");
-        if (effectTriggers.Count > 0)
-        {
-            foreach (EffectTrigger effectTrigger in effectTriggers)
+
+            foreach (EffectTriggerData effectTriggerData in cardData.effectTriggerDatas)
             {
-                if (effectTrigger != null)
+                if (effectTriggerData != null)
                 {
-                    effectTrigger.Placement(actionData);
+                    effectTriggers.Add(new EffectTrigger(actionData, effectTriggerData));
                 }
             }
-        }     
+
     }
     public void PerformAbility(ActionData actionData)
     {
         Debug.Log("performAbilityCalled");
-        if (effects.Count > 0)
+
+        foreach (Effect effect in effects)
         {
-            foreach (Effect effect in effects)
+            if (effect != null)
             {
-                if (effect != null)
+                effect.actionData = actionData;
+                foreach (GameAction action in effect.effect)
                 {
-                    effect.actionData = actionData;
-                    foreach (GameAction action in effect.effect)
-                    {
-                        ActionManager.instance.Perform(action);
-                    }
+                    ActionManager.instance.Perform(action);
                 }
             }
         }
     }
     public void Destruciton()
     {
-        if (effectTriggers.Count > 0)
+        foreach (EffectTrigger effectTrigger in effectTriggers)
         {
-            foreach (EffectTrigger effectTrigger in effectTriggers)
+            if (effectTrigger != null)
             {
-                if (effectTrigger != null)
-                {
-                    effectTrigger.DestructionEffect();
-                }
+                effectTrigger.DestructionEffect();
             }
-        }     
-
+        }
     }
 }

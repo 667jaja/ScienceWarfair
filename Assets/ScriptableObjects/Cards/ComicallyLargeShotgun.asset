@@ -22,13 +22,8 @@ MonoBehaviour:
   <health>k__BackingField: 2
   <noAttack>k__BackingField: 1
   <cardEffect>k__BackingField: 4 Damage shotgun
-  <effectTriggers>k__BackingField:
-    <pre>k__BackingField: 0
-    effectTriggerType: 0
-    originPlayer: 0
-    <oneTimeUse>k__BackingField: 0
-    <countDown>k__BackingField: 0
-    countDownVal: 0
+  <effectTriggerDatas>k__BackingField:
+  - {fileID: 11400000, guid: f2f1d8ff239888f4bbf2ce5a80dcaf18, type: 2}
   <effects>k__BackingField:
   - {fileID: 11400000, guid: 7094c1f5c1e422344b1064ce2b0fab8a, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

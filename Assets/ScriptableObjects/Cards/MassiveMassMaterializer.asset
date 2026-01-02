@@ -21,13 +21,8 @@ MonoBehaviour:
   <health>k__BackingField: 2
   <noAttack>k__BackingField: 0
   <cardEffect>k__BackingField: 
-  <effectTriggers>k__BackingField:
-    <pre>k__BackingField: 0
-    effectTriggerType: 1
-    originPlayer: 0
-    <oneTimeUse>k__BackingField: 0
-    <countDown>k__BackingField: 0
-    countDownVal: 0
+  <effectTriggerDatas>k__BackingField:
+  - {fileID: 11400000, guid: ef9b49efbed881647a5be2a8f89bedd4, type: 2}
   <effects>k__BackingField:
   - {fileID: 11400000, guid: cd98d78d218ff504e96bfc96d8ea6570, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

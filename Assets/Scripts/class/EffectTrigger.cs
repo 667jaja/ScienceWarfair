@@ -1,56 +1,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//[CreateAssetMenu(fileName = "EffectTrigger", menuName = "Effect Trigger")]
-public enum EffectTriggerType
-{
-    Simple = 0,
-    StartTurn = 1
-}
-[System.Serializable]
 public class EffectTrigger
 {
-    [field: SerializeField] public bool pre {get; set;}
-    [field: SerializeField] public List<Card> subscribedCards{ get; private set;}
-    [field: SerializeField] public EffectTriggerType effectTriggerType;
-    [field: HideInInspector] public int originPlayer;
+    public EffectTriggerData effectTriggerData;
+
+    public bool pre { get => effectTriggerData.pre; }
+    public EffectTriggerType effectTriggerType { get => effectTriggerData.effectTriggerType; }
+    private bool oneTimeUse { get => effectTriggerData.oneTimeUse; }
+    private int countDown { get => effectTriggerData.countDown; }
+    private int countDownVal { get; set;}
+
+    public Card originCard{ get; private set;}
+    public int originPlayer;
+
+    private bool triggerDisabled;
+    private bool onlyMyTurn;
     private bool isInPlay = false;
 
-    [field: SerializeField] private bool oneTimeUse {get; set;} = false;
-    [field: HideInInspector] private bool onlyMyTurn {get; set;} = true;
-    [field: SerializeField] private int countDown {get; set;} = 0;
-    [field: SerializeField] private int countDownVal = 0;
-    private bool triggerDisabled;
-
-    // public EffectTrigger(Card originCard)
-    // {
-    //     subscribedCards = new List<Card>();
-    //     subscribedCards.Add(originCard);
-    //     pre = false;
-    // }
-    private void NotifySubscribers(ActionData actionData)
+    public EffectTrigger(ActionData actionData, EffectTriggerData newEffectTriggerData)
     {
-        foreach (Card card in subscribedCards)
-        {
-            card.PerformAbility(actionData);
-        }
+        effectTriggerData = newEffectTriggerData;
+        countDownVal = newEffectTriggerData.countDownVal;
+
+        originPlayer = actionData.originPlayerId;
+        originCard = actionData.originCard;
+        Placement(actionData);
     }
     public void TriggerEffect(ActionData actionData)
     {
         if (isInPlay)
         {
-            NotifySubscribers(actionData);
+            originCard.PerformAbility(actionData);
         }
     }
     public void Placement(ActionData actionData)
     {
         isInPlay = true;
-        subscribedCards = new List<Card>();
-        subscribedCards.Add(actionData.originCard);
-        pre = false;
         PlacementEffect(actionData);
     }
-    public virtual void PlacementEffect(ActionData actionData)
+    public void PlacementEffect(ActionData actionData)
     {
         if (effectTriggerType == EffectTriggerType.Simple)
         {
@@ -58,15 +47,17 @@ public class EffectTrigger
         }
         if (effectTriggerType == EffectTriggerType.StartTurn)
         {
+            Debug.Log("subbed card effect to StartTurnGA");
             onlyMyTurn = true;
             if (pre) ActionManager.SubscribeReaction<StartTurnGA>(Reaction, ReactionTiming.PRE);
             else ActionManager.SubscribeReaction<StartTurnGA>(Reaction, ReactionTiming.POST);
         }
     }
-    public virtual void DestructionEffect()
+    public void DestructionEffect()
     {
         if (effectTriggerType == EffectTriggerType.StartTurn)
         {
+            Debug.Log("unsubbed card effect from StartTurnGA");
             if (pre) ActionManager.UnubscribeReaction<StartTurnGA>(Reaction, ReactionTiming.PRE);
             else ActionManager.UnubscribeReaction<StartTurnGA>(Reaction, ReactionTiming.POST);
         }
@@ -74,7 +65,7 @@ public class EffectTrigger
 
     private void Reaction(StartTurnGA startTurnGA)
     {
-        ActionData actionData = new ActionData(originPlayer, new Vector2Int(0,0), null);
+        ActionData actionData = new ActionData(originPlayer, new Vector2Int(0,0), originCard);
         if ((startTurnGA.playerId == originPlayer || !onlyMyTurn) && !triggerDisabled)
         {
             if (countDownVal <= 0)
@@ -86,7 +77,7 @@ public class EffectTrigger
             }
             else
             {
-                countDown -= 1;
+                countDownVal -= 1;
             }
         }
     }

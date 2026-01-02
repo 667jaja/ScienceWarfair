@@ -462,12 +462,12 @@ MonoBehaviour:
   moneySlider: {fileID: 1665267452}
   plaSciencePointsSlider: {fileID: 329196553}
   oppSciencePointsSlider: {fileID: 808352577}
-  startingMoney: 3
+  startingMoney: 5
   turnOrderBonusMoney: 1
-  startingCards: 3
+  startingCards: 5
   turnOrderBonusCards: 1
-  moneyGain: 2
-  cardGain: 2
+  moneyGain: 0
+  cardGain: 0
   maxMoney: 10
   endOfTurnWait: 0.2
 --- !u!114 &78848196

@@ -1,0 +1,16 @@
+using UnityEngine;
+public enum EffectTriggerType
+{
+    Simple = 0,
+    StartTurn = 1
+}
+
+[CreateAssetMenu(fileName = "EffectTriggerData", menuName = "Effect Trigger Data")]
+public class EffectTriggerData : ScriptableObject
+{
+    [field: SerializeField] public bool pre {get; set;}
+    [field: SerializeField] public EffectTriggerType effectTriggerType;
+    [field: SerializeField] public bool oneTimeUse {get; set;} = false;
+    [field: SerializeField] public int countDown {get; set;} = 0;
+    [field: SerializeField] public int countDownVal = 0;
+}
