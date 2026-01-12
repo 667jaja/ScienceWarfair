@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
 public class CardVisual : MonoBehaviour, IPointerClickHandler
 {
@@ -25,6 +26,17 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
         startDragPos = transform.position;
         transform.position = MousePos();
         LaneManager.instance.PlaceActionToggle(card.isAction);
+    }
+    public void OnMouseEnter()
+    {
+        CardManager.instance.lastHoveredCardPos = CardManager.instance.currentHeldCards.IndexOf(this);
+        if ( CardManager.instance.lastUnhoveredCardPos == CardManager.instance.currentHeldCards.IndexOf(this)) CardManager.instance.lastUnhoveredCardPos = -1;
+        CardManager.instance.PositionHeldCards();
+    }
+    void OnMouseExit()
+    {
+        CardManager.instance.lastUnhoveredCardPos = CardManager.instance.currentHeldCards.IndexOf(this);
+        CardManager.instance.PositionHeldCards();
     }
     void OnMouseDrag()
     {

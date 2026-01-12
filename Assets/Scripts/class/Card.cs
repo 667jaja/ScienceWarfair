@@ -80,4 +80,14 @@ public class Card
             }
         }
     }
+    public void UnsubET()
+    {
+        foreach (EffectTrigger effectTrigger in effectTriggers)
+        {
+            if (effectTrigger != null)
+            {
+                effectTrigger.Unsub();
+            }
+        }
+    }
 }

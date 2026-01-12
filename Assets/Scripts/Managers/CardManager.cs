@@ -11,7 +11,7 @@ public class CardManager : MonoBehaviour
 
     [SerializeField] private List<CardData> cardDatas;
     [SerializeField] private CardVisual cardVisual;
-    [SerializeField] private List<CardVisual> currentHeldCards = new List<CardVisual>();
+    public List<CardVisual> currentHeldCards = new List<CardVisual>();
 
     [SerializeField] private Transform cardCanvas;
     [SerializeField] private Transform playerHand;
@@ -25,6 +25,11 @@ public class CardManager : MonoBehaviour
     //handWidthVar
     [SerializeField] private float maxHandWidth;
     [SerializeField] private float handWidthScaleRate;
+    [SerializeField] private float selectedCardRiseDistance;
+
+    public int lastHoveredCardPos;
+    public int lastUnhoveredCardPos = -1;
+    private bool cardIsHovered;
     private int deckSize = 10;
 
     void Awake()
@@ -137,6 +142,8 @@ public class CardManager : MonoBehaviour
         CreateDeck(playerId);
         UpdateDeckUI();
     }
+
+
     public void UpdateDeckUI()
     {
         deckCountUI.text = GameManager.instance.players[GameManager.instance.displayPlayer].deck.Count.ToString();
@@ -156,16 +163,52 @@ public class CardManager : MonoBehaviour
         }
         PositionHeldCards();
     }
-    private void PositionHeldCards()
+    public void PositionHeldCards()
     {
         int i = -1;
-        float cardsHeld = currentHeldCards.Count;
+        int cardsHeld = currentHeldCards.Count;
         float handWidth = -(maxHandWidth * handWidthScaleRate) / (cardsHeld + handWidthScaleRate) + maxHandWidth;
+
+        cardIsHovered = !(lastUnhoveredCardPos == lastHoveredCardPos);
+        if (lastHoveredCardPos > cardsHeld-1)
+        {
+            cardIsHovered = false;
+            lastHoveredCardPos = cardsHeld-1;
+        }
+        
+
         foreach (CardVisual item in currentHeldCards)
         {
+            item.transform.position = new Vector3(playerHand.position.x-handWidth/2 + (handWidth/(cardsHeld+1))*(i+1), playerHand.position.y);//(cardIsHovered && i<lastHoveredCardPos)? -i*2 - cardsHeld*2: -i*2);
             i++;
-            item.transform.position = new Vector2(playerHand.position.x-handWidth/2 + (handWidth/(cardsHeld+1))*(i+1), playerHand.position.y);
         }
 
+        //lift Selected
+        int j = 2;
+        if (lastHoveredCardPos > 0)
+        {
+            for (i = lastHoveredCardPos-1; i >= 0; i--)
+            {
+                currentHeldCards[i].transform.SetAsFirstSibling();
+                currentHeldCards[i].transform.position = new Vector3(currentHeldCards[i].transform.position.x, currentHeldCards[i].transform.position.y, j);
+                j+=2;
+            }
+        }
+        if (lastHoveredCardPos < cardsHeld-1)
+        {
+            for (i = lastHoveredCardPos+1; i < cardsHeld; i++)
+            {
+                currentHeldCards[i].transform.SetAsFirstSibling();
+                currentHeldCards[i].transform.position = new Vector3(currentHeldCards[i].transform.position.x, currentHeldCards[i].transform.position.y, j);
+                j+=2;
+            }
+        }
+
+
+        if (cardIsHovered)
+        {
+            Vector3 orig = currentHeldCards[lastHoveredCardPos].transform.position;
+            currentHeldCards[lastHoveredCardPos].transform.position = new Vector3(orig.x, orig.y + selectedCardRiseDistance, orig.z);
+        }
     }
 }

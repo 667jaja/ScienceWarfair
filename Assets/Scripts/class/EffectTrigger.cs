@@ -17,6 +17,7 @@ public class EffectTrigger
     private bool triggerDisabled;
     private bool onlyMyTurn;
     private bool isInPlay = false;
+    private bool subbed;
 
     public EffectTrigger(ActionData actionData, EffectTriggerData newEffectTriggerData)
     {
@@ -44,22 +45,32 @@ public class EffectTrigger
         if (effectTriggerType == EffectTriggerType.Simple)
         {
             TriggerEffect(actionData);
+            subbed = false;
         }
         if (effectTriggerType == EffectTriggerType.StartTurn)
         {
             Debug.Log("subbed card effect to StartTurnGA");
             onlyMyTurn = true;
+            subbed = true;
             if (pre) ActionManager.SubscribeReaction<StartTurnGA>(Reaction, ReactionTiming.PRE);
-            else ActionManager.SubscribeReaction<StartTurnGA>(Reaction, ReactionTiming.POST);
+            ActionManager.SubscribeReaction<StartTurnGA>(Reaction, ReactionTiming.POST);
         }
     }
     public void DestructionEffect()
     {
-        if (effectTriggerType == EffectTriggerType.StartTurn)
+        Unsub();
+    }
+    public void Unsub()
+    {
+        if (subbed)
         {
-            Debug.Log("unsubbed card effect from StartTurnGA");
-            if (pre) ActionManager.UnubscribeReaction<StartTurnGA>(Reaction, ReactionTiming.PRE);
-            else ActionManager.UnubscribeReaction<StartTurnGA>(Reaction, ReactionTiming.POST);
+            subbed = false;
+            if (effectTriggerType == EffectTriggerType.StartTurn)
+            {
+                Debug.Log("unsubbed card effect from StartTurnGA");
+                if (pre) ActionManager.UnsubscribeReaction<StartTurnGA>(Reaction, ReactionTiming.PRE);
+                ActionManager.UnsubscribeReaction<StartTurnGA>(Reaction, ReactionTiming.POST);
+            }
         }
     }
 
@@ -82,20 +93,21 @@ public class EffectTrigger
         }
     }
 }
-    // private void PerformEffect(ActionData actionData)
-    // {
-    //     if (triggeredEffects.Count > 0)
-    //     {
-    //         foreach (Effect effect in triggeredEffects)
-    //         {
-    //             if (effect != null)
-    //             {
-    //                 effect.actionData = actionData;
-    //                 foreach (GameAction action in effect.effect)
-    //                 {
-    //                     ActionManager.instance.Perform(action);
-    //                 }
-    //             }
-    //         }
-    //     } 
-    // }
+
+// private void PerformEffect(ActionData actionData)
+// {
+//     if (triggeredEffects.Count > 0)
+//     {
+//         foreach (Effect effect in triggeredEffects)
+//         {
+//             if (effect != null)
+//             {
+//                 effect.actionData = actionData;
+//                 foreach (GameAction action in effect.effect)
+//                 {
+//                     ActionManager.instance.Perform(action);
+//                 }
+//             }
+//         }
+//     } 
+// }

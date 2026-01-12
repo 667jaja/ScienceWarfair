@@ -4,7 +4,7 @@ public enum EffectTriggerType
     Simple = 0,
     StartTurn = 1
 }
-
+//GameAction.GetType() & typeof(GameAction) is potential solution to enum issue
 [CreateAssetMenu(fileName = "EffectTriggerData", menuName = "Effect Trigger Data")]
 public class EffectTriggerData : ScriptableObject
 {

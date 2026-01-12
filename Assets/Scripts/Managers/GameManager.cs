@@ -61,6 +61,40 @@ public class GameManager : MonoBehaviour
         currentPlayer = 0;
         StartTurn();
     }
+    public void EndGame()
+    {
+        players = new();
+        ActionManager.instance.ClearAll();
+        currentPlayer = 0;
+
+        foreach (Player player in players)
+        {
+            //for every player
+            for (int i = 0; i < UnitManager.instance.columnCount; i++)
+            {
+                //for every column
+                for (int j = 0; j < UnitManager.instance.rowCount; j++)
+                {
+                    //for every row
+                    player.units[i,j].UnsubET();
+                }
+            }
+        }
+
+        StartTurn();
+    }
+    public void PlayerWon(int winningPlayer)
+    {
+        if (HotseatScreenController.instance != null)
+        {
+            HotseatScreenController.instance.YouWin(winningPlayer);
+        }
+        EndGame();
+        // if (HotseatScreenController.instance == null)
+        // {
+            
+        // }
+        }
     public void TurnEndButton()
     {
         //if (ActionManager.instance.isPerforming) return;
@@ -94,18 +128,36 @@ public class GameManager : MonoBehaviour
         //currentplayer
         currentPlayer = GetNextPlayerId();
 
-        if (HotseatScreenController.instance == null)
+        //check win
+        int highestPlayerSciencePoints = 0;
+        int highestSciencePointsPlayerId = 0;
+        foreach (Player player in players)
         {
-            StartTurnGA startTurnGA = new(currentPlayer);
-            ActionManager.instance.AddReaction(startTurnGA);
+            if (player.sciencePoints > highestPlayerSciencePoints)
+            {
+                highestPlayerSciencePoints = player.sciencePoints;
+                highestSciencePointsPlayerId = player.id;
+            }
+        }
+        if (highestPlayerSciencePoints > maxSciencePoints)
+        {
+            PlayerWon(highestSciencePointsPlayerId);
         }
         else
         {
-            yield return HotseatScreenController.instance.OnTurnEnd();
+            //start next turn
+            if (HotseatScreenController.instance == null)
+            {
+                StartTurnGA startTurnGA = new(currentPlayer);
+                ActionManager.instance.AddReaction(startTurnGA);
+            }
+            else
+            {
+                yield return HotseatScreenController.instance.OnTurnEnd();
+            }
         }
         // Debug.Log("current player IQ: " + players[currentPlayer].sciencePoints);
         // Debug.Log("next player IQ: " + players[GetNextPlayerId()].sciencePoints);
-        yield return null;
     }
     public void StartTurn()
     {

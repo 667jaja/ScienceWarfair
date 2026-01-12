@@ -11,8 +11,8 @@ public class GainSciencePointsEF : Effect
         get
         {
             List<GameAction> actionList = new List<GameAction>(); 
-            GainMoneyGA gainMoneyGA = new GainMoneyGA(base.actionData.originPlayerId, gainCount);
-            actionList.Add(gainMoneyGA);
+            GainSciencePointsGA gainSciencePointsGA = new GainSciencePointsGA(base.actionData.originPlayerId, gainCount);
+            actionList.Add(gainSciencePointsGA);
             return actionList;
         }
     }  
