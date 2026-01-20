@@ -10,12 +10,23 @@ public class DamageManager : MonoBehaviour
         ActionManager.AttachPerformer<DamageUnitGA>(DamageUnitPerformer);
         ActionManager.AttachPerformer<AttackLaneGA>(AttackLanePerformer);
         ActionManager.AttachPerformer<DestroyUnitGA>(DestroyUnitPerformer);
+        ActionManager.AttachPerformer<AttackSelectedGA>(AttackSelectedPerformer);
     }
     void OnDisable()
     {
         ActionManager.DetachPerformer<DamageUnitGA>();
         ActionManager.DetachPerformer<AttackLaneGA>();
         ActionManager.DetachPerformer<DestroyUnitGA>();
+        ActionManager.DetachPerformer<AttackSelectedGA>();
+    }
+    private IEnumerator AttackSelectedPerformer(AttackSelectedGA attackSelectedGA)
+    {
+        Debug.Log("AttackSelectedPerformer attacking: " + SelectionManager.instance.selectedLanes.Count + " lane(s)");
+        foreach (Vector2Int vector in SelectionManager.instance.selectedLanes)
+        {
+            AttackLaneGA attackLaneGA =  new AttackLaneGA(vector.y, vector.x, attackSelectedGA.amount);
+            yield return AttackLanePerformer(attackLaneGA);
+        }
     }
     //deal damage to front unit in lane 
     private IEnumerator AttackLanePerformer(AttackLaneGA attackLaneGA)

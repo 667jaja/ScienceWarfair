@@ -8,7 +8,7 @@ public class LaneManager : MonoBehaviour
 {
     public static LaneManager instance;
     [SerializeField] private List<LaneVisual> laneVisuals;
-    [SerializeField] private List<LaneVisual> EnemyLaneVisuals;
+    [SerializeField] private List<LaneVisual> enemyLaneVisuals;
     [SerializeField] private LaneVisual ActionCardLane;
     public List<Transform> lanePositions;
 
@@ -46,7 +46,7 @@ public class LaneManager : MonoBehaviour
             i++;
         }
         i = 0;
-        foreach(LaneVisual lane in EnemyLaneVisuals)
+        foreach(LaneVisual lane in enemyLaneVisuals)
         {
             lane.Initiate(false, i);
             lanePositions.Add(lane.gameObject.transform);
@@ -55,6 +55,35 @@ public class LaneManager : MonoBehaviour
         ActionCardLane.Initiate(true, -3);
         lanePositions.Add(ActionCardLane.transform);
     }
+
+    public void MakeLaneSelectable(Vector2Int lanePos)
+    {
+        if (lanePos.y != GameManager.instance.displayPlayer)
+        {
+            enemyLaneVisuals[lanePos.x].EnableSelection();
+        }
+        else
+        {
+            laneVisuals[lanePos.x].EnableSelection();
+        }
+    }
+    public void LaneSelectOff()
+    {
+        foreach (LaneVisual item in laneVisuals)
+        {
+            item.DisableSelection();
+        }
+        foreach (LaneVisual item in enemyLaneVisuals)
+        {
+            item.DisableSelection();
+        }
+    }
+    public void LaneSelected(int lanePos, bool isDisplayPlayer)
+    {
+        Vector2Int laneData = new Vector2Int(lanePos, isDisplayPlayer? GameManager.instance.displayPlayer : GameManager.instance.GetNextPlayerId(GameManager.instance.displayPlayer));
+        SelectionManager.instance.selectedLanes.Add(laneData);
+    }
+
     public IEnumerator CountIqVisual()
     {
         int currentPlayerSP = GameManager.instance.players[GameManager.instance.currentPlayer].sciencePoints;
