@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LegalShipment
   m_EditorClassIdentifier: 
   <title>k__BackingField: Legal Shipment
-  <description>k__BackingField: contains Intern
+  <description>k__BackingField: moves to front. contains Intern.
   <cardArt>k__BackingField: {fileID: 4830009725995738098, guid: 76a9025b5eea8a742a2c83c2f99ac667, type: 3}
   isAction: 0
   <placementCost>k__BackingField: 1
@@ -23,5 +23,6 @@ MonoBehaviour:
   <cardEffect>k__BackingField: 
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: f2f1d8ff239888f4bbf2ce5a80dcaf18, type: 2}
-  <effects>k__BackingField: []
+  <effects>k__BackingField:
+  - {fileID: 11400000, guid: fdbff812916b00a4380efcbfd8053ef9, type: 2}
   <containedCard>k__BackingField: {fileID: 11400000, guid: 33cf9720279384f4c9bd070a67c1ad82, type: 2}

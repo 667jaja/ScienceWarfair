@@ -48,13 +48,16 @@ public class UnitManager : MonoBehaviour
         ActionManager.AttachPerformer<PlaceUnitGA>(PlaceUnitPerformer);
         ActionManager.AttachPerformer<CreateUnitGA>(CreateUnitPerformer);
         ActionManager.AttachPerformer<PlayActionGA>(PlayActionPerformer);
+        ActionManager.AttachPerformer<MoveUnitGA>(MoveUnitPerformer);
     }
     private void OnDisable()
     {
         ActionManager.DetachPerformer<PlaceUnitGA>();
         ActionManager.DetachPerformer<CreateUnitGA>();
         ActionManager.DetachPerformer<PlayActionGA>();
+        ActionManager.DetachPerformer<MoveUnitGA>();
     }
+
     public void PlayAction(int playerId, Card card)
     {
         PlayActionGA playActionGA = new(playerId, card);
@@ -172,33 +175,8 @@ public class UnitManager : MonoBehaviour
         PushAllUnitsForward();
         bool unitCreationSuccess = false;
 
-        // if target space empty use it :)
-        if (GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, createUnitGA.position.y] == null)
-        {
-            GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, createUnitGA.position.y] = createUnitGA.playedCard;
-            unitCreationSuccess = true;
-        }
-        // else, check backmost space, if empty move all behind back 1
-        else if (GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, rowCount-1] == null)
-        {
-            for (int j = rowCount-1; j > createUnitGA.position.y; j--)
-            {
-                //for every row (except the last)
-                if (GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, j] == null && GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, j-1] != null)
-                {
-                    GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, j] = GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, j-1];
-                    GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, j-1] = null;
-                }
-            }
-            GameManager.instance.players[createUnitGA.playerId].units[createUnitGA.position.x, createUnitGA.position.y] = createUnitGA.playedCard;
-            unitCreationSuccess = true;
-        }
-        // else, pack it up we lost
-        else
-        {
-            unitCreationSuccess = false;
-            Debug.Log("Lanes Full");
-        }
+        //do
+        unitCreationSuccess = AddUnit(createUnitGA.playerId, createUnitGA.position, createUnitGA.playedCard);
 
         if (unitCreationSuccess)
         {
@@ -215,6 +193,62 @@ public class UnitManager : MonoBehaviour
             yield return new WaitForSeconds(1/3);
         }
     }
+    private IEnumerator MoveUnitPerformer(MoveUnitGA moveUnitGA)
+    {
+        Card selectedUnit = GameManager.instance.players[moveUnitGA.playerId].units[moveUnitGA.originPosition.x, moveUnitGA.originPosition.y]; //get only reference
+
+        if (selectedUnit != null)
+        {
+            bool moveValid = false;
+            GameManager.instance.players[moveUnitGA.playerId].units[moveUnitGA.originPosition.x, moveUnitGA.originPosition.y] = null;
+
+            moveValid = AddUnit(moveUnitGA.playerId, moveUnitGA.destinationPosition, selectedUnit);
+
+            if (!moveValid) GameManager.instance.players[moveUnitGA.playerId].units[moveUnitGA.originPosition.x, moveUnitGA.originPosition.y] = selectedUnit;
+            LaneManager.instance.UpdateLaneVisuals();
+        }
+
+        yield return null;
+    }
+    private bool AddUnit(int playerId, Vector2Int position, Card AddedCard)
+    {
+        bool unitAddSuccess = false;
+
+        // if target space empty use it :)
+        if (GameManager.instance.players[playerId].units[position.x, position.y] == null)
+        {
+            GameManager.instance.players[playerId].units[position.x, position.y] = AddedCard;
+            unitAddSuccess = true;
+        }
+        // else, check backmost space, if empty move all behind back 1
+        else if (GameManager.instance.players[playerId].units[position.x, rowCount-1] == null)
+        {
+            for (int j = rowCount-1; j > position.y; j--)
+            {
+                //for every row (except the last)
+                if (GameManager.instance.players[playerId].units[position.x, j] == null && GameManager.instance.players[playerId].units[position.x, j-1] != null)
+                {
+                    GameManager.instance.players[playerId].units[position.x, j] = GameManager.instance.players[playerId].units[position.x, j-1];
+                    GameManager.instance.players[playerId].units[position.x, j-1] = null;
+                }
+            }
+            GameManager.instance.players[playerId].units[position.x, position.y] = AddedCard;
+            unitAddSuccess = true;
+        }
+        // else, pack it up we lost
+        else
+        {
+            unitAddSuccess = false;
+            Debug.Log("Lanes Full");
+        }
+        if (unitAddSuccess)
+        {
+            PushAllUnitsForward();
+            UpdateUnitUI();
+        }
+        return unitAddSuccess;
+    }
+
     public void PushAllUnitsForward()
     {
         foreach (Player player in GameManager.instance.players)
@@ -319,10 +353,6 @@ public class UnitManager : MonoBehaviour
         }
 
     }
-    private void UnitTriggerAnimation(string AnimName, Vector2Int index)
-    {
-        unitVisuals[index.x, index.y].GetComponent<Animator>().SetTrigger(AnimName);
-    }
     private void UpdateLanePositioning(Transform LanePos, List<CardVisual> cardVisuals)
     {
         int i = -1;
@@ -337,26 +367,36 @@ public class UnitManager : MonoBehaviour
             if (item != null) item.transform.position = new Vector2(LanePos.position.x, LanePos.position.y- laneHeight / 2 + (laneHeight / (unitsInLane + 1)) * (i + 1));// ;
         }
     }
-    public void DebugUnitPositions()   
+    public void UpdateAllCardVisuals()
     {
-        foreach (Player player in GameManager.instance.players)
+        for (int p = 0; p < GameManager.instance.players.Count; p++)
         {
-            int playerAdd = (player.id == GameManager.instance.currentPlayer) ? 0 : columnCount;
-
-            for (int i = playerAdd; i < columnCount + playerAdd; i++)
+            for (int i = 0; i < columnCount; i++)
             {
                 //for every column
-
                 for (int j = 0; j < rowCount; j++)
                 {
                     //for every row
-                    // Debug.Log("BACKEND::" +" Player: "+ ((player.id == GameManager.instance.currentPlayer) ? "current" : "other") +" X:" + (i-playerAdd) + " Y:" + j + "contents: " + ((player.units[i - playerAdd, j] == null) ? "empty" : player.units[i - playerAdd, j]));
-                    // Debug.Log("FRONTEND:: X:" + i + " Y:" + j + "contents: " + ((unitVisuals[i, j] == null) ? "empty" : unitVisuals[i, j]));
-                    if (player.units[i - playerAdd, j] != null) Debug.Log("BACKEND::" +" Player: "+ ((player.id == GameManager.instance.currentPlayer) ? "current" : "other") +" X:" + (i-playerAdd) + " Y:" + j + "contents: " + player.units[i - playerAdd, j]);
-                    if (unitVisuals[i, j] != null) Debug.Log("FRONTEND:: X:" + i + " Y:" + j + "contents: " + unitVisuals[i, j]);
+                    if (unitVisuals[i, j] != null)
+                    {
+                        UpdateCardVisual(p, new Vector2Int(i,j));
+                    }
                 }
             }
         }
+    }
+    public void UpdateCardVisual(int playerId, Vector2Int position)
+    {
+        if (playerId != GameManager.instance.displayPlayer)
+        {
+            position = new Vector2Int(position.x + columnCount, position.y);
+        }
+        unitVisuals[position.x, position.y].UpdateVisuals();
+    }
+
+    private void UnitTriggerAnimation(string AnimName, Vector2Int index)
+    {
+        unitVisuals[index.x, index.y].GetComponent<Animator>().SetTrigger(AnimName);
     }
     public float PlacementAnimation(int playerId, Vector2Int position)
     {
@@ -386,32 +426,7 @@ public class UnitManager : MonoBehaviour
         UnitTriggerAnimation(damageAnimationName, position);
         return damageAnimationLength;
     }
-    public void UpdateAllCardVisuals()
-    {
-        for (int p = 0; p < GameManager.instance.players.Count; p++)
-        {
-            for (int i = 0; i < columnCount; i++)
-            {
-                //for every column
-                for (int j = 0; j < rowCount; j++)
-                {
-                    //for every row
-                    if (unitVisuals[i, j] != null)
-                    {
-                        UpdateCardVisual(p, new Vector2Int(i,j));
-                    }
-                }
-            }
-        }
-    }
-    public void UpdateCardVisual(int playerId, Vector2Int position)
-    {
-        if (playerId != GameManager.instance.displayPlayer)
-        {
-            position = new Vector2Int(position.x + columnCount, position.y);
-        }
-        unitVisuals[position.x, position.y].UpdateVisuals();
-    }
+
     public int CountPlayerIQ(int playerid)
     {
         int sciencePoints = 0;
@@ -437,3 +452,24 @@ public class UnitManager : MonoBehaviour
         return sciencePoints;
     }
 }
+    // public void DebugUnitPositions()   
+    // {
+    //     foreach (Player player in GameManager.instance.players)
+    //     {
+    //         int playerAdd = (player.id == GameManager.instance.currentPlayer) ? 0 : columnCount;
+
+    //         for (int i = playerAdd; i < columnCount + playerAdd; i++)
+    //         {
+    //             //for every column
+
+    //             for (int j = 0; j < rowCount; j++)
+    //             {
+    //                 //for every row
+    //                 // Debug.Log("BACKEND::" +" Player: "+ ((player.id == GameManager.instance.currentPlayer) ? "current" : "other") +" X:" + (i-playerAdd) + " Y:" + j + "contents: " + ((player.units[i - playerAdd, j] == null) ? "empty" : player.units[i - playerAdd, j]));
+    //                 // Debug.Log("FRONTEND:: X:" + i + " Y:" + j + "contents: " + ((unitVisuals[i, j] == null) ? "empty" : unitVisuals[i, j]));
+    //                 if (player.units[i - playerAdd, j] != null) Debug.Log("BACKEND::" +" Player: "+ ((player.id == GameManager.instance.currentPlayer) ? "current" : "other") +" X:" + (i-playerAdd) + " Y:" + j + "contents: " + player.units[i - playerAdd, j]);
+    //                 if (unitVisuals[i, j] != null) Debug.Log("FRONTEND:: X:" + i + " Y:" + j + "contents: " + unitVisuals[i, j]);
+    //             }
+    //         }
+    //     }
+    // }
