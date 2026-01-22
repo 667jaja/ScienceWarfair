@@ -170,12 +170,12 @@ public class CardManager : MonoBehaviour
         float handWidth = -(maxHandWidth * handWidthScaleRate) / (cardsHeld + handWidthScaleRate) + maxHandWidth;
 
         cardIsHovered = !(lastUnhoveredCardPos == lastHoveredCardPos);
-        if (lastHoveredCardPos > cardsHeld-1)
+
+        if (lastHoveredCardPos > cardsHeld-1 || lastHoveredCardPos < 0 || currentHeldCards[lastHoveredCardPos] == null)
         {
             cardIsHovered = false;
             lastHoveredCardPos = cardsHeld-1;
         }
-        
 
         foreach (CardVisual item in currentHeldCards)
         {

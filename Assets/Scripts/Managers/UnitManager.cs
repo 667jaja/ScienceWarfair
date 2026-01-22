@@ -373,6 +373,7 @@ public class UnitManager : MonoBehaviour
         {
             position = new Vector2Int(position.x + columnCount, position.y);
         }
+        Debug.Log("animName: " + destroyAnimationName + " position: " + position.x +", "+ position.y);
         UnitTriggerAnimation(destroyAnimationName, position);
         return destroyAnimationLength;
     }

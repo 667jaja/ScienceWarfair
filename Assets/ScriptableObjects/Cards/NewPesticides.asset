@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
+  m_Name: NewPesticides
+  m_EditorClassIdentifier: 
+  <title>k__BackingField: New Pesticides
+  <description>k__BackingField: Damage all Enemy units in lane by one
+  <cardArt>k__BackingField: {fileID: 8477753053699024119, guid: 6959b0c7e2462f1458f03242e6965669, type: 3}
+  isAction: 1
+  <placementCost>k__BackingField: 0
+  <iq>k__BackingField: 0
+  <health>k__BackingField: 0
+  <noAttack>k__BackingField: 0
+  <cardEffect>k__BackingField: Damage Lane
+  <effectTriggerDatas>k__BackingField:
+  - {fileID: 11400000, guid: f2f1d8ff239888f4bbf2ce5a80dcaf18, type: 2}
+  <effects>k__BackingField:
+  - {fileID: 11400000, guid: 8f3236868e8613f4a9d33d3ea2a9053e, type: 2}
+  <containedCard>k__BackingField: {fileID: 0}

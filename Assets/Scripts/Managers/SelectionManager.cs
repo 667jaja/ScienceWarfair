@@ -18,6 +18,8 @@ public class SelectionManager : MonoBehaviour
     void OnEnable()
     {
         ActionManager.AttachPerformer<SelectLanesGA>(SelectLanePerformer);
+        ActionManager.AttachPerformer<SelectUnitsInLanesGA>(SelectUnitsInSelectedLanes);
+        ActionManager.AttachPerformer<SelectUnitsGA>(SelectBoardPerformer);
     }
     void OnDisable()
     {
@@ -34,11 +36,26 @@ public class SelectionManager : MonoBehaviour
             return new List<Vector2Int>{new Vector2Int (0,0), new Vector2Int (1,0), new Vector2Int (2,0)};
         }
     }
-    public IEnumerator SelectBoardPerformer(List<Vector3> avaliableOptions, int selectCount)
+    public IEnumerator SelectBoardPerformer(SelectUnitsGA selectUnitsGA)
     {
         selectedBoard = new();
         yield return null;
     } 
+    public IEnumerator SelectUnitsInSelectedLanes(SelectUnitsInLanesGA selectUnitsInLanesGA)
+    {
+        selectedBoard = new();
+        foreach (Vector2Int lane in selectedLanes)
+        {
+            for (int i = UnitManager.instance.rowCount-1; i >= 0; i--)
+            {
+                if (GameManager.instance.players[lane.y].units[lane.x, i] != null)
+                {
+                    selectedBoard.Add(new Vector3Int(lane.x, i, lane.y));
+                }
+            }
+        }
+        yield return null;
+    }
     public IEnumerator SelectLanePerformer(SelectLanesGA selectLanesGA)
     {
         selectedLanes = new();
