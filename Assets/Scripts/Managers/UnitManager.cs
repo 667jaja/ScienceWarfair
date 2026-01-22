@@ -396,7 +396,10 @@ public class UnitManager : MonoBehaviour
 
     private void UnitTriggerAnimation(string AnimName, Vector2Int index)
     {
-        unitVisuals[index.x, index.y].GetComponent<Animator>().SetTrigger(AnimName);
+        if (unitVisuals[index.x, index.y] != null)
+        {
+            unitVisuals[index.x, index.y].GetComponent<Animator>().SetTrigger(AnimName);
+        }
     }
     public float PlacementAnimation(int playerId, Vector2Int position)
     {
