@@ -69,6 +69,7 @@ public class CardManager : MonoBehaviour
         for (int i = 0; i < drawCardsGA.drawCount; i++)
         {
             DrawCardGA drawCardGA = new(drawCardsGA.playerId);
+            //drawCardGA.description = GameManager.instance.players[drawCardsGA.playerId].name + " draws a card";
             ActionManager.instance.AddReaction(drawCardGA);
         }
         yield return null;

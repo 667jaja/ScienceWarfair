@@ -46,8 +46,9 @@ public class DamageManager : MonoBehaviour
     {
         int damageAmount = attackLaneGA.amount;
         //Debug.Log("attacking...");
-        
-        if (GameManager.instance.players[attackLaneGA.playerId].units[attackLaneGA.lane, 0] == null)
+        Card selectedUnit = GameManager.instance.players[attackLaneGA.playerId].units[attackLaneGA.lane, 0]; //get only reference
+
+        if (selectedUnit == null)
         {
             Debug.Log("no unit to attack");
         }
@@ -55,7 +56,9 @@ public class DamageManager : MonoBehaviour
         {
             //attack unit
             DamageUnitGA damageUnitGA = new(attackLaneGA.playerId, new Vector2Int(attackLaneGA.lane, 0), attackLaneGA.amount);
+            damageUnitGA.description = "Player"+GameManager.instance.GetNextPlayerId (attackLaneGA.playerId) + " attacked lane " + attackLaneGA.lane; //+" for " + damageAmount + " damage";
             ActionManager.instance.AddReaction(damageUnitGA);
+
             Debug.Log("dealt " + damageAmount + " damage to player " + attackLaneGA.playerId + " lane " + attackLaneGA.lane);
             
             if (attackLaneGA.playerId != GameManager.instance.displayPlayer) yield return new WaitForSeconds(LaneManager.instance.AttackAnimation(attackLaneGA.lane));
@@ -75,6 +78,7 @@ public class DamageManager : MonoBehaviour
             if (selectedUnit.health <= damageAmount)
             {
                 DestroyUnitGA destroyUnitGA = new(damageUnitGA.playerId, damageUnitGA.position);
+                destroyUnitGA.description = selectedUnit.title + " destroyed";
                 ActionManager.instance.AddReaction(destroyUnitGA);
             }
             else
@@ -102,6 +106,8 @@ public class DamageManager : MonoBehaviour
             if (containedCard != null)
             {
                 CreateUnitGA createUnitGA = new(destroyUnitGA.playerId, destroyUnitGA.position, containedCard);
+                createUnitGA.description = "Destroyed unit contained unit "+ createUnitGA.playedCard.title;
+
                 ActionManager.instance.AddReaction(createUnitGA);
             }
 

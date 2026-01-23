@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class Player
 {
+    public string name;
     public int maxMoney = 10;
     public int id;
     public int sciencePoints;

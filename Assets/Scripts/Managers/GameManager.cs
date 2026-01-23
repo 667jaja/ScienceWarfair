@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < playerCount; i++)
         {
             players.Add(new Player(i));
+            players[i].name = "Player" + (i+1);
             players[i].maxMoney = maxMoney;
             players[i].Money = startingMoney + i*turnOrderBonusMoney;
             CardManager.instance.CreateDeck(i);
@@ -59,7 +60,9 @@ public class GameManager : MonoBehaviour
         
         UpdateMoneyUI(players[0]);
         currentPlayer = 0;
-        StartTurn();
+        StartTurnGA startTurnGA = new(currentPlayer);
+        startTurnGA.description = "Game start. "+players[0].name+" plays first. money: " + startingMoney + "-" + (startingMoney+turnOrderBonusMoney) + " cards: " + startingCards + "-" + (startingCards + turnOrderBonusCards);
+        ActionManager.instance.Perform(startTurnGA);
     }
     public void EndGame()
     {
@@ -162,6 +165,7 @@ public class GameManager : MonoBehaviour
     public void StartTurn()
     {
         StartTurnGA startTurnGA = new(currentPlayer);
+        startTurnGA.description = players[startTurnGA.playerId].name + "'s turn. money: " + players[startTurnGA.playerId].Money + "-" + players[GetNextPlayerId(startTurnGA.playerId)].Money + "  cards: " + (players[startTurnGA.playerId].hand.Count + cardGain) + "-" + (players[GetNextPlayerId(startTurnGA.playerId)].hand.Count + cardGain);// + " SP: "  + players[startTurnGA.playerId].sciencePoints + "-" + players[GetNextPlayerId(startTurnGA.playerId)].sciencePoints;
         ActionManager.instance.Perform(startTurnGA);
     }
     private IEnumerator StartTurnPerformer(StartTurnGA startTurnGA)

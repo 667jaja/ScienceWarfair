@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: MassiveMassMaterializer
   m_EditorClassIdentifier: 
-  <title>k__BackingField: MassiveMassMaterializer
+  <title>k__BackingField: Massive Mass Materializer
   <description>k__BackingField: Draw a card at the start of every turn
   <cardArt>k__BackingField: {fileID: 21300000, guid: c31f0d5506dc292429a1ee6d31bbaf82, type: 3}
   isAction: 0
@@ -20,7 +20,7 @@ MonoBehaviour:
   <iq>k__BackingField: 0
   <health>k__BackingField: 2
   <noAttack>k__BackingField: 0
-  <cardEffect>k__BackingField: 
+  <cardEffect>k__BackingField: Draw Card
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: ef9b49efbed881647a5be2a8f89bedd4, type: 2}
   <effects>k__BackingField:

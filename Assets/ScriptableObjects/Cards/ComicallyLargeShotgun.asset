@@ -21,7 +21,7 @@ MonoBehaviour:
   <iq>k__BackingField: 1
   <health>k__BackingField: 2
   <noAttack>k__BackingField: 1
-  <cardEffect>k__BackingField: 4 Damage shotgun
+  <cardEffect>k__BackingField: 4 Shotgun Damage
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: f2f1d8ff239888f4bbf2ce5a80dcaf18, type: 2}
   <effects>k__BackingField:

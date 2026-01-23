@@ -19,7 +19,7 @@ public class ShotgunAttackEF : Effect
             while (remainingDamage > 0)
             {
                 Debug.Log("player: " + targetplayer +" position: " + base.actionData.originPosition.x + " " + i);
-                if (GameManager.instance.players[targetplayer].units[base.actionData.originPosition.x, i] != null && i < UnitManager.instance.rowCount)
+                if ( i < UnitManager.instance.rowCount && GameManager.instance.players[targetplayer].units[base.actionData.originPosition.x, i] != null)
                 {
                     AttackLaneGA attackLaneGA = new AttackLaneGA(targetplayer, base.actionData.originPosition.x, remainingDamage);
                     actionList.Add(attackLaneGA);

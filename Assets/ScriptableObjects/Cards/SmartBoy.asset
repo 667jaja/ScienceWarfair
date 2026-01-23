@@ -20,7 +20,7 @@ MonoBehaviour:
   <iq>k__BackingField: 2
   <health>k__BackingField: 2
   <noAttack>k__BackingField: 0
-  <cardEffect>k__BackingField: cardDraw
+  <cardEffect>k__BackingField: Draw Card
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: f2f1d8ff239888f4bbf2ce5a80dcaf18, type: 2}
   <effects>k__BackingField:

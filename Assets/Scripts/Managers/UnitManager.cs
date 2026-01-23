@@ -83,6 +83,7 @@ public class UnitManager : MonoBehaviour
     public void CreateUnitReaction(int playerId, Vector2Int position, Card card)
     {
         CreateUnitGA createUnitGA = new(playerId, position, card);
+        createUnitGA.description = card.title + " is placed";
         ActionManager.instance.AddReaction(createUnitGA);
     }
     private IEnumerator PlayActionPerformer(PlayActionGA playActionGA)
@@ -175,7 +176,6 @@ public class UnitManager : MonoBehaviour
         PushAllUnitsForward();
         bool unitCreationSuccess = false;
 
-        //do
         unitCreationSuccess = AddUnit(createUnitGA.playerId, createUnitGA.position, createUnitGA.playedCard);
 
         if (unitCreationSuccess)

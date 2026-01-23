@@ -58,13 +58,20 @@ public class Card
     {
         Debug.Log("performAbilityCalled");
 
+        bool actionDescribed = false;
         foreach (Effect effect in effects)
         {
             if (effect != null)
             {
+                
                 effect.actionData = actionData;
                 foreach (GameAction action in effect.effect)
                 {
+                    if (!actionDescribed)
+                    {
+                        action.description = title + " Performs: " + cardEffect;
+                        actionDescribed = true;
+                    }
                     ActionManager.instance.Perform(action);
                 }
             }

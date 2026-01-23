@@ -65,6 +65,11 @@ public class ActionManager : MonoBehaviour
     //of extreme importance
     private IEnumerator Flow(GameAction action, Action OnFlowFinished = null)
     {
+        //log action
+        if (ActionLogManager.instance != null && action.description != null)
+        {
+            ActionLogManager.instance.LogAction(action.description);
+        }
         //Debug.Log("flow Start");
         //sets "reactions" to the current actions prereactions
         reactions = action.preReactions;

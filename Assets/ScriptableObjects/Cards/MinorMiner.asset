@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <title>k__BackingField: Minor Miner
   <description>k__BackingField: gain 1k
-  <cardArt>k__BackingField: {fileID: -8567022068340828743, guid: 7a0976be7d0760c438397fa23cad7357, type: 3}
+  <cardArt>k__BackingField: {fileID: 6336965144557764222, guid: 5e1e99b9bb0772047a08624a4b2a29a0, type: 3}
   isAction: 0
   <placementCost>k__BackingField: 0
   <iq>k__BackingField: 0
   <health>k__BackingField: 1
   <noAttack>k__BackingField: 0
-  <cardEffect>k__BackingField: gain 1k
+  <cardEffect>k__BackingField: Gain 1k
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: f2f1d8ff239888f4bbf2ce5a80dcaf18, type: 2}
   <effects>k__BackingField:
