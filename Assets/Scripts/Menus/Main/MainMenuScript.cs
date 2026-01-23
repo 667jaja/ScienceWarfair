@@ -5,12 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
+    public static bool hasResetName = false;
     [SerializeField] private string levelSelectName;
     [SerializeField] private string deckMakerName;
     [SerializeField] private string gameBoardName;
     [SerializeField] private List<Card> defaultDeck;
+    [SerializeField] private List<PlayerData> playerDatas;
     // private DeckInfo deckInfo;
 
+    void Awake()
+    {
+        if (!hasResetName)
+        {
+            foreach (PlayerData data in playerDatas)
+            {
+                data.changeName("");
+            }
+            hasResetName = true;
+        }
+    }
     public void LoadLevelSelect()
     {
         SceneManager.LoadSceneAsync(levelSelectName);

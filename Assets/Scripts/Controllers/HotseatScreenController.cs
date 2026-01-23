@@ -14,6 +14,9 @@ public class HotseatScreenController : MonoBehaviour
     [SerializeField] private Slider scienceSlider1;
     [SerializeField] private Slider scienceSlider2;
 
+    [SerializeField] private List<TextMeshProUGUI> player1Name;
+    [SerializeField] private List<TextMeshProUGUI> player2Name;
+
     [SerializeField] private List<GameObject> startScreenObjects;
     [SerializeField] private List<GameObject> turnScreenObjects;
     [SerializeField] private List<GameObject> winScreenObjects;
@@ -26,6 +29,15 @@ public class HotseatScreenController : MonoBehaviour
     void Start()
     {
         StartBlock();
+
+        foreach (TextMeshProUGUI textMeshPro in player1Name)
+        {
+            textMeshPro.text = GameManager.instance.players[0].name;
+        }
+        foreach (TextMeshProUGUI textMeshPro in player2Name)
+        {
+            textMeshPro.text = GameManager.instance.players[1].name;
+        }
     }
 
     public IEnumerator OnTurnEnd()
@@ -46,7 +58,7 @@ public class HotseatScreenController : MonoBehaviour
 
     public void StartBlock()
     {
-        Text.text = "Waiting for Player" + (GameManager.instance.currentPlayer + 1).ToString() + " to Click Start";
+        Text.text = "Waiting for " + ((GameManager.instance.playerDatas[0].playerName != null || GameManager.instance.playerDatas[0].playerName.Length < 1)? GameManager.instance.playerDatas[GameManager.instance.currentPlayer].playerName : "Player1") + " to Click Start";
         foreach (GameObject item in startScreenObjects)
         {
             item.SetActive(true);
@@ -57,7 +69,7 @@ public class HotseatScreenController : MonoBehaviour
     {
         yield return new WaitForSeconds(appearenceDelay);
 
-        Text.text = "Waiting for Player"+ (GameManager.instance.currentPlayer + 1).ToString()+"...";
+        Text.text = "Waiting for " + GameManager.instance.players[GameManager.instance.currentPlayer].name + "...";
         foreach (GameObject item in turnScreenObjects)
         {
             item.SetActive(true);
@@ -69,7 +81,7 @@ public class HotseatScreenController : MonoBehaviour
         scienceSlider1.value = GameManager.instance.players[0].sciencePoints;
         scienceSlider2.value = GameManager.instance.players[1].sciencePoints;
 
-        Text.text = "The Winner is Player"+(winnerId + 1).ToString()+"!";
+        Text.text = "The Winner is "+ GameManager.instance.players[winnerId].name+"!";
         foreach (GameObject item in winScreenObjects)
         {
             item.SetActive(true);

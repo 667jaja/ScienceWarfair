@@ -3,11 +3,13 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
     //manages overarching elements of a game such as players, loss, victory, turn start, turn end
     public static GameManager instance;
+    public List<PlayerData> playerDatas;
     [SerializeField] private int playerCount = 2;    
 
     public List<Player> players = new List<Player>();
@@ -50,8 +52,8 @@ public class GameManager : MonoBehaviour
         players = new();
         for (int i = 0; i < playerCount; i++)
         {
-            players.Add(new Player(i));
-            players[i].name = "Player" + (i+1);
+            players.Add(new Player(playerDatas[i], i));
+            if (players[i].name == null || players[i].name.Length < 1) players[i].name = "Player" + (i+1);
             players[i].maxMoney = maxMoney;
             players[i].Money = startingMoney + i*turnOrderBonusMoney;
             CardManager.instance.CreateDeck(i);
