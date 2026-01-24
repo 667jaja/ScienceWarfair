@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int playerCount = 2;    
 
     public List<Player> players = new List<Player>();
+    [SerializeField] private List<CardData> cardDatas;
+
     public int currentPlayer;
     public int displayPlayer;
     public int maxSciencePoints;
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int moneyGain = 2;
     [SerializeField] private int cardGain = 2;
     [SerializeField] private int maxMoney;
-
+    [SerializeField] private int deckDataSizeMin = 20;
 
     [SerializeField] private float endOfTurnWait = 0.2f;
 
@@ -56,7 +58,8 @@ public class GameManager : MonoBehaviour
             if (players[i].name == null || players[i].name.Length < 1) players[i].name = "Player" + (i+1);
             players[i].maxMoney = maxMoney;
             players[i].Money = startingMoney + i*turnOrderBonusMoney;
-            CardManager.instance.CreateDeck(i);
+            if (players[i].playerData.deck == null || players[i].playerData.deck.Count < deckDataSizeMin) players[i].playerData.deck = cardDatas;
+            CardManager.instance.CreateDeck(i, players[i].playerData.deck);
             CardManager.instance.DrawCards(i, startingCards + i*turnOrderBonusCards);
         }
         

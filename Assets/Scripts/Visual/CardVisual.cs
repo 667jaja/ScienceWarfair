@@ -25,18 +25,25 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     {
         startDragPos = transform.position;
         transform.position = MousePos();
-        LaneManager.instance.PlaceActionToggle(card.isAction);
+        if (LaneManager.instance != null) LaneManager.instance.PlaceActionToggle(card.isAction);
+        if (DeckBuilderManager.instance != null) DeckBuilderManager.instance.CardSelectedToggle(true);
     }
     public void OnMouseEnter()
     {
-        CardManager.instance.lastHoveredCardPos = CardManager.instance.currentHeldCards.IndexOf(this);
-        if ( CardManager.instance.lastUnhoveredCardPos == CardManager.instance.currentHeldCards.IndexOf(this)) CardManager.instance.lastUnhoveredCardPos = -1;
-        CardManager.instance.PositionHeldCards();
+        if (CardManager.instance != null)
+        {
+            CardManager.instance.lastHoveredCardPos = CardManager.instance.currentHeldCards.IndexOf(this);
+            if ( CardManager.instance.lastUnhoveredCardPos == CardManager.instance.currentHeldCards.IndexOf(this)) CardManager.instance.lastUnhoveredCardPos = -1;
+            CardManager.instance.PositionHeldCards();
+        }
     }
     void OnMouseExit()
     {
-        CardManager.instance.lastUnhoveredCardPos = CardManager.instance.currentHeldCards.IndexOf(this);
-        CardManager.instance.PositionHeldCards();
+        if (CardManager.instance != null)
+        {
+            CardManager.instance.lastUnhoveredCardPos = CardManager.instance.currentHeldCards.IndexOf(this);
+            CardManager.instance.PositionHeldCards();
+        }
     }
     void OnMouseDrag()
     {
@@ -56,7 +63,8 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
         {
             transform.position = startDragPos;
         }
-        LaneManager.instance.PlaceActionToggle(false);
+        if (LaneManager.instance != null) LaneManager.instance.PlaceActionToggle(false);
+        if (DeckBuilderManager.instance != null) DeckBuilderManager.instance.CardSelectedToggle(false);
     }
     Vector2 MousePos()
     {

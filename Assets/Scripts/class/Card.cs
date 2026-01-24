@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Card
 {
-    private CardData cardData;
+    public CardData cardData { get; private set;}
 
     //constructor
     public Card(CardData cardData)
@@ -39,6 +39,9 @@ public class Card
     public List<EffectTrigger> effectTriggers {get; set;}
     public List<Effect> effects {get; set;}
     public CardData containedCard { get; set; }
+
+    //deck Creator
+    public bool isInADeck { get; set; }
 
     public void PlacementAbility(ActionData actionData)// Card card
     {

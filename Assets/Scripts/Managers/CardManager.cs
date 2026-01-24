@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
+using System.Linq;
 using System.Collections;
 
 public class CardManager : MonoBehaviour
@@ -9,7 +11,6 @@ public class CardManager : MonoBehaviour
     // controls frontend actions of deck and discard
     public static CardManager instance;
 
-    [SerializeField] private List<CardData> cardDatas;
     [SerializeField] private CardVisual cardVisual;
     public List<CardVisual> currentHeldCards = new List<CardVisual>();
 
@@ -105,8 +106,8 @@ public class CardManager : MonoBehaviour
         {
             ShuffleDiscardIntoDeck(drawCardGA.playerId);
         }
-        Card drawnCard = GameManager.instance.players[drawCardGA.playerId].deck[0];
-        GameManager.instance.players[drawCardGA.playerId].deck.Remove(drawnCard);
+        Card drawnCard = new(GameManager.instance.players[drawCardGA.playerId].deck[0]);
+        GameManager.instance.players[drawCardGA.playerId].deck.RemoveAt(0);
         GameManager.instance.players[drawCardGA.playerId].hand.Add(drawnCard);
 
         //frontend
@@ -127,20 +128,24 @@ public class CardManager : MonoBehaviour
         Debug.Log("Draw Card Ended");
         yield return null;
     }
-    public void CreateDeck(int playerId)
+    public void CreateDeck(int playerId, List<CardData> deckData)
     {
         GameManager.instance.players[playerId].deck = new();
-        for (int i = 0; i < deckSize; i++)
-        {
-            CardData data = cardDatas[Random.Range(0, cardDatas.Count)];
-            Card newCard = new(data);
-            GameManager.instance.players[playerId].deck.Add(newCard);
-        }
+
+        // for (int i = 0; i < deckData.Count; i++)
+        // {
+        //     CardData data = deckData[Random.Range(0, deckData.Count)];
+        //     Card newCard = new(data);
+        //     GameManager.instance.players[playerId].deck.Add(newCard);
+        // }
+
+        GameManager.instance.players[playerId].deck = deckData.OrderBy(i => Guid.NewGuid()).ToList();
+
         UpdateDeckUI();
     }
     public void ShuffleDiscardIntoDeck(int playerId)
     {
-        CreateDeck(playerId);
+        CreateDeck(playerId, GameManager.instance.players[playerId].playerData.deck);
         UpdateDeckUI();
     }
 

@@ -58,7 +58,7 @@ public class HotseatScreenController : MonoBehaviour
 
     public void StartBlock()
     {
-        Text.text = "Waiting for " + ((GameManager.instance.playerDatas[0].playerName != null || GameManager.instance.playerDatas[0].playerName.Length < 1)? GameManager.instance.playerDatas[GameManager.instance.currentPlayer].playerName : "Player1") + " to Click Start";
+        Text.text = "Waiting for " + ((GameManager.instance.playerDatas[0].playerName != null && GameManager.instance.playerDatas[0].playerName.Length >= 1)? GameManager.instance.playerDatas[GameManager.instance.currentPlayer].playerName : "Player1") + " to Click Start";
         foreach (GameObject item in startScreenObjects)
         {
             item.SetActive(true);

@@ -20,6 +20,7 @@ public class MainMenuScript : MonoBehaviour
             foreach (PlayerData data in playerDatas)
             {
                 data.changeName("");
+                data.deck = new();
             }
             hasResetName = true;
         }
