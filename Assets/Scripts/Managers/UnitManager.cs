@@ -49,6 +49,7 @@ public class UnitManager : MonoBehaviour
         ActionManager.AttachPerformer<CreateUnitGA>(CreateUnitPerformer);
         ActionManager.AttachPerformer<PlayActionGA>(PlayActionPerformer);
         ActionManager.AttachPerformer<MoveUnitGA>(MoveUnitPerformer);
+        ActionManager.AttachPerformer<ChangeStatsUnitGA>(ChangeStatsUnitPerformer);
     }
     private void OnDisable()
     {
@@ -56,6 +57,7 @@ public class UnitManager : MonoBehaviour
         ActionManager.DetachPerformer<CreateUnitGA>();
         ActionManager.DetachPerformer<PlayActionGA>();
         ActionManager.DetachPerformer<MoveUnitGA>();
+        ActionManager.DetachPerformer<ChangeStatsUnitGA>();
     }
 
     public void PlayAction(int playerId, Card card)
@@ -193,23 +195,6 @@ public class UnitManager : MonoBehaviour
             yield return new WaitForSeconds(1/3);
         }
     }
-    private IEnumerator MoveUnitPerformer(MoveUnitGA moveUnitGA)
-    {
-        Card selectedUnit = GameManager.instance.players[moveUnitGA.playerId].units[moveUnitGA.originPosition.x, moveUnitGA.originPosition.y]; //get only reference
-
-        if (selectedUnit != null)
-        {
-            bool moveValid = false;
-            GameManager.instance.players[moveUnitGA.playerId].units[moveUnitGA.originPosition.x, moveUnitGA.originPosition.y] = null;
-
-            moveValid = AddUnit(moveUnitGA.playerId, moveUnitGA.destinationPosition, selectedUnit);
-
-            if (!moveValid) GameManager.instance.players[moveUnitGA.playerId].units[moveUnitGA.originPosition.x, moveUnitGA.originPosition.y] = selectedUnit;
-            LaneManager.instance.UpdateLaneVisuals();
-        }
-
-        yield return null;
-    }
     private bool AddUnit(int playerId, Vector2Int position, Card AddedCard)
     {
         bool unitAddSuccess = false;
@@ -247,6 +232,36 @@ public class UnitManager : MonoBehaviour
             UpdateUnitUI();
         }
         return unitAddSuccess;
+    }
+
+    private IEnumerator MoveUnitPerformer(MoveUnitGA moveUnitGA)
+    {
+        Card selectedUnit = GameManager.instance.players[moveUnitGA.playerId].units[moveUnitGA.originPosition.x, moveUnitGA.originPosition.y]; //get only reference
+
+        if (selectedUnit != null)
+        {
+            bool moveValid = false;
+            GameManager.instance.players[moveUnitGA.playerId].units[moveUnitGA.originPosition.x, moveUnitGA.originPosition.y] = null;
+
+            moveValid = AddUnit(moveUnitGA.playerId, moveUnitGA.destinationPosition, selectedUnit);
+
+            if (!moveValid) GameManager.instance.players[moveUnitGA.playerId].units[moveUnitGA.originPosition.x, moveUnitGA.originPosition.y] = selectedUnit;
+            LaneManager.instance.UpdateLaneVisuals();
+        }
+
+        yield return null;
+    }
+    private IEnumerator ChangeStatsUnitPerformer(ChangeStatsUnitGA changeStatsUnitGA)
+    {
+        Card selectedUnit = GameManager.instance.players[changeStatsUnitGA.playerId].units[changeStatsUnitGA.position.x, changeStatsUnitGA.position.y]; //get only reference
+        
+        selectedUnit.iq += changeStatsUnitGA.iqChange;
+        selectedUnit.health += changeStatsUnitGA.heathChange;
+        selectedUnit.placementCost += changeStatsUnitGA.costChange;
+
+        UpdateCardVisual(changeStatsUnitGA.playerId, changeStatsUnitGA.position);
+        LaneManager.instance.UpdateLaneVisuals();
+        yield return null;
     }
 
     public void PushAllUnitsForward()

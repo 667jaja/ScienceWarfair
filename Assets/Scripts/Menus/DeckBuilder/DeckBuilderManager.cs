@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+//Add "Sort by Cost/name/actionsfirst" && "show only actions"
 public class DeckBuilderManager : MonoBehaviour
 {
     public static DeckBuilderManager instance;

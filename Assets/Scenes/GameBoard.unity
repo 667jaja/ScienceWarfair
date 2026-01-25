@@ -598,8 +598,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3b6d3e0feaf327d4183d797fa42404f8, type: 2}
   playerCount: 2
   cardDatas:
+  - {fileID: 11400000, guid: ef7cafc251e245640be0435b813f9770, type: 2}
   - {fileID: 11400000, guid: e3dad6bfe801d4241a915f7063eff627, type: 2}
   - {fileID: 11400000, guid: 9187a2ba65e49d140b0289c6ada9cc68, type: 2}
+  - {fileID: 11400000, guid: e85947f98d9603140b91df80b57ebdec, type: 2}
   - {fileID: 11400000, guid: 60a78e4b99005f541937fa5fd036989b, type: 2}
   - {fileID: 11400000, guid: 3a87129b2fa86be4fb51268e484a883b, type: 2}
   - {fileID: 11400000, guid: 1f45602df00b3f345a072075be45773a, type: 2}
@@ -611,13 +613,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2d2dbbb548d40c14ab1c280d95e0a0ca, type: 2}
   - {fileID: 11400000, guid: 3127d9ae1b79c4a4ab877d2e95d220f7, type: 2}
   - {fileID: 11400000, guid: 5819e4ae64de1594da0a50f63c5a361c, type: 2}
+  - {fileID: 11400000, guid: 24134efa021601149999ce18010a94f1, type: 2}
   - {fileID: 11400000, guid: f4e0c8253c2125448bebba799d80a6db, type: 2}
-  - {fileID: 11400000, guid: c5002b3150ce4fb48ab3397d80bd3807, type: 2}
   - {fileID: 11400000, guid: 9e4eddcab0b29c54da63d2c2803c99ef, type: 2}
   - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
   - {fileID: 11400000, guid: ea1873d23da18a0448c87a213d8ed9e1, type: 2}
-  - {fileID: 11400000, guid: e3dad6bfe801d4241a915f7063eff627, type: 2}
-  - {fileID: 11400000, guid: 2d2dbbb548d40c14ab1c280d95e0a0ca, type: 2}
   currentPlayer: 0
   displayPlayer: 0
   maxSciencePoints: 30
