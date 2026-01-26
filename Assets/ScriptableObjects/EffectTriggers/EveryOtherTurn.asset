@@ -17,3 +17,5 @@ MonoBehaviour:
   <oneTimeUse>k__BackingField: 0
   <countDown>k__BackingField: 1
   countDownVal: 1
+  targetEnemyOnly: 0
+  targetMeOnly: 1
