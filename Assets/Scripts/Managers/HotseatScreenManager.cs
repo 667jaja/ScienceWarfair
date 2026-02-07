@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using TMPro;
 
-public class HotseatScreenController : MonoBehaviour
+public class HotseatScreenManager : MonoBehaviour
 {
-    public static HotseatScreenController instance;
+    public static HotseatScreenManager instance;
 
     [SerializeField] private float appearenceDelay = 0.5f;
-    [SerializeField] private string mainMenuName = "MainMenu";
     [SerializeField] private Slider scienceSlider1;
     [SerializeField] private Slider scienceSlider2;
 
@@ -26,17 +24,18 @@ public class HotseatScreenController : MonoBehaviour
     {
         instance = this;
     }
-    void Start()
+    public void Initiate()
     {
+        Debug.Log("Initiated");
         StartBlock();
 
         foreach (TextMeshProUGUI textMeshPro in player1Name)
         {
-            textMeshPro.text = GameManager.instance.players[0].name;
+            textMeshPro.text = (GameManager.instance.playerDatas[0].playerName != null && GameManager.instance.playerDatas[0].playerName.Length >= 1)? GameManager.instance.playerDatas[GameManager.instance.currentPlayer].playerName : "Player1";
         }
         foreach (TextMeshProUGUI textMeshPro in player2Name)
         {
-            textMeshPro.text = GameManager.instance.players[1].name;
+            textMeshPro.text = (GameManager.instance.playerDatas[0].playerName != null && GameManager.instance.playerDatas[1].playerName.Length >= 1)? GameManager.instance.playerDatas[GameManager.instance.currentPlayer].playerName : "Player2";
         }
     }
 
@@ -112,11 +111,11 @@ public class HotseatScreenController : MonoBehaviour
 
     public void closeGame()
     {
-        Application.Quit();
+        SceneLoadManager.instance.QuitApplication();
     }
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadSceneAsync(mainMenuName);
+        SceneLoadManager.instance.LoadMainMenu();
     }
 }

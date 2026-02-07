@@ -93,12 +93,12 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerWon(int winningPlayer)
     {
-        if (HotseatScreenController.instance != null)
+        if (HotseatScreenManager.instance != null)
         {
-            HotseatScreenController.instance.YouWin(winningPlayer);
+            HotseatScreenManager.instance.YouWin(winningPlayer);
         }
         EndGame();
-        // if (HotseatScreenController.instance == null)
+        // if (HotseatScreenManager.instance == null)
         // {
             
         // }
@@ -154,14 +154,14 @@ public class GameManager : MonoBehaviour
         else
         {
             //start next turn
-            if (HotseatScreenController.instance == null)
+            if (HotseatScreenManager.instance == null)
             {
                 StartTurnGA startTurnGA = new(currentPlayer);
                 ActionManager.instance.AddReaction(startTurnGA);
             }
             else
             {
-                yield return HotseatScreenController.instance.OnTurnEnd();
+                yield return HotseatScreenManager.instance.OnTurnEnd();
             }
         }
         // Debug.Log("current player IQ: " + players[currentPlayer].sciencePoints);
@@ -219,14 +219,14 @@ public class GameManager : MonoBehaviour
     // private void EndTurnReaction(EndTurnGA endTurnGA)
     // {
     //     Debug.Log("turn end detected");
-    //     if (HotseatScreenController.instance == null)
+    //     if (HotseatScreenManager.instance == null)
     //     {
     //         StartTurnGA startTurnGA = new(currentPlayer);
     //         ActionManager.instance.AddReaction(startTurnGA);
     //     }
     //     else
     //     {
-    //         HotseatScreenController.instance.OnTurnEnd();
+    //         HotseatScreenManager.instance.OnTurnEnd();
     //     }
     // }
     public void GlobalUIUpdate()

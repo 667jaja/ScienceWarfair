@@ -20,9 +20,6 @@ public class Player
 
     public List<CardData> deck = new List<CardData>();
     public List<Card> hand = new List<Card>();
-    // public Card[] lane1 = new Card[3];
-    // public List<Card> lane2 = new List<Card>();
-    // public List<Card> lane3 = new List<Card>();
     public Card[,] units = new Card[3, 3];
 
     public int Money

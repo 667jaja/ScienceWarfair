@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class MainMenuScript : MonoBehaviour
     [SerializeField] private string gameBoardName;
     [SerializeField] private List<Card> defaultDeck;
     [SerializeField] private List<PlayerData> playerDatas;
+    [SerializeField] private TMP_InputField joinInput;
+    [SerializeField] private TMP_Dropdown SelectedPlayerInput;
+
     // private DeckInfo deckInfo;
 
     void Awake()
@@ -24,37 +29,45 @@ public class MainMenuScript : MonoBehaviour
             }
             hasResetName = true;
         }
+        SelectedPlayerInput.options = new();
+        foreach (PlayerData data in playerDatas)
+        {
+            if (data.playerName != null && data.playerName.Length > 0)
+            {
+                SelectedPlayerInput.options.Add(new TMP_Dropdown.OptionData(data.playerName));
+            }
+        }
     }
-    public void LoadLevelSelect()
+    public void PlayerNamesUpdated()
     {
-        SceneManager.LoadSceneAsync(levelSelectName);
+        SelectedPlayerInput.options = new();
+        foreach (PlayerData data in playerDatas)
+        {
+            if (data.playerName != null && data.playerName.Length > 0)
+            {
+                SelectedPlayerInput.options.Add(new TMP_Dropdown.OptionData(data.playerName));
+            }
+        }
+        SelectedPlayerInput.value = 0;
     }
-    
-    public void LoadDeckMaker()
+    public void LoadLocal()
     {
-        SceneManager.LoadSceneAsync(deckMakerName);
+        SceneLoadManager.instance.LoadGameBoard(BattleType.HotSeat);
     }
-
-    public void LoadGameBoard()
+    public void LoadOnline()
     {
-        // if (DeckInfo.deck1.Count < 20)
-        // {
-        //     DeckInfo.deck1 = defaultDeck;
-        // }
-        // if (DeckInfo.deck2.Count < 20)
-        // {
-        //     DeckInfo.deck2 = defaultDeck;
-        // }
-        SceneManager.LoadSceneAsync(gameBoardName);
+        if (joinInput.text.Length == 6)
+        {
+            SceneLoadManager.instance.LoadGameBoard(BattleType.OnlineJoin, SelectedPlayerInput.value, joinInput.text);
+        }
+        else
+        {
+            SceneLoadManager.instance.LoadGameBoard(BattleType.OnlineHost, SelectedPlayerInput.value);
+        }
     }
 
     public void CloseTab()
     {
         this.gameObject.SetActive(false);
-    }
-    
-    public void QuitApplication()
-    {
-        Application.Quit();
     }
 }

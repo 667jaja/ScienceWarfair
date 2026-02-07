@@ -896,7 +896,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1559118578}
         m_TargetAssemblyTypeName: DeckBuilderManager, Assembly-CSharp
-        m_MethodName: LoadLevelSelect
+        m_MethodName: LoadLocal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1869,8 +1869,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1559118578}
-        m_TargetAssemblyTypeName: DeckBuilderManager, Assembly-CSharp
+      - m_Target: {fileID: 1559118580}
+        m_TargetAssemblyTypeName: SceneLoadManager, Assembly-CSharp
         m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
@@ -1976,7 +1976,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play
+  m_text: Local
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3515,6 +3515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1559118579}
   - component: {fileID: 1559118578}
+  - component: {fileID: 1559118580}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -3616,6 +3617,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1559118580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559118576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfe2369a6db1442419443d9471d9fdac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameBoardName: GameBoard
+  deckMakerName: DeckBuilder
+  levelSelectName: LevelSelect
+  loadScreenName: LoadScreen
+  mainMenuName: MainMenu
 --- !u!1 &1643072895
 GameObject:
   m_ObjectHideFlags: 0

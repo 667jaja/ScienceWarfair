@@ -56,7 +56,7 @@ public class DamageManager : MonoBehaviour
         {
             //attack unit
             DamageUnitGA damageUnitGA = new(attackLaneGA.playerId, new Vector2Int(attackLaneGA.lane, 0), attackLaneGA.amount);
-            damageUnitGA.description = "Player"+GameManager.instance.GetNextPlayerId (attackLaneGA.playerId) + " attacked lane " + (attackLaneGA.lane + 1); //+" for " + damageAmount + " damage";
+            damageUnitGA.description = GameManager.instance.players[GameManager.instance.GetNextPlayerId (attackLaneGA.playerId)].name + " attacked lane " + (attackLaneGA.lane + 1); //+" for " + damageAmount + " damage";
             ActionManager.instance.AddReaction(damageUnitGA);
 
             Debug.Log("dealt " + damageAmount + " damage to player " + attackLaneGA.playerId + " lane " + attackLaneGA.lane);

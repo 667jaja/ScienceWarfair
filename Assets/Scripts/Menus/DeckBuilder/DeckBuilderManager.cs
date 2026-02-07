@@ -58,22 +58,18 @@ public class DeckBuilderManager : MonoBehaviour
         deckTitle.text = deck1Name;
         UpdateUI();
     }
-    public void LoadLevelSelect()
+    public void LoadLocal()
     {
-        SceneManager.LoadSceneAsync(levelSelectName);
-        foreach (PlayerData player in savedPlayers)
-        {
-            if (player.deck.Count < deckMinimum)
-            {
-                player.deck = defaultDeck;
-            }
-        }
+        // foreach (PlayerData player in savedPlayers)
+        // {
+        //     if (player.deck.Count < deckMinimum)
+        //     {
+        //         player.deck = defaultDeck;
+        //     }
+        // }
+        SceneLoadManager.instance.LoadGameBoard(BattleType.HotSeat);
     }
-    public void LoadMainMenu()
-    {
-        SceneManager.LoadSceneAsync(mainMenuName);
-    }
-    
+
     public void ClearDeck()
     {
         Debug.Log("Clear Deck");
