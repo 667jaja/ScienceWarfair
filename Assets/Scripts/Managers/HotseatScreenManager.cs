@@ -31,11 +31,11 @@ public class HotseatScreenManager : MonoBehaviour
 
         foreach (TextMeshProUGUI textMeshPro in player1Name)
         {
-            textMeshPro.text = (GameManager.instance.playerDatas[0].playerName != null && GameManager.instance.playerDatas[0].playerName.Length >= 1)? GameManager.instance.playerDatas[GameManager.instance.currentPlayer].playerName : "Player1";
+            textMeshPro.text = (GameManager.instance.playerDatas[0].playerName != null && GameManager.instance.playerDatas[0].playerName.Length >= 1)? GameManager.instance.playerDatas[0].playerName : "Player1";
         }
         foreach (TextMeshProUGUI textMeshPro in player2Name)
         {
-            textMeshPro.text = (GameManager.instance.playerDatas[0].playerName != null && GameManager.instance.playerDatas[1].playerName.Length >= 1)? GameManager.instance.playerDatas[GameManager.instance.currentPlayer].playerName : "Player2";
+            textMeshPro.text = (GameManager.instance.playerDatas[0].playerName != null && GameManager.instance.playerDatas[1].playerName.Length >= 1)? GameManager.instance.playerDatas[1].playerName : "Player2";
         }
     }
 
