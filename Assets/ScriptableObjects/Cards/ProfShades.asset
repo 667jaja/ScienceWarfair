@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: ProfShades
   m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 16
   <title>k__BackingField: Prof. Shades
   <description>k__BackingField: Increases the Iq of the next played card by 1
   <cardArt>k__BackingField: {fileID: 21300000, guid: a1f7bb195da91f24fa0b7b29ac7b7263, type: 3}

@@ -51,15 +51,23 @@ public class GameManager : MonoBehaviour
     }
     public void BeginGame()
     {
-        players = new();
+        if (RelayManager.instance == null)
+        {
+            players = new();
+            for (int i = 0; i < playerCount; i++)
+            {
+                players.Add(new Player(playerDatas[i], i));
+            }
+        }
+
+
         for (int i = 0; i < playerCount; i++)
         {
-            players.Add(new Player(playerDatas[i], i));
             if (players[i].name == null || players[i].name.Length < 1) players[i].name = "Player" + (i+1);
             players[i].maxMoney = maxMoney;
             players[i].Money = startingMoney + i*turnOrderBonusMoney;
-            if (players[i].playerData.deck == null || players[i].playerData.deck.Count < deckDataSizeMin) players[i].playerData.deck = cardDatas;
-            CardManager.instance.CreateDeck(i, players[i].playerData.deck);
+            if (players[i].rawDeck == null || players[i].rawDeck.Count < deckDataSizeMin) players[i].rawDeck = cardDatas;
+            CardManager.instance.CreateDeck(i, players[i].rawDeck);
             CardManager.instance.DrawCards(i, startingCards + i*turnOrderBonusCards);
         }
         
@@ -89,7 +97,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        StartTurn();
+        //StartTurn();
     }
     public void PlayerWon(int winningPlayer)
     {
@@ -98,6 +106,10 @@ public class GameManager : MonoBehaviour
             HotseatScreenManager.instance.YouWin(winningPlayer);
         }
         EndGame();
+        if (HotseatScreenManager.instance == null)
+        {
+            SceneLoadManager.instance.LoadMainMenu();;
+        }
         // if (HotseatScreenManager.instance == null)
         // {
             
@@ -157,6 +169,7 @@ public class GameManager : MonoBehaviour
             if (HotseatScreenManager.instance == null)
             {
                 StartTurnGA startTurnGA = new(currentPlayer);
+                startTurnGA.description = players[startTurnGA.playerId].name + "'s turn. money: " + players[startTurnGA.playerId].Money + "-" + players[GetNextPlayerId(startTurnGA.playerId)].Money + "  cards: " + (players[startTurnGA.playerId].hand.Count + cardGain) + "-" + (players[GetNextPlayerId(startTurnGA.playerId)].hand.Count + cardGain);
                 ActionManager.instance.AddReaction(startTurnGA);
             }
             else
@@ -216,19 +229,6 @@ public class GameManager : MonoBehaviour
         ActionManager.DetachPerformer<GainSciencePointsGA>();
         //ActionManager.UnubscribeReaction<EndTurnGA>(EndTurnReaction, ReactionTiming.POST);
     }
-    // private void EndTurnReaction(EndTurnGA endTurnGA)
-    // {
-    //     Debug.Log("turn end detected");
-    //     if (HotseatScreenManager.instance == null)
-    //     {
-    //         StartTurnGA startTurnGA = new(currentPlayer);
-    //         ActionManager.instance.AddReaction(startTurnGA);
-    //     }
-    //     else
-    //     {
-    //         HotseatScreenManager.instance.OnTurnEnd();
-    //     }
-    // }
     public void GlobalUIUpdate()
     {
         CardManager.instance.UpdateDeckUI();

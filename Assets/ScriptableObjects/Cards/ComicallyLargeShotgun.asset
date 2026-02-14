@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: ComicallyLargeShotgun
   m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 3
   <title>k__BackingField: ComicallyLargeShotgun
   <description>k__BackingField: does not attack normally. Deal 4 damage to defending
     unit in lane, excess damage carries over to the unit behind it

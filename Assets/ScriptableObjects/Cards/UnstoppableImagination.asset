@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: UnstoppableImagination
   m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 20
   <title>k__BackingField: Unstoppable Imagination
   <description>k__BackingField: Draw 2 cards
   <cardArt>k__BackingField: {fileID: 21300000, guid: 0c8afd9a75c702a46819c71d17a65ceb, type: 3}

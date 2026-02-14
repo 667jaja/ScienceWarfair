@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: MinorMiner
   m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 13
   <title>k__BackingField: Minor Miner
   <description>k__BackingField: gain 1k
   <cardArt>k__BackingField: {fileID: 6336965144557764222, guid: 5e1e99b9bb0772047a08624a4b2a29a0, type: 3}

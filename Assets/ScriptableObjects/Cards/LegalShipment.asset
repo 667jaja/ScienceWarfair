@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: LegalShipment
   m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 11
   <title>k__BackingField: Legal Shipment
   <description>k__BackingField: moves to front. contains Intern.
   <cardArt>k__BackingField: {fileID: 4830009725995738098, guid: 76a9025b5eea8a742a2c83c2f99ac667, type: 3}

@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06de392ce3db7204fb3fdb2467e220f6, type: 3}
   m_Name: GainSciencePointsMoon
   m_EditorClassIdentifier: 
+  <effectId>k__BackingField: 10
   <gainCount>k__BackingField: 10

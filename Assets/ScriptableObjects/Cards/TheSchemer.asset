@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: TheSchemer
   m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 19
   <title>k__BackingField: The Schemer
   <description>k__BackingField: Does Not Attack Normally. Gain 2k at the start of
     every turn

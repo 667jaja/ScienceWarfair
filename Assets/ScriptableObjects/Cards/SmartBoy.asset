@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: SmartBoy
   m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 18
   <title>k__BackingField: SmartBoy
   <description>k__BackingField: draws a card
   <cardArt>k__BackingField: {fileID: 7575962368692982277, guid: aec147bf56919894ea36180dd9a7709c, type: 3}

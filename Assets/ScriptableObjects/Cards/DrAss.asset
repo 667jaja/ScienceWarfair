@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: DrAss
   m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 4
   <title>k__BackingField: Dr. Ass
   <description>k__BackingField: Decreases the Iq of the next played card by 1
   <cardArt>k__BackingField: {fileID: 21300000, guid: ece094d77a60caf418f434408fb307cc, type: 3}

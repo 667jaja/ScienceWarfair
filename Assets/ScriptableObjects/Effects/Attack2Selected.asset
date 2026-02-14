@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45d20e3e8172f14aac06b5e0074ff1f, type: 3}
   m_Name: Attack2Selected
   m_EditorClassIdentifier: 
+  <effectId>k__BackingField: 1
   <attackDamage>k__BackingField: 2
   <selectCount>k__BackingField: 1

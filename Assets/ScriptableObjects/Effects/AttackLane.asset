@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ebbd62fdaf03e48b15e5460ba720e7, type: 3}
   m_Name: AttackLane
   m_EditorClassIdentifier: 
+  <effectId>k__BackingField: 2
   <attackDamage>k__BackingField: 1

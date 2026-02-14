@@ -145,7 +145,7 @@ public class CardManager : MonoBehaviour
     }
     public void ShuffleDiscardIntoDeck(int playerId)
     {
-        CreateDeck(playerId, GameManager.instance.players[playerId].playerData.deck);
+        CreateDeck(playerId, GameManager.instance.players[playerId].rawDeck);
         UpdateDeckUI();
     }
 

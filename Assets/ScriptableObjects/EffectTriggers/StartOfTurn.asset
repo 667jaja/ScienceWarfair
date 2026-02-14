@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9feee8a6e1578348913061ebc0e2c49, type: 3}
   m_Name: StartOfTurn
   m_EditorClassIdentifier: 
+  <effectTriggerId>k__BackingField: 6
   <pre>k__BackingField: 0
   effectTriggerType: 1
   <oneTimeUse>k__BackingField: 0

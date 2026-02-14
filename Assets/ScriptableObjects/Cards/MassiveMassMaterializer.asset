@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: MassiveMassMaterializer
   m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 12
   <title>k__BackingField: Massive Mass Materializer
   <description>k__BackingField: Draw a card at the start of every turn
   <cardArt>k__BackingField: {fileID: 21300000, guid: c31f0d5506dc292429a1ee6d31bbaf82, type: 3}

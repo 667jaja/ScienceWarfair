@@ -3,12 +3,18 @@ using System.Collections.Generic;
 
 public class Player
 {
-    public PlayerData playerData;
+    //private PlayerData playerData;
     public Player(PlayerData playerData, int newId)
     {
-        this.playerData = playerData;
         id = newId;
-        name = playerData.playerName;
+
+        if (playerData != null)
+        {
+            //this.playerData = playerData;
+            name = playerData.playerName;
+            rawDeck = playerData.deck;
+        }
+
     }
     public string name;
     public int maxMoney = 10;
@@ -17,7 +23,7 @@ public class Player
     private int money;
     public int actionPoints;
 
-
+    public List<CardData> rawDeck;
     public List<CardData> deck = new List<CardData>();
     public List<Card> hand = new List<Card>();
     public Card[,] units = new Card[3, 3];

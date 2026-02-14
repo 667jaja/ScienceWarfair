@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: GiantRobotDestroyer
   m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 7
   <title>k__BackingField: Giant Robot Destroyer
   <description>k__BackingField: Attacks twice
   <cardArt>k__BackingField: {fileID: -2708123162176763443, guid: ae9642109f6c1994d822c0ba2d97a4d6, type: 3}

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: GovermentGrant
   m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 8
   <title>k__BackingField: Goverment Grant
   <description>k__BackingField: Gain 2k
   <cardArt>k__BackingField: {fileID: 1187480304868620637, guid: 0c9e42187211fab4aa3845887e008738, type: 3}

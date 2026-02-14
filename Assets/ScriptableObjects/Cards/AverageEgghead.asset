@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: AverageEgghead
   m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 1
   <title>k__BackingField: Average Egghead
   <description>k__BackingField: 
   <cardArt>k__BackingField: {fileID: 7213983139544702578, guid: b579aedca885cb242ae338a679ea9de9, type: 3}

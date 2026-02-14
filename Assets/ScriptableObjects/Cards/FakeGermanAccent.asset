@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: FakeGermanAccent
   m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 5
   <title>k__BackingField: Fake German Accent
   <description>k__BackingField: you may play 2 extra actions this turn
   <cardArt>k__BackingField: {fileID: 5502251504864247103, guid: 08fb11741e9e2fa4496a186443959002, type: 3}

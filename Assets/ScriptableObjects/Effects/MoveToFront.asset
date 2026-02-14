@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b725962dac76c44b815fa13609c916f, type: 3}
   m_Name: MoveToFront
   m_EditorClassIdentifier: 
+  <effectId>k__BackingField: 12
   <rowIndex>k__BackingField: 0

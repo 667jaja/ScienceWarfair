@@ -10,11 +10,11 @@ public class Card
     public Card(CardData cardData)
     {
         this.cardData = cardData;
-        cardEffect = cardData.cardEffect;
+        //cardEffect = cardData.cardEffect;
         placementCost = cardData.placementCost;
         iq = cardData.iq;
         health = cardData.health;
-        noAttack = cardData.noAttack;
+        //noAttack = cardData.noAttack;
         effectTriggers = new List<EffectTrigger>();
         effects = cardData.effects;
         containedCard = cardData.containedCard;
@@ -34,8 +34,8 @@ public class Card
     public int health { get; set; }
 
     //abilities
-    public bool noAttack { get; set; }
-    public string cardEffect { get; set; }
+    public bool noAttack { get => cardData.noAttack; }
+    public string cardEffect { get => cardData.cardEffect; }
     public List<EffectTrigger> effectTriggers {get; set;}
     public List<Effect> effects {get; set;}
     public CardData containedCard { get; set; }

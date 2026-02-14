@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: RobotTherapist
   m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 17
   <title>k__BackingField: Robot Psychiatrist
   <description>k__BackingField: 
   <cardArt>k__BackingField: {fileID: 21300000, guid: 5c466105ec6e43047a3308c0527cce71, type: 3}

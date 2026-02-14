@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: MoonDestroyingLaser
   m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 14
   <title>k__BackingField: Moon Destroying Laser
   <description>k__BackingField: After next turn gain 10 Science Points on turn start.
     repeat

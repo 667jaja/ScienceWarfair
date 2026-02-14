@@ -9,6 +9,8 @@ public enum EffectTriggerType
 [CreateAssetMenu(fileName = "EffectTriggerData", menuName = "Effect Trigger Data")]
 public class EffectTriggerData : ScriptableObject
 {
+    [field: SerializeField] public int effectTriggerId {get; private set;}
+
     [field: SerializeField] public bool pre {get; set;}
     [field: SerializeField] public EffectTriggerType effectTriggerType;
     [field: SerializeField] public bool oneTimeUse {get; set;} = false;
