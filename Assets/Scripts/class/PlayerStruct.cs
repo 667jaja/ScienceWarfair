@@ -46,7 +46,7 @@ public struct PlayerStruct : INetworkSerializable
 
         for (int i = 0; i < 3; i++)
         {
-            for (int j = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
             {
                 if (player.units[i, j] != null) units[(i*3) + j] = new CardStruct(player.units[i, j]);
             }        
@@ -56,6 +56,65 @@ public struct PlayerStruct : INetworkSerializable
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
+        // name[]
+        int nameLength = name != null ? name.Length : 0;
+        serializer.SerializeValue(ref nameLength);
+
+        if (serializer.IsReader)
+            name = new char[nameLength];
+
+        for (int i = 0; i < nameLength; i++)
+            serializer.SerializeValue(ref name[i]);
+
+        // ints
+        serializer.SerializeValue(ref maxMoney);
+        serializer.SerializeValue(ref id);
+        serializer.SerializeValue(ref sciencePoints);
+        serializer.SerializeValue(ref money);
+        serializer.SerializeValue(ref actionPoints);
+
+        // rawDeck[]
+        int rawDeckLength = rawDeck != null ? rawDeck.Length : 0;
+        serializer.SerializeValue(ref rawDeckLength);
+
+        if (serializer.IsReader)
+            rawDeck = new int[rawDeckLength];
+
+        for (int i = 0; i < rawDeckLength; i++)
+            serializer.SerializeValue(ref rawDeck[i]);
+
+        // deck[]
+        int deckLength = deck != null ? deck.Length : 0;
+        serializer.SerializeValue(ref deckLength);
+
+        if (serializer.IsReader)
+            deck = new int[deckLength];
+
+        for (int i = 0; i < deckLength; i++)
+            serializer.SerializeValue(ref deck[i]);
+
+        // hand[]
+        int handLength = hand != null ? hand.Length : 0;
+        serializer.SerializeValue(ref handLength);
+
+        if (serializer.IsReader)
+            hand = new CardStruct[handLength];
+
+        for (int i = 0; i < handLength; i++)
+            serializer.SerializeValue(ref hand[i]);
+
+        // units[]
+        int unitsLength = units != null ? units.Length : 0;
+        serializer.SerializeValue(ref unitsLength);
+
+        if (serializer.IsReader)
+            units = new CardStruct[unitsLength];
+
+        for (int i = 0; i < unitsLength; i++)
+            serializer.SerializeValue(ref units[i]);
+    }
+}
+    /*
         serializer.SerializeValue(ref maxMoney);
         serializer.SerializeValue(ref id);
         serializer.SerializeValue(ref sciencePoints);

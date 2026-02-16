@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public Slider plaSciencePointsSlider;
     public Slider oppSciencePointsSlider;
 
+    [SerializeField] private GameObject ifCurrentPlayerIsNotDisplay;
+
     //money&Cards
     [SerializeField] private int startingMoney;
     [SerializeField] private int turnOrderBonusMoney = 1;
@@ -40,14 +42,9 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
     }
-    void Start()
-    {
-        displayPlayer = currentPlayer;
-        //BeginGame();
-    }
     void Update()
     {
-        displayPlayer = currentPlayer;
+        ifCurrentPlayerIsNotDisplay.SetActive(currentPlayer != displayPlayer);
     }
     public void BeginGame()
     {
@@ -73,6 +70,7 @@ public class GameManager : MonoBehaviour
         
         UpdateMoneyUI(players[0]);
         currentPlayer = 0;
+        if (RelayManager.instance == null) displayPlayer = currentPlayer;
         StartTurnGA startTurnGA = new(currentPlayer);
         startTurnGA.description = "Game start. "+players[0].name+" plays first. money: " + startingMoney + "-" + (startingMoney+turnOrderBonusMoney) + " cards: " + startingCards + "-" + (startingCards + turnOrderBonusCards);
         ActionManager.instance.Perform(startTurnGA);
@@ -147,6 +145,7 @@ public class GameManager : MonoBehaviour
 
         //currentplayer
         currentPlayer = GetNextPlayerId();
+        if (RelayManager.instance == null) displayPlayer = currentPlayer;
 
         //check win
         int highestPlayerSciencePoints = 0;
@@ -176,6 +175,10 @@ public class GameManager : MonoBehaviour
             {
                 yield return HotseatScreenManager.instance.OnTurnEnd();
             }
+        }
+        if (RelayManager.instance != null)
+        {
+            OnlineManager.instance.StateUpdate();
         }
         // Debug.Log("current player IQ: " + players[currentPlayer].sciencePoints);
         // Debug.Log("next player IQ: " + players[GetNextPlayerId()].sciencePoints);
@@ -245,7 +248,7 @@ public class GameManager : MonoBehaviour
     } 
     public void UpdateSciencePointSliders()
     {
-        plaSciencePointsSlider.value = players[currentPlayer].sciencePoints;
+        plaSciencePointsSlider.value = players[displayPlayer].sciencePoints;
         oppSciencePointsSlider.value = players[GetNextPlayerId(displayPlayer)].sciencePoints;
     }
     public int GetNextPlayerId(int playerId = -1)

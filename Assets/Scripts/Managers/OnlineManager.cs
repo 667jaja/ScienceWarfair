@@ -7,18 +7,52 @@ using System.Threading.Tasks;
 using System;
 using Unity.Mathematics;
 using System.Data.Common;
+using TMPro;
 
 public class OnlineManager : NetworkBehaviour
 {
     public static OnlineManager instance;
-    private NetworkVariable<PlayerStruct> hostPlayer = new (writePerm: NetworkVariableWritePermission.Server);
-    private NetworkVariable<PlayerStruct> clientPlayer = new (writePerm: NetworkVariableWritePermission.Server);
+    // private NetworkVariable<PlayerStruct> hostPlayer = new (writePerm: NetworkVariableWritePermission.Server);
+    // private NetworkVariable<PlayerStruct> clientPlayer = new (writePerm: NetworkVariableWritePermission.Server);
 
 
     void Awake()
     {
         instance = this;
     }
+    
+    public void StateUpdate()
+    {
+        if (IsHost)
+        {
+            PlayerStruct newplayer1 = new PlayerStruct(GameManager.instance.players[0]);
+            PlayerStruct newplayer2 = new PlayerStruct(GameManager.instance.players[1]);
+            //Debug.Log(newplayer1.name.ArrayToString() +" has "+ newplayer1.hand[0].CardDataBaseId + " and " + newplayer2.name.ArrayToString() +" has "+ newplayer2.hand[0].CardDataBaseId);
+            StateUpdateClientRPC(newplayer1, newplayer2);
+            GameManager.instance.GlobalUIUpdate();
+        }
+    }
+
+    [Rpc(SendTo.NotServer)]
+    public void StateUpdateClientRPC(PlayerStruct hostPlayerStruct, PlayerStruct clientPlayerStruct)
+    {
+        Debug.Log("StateUpdateClientRPC Called");
+
+        Player player1 = CardLibraryManager.instance.PlayerFromPlayerStruct(hostPlayerStruct);
+        Player player2 = CardLibraryManager.instance.PlayerFromPlayerStruct(clientPlayerStruct);
+
+        // Debug.Log(hostPlayerStruct.name.ArrayToString() +" has "+ hostPlayerStruct.hand[0].CardDataBaseId + " and " + clientPlayerStruct.name.ArrayToString() +" has "+ clientPlayerStruct.hand[0].CardDataBaseId);
+        // Debug.Log(player1.name +" has "+ player1.hand[0].cardData.CardDataId + " and " + player2.name +" has "+ player2.hand[0].cardData.CardDataId);
+
+        GameManager.instance.players = new() 
+        {
+            player1,
+            player2
+        };
+        GameManager.instance.GlobalUIUpdate();
+    }
+
+    //setup
     public void ConnectionFailure()
     {
         SceneLoadManager.instance.LoadMainMenu();
@@ -60,14 +94,14 @@ public class OnlineManager : NetworkBehaviour
             player1,
             player2
         };
+        GameManager.instance.displayPlayer = 0;
         GameManager.instance.BeginGame();
-
     }
 
     [Rpc(SendTo.NotServer)]
     public void ClientSetupClientRpc(PlayerStruct hostPlayerStruct)
     {
-        Debug.Log("ClientSetupClientRpc Called  Host Name is: " + hostPlayer.Value.name);
+        Debug.Log("ClientSetupClientRpc Called  Host Name is: " + hostPlayerStruct.name.ArrayToString());
         
         Player clientNewPlayer = new Player(GameManager.instance.playerDatas[SceneLoadManager.selectedPlayerData], 1);
         PlayerStruct clientPlayerStruct = new PlayerStruct(clientNewPlayer);
@@ -80,6 +114,7 @@ public class OnlineManager : NetworkBehaviour
             player1,
             player2
         };
+        GameManager.instance.displayPlayer = 1;
         GameManager.instance.BeginGame();
     }
 }

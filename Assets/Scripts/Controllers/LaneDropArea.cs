@@ -7,13 +7,12 @@ public class LaneDropArea : MonoBehaviour, ICardDropArea
     public void OnCardDrop(Card card)
     {
         int currentPlayer = GameManager.instance.currentPlayer;
-        int displayPlayer = GameManager.instance.displayPlayer;
     
         // Debug.Log("player id: " + currentPlayer);
         // Debug.Log("lane id: " + laneId);
         // Debug.Log("card name: " + card.title);
 
-        if (currentPlayer == displayPlayer )
+        if (currentPlayer == GameManager.instance.displayPlayer)
         {
             if (!isActionLane)
             {

@@ -62,16 +62,22 @@ public class CardLibraryManager : MonoBehaviour
             placementCost = cardStruct.placementCost,
             health = cardStruct.health,
 
-            containedCard = GetCardDataById(cardStruct.containedCardBaseId),
+            containedCard = cardStruct.containedCardBaseId>=0? GetCardDataById(cardStruct.containedCardBaseId): null,
 
             // effectTriggers = cardStruct.health,
             effects = new List<Effect>(),
         };
+        if (cardStruct.effects != null && cardStruct.effects.Length > 0)
         for (int i = 0; i < cardStruct.effects.Length; i++)
         {
             if (cardStruct.effects[i] > 0) newCard.effects.Add(GetEffectById(cardStruct.effects[i]));
         }
-
+        
+        // if (cardStruct.effectTriggers != null && cardStruct.effectTriggers.Length > 0)
+        // for (int i = 0; i < cardStruct.effectTriggers.Length; i++)
+        // {
+        //     if (cardStruct.effectTriggers[i] > 0) newCard.effectTriggers.Add(new EffectTrigger(new ActionData(,,newCard),GetEffectTriggerDataById(cardStruct.effectTriggers[i])));
+        // }
         return newCard;
     }
     public Player PlayerFromPlayerStruct(PlayerStruct playerStruct)
@@ -113,7 +119,8 @@ public class CardLibraryManager : MonoBehaviour
         {
             for (int j = 0; i < 3; i++)
             {
-                if (newPlayer.units[i, j] != null) newPlayer.units[i, j] = cardFromCardStruct(playerStruct.units[(i*3) + j]);
+                if (playerStruct.units[(i*3) + j].CardDataBaseId > 0) newPlayer.units[i, j] = cardFromCardStruct(playerStruct.units[(i*3) + j]);
+                else newPlayer.units[i, j] = null;
             }        
         }
 
