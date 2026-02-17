@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
+  m_Name: Jackal
+  m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 667
+  <title>k__BackingField: Jackal
+  <description>k__BackingField: contains Jackal... wait, that's not possible!!
+  <cardArt>k__BackingField: {fileID: 21300000, guid: 582eeedcc1f19794d989e1edc3a090b9, type: 3}
+  isAction: 0
+  <placementCost>k__BackingField: 1
+  <iq>k__BackingField: 2
+  <health>k__BackingField: 1
+  <noAttack>k__BackingField: 0
+  <cardEffect>k__BackingField: 
+  <effectTriggerDatas>k__BackingField:
+  - {fileID: 11400000, guid: f2f1d8ff239888f4bbf2ce5a80dcaf18, type: 2}
+  <effects>k__BackingField: []
+  <containedCard>k__BackingField: {fileID: 11400000}

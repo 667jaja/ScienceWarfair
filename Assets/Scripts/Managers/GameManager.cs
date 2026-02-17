@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public List<Player> players = new List<Player>();
     [SerializeField] private List<CardData> cardDatas;
+    private List<CardData> defaultDeck;
 
     public int currentPlayer;
     public int displayPlayer;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     public Slider oppSciencePointsSlider;
 
     [SerializeField] private GameObject ifCurrentPlayerIsNotDisplay;
+    [SerializeField] private List<int> secretCardIds;
 
     //money&Cards
     [SerializeField] private int startingMoney;
@@ -41,6 +43,11 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        defaultDeck = new();
+        for (int i = 0; i < 20; i++)
+        {
+            defaultDeck.Add(cardDatas[i]);
+        }
     }
     void Update()
     {
@@ -61,14 +68,33 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < playerCount; i++)
         {
             if (players[i].name == null || players[i].name.Length < 1) players[i].name = "Player" + (i+1);
+            if (players[i].name.Contains("Jackal667")) 
             players[i].maxMoney = maxMoney;
             players[i].Money = startingMoney + i*turnOrderBonusMoney;
-            if (players[i].rawDeck == null || players[i].rawDeck.Count < deckDataSizeMin) players[i].rawDeck = cardDatas;
+            if (players[i].rawDeck == null || players[i].rawDeck.Count < deckDataSizeMin) players[i].rawDeck = defaultDeck;
             CardManager.instance.CreateDeck(i, players[i].rawDeck);
             CardManager.instance.DrawCards(i, startingCards + i*turnOrderBonusCards);
         }
-        
-        UpdateMoneyUI(players[0]);
+        //cheats
+        for (int i = 0; i < playerCount; i++)
+        {
+            if (players[i].name.Contains("Jackal667"))
+            {
+                players[i].name = "Jackal";
+                players[i].hand.Add(new Card(CardLibraryManager.instance.GetCardDataById(secretCardIds[0])));
+            }
+            if (players[i].name.Contains("Miles1"))
+            {
+                players[i].name = "Miles";
+
+                for (int c = 0; c < 3; c++)
+                {
+                    CreateUnitGA createUnitGA = new(players[i].id, new Vector2Int(c,0), new Card(CardLibraryManager.instance.GetCardDataById(secretCardIds[1])));
+                    createUnitGA.description = "Miles Cheats";
+                    ActionManager.instance.Perform(createUnitGA);
+                }
+            }
+        }
         currentPlayer = 0;
         if (RelayManager.instance == null) displayPlayer = currentPlayer;
         StartTurnGA startTurnGA = new(currentPlayer);

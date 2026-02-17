@@ -632,6 +632,7 @@ MonoBehaviour:
   plaSciencePointsSlider: {fileID: 329196553}
   oppSciencePointsSlider: {fileID: 808352577}
   ifCurrentPlayerIsNotDisplay: {fileID: 182955064}
+  secretCardIds: 9b0200009a020000
   startingMoney: 3
   turnOrderBonusMoney: 1
   startingCards: 4
@@ -960,6 +961,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5002b3150ce4fb48ab3397d80bd3807, type: 2}
   - {fileID: 11400000, guid: 9e4eddcab0b29c54da63d2c2803c99ef, type: 2}
   - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
+  - {fileID: 11400000, guid: b7528bbfb519c534baed7c63fb7d6486, type: 2}
+  - {fileID: 11400000, guid: ac4ccbcfcae2121409016d29a5eb8849, type: 2}
   effects:
   - {fileID: 11400000, guid: a132b51faaba6b94dbe792807be72c37, type: 2}
   - {fileID: 11400000, guid: 83e9b1afe9dd00a47bd90f69f9e5eca8, type: 2}
