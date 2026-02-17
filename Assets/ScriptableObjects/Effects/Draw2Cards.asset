@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda5a3f1910ee294db880e155a08893d, type: 3}
   m_Name: Draw2Cards
   m_EditorClassIdentifier: 
-  <effectId>k__BackingField: 5
+  <effectId>k__BackingField: 6
   <cardCount>k__BackingField: 2

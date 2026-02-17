@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d344f8a76f6b8904983793bde957e2dc, type: 3}
   m_Name: Shotgun4Damage
   m_EditorClassIdentifier: 
-  <effectId>k__BackingField: 13
+  <effectId>k__BackingField: 14
   <attackDamage>k__BackingField: 4

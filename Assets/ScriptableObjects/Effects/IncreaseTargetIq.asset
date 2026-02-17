@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf1afe7c8d616143abb4a4734010d6a, type: 3}
   m_Name: IncreaseTargetIq
   m_EditorClassIdentifier: 
-  <effectId>k__BackingField: 11
+  <effectId>k__BackingField: 12
   <iq>k__BackingField: 1
   <health>k__BackingField: 0
   <placementCost>k__BackingField: 0

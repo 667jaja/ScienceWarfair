@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb9d240c2c9e0464b8ee0cec8c4ae46f, type: 3}
   m_Name: GainAction2
   m_EditorClassIdentifier: 
-  <effectId>k__BackingField: 7
+  <effectId>k__BackingField: 8
   <gainCount>k__BackingField: 2

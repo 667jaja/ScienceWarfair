@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53fbd4b929f2da645a8419827d482b1b, type: 3}
   m_Name: DamageLane
   m_EditorClassIdentifier: 
-  <effectId>k__BackingField: 3
+  <effectId>k__BackingField: 4
   <attackDamage>k__BackingField: 1
   <selectCount>k__BackingField: 1
