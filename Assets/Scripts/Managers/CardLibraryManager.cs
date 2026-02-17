@@ -117,7 +117,7 @@ public class CardLibraryManager : MonoBehaviour
         //units
         for (int i = 0; i < 3; i++)
         {
-            for (int j = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
             {
                 if (playerStruct.units[(i*3) + j].CardDataBaseId > 0) newPlayer.units[i, j] = cardFromCardStruct(playerStruct.units[(i*3) + j]);
                 else newPlayer.units[i, j] = null;

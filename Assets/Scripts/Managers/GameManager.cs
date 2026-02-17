@@ -116,14 +116,17 @@ public class GameManager : MonoBehaviour
     public void TurnEndButton()
     {
         //if (ActionManager.instance.isPerforming) return;
-        EndTurn();
+        EndTurn(displayPlayer);
     }
-    private void EndTurn()
+    public void EndTurn(int playerId)
     {
-        CardManager.instance.CurrentPlayerDrawCards(cardGain);
+        if (playerId == currentPlayer)
+        {
+            CardManager.instance.CurrentPlayerDrawCards(cardGain);
 
-        EndTurnGA endTurnGA = new(currentPlayer);
-        ActionManager.instance.Perform(endTurnGA);
+            EndTurnGA endTurnGA = new(playerId);
+            ActionManager.instance.Perform(endTurnGA);
+        }
     }
     private IEnumerator EndTurnPerformer(EndTurnGA endTurnGA)
     {

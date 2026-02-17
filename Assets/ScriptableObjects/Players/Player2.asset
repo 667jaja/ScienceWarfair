@@ -12,25 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9f2d22956a2364ab5899278cd3adde, type: 3}
   m_Name: Player2
   m_EditorClassIdentifier: 
-  <playerName>k__BackingField: rando
-  <deck>k__BackingField:
-  - {fileID: 11400000, guid: 3a87129b2fa86be4fb51268e484a883b, type: 2}
-  - {fileID: 11400000, guid: 2d2dbbb548d40c14ab1c280d95e0a0ca, type: 2}
-  - {fileID: 11400000, guid: 3a87129b2fa86be4fb51268e484a883b, type: 2}
-  - {fileID: 11400000, guid: 24134efa021601149999ce18010a94f1, type: 2}
-  - {fileID: 11400000, guid: ba0e8fc85c68d8a44a88b7febc393ec9, type: 2}
-  - {fileID: 11400000, guid: c5002b3150ce4fb48ab3397d80bd3807, type: 2}
-  - {fileID: 11400000, guid: ba0e8fc85c68d8a44a88b7febc393ec9, type: 2}
-  - {fileID: 11400000, guid: 9187a2ba65e49d140b0289c6ada9cc68, type: 2}
-  - {fileID: 11400000, guid: ea1873d23da18a0448c87a213d8ed9e1, type: 2}
-  - {fileID: 11400000, guid: b8c4627ce80ef35459d5b1803147d0ac, type: 2}
-  - {fileID: 11400000, guid: ef7cafc251e245640be0435b813f9770, type: 2}
-  - {fileID: 11400000, guid: 60a78e4b99005f541937fa5fd036989b, type: 2}
-  - {fileID: 11400000, guid: 9187a2ba65e49d140b0289c6ada9cc68, type: 2}
-  - {fileID: 11400000, guid: ef7cafc251e245640be0435b813f9770, type: 2}
-  - {fileID: 11400000, guid: b8c4627ce80ef35459d5b1803147d0ac, type: 2}
-  - {fileID: 11400000, guid: 2d2dbbb548d40c14ab1c280d95e0a0ca, type: 2}
-  - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
-  - {fileID: 11400000, guid: 9187a2ba65e49d140b0289c6ada9cc68, type: 2}
-  - {fileID: 11400000, guid: ef7cafc251e245640be0435b813f9770, type: 2}
-  - {fileID: 11400000, guid: e3dad6bfe801d4241a915f7063eff627, type: 2}
+  <playerName>k__BackingField: fed
+  <deck>k__BackingField: []

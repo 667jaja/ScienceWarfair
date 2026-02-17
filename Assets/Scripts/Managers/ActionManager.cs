@@ -70,6 +70,11 @@ public class ActionManager : MonoBehaviour
         {
             ActionLogManager.instance.LogAction(action.description);
         }
+        if (RelayManager.instance != null && action.isInputAction && action.inputPlayerId != GameManager.instance.displayPlayer)
+        {
+            action.inputPlayerId = GameManager.instance.displayPlayer;
+            OnlineManager.instance.InputGameAction(action);
+        }
         //Debug.Log("flow Start");
         //sets "reactions" to the current actions prereactions
         reactions = action.preReactions;

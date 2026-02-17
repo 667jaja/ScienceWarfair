@@ -7,6 +7,7 @@ public class PlaceUnitGA : GameAction
     public Card playedCard;
     public PlaceUnitGA(int playerIdInput, int laneInput, Card cardInput)
     {
+        base.isInputAction = true;
         playerId = playerIdInput;
         lane = laneInput;
         playedCard = cardInput;

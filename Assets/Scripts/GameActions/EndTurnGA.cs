@@ -7,5 +7,6 @@ public class EndTurnGA : GameAction
     {
         playerId = playerIdInput;
         base.isQueueEnder = true;
+        base.isInputAction = true;
     }
 }

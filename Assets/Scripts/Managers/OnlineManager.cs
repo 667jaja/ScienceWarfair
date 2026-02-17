@@ -15,12 +15,78 @@ public class OnlineManager : NetworkBehaviour
     // private NetworkVariable<PlayerStruct> hostPlayer = new (writePerm: NetworkVariableWritePermission.Server);
     // private NetworkVariable<PlayerStruct> clientPlayer = new (writePerm: NetworkVariableWritePermission.Server);
 
-
     void Awake()
     {
         instance = this;
     }
     
+    public void InputGameAction(GameAction gameAction)
+    {
+        if (gameAction.inputPlayerId == GameManager.instance.currentPlayer)
+        {
+            if (gameAction is EndTurnGA endTurn) 
+            { 
+                if (IsHost) EndTurnGAClientRPC(endTurn.playerId); 
+                if (!IsHost) EndTurnGAServerRPC(endTurn.playerId); 
+            }
+            if (gameAction is PlaceUnitGA placeUnit)
+            { 
+                if (IsHost) PlaceUnitGAClientRPC(placeUnit.playerId, placeUnit.lane, new CardStruct(placeUnit.playedCard)); 
+                if (!IsHost) PlaceUnitGAServerRPC(placeUnit.playerId, placeUnit.lane, new CardStruct(placeUnit.playedCard)); 
+            }
+            if (gameAction is PlayActionGA playAction)
+            { 
+                if (IsHost) PlayActionGAClientRPC(playAction.playerId, new CardStruct(playAction.playedCard)); 
+                if (!IsHost) PlayActionGAServerRPC(playAction.playerId, new CardStruct(playAction.playedCard)); 
+            }   
+        }
+
+        // if (gameAction is SelectUnitsGA selectUnits) 
+        // { 
+        //     if (IsHost) EndTurnGAClientRPC(selectUnits.playerId); 
+        //     if (!IsHost) EndTurnGAServerRPC(selectUnits.playerId); 
+        // }
+        // if (gameAction is SelectLanesGA selectLanes) 
+        // { 
+        //     if (IsHost) EndTurnGAClientRPC(selectLanes.playerId); 
+        //     if (!IsHost) EndTurnGAServerRPC(selectLanes.playerId); 
+        // }
+    }
+
+
+    [Rpc(SendTo.Server)]
+    public void EndTurnGAServerRPC(int playerId)
+    {
+        GameManager.instance.EndTurn(playerId);
+    }
+    [Rpc(SendTo.NotServer)]
+    public void EndTurnGAClientRPC(int playerId)
+    {
+        GameManager.instance.EndTurn(playerId);
+    }
+
+    [Rpc(SendTo.Server)]
+    public void PlaceUnitGAServerRPC(int playerId, int lane, CardStruct cardStruct)
+    {
+        UnitManager.instance.PlaceCard(playerId, lane, CardLibraryManager.instance.cardFromCardStruct(cardStruct));
+    }
+    [Rpc(SendTo.NotServer)]
+    public void PlaceUnitGAClientRPC(int playerId, int lane, CardStruct cardStruct)
+    {
+        UnitManager.instance.PlaceCard(playerId, lane, CardLibraryManager.instance.cardFromCardStruct(cardStruct));
+    }
+
+    [Rpc(SendTo.Server)]
+    public void PlayActionGAServerRPC(int playerId, CardStruct cardStruct)
+    {
+        UnitManager.instance.PlayAction(playerId, CardLibraryManager.instance.cardFromCardStruct(cardStruct));
+    }
+    [Rpc(SendTo.NotServer)]
+    public void PlayActionGAClientRPC(int playerId, CardStruct cardStruct)
+    {
+        UnitManager.instance.PlayAction(playerId, CardLibraryManager.instance.cardFromCardStruct(cardStruct));
+    }
+
     public void StateUpdate()
     {
         if (IsHost)
@@ -43,6 +109,15 @@ public class OnlineManager : NetworkBehaviour
 
         // Debug.Log(hostPlayerStruct.name.ArrayToString() +" has "+ hostPlayerStruct.hand[0].CardDataBaseId + " and " + clientPlayerStruct.name.ArrayToString() +" has "+ clientPlayerStruct.hand[0].CardDataBaseId);
         // Debug.Log(player1.name +" has "+ player1.hand[0].cardData.CardDataId + " and " + player2.name +" has "+ player2.hand[0].cardData.CardDataId);
+
+        // //units
+        // for (int i = 0; i < 3; i++)
+        // {
+        //     for (int j = 0; i < 3; i++)
+        //     {
+        //         if (hostPlayerStruct.units[(i*3) + j].CardDataBaseId > 0) Debug.Log("host has unit " + hostPlayerStruct.units[(i*3) + j].CardDataBaseId+" at " + );
+        //     }        
+        // }
 
         GameManager.instance.players = new() 
         {

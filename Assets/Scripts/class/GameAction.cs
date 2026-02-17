@@ -3,6 +3,8 @@ using UnityEngine;
 
 public abstract class GameAction
 {
+    public bool isInputAction = false;
+    public int inputPlayerId = -1;
     public bool isQueueEnder = false;
     public string description = null;
     public List<GameAction> preReactions { get; private set; } = new();
