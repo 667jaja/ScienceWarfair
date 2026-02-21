@@ -17,7 +17,7 @@ MonoBehaviour:
   <description>k__BackingField: 
   <cardArt>k__BackingField: {fileID: 21300000, guid: 5c466105ec6e43047a3308c0527cce71, type: 3}
   isAction: 0
-  <placementCost>k__BackingField: 3
+  <placementCost>k__BackingField: 4
   <iq>k__BackingField: 4
   <health>k__BackingField: 3
   <noAttack>k__BackingField: 0
