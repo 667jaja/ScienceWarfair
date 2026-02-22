@@ -90,24 +90,32 @@ public class UnitManager : MonoBehaviour
     }
     private IEnumerator PlayActionPerformer(PlayActionGA playActionGA)
     {
+
+        // check if player has points remove from hand
         if (GameManager.instance.players[playActionGA.playerId].actionPoints > 0)
         {
-            Debug.Log("Action Play success: Player:" + playActionGA.playerId + " Card:" + playActionGA.playedCard.title);
-            
-            //backend
-            playActionGA.playedCard.PlacementAbility(new ActionData(playActionGA.playerId, new Vector2Int (-1,-1), playActionGA.playedCard));
-            GameManager.instance.players[playActionGA.playerId].hand.Remove(playActionGA.playedCard);
-            GameManager.instance.players[playActionGA.playerId].actionPoints -= 1;
-
-            //frontend
-            CardManager.instance.UpdateHandUI();
-            CardVisual newCardVisual = Instantiate(actionVisual, LaneManager.instance.lanePositions[columnCount*2]);
-            newCardVisual.Initiate(playActionGA.playedCard);
-            yield return new WaitForSeconds(actionPlayAnimationLength);
-
-            if (newCardVisual != null)
+            if (CardManager.instance.RemoveCard(playActionGA.playerId, playActionGA.playedCard))
             {
-                Destroy(newCardVisual.gameObject);
+                Debug.Log("Action Play success: Player:" + playActionGA.playerId + " Card:" + playActionGA.playedCard.title);
+                
+                //backend
+                playActionGA.playedCard.PlacementAbility(new ActionData(playActionGA.playerId, new Vector2Int (-1,-1), playActionGA.playedCard));
+                GameManager.instance.players[playActionGA.playerId].actionPoints -= 1;
+
+                //frontend
+                CardManager.instance.UpdateHandUI();
+                CardVisual newCardVisual = Instantiate(actionVisual, LaneManager.instance.lanePositions[columnCount*2]);
+                newCardVisual.Initiate(playActionGA.playedCard);
+                yield return new WaitForSeconds(actionPlayAnimationLength);
+
+                if (newCardVisual != null)
+                {
+                    Destroy(newCardVisual.gameObject);
+                }
+            }
+            else
+            {
+                Debug.Log("unit placement failed, card not found");  
             }
         }
         else
@@ -121,14 +129,14 @@ public class UnitManager : MonoBehaviour
     }
     private IEnumerator PlaceUnitPerformer(PlaceUnitGA placeUnitGA)
     {
-        //find Open Spot
+
+        // find open spot
         bool unitPlacementSuccess = false;
         int i = 0;
         for (i = 0; i < rowCount; )
         {
             if (GameManager.instance.players[placeUnitGA.playerId].units[placeUnitGA.lane, i] == null)
             {
-                // GameManager.instance.players[placeUnitGA.playerId].units[placeUnitGA.lane, i] = placeUnitGA.playedCard;
                 unitPlacementSuccess = true;
                 break;
             }
@@ -139,26 +147,35 @@ public class UnitManager : MonoBehaviour
             }
             i++;
         }
-        if (unitPlacementSuccess && GameManager.instance.players[placeUnitGA.playerId].units[placeUnitGA.lane, rowCount-1] == null && placeUnitGA.playedCard.placementCost <= GameManager.instance.players[placeUnitGA.playerId].Money)
+
+        // check that we can afford
+        if (unitPlacementSuccess && placeUnitGA.playedCard.placementCost <= GameManager.instance.players[placeUnitGA.playerId].Money)
         {
-            Debug.Log("Placement success: Player:" + placeUnitGA.playerId + " Lane:" + placeUnitGA.lane + " Card:" + placeUnitGA.playedCard.title);
-            Vector2Int firstOpenSpot = new Vector2Int(placeUnitGA.lane, i);
-
-            GameManager.instance.players[placeUnitGA.playerId].hand.Remove(placeUnitGA.playedCard);
-            CardManager.instance.UpdateHandUI();
-            GameManager.instance.players[placeUnitGA.playerId].Money -= placeUnitGA.playedCard.placementCost;
-            GameManager.instance.UpdateMoneyUI();
-
-
-            if (unitPlacementSuccess) CreateUnitReaction(placeUnitGA.playerId, firstOpenSpot, placeUnitGA.playedCard);
-
-            //attack lane
-            if (!placeUnitGA.playedCard.noAttack)
+            // remove from hand
+            if (CardManager.instance.RemoveCard(placeUnitGA.playerId, placeUnitGA.playedCard))
             {
-                AttackLaneGA attackLaneGA = new((placeUnitGA.playerId < GameManager.instance.players.Count-1)? placeUnitGA.playerId+1: 0, placeUnitGA.lane, 1);
-                ActionManager.instance.AddReaction(attackLaneGA);
-            }
+                Debug.Log("Placement success: Player:" + placeUnitGA.playerId + " Lane:" + placeUnitGA.lane + " Card:" + placeUnitGA.playedCard.title);
+                Vector2Int firstOpenSpot = new Vector2Int(placeUnitGA.lane, i);
 
+                CardManager.instance.UpdateHandUI();
+                GameManager.instance.players[placeUnitGA.playerId].Money -= placeUnitGA.playedCard.placementCost;
+                GameManager.instance.UpdateMoneyUI();
+
+
+                if (unitPlacementSuccess) CreateUnitReaction(placeUnitGA.playerId, firstOpenSpot, placeUnitGA.playedCard);
+
+                //attack lane
+                if (!placeUnitGA.playedCard.noAttack)
+                {
+                    AttackLaneGA attackLaneGA = new((placeUnitGA.playerId < GameManager.instance.players.Count-1)? placeUnitGA.playerId+1: 0, placeUnitGA.lane, 1);
+                    ActionManager.instance.AddReaction(attackLaneGA);
+                }
+            }
+            else
+            {
+                Debug.Log("unit placement failed, card not found");
+                GameManager.instance.GlobalUIUpdate();
+            }
         }
         else
         {

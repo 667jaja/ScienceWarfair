@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Collections;
 
+// ISSUE: online players keep losing cards (maybe specifically draw card actions) when they draw them
 public class CardManager : MonoBehaviour
 {
     // manages backend actions of cards while is deck, discard
@@ -128,28 +129,52 @@ public class CardManager : MonoBehaviour
         Debug.Log("Draw Card Ended");
         yield return null;
     }
-    public void CreateDeck(int playerId, List<CardData> deckData)
+    public List<CardData> CreateDeck(List<CardData> deckData)
     {
-        GameManager.instance.players[playerId].deck = new();
-
-        // for (int i = 0; i < deckData.Count; i++)
-        // {
-        //     CardData data = deckData[Random.Range(0, deckData.Count)];
-        //     Card newCard = new(data);
-        //     GameManager.instance.players[playerId].deck.Add(newCard);
-        // }
-
-        GameManager.instance.players[playerId].deck = deckData.OrderBy(i => Guid.NewGuid()).ToList();
-
-        UpdateDeckUI();
+        return deckData.OrderBy(i => Guid.NewGuid()).ToList();
     }
     public void ShuffleDiscardIntoDeck(int playerId)
     {
-        CreateDeck(playerId, GameManager.instance.players[playerId].rawDeck);
+        GameManager.instance.players[playerId].deck = CreateDeck(GameManager.instance.players[playerId].rawDeck);
         UpdateDeckUI();
     }
+    // private IEnumerator DiscardCard(DiscardCardGA discardCardGA)
+    // {
+    //     RemoveCard(discardCardGA.card);
+    //     yield return null;
+    // }
+    public bool RemoveCard(int playerId, Card removedCard)
+    {
+        //find card in hand
 
+        int cardToRemove = -1;
+        int i = 0;
+        foreach (Card card in GameManager.instance.players[playerId].hand)
+        {
+            if (card.cardData.CardDataId == removedCard.cardData.CardDataId)
+            {
+                //if (card.health == removedCard.health && card.iq == removedCard.iq && card.placementCost == removedCard.placementCost)
+                cardToRemove = i;
+                break;
+            }
+            i++;
+        }
 
+        //remove card
+        bool cardRemovalSuccessful;
+        if (cardToRemove >= 0)
+        {
+            GameManager.instance.players[playerId].hand.RemoveAt(cardToRemove);
+            cardRemovalSuccessful = true;
+        }
+        else
+        {
+            Debug.Log("Removed card not found");
+            cardRemovalSuccessful = false;
+        }
+        
+        return cardRemovalSuccessful;
+    }
     public void UpdateDeckUI()
     {
         deckCountUI.text = GameManager.instance.players[GameManager.instance.displayPlayer].deck.Count.ToString();

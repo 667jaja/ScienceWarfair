@@ -17,8 +17,8 @@ MonoBehaviour:
   <description>k__BackingField: contains Jackal... wait, that's not possible!!
   <cardArt>k__BackingField: {fileID: 21300000, guid: 582eeedcc1f19794d989e1edc3a090b9, type: 3}
   isAction: 0
-  <placementCost>k__BackingField: 1
-  <iq>k__BackingField: 2
+  <placementCost>k__BackingField: 2
+  <iq>k__BackingField: 0
   <health>k__BackingField: 1
   <noAttack>k__BackingField: 0
   <cardEffect>k__BackingField: 

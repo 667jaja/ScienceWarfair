@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public List<Player> players = new List<Player>();
     [SerializeField] private List<CardData> cardDatas;
-    private List<CardData> defaultDeck;
+    public List<CardData> defaultDeck;
 
     public int currentPlayer;
     public int displayPlayer;
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int moneyGain = 2;
     [SerializeField] private int cardGain = 2;
     [SerializeField] private int maxMoney;
-    [SerializeField] private int deckDataSizeMin = 20;
+    public int deckDataSizeMin = 20;
 
     [SerializeField] private float endOfTurnWait = 0.2f;
 
@@ -55,26 +55,28 @@ public class GameManager : MonoBehaviour
     }
     public void BeginGame()
     {
+        //local game only setup
         if (RelayManager.instance == null)
         {
             players = new();
             for (int i = 0; i < playerCount; i++)
             {
                 players.Add(new Player(playerDatas[i], i));
+                if (players[i].rawDeck == null || players[i].rawDeck.Count < deckDataSizeMin) players[i].rawDeck = defaultDeck;
+                players[i].deck = CardManager.instance.CreateDeck(players[i].rawDeck);
             }
         }
 
-
+        //standard setup
         for (int i = 0; i < playerCount; i++)
         {
             if (players[i].name == null || players[i].name.Length < 1) players[i].name = "Player" + (i+1);
-            if (players[i].name.Contains("Jackal667")) 
             players[i].maxMoney = maxMoney;
             players[i].Money = startingMoney + i*turnOrderBonusMoney;
-            if (players[i].rawDeck == null || players[i].rawDeck.Count < deckDataSizeMin) players[i].rawDeck = defaultDeck;
-            CardManager.instance.CreateDeck(i, players[i].rawDeck);
+
             CardManager.instance.DrawCards(i, startingCards + i*turnOrderBonusCards);
         }
+
         //cheats
         for (int i = 0; i < playerCount; i++)
         {
@@ -95,6 +97,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
         currentPlayer = 0;
         if (RelayManager.instance == null) displayPlayer = currentPlayer;
         StartTurnGA startTurnGA = new(currentPlayer);
@@ -138,7 +141,12 @@ public class GameManager : MonoBehaviour
         // {
             
         // }
-        }
+    }
+    public List<CardData> CreateDeck(Player player)
+    {
+        if (player.rawDeck == null || player.rawDeck.Count < deckDataSizeMin) player.rawDeck = defaultDeck;
+        return CardManager.instance.CreateDeck(player.rawDeck);
+    }
     public void TurnEndButton()
     {
         //if (ActionManager.instance.isPerforming) return;
@@ -205,10 +213,10 @@ public class GameManager : MonoBehaviour
                 yield return HotseatScreenManager.instance.OnTurnEnd();
             }
         }
-        if (RelayManager.instance != null)
-        {
-            OnlineManager.instance.StateUpdate();
-        }
+        // if (RelayManager.instance != null)
+        // {
+        //     OnlineManager.instance.StateUpdate();
+        // }
         // Debug.Log("current player IQ: " + players[currentPlayer].sciencePoints);
         // Debug.Log("next player IQ: " + players[GetNextPlayerId()].sciencePoints);
     }

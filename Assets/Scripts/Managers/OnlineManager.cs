@@ -2,11 +2,6 @@ using Unity.Netcode;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using Unity.Netcode.Components;
-using System.Threading.Tasks;
-using System;
-using Unity.Mathematics;
-using System.Data.Common;
 using TMPro;
 
 public class OnlineManager : NetworkBehaviour
@@ -107,18 +102,6 @@ public class OnlineManager : NetworkBehaviour
         Player player1 = CardLibraryManager.instance.PlayerFromPlayerStruct(hostPlayerStruct);
         Player player2 = CardLibraryManager.instance.PlayerFromPlayerStruct(clientPlayerStruct);
 
-        // Debug.Log(hostPlayerStruct.name.ArrayToString() +" has "+ hostPlayerStruct.hand[0].CardDataBaseId + " and " + clientPlayerStruct.name.ArrayToString() +" has "+ clientPlayerStruct.hand[0].CardDataBaseId);
-        // Debug.Log(player1.name +" has "+ player1.hand[0].cardData.CardDataId + " and " + player2.name +" has "+ player2.hand[0].cardData.CardDataId);
-
-        // //units
-        // for (int i = 0; i < 3; i++)
-        // {
-        //     for (int j = 0; i < 3; i++)
-        //     {
-        //         if (hostPlayerStruct.units[(i*3) + j].CardDataBaseId > 0) Debug.Log("host has unit " + hostPlayerStruct.units[(i*3) + j].CardDataBaseId+" at " + );
-        //     }        
-        // }
-
         GameManager.instance.players = new() 
         {
             player1,
@@ -152,18 +135,23 @@ public class OnlineManager : NetworkBehaviour
     public void HostSetupServerRpc(PlayerStruct clientPlayerStruct)
     {
         Debug.Log("player first Card = " + clientPlayerStruct.deck);
+        // int seed = Random.Range(0, 1000);
+        // Random.InitState(seed);
 
-        Player hostNewPlayer = new Player(GameManager.instance.playerDatas[SceneLoadManager.selectedPlayerData], 0);
-        PlayerStruct newPlayerStruct = new PlayerStruct(hostNewPlayer);
-
-        newPlayerStruct.id = 0;
-        clientPlayerStruct.id = 1;
-
-        ClientSetupClientRpc(newPlayerStruct);
-
-        Player player1 = CardLibraryManager.instance.PlayerFromPlayerStruct(newPlayerStruct);
+        //create players
+        Player player1 = new Player(GameManager.instance.playerDatas[SceneLoadManager.selectedPlayerData], 0);
         Player player2 = CardLibraryManager.instance.PlayerFromPlayerStruct(clientPlayerStruct);
+        player2.id = 1;
 
+        player1.deck = GameManager.instance.CreateDeck(player1);
+        player2.deck = GameManager.instance.CreateDeck(player2);
+
+        //send to client
+        PlayerStruct newHostStruct = new PlayerStruct(player1);
+        PlayerStruct newClientStruct = new PlayerStruct(player2);
+        ClientSetupClientRpc(newHostStruct, newClientStruct);
+
+        //start game
         GameManager.instance.players = new() 
         {
             player1,
@@ -174,16 +162,16 @@ public class OnlineManager : NetworkBehaviour
     }
 
     [Rpc(SendTo.NotServer)]
-    public void ClientSetupClientRpc(PlayerStruct hostPlayerStruct)
+    public void ClientSetupClientRpc(PlayerStruct hostPlayerStruct, PlayerStruct clientPlayerStruct)
     {
         Debug.Log("ClientSetupClientRpc Called  Host Name is: " + hostPlayerStruct.name.ArrayToString());
-        
-        Player clientNewPlayer = new Player(GameManager.instance.playerDatas[SceneLoadManager.selectedPlayerData], 1);
-        PlayerStruct clientPlayerStruct = new PlayerStruct(clientNewPlayer);
+        //Random.InitState(seed);
 
+        //recontruct players
         Player player1 = CardLibraryManager.instance.PlayerFromPlayerStruct(hostPlayerStruct);
         Player player2 = CardLibraryManager.instance.PlayerFromPlayerStruct(clientPlayerStruct);
 
+        //start game
         GameManager.instance.players = new() 
         {
             player1,
