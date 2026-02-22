@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         startTurnGA.description = "Game start. "+players[0].name+" plays first. money: " + startingMoney + "-" + (startingMoney+turnOrderBonusMoney) + " cards: " + startingCards + "-" + (startingCards + turnOrderBonusCards);
         ActionManager.instance.Perform(startTurnGA);
     }
-    public void EndGame()
+    public void EndGameCleanup()
     {
         players = new();
         ActionManager.instance.ClearAll();
@@ -123,8 +123,16 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-
+        if (RelayManager.instance != null)
+        {
+            OnlineManager.instance.ShutDownServer();
+        }
         //StartTurn();
+    }
+    public void ExitGame()
+    {
+        EndGameCleanup();
+        SceneLoadManager.instance.LoadMainMenu();
     }
     public void PlayerWon(int winningPlayer)
     {
@@ -132,10 +140,11 @@ public class GameManager : MonoBehaviour
         {
             HotseatScreenManager.instance.YouWin(winningPlayer);
         }
-        EndGame();
+        EndGameCleanup();
+
         if (HotseatScreenManager.instance == null)
         {
-            SceneLoadManager.instance.LoadMainMenu();;
+            SceneLoadManager.instance.LoadMainMenu();
         }
         // if (HotseatScreenManager.instance == null)
         // {

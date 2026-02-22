@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour
 {
-    public static bool hasResetName = false;
     [SerializeField] private string levelSelectName;
     [SerializeField] private string deckMakerName;
     [SerializeField] private string gameBoardName;
@@ -20,15 +19,6 @@ public class MainMenuScript : MonoBehaviour
 
     void Awake()
     {
-        if (!hasResetName)
-        {
-            foreach (PlayerData data in playerDatas)
-            {
-                data.changeName("");
-                data.deck = new();
-            }
-            hasResetName = true;
-        }
         SelectedPlayerInput.options = new();
         foreach (PlayerData data in playerDatas)
         {

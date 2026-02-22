@@ -115,6 +115,13 @@ public class OnlineManager : NetworkBehaviour
     {
         SceneLoadManager.instance.LoadMainMenu();
     }
+    public async void ShutDownServer() 
+    {
+        if (IsHost)
+        {
+            NetworkManager.Singleton.Shutdown();   
+        }
+    }
 
     public IEnumerator PlayerDataSetup()
     {

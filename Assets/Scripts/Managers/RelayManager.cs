@@ -1,4 +1,3 @@
-
 using System.Collections;
 using TMPro;
 using System.Threading.Tasks;
@@ -9,6 +8,7 @@ using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
+
 public class RelayManager : MonoBehaviour
 {
     public static RelayManager instance;
@@ -29,6 +29,7 @@ public class RelayManager : MonoBehaviour
         instance = this;
         screenBlock.SetActive(false);
         joinCode.gameObject.SetActive(false);
+        transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         // if (SceneLoadManager.gameType == BattleType.OnlineHost || SceneLoadManager.gameType == BattleType.OnlineJoin)
         // {
         //     await Authenticate();
@@ -85,6 +86,7 @@ public class RelayManager : MonoBehaviour
             connectionWait += Time.deltaTime;
             // if (connectionWait > maxConnectionTime)
             // {
+            //     ShutDownServer();
             //     OnlineManager.instance.ConnectionFailure();
             //     connectionSuccess = false;
             //     break;
@@ -99,4 +101,10 @@ public class RelayManager : MonoBehaviour
         }
 
     } 
+    public void CancelConnectionButton()
+    {
+        OnlineManager.instance.ShutDownServer();
+        SceneLoadManager.instance.LoadMainMenu();
+    }
+
 }
