@@ -222,10 +222,10 @@ public class GameManager : MonoBehaviour
                 yield return HotseatScreenManager.instance.OnTurnEnd();
             }
         }
-        // if (RelayManager.instance != null)
-        // {
-        //     OnlineManager.instance.StateUpdate();
-        // }
+        if (RelayManager.instance != null)
+        {
+            OnlineManager.instance.StateUpdate();
+        }
         // Debug.Log("current player IQ: " + players[currentPlayer].sciencePoints);
         // Debug.Log("next player IQ: " + players[GetNextPlayerId()].sciencePoints);
     }
