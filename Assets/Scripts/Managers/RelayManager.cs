@@ -67,8 +67,6 @@ public class RelayManager : MonoBehaviour
         await Authenticate();
         screenBlock.SetActive(true);
 
-        screenBlock.SetActive(true);
-
         JoinAllocation a = await RelayService.Instance.JoinAllocationAsync(joinInput);
 
         transport.SetClientRelayData(a.RelayServer.IpV4, (ushort)a.RelayServer.Port, a.AllocationIdBytes,  a.Key, a.ConnectionData, a.HostConnectionData);
@@ -97,6 +95,7 @@ public class RelayManager : MonoBehaviour
         {
             StartCoroutine(OnlineManager.instance.PlayerDataSetup());
             screenBlock.SetActive(false);
+            joinCode.gameObject.SetActive(false);
             Debug.Log("SUCCESS Client Count " + NetworkManager.Singleton.ConnectedClientsList.Count);  
         }
 

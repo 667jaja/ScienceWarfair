@@ -4,11 +4,13 @@ using UnityEngine;
 public class Card
 {
     public CardData cardData { get; private set;}
+    public int cardInstanceId;
 
     //constructor
     public Card(CardData cardData)
     {
         this.cardData = cardData;
+        cardInstanceId = Random.Range(0, 10000000);
         //cardEffect = cardData.cardEffect;
         placementCost = cardData.placementCost;
         iq = cardData.iq;

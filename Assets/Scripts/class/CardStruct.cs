@@ -7,6 +7,7 @@ public struct CardStruct : INetworkSerializable
 {
     //card data
     public int CardDataBaseId;
+    public int cardInstanceId;
 
     //stats
     public int placementCost;
@@ -21,6 +22,7 @@ public struct CardStruct : INetworkSerializable
     public CardStruct(Card card)
     {
         CardDataBaseId = card.cardData.CardDataId;
+        cardInstanceId = card.cardInstanceId;
         placementCost = card.placementCost;
         iq = card.iq;
         health = card.health;
@@ -52,6 +54,7 @@ public struct CardStruct : INetworkSerializable
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
         serializer.SerializeValue(ref CardDataBaseId);
+        serializer.SerializeValue(ref cardInstanceId);
         serializer.SerializeValue(ref placementCost);
         serializer.SerializeValue(ref iq);
         serializer.SerializeValue(ref health);

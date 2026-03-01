@@ -16,11 +16,11 @@ public class LaneDropArea : MonoBehaviour, ICardDropArea
         {
             if (!isActionLane)
             {
-                UnitManager.instance.PlaceCard(currentPlayer, laneId, card);
+                UnitManager.instance.PlaceCard(currentPlayer, laneId, card); //WARNING this is a reference type
             }
             else
             {
-                UnitManager.instance.PlayAction(currentPlayer, card);
+                UnitManager.instance.PlayAction(currentPlayer, card); //WARNING this is a reference type
             }
         }
     }

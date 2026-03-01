@@ -3,10 +3,13 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using TMPro;
+using System.Threading.Tasks;
 
 public class OnlineManager : NetworkBehaviour
 {
     public static OnlineManager instance;
+    [SerializeField] private float maxStateUpdateWait = 5;
+    private bool hasUpdated;
     // private NetworkVariable<PlayerStruct> hostPlayer = new (writePerm: NetworkVariableWritePermission.Server);
     // private NetworkVariable<PlayerStruct> clientPlayer = new (writePerm: NetworkVariableWritePermission.Server);
 
@@ -82,7 +85,7 @@ public class OnlineManager : NetworkBehaviour
         UnitManager.instance.PlayAction(playerId, CardLibraryManager.instance.cardFromCardStruct(cardStruct));
     }
 
-    public void StateUpdate()
+    public IEnumerator StateUpdate()
     {
         if (IsHost)
         {
@@ -90,14 +93,25 @@ public class OnlineManager : NetworkBehaviour
             PlayerStruct newplayer2 = new PlayerStruct(GameManager.instance.players[1]);
             //Debug.Log(newplayer1.name.ArrayToString() +" has "+ newplayer1.hand[0].CardDataBaseId + " and " + newplayer2.name.ArrayToString() +" has "+ newplayer2.hand[0].CardDataBaseId);
             StateUpdateClientRPC(newplayer1, newplayer2);
-            GameManager.instance.GlobalUIUpdate();
+        }
+        else
+        {
+            float timer = 0;
+            while (timer < maxStateUpdateWait && !hasUpdated)
+            {
+                timer += Time.unscaledDeltaTime;
+                yield return null;
+            }
+            hasUpdated = false;
         }
     }
+
 
     [Rpc(SendTo.NotServer)]
     public void StateUpdateClientRPC(PlayerStruct hostPlayerStruct, PlayerStruct clientPlayerStruct)
     {
         Debug.Log("StateUpdateClientRPC Called");
+        hasUpdated = true;
 
         Player player1 = CardLibraryManager.instance.PlayerFromPlayerStruct(hostPlayerStruct);
         Player player2 = CardLibraryManager.instance.PlayerFromPlayerStruct(clientPlayerStruct);

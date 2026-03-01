@@ -60,9 +60,9 @@ public class UnitManager : MonoBehaviour
         ActionManager.DetachPerformer<ChangeStatsUnitGA>();
     }
 
-    public void PlayAction(int playerId, Card card)
+    public void PlayAction(int playerId, Card card) 
     {
-        PlayActionGA playActionGA = new(playerId, card);
+        PlayActionGA playActionGA = new(playerId, new Card(card.cardData));
         ActionManager.instance.Perform(playActionGA);
     }
     public void PlaceCard(int playerId, int lane, Card card)
@@ -70,7 +70,7 @@ public class UnitManager : MonoBehaviour
         //if (ActionManager.instance.isPerforming || GameManager.instance.players[playerId].units[lane, rowCount-1] != null) return false;
         //if (GameManager.instance.players[playerId].units[lane, rowCount-1] != null) return false;
 
-        PlaceUnitGA placeUnitGA = new(playerId, lane, card);
+        PlaceUnitGA placeUnitGA = new(playerId, lane, new Card(card.cardData));
         ActionManager.instance.Perform(placeUnitGA);
 
         // return true;
@@ -115,7 +115,7 @@ public class UnitManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("unit placement failed, card not found");  
+                Debug.Log("Action use failed, card not found");  
             }
         }
         else

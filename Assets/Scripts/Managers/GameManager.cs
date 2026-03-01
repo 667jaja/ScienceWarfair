@@ -224,7 +224,7 @@ public class GameManager : MonoBehaviour
         }
         if (RelayManager.instance != null)
         {
-            OnlineManager.instance.StateUpdate();
+            yield return OnlineManager.instance.StateUpdate();
         }
         // Debug.Log("current player IQ: " + players[currentPlayer].sciencePoints);
         // Debug.Log("next player IQ: " + players[GetNextPlayerId()].sciencePoints);
