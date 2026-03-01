@@ -17,7 +17,7 @@ MonoBehaviour:
   <description>k__BackingField: moves to front. contains Intern.
   <cardArt>k__BackingField: {fileID: 4830009725995738098, guid: 76a9025b5eea8a742a2c83c2f99ac667, type: 3}
   isAction: 0
-  <placementCost>k__BackingField: 1
+  <placementCost>k__BackingField: 0
   <iq>k__BackingField: 0
   <health>k__BackingField: 1
   <noAttack>k__BackingField: 0
