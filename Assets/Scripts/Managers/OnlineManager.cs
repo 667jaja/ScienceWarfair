@@ -50,7 +50,90 @@ public class OnlineManager : NetworkBehaviour
         //     if (!IsHost) EndTurnGAServerRPC(selectLanes.playerId); 
         // }
     }
+    public void InputSelection()
+    {
+        //prep data
+        //hand
+        CardStruct[] selectedHand = new CardStruct[SelectionManager.instance.selectedHand.Count];
+        for (int i = 0; i < selectedHand.Length; i++)
+        {
+            selectedHand[i] = new CardStruct(SelectionManager.instance.selectedHand[i]);
+        }
+        //discard
+        int[] selectedDiscard = new int[SelectionManager.instance.selectedDiscard.Count];
+        for (int i = 0; i < selectedDiscard.Length; i++)
+        {
+            selectedDiscard[i] = SelectionManager.instance.selectedDiscard[i].cardData.CardDataId;
+        }
+        //units
+        Vector3Int[] selectedBoard = new Vector3Int[SelectionManager.instance.selectedBoard.Count];
+        for (int i = 0; i < selectedBoard.Length; i++)
+        {
+            selectedBoard[i] = SelectionManager.instance.selectedBoard[i];
+        }
+        //lanes
+        Vector2Int[] selectedLanes = new Vector2Int[SelectionManager.instance.selectedLanes.Count];
+        for (int i = 0; i < selectedLanes.Length; i++)
+        {
+            selectedLanes[i] = SelectionManager.instance.selectedLanes[i];
+        }
 
+        //send rpc
+        if (IsHost) InputSelectionClientRPC(GameManager.instance.displayPlayer, selectedHand, selectedDiscard, selectedBoard, selectedLanes);
+        if (!IsHost) InputSelectionServerRPC(GameManager.instance.displayPlayer, selectedHand, selectedDiscard, selectedBoard, selectedLanes);
+    }
+    [Rpc(SendTo.Server)]
+    public void InputSelectionServerRPC(int selectingPlayerId, CardStruct[] selectedHand, int[] selectedDiscard, Vector3Int[] selectedBoard, Vector2Int[] selectedLanes)
+    {
+        Debug.Log("InputSelectionServerRPC Recieved");
+        SelectionManager.instance.selectedHand = new();
+        SelectionManager.instance.selectedDiscard = new();
+        SelectionManager.instance.selectedBoard = new();
+        SelectionManager.instance.selectedLanes = new();
+
+        foreach (CardStruct cardStruct in selectedHand)
+        {
+            SelectionManager.instance.selectedHand.Add(CardManager.instance.FindCardInHand(selectingPlayerId, cardStruct.cardInstanceId, cardStruct.CardDataBaseId));
+        }
+        // foreach (int cardDataId in selectedDiscard)
+        // {
+        //      SelectionManager.instance.selectedHand.Add(CardManager.instance.FindCardInDiscard(selectingPlayerId, cardDataId));
+        // }
+        foreach (Vector3Int vector in selectedBoard)
+        {
+            SelectionManager.instance.selectedBoard.Add(vector);
+        }
+        foreach (Vector2Int vector in selectedLanes)
+        {
+            SelectionManager.instance.selectedLanes.Add(vector);
+        }
+    }
+    [Rpc(SendTo.NotServer)]
+    public void InputSelectionClientRPC(int selectingPlayerId, CardStruct[] selectedHand, int[] selectedDiscard, Vector3Int[] selectedBoard, Vector2Int[] selectedLanes)
+    {
+        Debug.Log("InputSelectionClientRPC Recieved");
+        SelectionManager.instance.selectedHand = new();
+        SelectionManager.instance.selectedDiscard = new();
+        SelectionManager.instance.selectedBoard = new();
+        SelectionManager.instance.selectedLanes = new();
+
+        foreach (CardStruct cardStruct in selectedHand)
+        {
+            SelectionManager.instance.selectedHand.Add(CardManager.instance.FindCardInHand(selectingPlayerId, cardStruct.cardInstanceId, cardStruct.CardDataBaseId));
+        }
+        // foreach (int cardDataId in selectedDiscard)
+        // {
+        //      SelectionManager.instance.selectedHand.Add(CardManager.instance.FindCardInDiscard(selectingPlayerId, cardDataId));
+        // }
+        foreach (Vector3Int vector in selectedBoard)
+        {
+            SelectionManager.instance.selectedBoard.Add(vector);
+        }
+        foreach (Vector2Int vector in selectedLanes)
+        {
+            SelectionManager.instance.selectedLanes.Add(vector);
+        }
+    }
 
     [Rpc(SendTo.Server)]
     public void EndTurnGAServerRPC(int playerId)

@@ -6,10 +6,10 @@ public class SelectionManager : MonoBehaviour
 {
     public static SelectionManager instance;
 
-    public List<Card> selectedHand;
-    public List<Card> selectedDiscard;
-    public List<Vector3Int> selectedBoard; //x, y, playerId
-    public List<Vector2Int> selectedLanes; //x, playerId
+    public List<Card> selectedHand = new();
+    public List<Card> selectedDiscard = new();
+    public List<Vector3Int> selectedBoard = new(); //x, y, playerId
+    public List<Vector2Int> selectedLanes = new(); //x, playerId
 
     void Awake()
     {
@@ -59,14 +59,26 @@ public class SelectionManager : MonoBehaviour
     public IEnumerator SelectLanePerformer(SelectLanesGA selectLanesGA)
     {
         selectedLanes = new();
+        //make lanes selectable
+        if (GameManager.instance.displayPlayer == selectLanesGA.inputPlayerId)
         foreach (Vector2Int item in selectLanesGA.validLanes)
         {
             LaneManager.instance.MakeLaneSelectable(item);
         }
+
+        //wait for player to select
         while (selectedLanes.Count < selectLanesGA.selectCount)
         {
             yield return null;
         }
+
+        //carryover selection to other player
+        if (RelayManager.instance != null && GameManager.instance.displayPlayer == selectLanesGA.inputPlayerId)
+        {
+            OnlineManager.instance.InputSelection();
+        }
+
+        //make lanes not selectable
         LaneManager.instance.LaneSelectOff();
     } 
     public IEnumerator SelectHandPerformer(List<Card> avaliableOptions, int selectCount)

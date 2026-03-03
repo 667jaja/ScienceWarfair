@@ -201,6 +201,47 @@ public class CardManager : MonoBehaviour
         
         return cardRemovalSuccessful;
     }
+    public Card FindCardInHand(int playerId, int cardInstanceId, int CardDataId)
+    {
+        //find card in hand
+
+        bool cardFound = false;
+        Card foundCard = null;
+        int i = 0;
+        foreach (Card card in GameManager.instance.players[playerId].hand)
+        {
+            if (card.cardInstanceId == cardInstanceId)
+            {
+                foundCard = card;
+                cardFound = true;
+                break;
+            }
+            i++;
+        }
+        if (!cardFound)
+        {
+            i=0;
+            foreach (Card card in GameManager.instance.players[playerId].hand)
+            {
+                if (card.cardData.CardDataId == CardDataId)
+                {
+                    foundCard = card;
+                    cardFound = true;
+                    break;
+                }
+                i++;
+            }
+            if (cardFound)
+            {
+                Debug.Log("Card not found by Id, returned identical Card");
+            }
+            else
+            {
+                Debug.Log("Card not found");
+            }
+        }
+        return foundCard;
+    }
     public void UpdateDeckUI()
     {
         deckCountUI.text = GameManager.instance.players[GameManager.instance.displayPlayer].deck.Count.ToString();

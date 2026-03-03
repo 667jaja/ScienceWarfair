@@ -127,6 +127,7 @@ public class Card
                 effect.actionData = actionData;
                 foreach (GameAction action in effect.effect)
                 {
+                    action.inputPlayerId = actionData.originPlayerId;
                     if (!actionDescribed)
                     {
                         action.description = title + " Performs: " + cardEffect;
