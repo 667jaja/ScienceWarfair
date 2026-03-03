@@ -1,7 +1,7 @@
 using UnityEngine;
 public enum EffectTriggerType
 {
-    Simple = 0,
+    Placement = 0,
     StartTurn = 1,
     CardPlaced = 2
 }

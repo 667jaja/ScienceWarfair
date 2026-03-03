@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
   m_Name: UnnaturalDisaster
   m_EditorClassIdentifier: 
-  <CardDataId>k__BackingField: 20
+  <CardDataId>k__BackingField: 202521
   <title>k__BackingField: Unnatural Disaster
   <description>k__BackingField: attack all lanes for 1 damage
   <cardArt>k__BackingField: {fileID: 8653345269905921841, guid: 035a6ba5ba196c945a2c29c21309ffe3, type: 3}

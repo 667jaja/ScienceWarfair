@@ -8,7 +8,7 @@ public class EffectTrigger
     public bool pre { get => effectTriggerData.pre; }
     public EffectTriggerType effectTriggerType { get => effectTriggerData.effectTriggerType; }
     private bool oneTimeUse { get => effectTriggerData.oneTimeUse; }
-    private int countDown { get => effectTriggerData.countDown; }
+    public int countDown { get => effectTriggerData.countDown; }
     public int countDownVal { get; set;}
 
     private bool targetEnemyOnly {get => effectTriggerData.targetEnemyOnly;}
@@ -43,7 +43,7 @@ public class EffectTrigger
     }
     public void PlacementEffect(ActionData actionData)
     { 
-        if (effectTriggerType == EffectTriggerType.Simple)
+        if (effectTriggerType == EffectTriggerType.Placement)
         {
             TriggerEffect(actionData);
             triggerDisabled = true;
