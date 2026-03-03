@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GainSciencePointsMoon
   m_EditorClassIdentifier: 
   <effectId>k__BackingField: 11
-  <gainCount>k__BackingField: 10
+  <gainCount>k__BackingField: 20

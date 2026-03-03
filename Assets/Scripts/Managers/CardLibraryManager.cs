@@ -70,9 +70,9 @@ public class CardLibraryManager : MonoBehaviour
         Card newCard = new Card(GetCardDataById(cardStruct.CardDataBaseId))
         {
             cardInstanceId = cardStruct.cardInstanceId,
-            iq = cardStruct.iq,
-            placementCost = cardStruct.placementCost,
-            health = cardStruct.health,
+            Iq = cardStruct.iq,
+            PlacementCost = cardStruct.placementCost,
+            Health = cardStruct.health,
 
             containedCard = cardStruct.containedCardBaseId>=0? GetCardDataById(cardStruct.containedCardBaseId): null,
 

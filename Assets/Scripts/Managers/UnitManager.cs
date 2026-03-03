@@ -101,6 +101,7 @@ public class UnitManager : MonoBehaviour
                 //backend
                 playActionGA.playedCard.PlacementAbility(new ActionData(playActionGA.playerId, new Vector2Int (-1,-1), playActionGA.playedCard));
                 GameManager.instance.players[playActionGA.playerId].actionPoints -= 1;
+                GameManager.instance.UpdateActionPointUI();
 
                 //frontend
                 CardManager.instance.UpdateHandUI();
@@ -149,7 +150,7 @@ public class UnitManager : MonoBehaviour
         }
 
         // check that we can afford
-        if (unitPlacementSuccess && placeUnitGA.playedCard.placementCost <= GameManager.instance.players[placeUnitGA.playerId].Money)
+        if (unitPlacementSuccess && placeUnitGA.playedCard.PlacementCost <= GameManager.instance.players[placeUnitGA.playerId].Money)
         {
             // remove from hand
             if (CardManager.instance.RemoveCard(placeUnitGA.playerId, placeUnitGA.playedCard))
@@ -158,7 +159,7 @@ public class UnitManager : MonoBehaviour
                 Vector2Int firstOpenSpot = new Vector2Int(placeUnitGA.lane, i);
 
                 CardManager.instance.UpdateHandUI();
-                GameManager.instance.players[placeUnitGA.playerId].Money -= placeUnitGA.playedCard.placementCost;
+                GameManager.instance.players[placeUnitGA.playerId].Money -= placeUnitGA.playedCard.PlacementCost;
                 GameManager.instance.UpdateMoneyUI();
 
 
@@ -272,9 +273,9 @@ public class UnitManager : MonoBehaviour
     {
         Card selectedUnit = GameManager.instance.players[changeStatsUnitGA.playerId].units[changeStatsUnitGA.position.x, changeStatsUnitGA.position.y]; //get only reference
         
-        selectedUnit.iq += changeStatsUnitGA.iqChange;
-        selectedUnit.health += changeStatsUnitGA.heathChange;
-        selectedUnit.placementCost += changeStatsUnitGA.costChange;
+        selectedUnit.Iq += changeStatsUnitGA.iqChange;
+        selectedUnit.Health += changeStatsUnitGA.heathChange;
+        selectedUnit.PlacementCost += changeStatsUnitGA.costChange;
 
         UpdateCardVisual(changeStatsUnitGA.playerId, changeStatsUnitGA.position);
         LaneManager.instance.UpdateLaneVisuals();
@@ -508,7 +509,7 @@ public class UnitManager : MonoBehaviour
             //for every row
             if (inspectedCard != null)
             {
-                sciencePoints += inspectedCard.iq;
+                sciencePoints += inspectedCard.Iq;
             }
         }
         return sciencePoints;

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using NUnit.Framework;
 
 
 public class LaneManager : MonoBehaviour
@@ -18,7 +19,7 @@ public class LaneManager : MonoBehaviour
     [SerializeField] private List<GameObject> ActionPlacement;
     //ui
     [SerializeField] private Slider iqAddSlider;
-    //[SerializeField] private Slider iqAddSliderEnemy;
+    [SerializeField] private Slider iqAddSliderEnemy;
 
     //animations
     [SerializeField] private string attackAnimationName;
@@ -33,6 +34,8 @@ public class LaneManager : MonoBehaviour
         instance = this;
         intitiateLanes();
         iqAddSlider.value = 0;
+        iqAddSliderEnemy.value = 0;
+        
         PlaceActionToggle(false);
     }
     private void intitiateLanes()
@@ -88,26 +91,49 @@ public class LaneManager : MonoBehaviour
     {
         int currentPlayerSP = GameManager.instance.players[GameManager.instance.currentPlayer].sciencePoints;
         int sciencePointsSum = currentPlayerSP;
+        bool isEnemyTurn = GameManager.instance.currentPlayer != GameManager.instance.displayPlayer;
         //if (currentPlayer == displayPlayer) {all}
         int i = 0;
-        foreach(LaneVisual lane in laneVisuals)
+        if (!isEnemyTurn)
         {
-            // + sciencePointsSum
-            lane.UpdateVisual(UnitManager.instance.CountLaneIQ(GameManager.instance.displayPlayer,i));
-            
-            sciencePointsSum += UnitManager.instance.CountLaneIQ(GameManager.instance.currentPlayer, lane.lanePos);
-            iqAddSlider.value = sciencePointsSum;
-            // if (currentPlayer != DisplayPlayer)
-            //iqAddSliderEnemy
-            yield return new WaitForSeconds(CountIqAnimation(i));
-            i++;
+            foreach(LaneVisual lane in laneVisuals)
+            {
+                // + sciencePointsSum
+                lane.UpdateVisual(UnitManager.instance.CountLaneIQ(GameManager.instance.currentPlayer, i));
+                sciencePointsSum += UnitManager.instance.CountLaneIQ(GameManager.instance.currentPlayer, lane.lanePos);
+                iqAddSlider.value = sciencePointsSum;
+
+                //play animation
+                yield return new WaitForSeconds(CountIqAnimation(i, isEnemyTurn));
+                i++;
+            }
+        }
+        else
+        {
+            foreach(LaneVisual lane in enemyLaneVisuals)
+            {
+                // + sciencePointsSum
+                lane.UpdateVisual(UnitManager.instance.CountLaneIQ(GameManager.instance.currentPlayer, i));
+                sciencePointsSum += UnitManager.instance.CountLaneIQ(GameManager.instance.currentPlayer, lane.lanePos);
+                iqAddSliderEnemy.value = sciencePointsSum;
+
+                //play animation
+                yield return new WaitForSeconds(CountIqAnimation(i, isEnemyTurn));
+                i++;
+            }
         }
     }
     public IEnumerator AddIqVisual(int playerId, int AddAmount)
     {
-        // if (currentPlayer != DisplayPlayer)
+        if (playerId != GameManager.instance.displayPlayer)
+        {
+            iqAddSliderEnemy.value = GameManager.instance.players[playerId].sciencePoints + AddAmount;
+        }
+        else
+        {
+            iqAddSlider.value = GameManager.instance.players[playerId].sciencePoints + AddAmount;
+        }
         //iqAddSliderEnemy
-        iqAddSlider.value = GameManager.instance.players[GameManager.instance.currentPlayer].sciencePoints + AddAmount;
         yield return new WaitForSeconds(countIqAnimationLength);
     }
     public void UpdateLaneVisuals()
@@ -117,6 +143,11 @@ public class LaneManager : MonoBehaviour
             lane.UpdateVisual();
         }
         iqAddSlider.value = 0;
+        foreach(LaneVisual lane in enemyLaneVisuals)
+        {
+            lane.UpdateVisual();
+        }
+        iqAddSliderEnemy.value = 0;
     }
     public void PlaceActionToggle(bool isPlacingAction)
     {
@@ -137,23 +168,24 @@ public class LaneManager : MonoBehaviour
             item.SetActive(!isPlacingAction);
         }
     }
-    private void LaneTriggerAnimation(string AnimName, int index)
+    private void LaneTriggerAnimation(string AnimName, int index, bool triggerEnemy)
     {
-        laneVisuals[index].GetComponent<Animator>().SetTrigger(AnimName);
+        if (triggerEnemy) enemyLaneVisuals[index].GetComponent<Animator>().SetTrigger(AnimName);
+        else laneVisuals[index].GetComponent<Animator>().SetTrigger(AnimName);
     }
     public float AttackAnimation(int position)
     {
-        LaneTriggerAnimation(attackAnimationName, position);
+        LaneTriggerAnimation(attackAnimationName, position, false);
         return attackAnimationLength;
     }
     public float AttackDownAnimation(int position)
     {
-        LaneTriggerAnimation(attackDownAnimationName, position);
+        LaneTriggerAnimation(attackDownAnimationName, position, false);
         return attackDownAnimationLength;
     }
-    public float CountIqAnimation(int position)
+    public float CountIqAnimation(int position, bool isEnemyTurn)
     {
-        LaneTriggerAnimation(countIqAnimationName, position);
+        LaneTriggerAnimation(countIqAnimationName, position, isEnemyTurn);
         return countIqAnimationLength;
     }
 }

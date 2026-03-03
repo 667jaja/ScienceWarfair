@@ -21,11 +21,7 @@ public class LaneVisual : MonoBehaviour
         laneDropArea.laneId = newLanePos;
         lanePos = newLanePos;
         isDisplayPlayer = newisDisplayPlayer;
-        if (isDisplayPlayer == false)
-        {
-            iqUI.gameObject.SetActive(false);
-            laneDropArea.enabled = false;
-        }
+
         if (newLanePos < 0)
         {
             laneDropArea.isActionLane = true;

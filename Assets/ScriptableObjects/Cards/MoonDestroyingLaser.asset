@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardDataId>k__BackingField: 14
   <title>k__BackingField: Moon Destroying Laser
-  <description>k__BackingField: After next turn gain 10 Science Points on turn start.
+  <description>k__BackingField: After next turn gain 20 Science Points on turn start.
     repeat
   <cardArt>k__BackingField: {fileID: -8267762533296465828, guid: d593f5bcbcbc0304991a0aa36a578081, type: 3}
   isAction: 0
@@ -22,7 +22,7 @@ MonoBehaviour:
   <iq>k__BackingField: 0
   <health>k__BackingField: 2
   <noAttack>k__BackingField: 0
-  <cardEffect>k__BackingField: Gain 10 SP
+  <cardEffect>k__BackingField: Gain 20 SP
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: 8bf1884f1e72d3a4ea5d56f2a112cf0d, type: 2}
   <effects>k__BackingField:

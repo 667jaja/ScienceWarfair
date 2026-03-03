@@ -12,9 +12,9 @@ public class Card
         this.cardData = cardData;
         cardInstanceId = Random.Range(0, 2000000000);
         //cardEffect = cardData.cardEffect;
-        placementCost = cardData.placementCost;
-        iq = cardData.iq;
-        health = cardData.health;
+        PlacementCost = cardData.placementCost;
+        Iq = cardData.iq;
+        Health = cardData.health;
         //noAttack = cardData.noAttack;
         effectTriggers = new List<EffectTrigger>();
         effects = cardData.effects;
@@ -33,6 +33,60 @@ public class Card
     public int placementCost { get; set; }
     public int iq { get; set; }
     public int health { get; set; }
+    public int PlacementCost
+    {
+        get
+        {
+            return placementCost;
+        }
+        set
+        {
+            if (value < 0)
+            {
+                placementCost = 0;
+            }
+            else
+            {
+                placementCost = value;
+            }
+        }
+    }
+    public int Iq
+    {
+        get
+        {
+            return iq;
+        }
+        set
+        {
+            if (value < 0)
+            {
+                iq = 0;
+            }
+            else
+            {
+                iq = value;
+            }
+        }
+    }
+    public int Health
+    {
+        get
+        {
+            return health;
+        }
+        set
+        {
+            if (value < 0)
+            {
+                health = 0;
+            }
+            else
+            {
+                health = value;
+            }
+        }
+    }
 
     //abilities
     public bool noAttack { get => cardData.noAttack; }

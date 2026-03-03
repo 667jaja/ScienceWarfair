@@ -75,7 +75,7 @@ public class DamageManager : MonoBehaviour
             int damageAmount = damageUnitGA.amount;
             yield return new WaitForSeconds(UnitManager.instance.DamageAnimation(damageUnitGA.playerId, damageUnitGA.position));
 
-            if (selectedUnit.health <= damageAmount)
+            if (selectedUnit.Health <= damageAmount)
             {
                 DestroyUnitGA destroyUnitGA = new(damageUnitGA.playerId, damageUnitGA.position);
                 destroyUnitGA.description = selectedUnit.title + " destroyed";
@@ -83,7 +83,7 @@ public class DamageManager : MonoBehaviour
             }
             else
             {
-                GameManager.instance.players[damageUnitGA.playerId].units[damageUnitGA.position.x, damageUnitGA.position.y].health -= damageAmount;  
+                GameManager.instance.players[damageUnitGA.playerId].units[damageUnitGA.position.x, damageUnitGA.position.y].Health -= damageAmount;  
                 UnitManager.instance.UpdateCardVisual(damageUnitGA.playerId, damageUnitGA.position);
             }
         }

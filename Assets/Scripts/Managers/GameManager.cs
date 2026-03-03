@@ -9,25 +9,28 @@ public class GameManager : MonoBehaviour
 {
     //manages overarching elements of a game such as players, loss, victory, turn start, turn end
     public static GameManager instance;
+    [SerializeField] private int playerCount = 2;
+
+    //players
     public List<PlayerData> playerDatas;
-    [SerializeField] private int playerCount = 2;    
-
     public List<Player> players = new List<Player>();
-    [SerializeField] private List<CardData> cardDatas;
-    public List<CardData> defaultDeck;
-
     public int currentPlayer;
     public int displayPlayer;
+
+    //ui
     public int maxSciencePoints;
     public Slider moneySlider;
-
+    public Slider moneySliderEnemy;
     public Slider plaSciencePointsSlider;
     public Slider oppSciencePointsSlider;
+    public TMP_Text plaActionPointsCount;
+    public GameObject plaActionPointObject;
 
     [SerializeField] private GameObject ifCurrentPlayerIsNotDisplay;
     [SerializeField] private List<int> secretCardIds;
 
     //money&Cards
+    public List<CardData> defaultDeck;
     [SerializeField] private int startingMoney;
     [SerializeField] private int turnOrderBonusMoney = 1;
     [SerializeField] private int startingCards;
@@ -43,11 +46,6 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        defaultDeck = new();
-        for (int i = 0; i < 20; i++)
-        {
-            defaultDeck.Add(cardDatas[i]);
-        }
     }
     void Update()
     {
@@ -249,7 +247,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator GainMoneyPerformer(GainMoneyGA gainMoneyGA)
     {
         players[gainMoneyGA.playerId].Money += gainMoneyGA.gainCount;
-        UpdateMoneyUI(players[displayPlayer]);
+        UpdateMoneyUI();
         yield return null;
     }
     private IEnumerator GainSciencePointsPerformer(GainSciencePointsGA gainSciencePointsGA)
@@ -261,6 +259,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator GainActionPointsPerformer(GainActionPointsGA gainActionPointsGA)
     {
         players[gainActionPointsGA.playerId].actionPoints += gainActionPointsGA.gainCount;
+        UpdateActionPointUI();
         yield return null;
     }
     private void OnEnable()
@@ -282,25 +281,37 @@ public class GameManager : MonoBehaviour
         ActionManager.DetachPerformer<GainSciencePointsGA>();
         //ActionManager.UnubscribeReaction<EndTurnGA>(EndTurnReaction, ReactionTiming.POST);
     }
+
+    //ui
     public void GlobalUIUpdate()
     {
         CardManager.instance.UpdateDeckUI();
         CardManager.instance.UpdateHandUI();
         UnitManager.instance.UpdateUnitUI();
-        UpdateMoneyUI(players[displayPlayer]);
+        UpdateActionPointUI();
+        UpdateMoneyUI();
         UpdateSciencePointSliders();
         LaneManager.instance.UpdateLaneVisuals();
     }
-    public void UpdateMoneyUI(Player updatePlayer = null)
+    public void UpdateActionPointUI()
     {
-        if (updatePlayer == null) updatePlayer = players[displayPlayer];
-        moneySlider.value = updatePlayer.Money;
+        plaActionPointObject.SetActive(players[displayPlayer].actionPoints > 0);
+        plaActionPointsCount.gameObject.SetActive(players[displayPlayer].actionPoints > 1);
+
+        plaActionPointsCount.text = players[displayPlayer].actionPoints.ToString();
+    }
+    public void UpdateMoneyUI()
+    {
+        moneySlider.value = players[displayPlayer].Money;
+        moneySliderEnemy.value = players[GetNextPlayerId(displayPlayer)].Money;
     } 
     public void UpdateSciencePointSliders()
     {
         plaSciencePointsSlider.value = players[displayPlayer].sciencePoints;
         oppSciencePointsSlider.value = players[GetNextPlayerId(displayPlayer)].sciencePoints;
     }
+
+    //get
     public int GetNextPlayerId(int playerId = -1)
     {
         if (playerId < 0) playerId = currentPlayer;

@@ -99,15 +99,15 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
         }
         foreach (TMP_Text item in placementCostUI)
         {
-            item.text = newCard.placementCost.ToString();
+            item.text = newCard.PlacementCost.ToString();
         }
         foreach (TMP_Text item in iqUI)
         {
-            item.text = newCard.iq.ToString();
+            item.text = newCard.Iq.ToString();
         }
         foreach (TMP_Text item in healthUI)
         {
-            item.text = newCard.health.ToString();
+            item.text = newCard.Health.ToString();
         }
         if (card.isAction)
         {
@@ -141,15 +141,15 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
         }
         foreach (TMP_Text item in placementCostUI)
         {
-            item.text = card.placementCost.ToString();
+            item.text = card.PlacementCost.ToString();
         }
         foreach (TMP_Text item in iqUI)
         {
-            item.text = card.iq.ToString();
+            item.text = card.Iq.ToString();
         }
         foreach (TMP_Text item in healthUI)
         {
-            item.text = card.health.ToString();
+            item.text = card.Health.ToString();
         }
         UpdateEffectInfos();
     }

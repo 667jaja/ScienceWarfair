@@ -23,7 +23,7 @@ public class ShotgunAttackEF : Effect
                 {
                     AttackLaneGA attackLaneGA = new AttackLaneGA(targetplayer, base.actionData.originPosition.x, remainingDamage);
                     actionList.Add(attackLaneGA);
-                    remainingDamage -= GameManager.instance.players[targetplayer].units[base.actionData.originPosition.x, i].health;
+                    remainingDamage -= GameManager.instance.players[targetplayer].units[base.actionData.originPosition.x, i].Health;
                     Debug.Log("remainingDamage: " + remainingDamage);
 
                     if (remainingDamage > 0 && GameManager.instance.players[targetplayer].units[base.actionData.originPosition.x, i].containedCard != null)

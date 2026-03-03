@@ -23,9 +23,9 @@ public struct CardStruct : INetworkSerializable
     {
         CardDataBaseId = card.cardData.CardDataId;
         cardInstanceId = card.cardInstanceId;
-        placementCost = card.placementCost;
-        iq = card.iq;
-        health = card.health;
+        placementCost = card.PlacementCost;
+        iq = card.Iq;
+        health = card.Health;
 
         containedCardBaseId = card.containedCard != null? card.containedCard.CardDataId: -1;
         effectTriggers = new EffectTriggerStruct[card.effectTriggers.Count];
