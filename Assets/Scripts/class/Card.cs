@@ -10,7 +10,7 @@ public class Card
     public Card(CardData cardData)
     {
         this.cardData = cardData;
-        cardInstanceId = Random.Range(0, 10000000);
+        cardInstanceId = Random.Range(0, 2000000000);
         //cardEffect = cardData.cardEffect;
         placementCost = cardData.placementCost;
         iq = cardData.iq;
@@ -53,18 +53,20 @@ public class Card
             {
                 if (effectTriggerData != null)
                 {
-                    effectTriggers.Add(new EffectTrigger(actionData, effectTriggerData));
+                    EffectTrigger newEffectTrigger = new EffectTrigger(actionData, effectTriggerData);
+                    newEffectTrigger.Placement(actionData);
+                    effectTriggers.Add(newEffectTrigger);
                 }
             }
 
     }
     public void PerformAbility(ActionData actionData)
     {
-        Debug.Log("performAbilityCalled");
-
+        Debug.Log("card " + cardInstanceId.ToString() + " performs " + effects.Count +" effects");
         bool actionDescribed = false;
         foreach (Effect effect in effects)
         {
+            
             if (effect != null)
             {
                 
@@ -78,6 +80,10 @@ public class Card
                     }
                     ActionManager.instance.Perform(action);
                 }
+            }
+            else
+            {
+                Debug.Log("null effects");
             }
         }
     }

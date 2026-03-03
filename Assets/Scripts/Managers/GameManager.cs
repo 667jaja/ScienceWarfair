@@ -109,20 +109,8 @@ public class GameManager : MonoBehaviour
         players = new();
         ActionManager.instance.ClearAll();
         currentPlayer = 0;
+        UnSubAllEts();
 
-        foreach (Player player in players)
-        {
-            //for every player
-            for (int i = 0; i < UnitManager.instance.columnCount; i++)
-            {
-                //for every column
-                for (int j = 0; j < UnitManager.instance.rowCount; j++)
-                {
-                    //for every row
-                    player.units[i,j].UnsubET();
-                }
-            }
-        }
         if (RelayManager.instance != null)
         {
             OnlineManager.instance.ShutDownServer();
@@ -150,6 +138,22 @@ public class GameManager : MonoBehaviour
         // {
             
         // }
+    }
+    public void UnSubAllEts()
+    {
+        foreach (Player player in players)
+        {
+            //for every player
+            for (int i = 0; i < UnitManager.instance.columnCount; i++)
+            {
+                //for every column
+                for (int j = 0; j < UnitManager.instance.rowCount; j++)
+                {
+                    //for every row
+                    if (player.units[i,j] != null) player.units[i,j].UnsubET();
+                }
+            }
+        }
     }
     public List<CardData> CreateDeck(Player player)
     {

@@ -10,11 +10,22 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     //[SerializeField] private SpriteRenderer cardArtUI;
     private Animator anim;
     private Collider2D col;
+    private Card card;
+    
     private Vector3 startDragPos;
+    [SerializeField] private bool isUnit;
+
+    //UI
     [SerializeField] private List<Image> cardArtUI = new List<Image>();
     [SerializeField] private List<TMP_Text> titleUI, placementCostUI, iqUI, healthUI, descriptionUI = new List<TMP_Text>();
     [SerializeField] private List<GameObject> actionDisable = new List<GameObject>(); // objects to disable if this is an action card
-    private Card card;
+
+    //effectInfos
+    [SerializeField] private Transform effectInfosSpawn;
+    [SerializeField] private float effectInfoYAdd;
+    [SerializeField] private GameObject effectTriggerInfoPrefab;
+    [SerializeField] private GameObject effectInfoPrefab;
+    private List<GameObject> effectInfos = new List<GameObject>();
 
     void Start()
     {
@@ -105,6 +116,10 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
                 item.SetActive(false);
             }
         }
+        if (isUnit)
+        {
+            UpdateEffectInfos();
+        }
     }
     public void OnPointerClick(PointerEventData eventdata)
     {
@@ -135,6 +150,41 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
         foreach (TMP_Text item in healthUI)
         {
             item.text = card.health.ToString();
+        }
+        UpdateEffectInfos();
+    }
+    private void UpdateEffectInfos()
+    {
+        foreach (GameObject item in effectInfos)
+        {
+            Destroy(item);
+        }
+        effectInfos = new();
+        foreach (EffectTrigger ET in card.effectTriggers)
+        {
+            GameObject newLoggedAction = Instantiate(effectTriggerInfoPrefab, effectInfosSpawn);
+
+            foreach (GameObject item in effectInfos)
+            {
+                item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y + effectInfoYAdd, item.transform.position.z);
+            }
+
+            if (newLoggedAction.GetComponent<EffectInfoVisual>() != null) newLoggedAction.GetComponent<EffectInfoVisual>().Initiate(ET.effectTriggerType.ToString(), ET.countDownVal, ET.originUnitInstanceId, ET.triggerDisabled);
+
+            effectInfos.Add(newLoggedAction);
+        }
+        foreach (Effect EF in card.effects)
+        {
+            GameObject newLoggedAction = Instantiate(effectInfoPrefab, effectInfosSpawn);
+
+            foreach (GameObject item in effectInfos)
+            {
+                item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y + effectInfoYAdd, item.transform.position.z);
+            }
+
+            if (newLoggedAction.GetComponent<EffectInfoVisual>() != null) newLoggedAction.GetComponent<EffectInfoVisual>().Initiate(EF.name, 0, 0, false);
+
+            effectInfos.Add(newLoggedAction);
         }
     }
 }

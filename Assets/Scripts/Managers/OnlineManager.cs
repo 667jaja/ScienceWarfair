@@ -66,23 +66,23 @@ public class OnlineManager : NetworkBehaviour
     [Rpc(SendTo.Server)]
     public void PlaceUnitGAServerRPC(int playerId, int lane, CardStruct cardStruct)
     {
-        UnitManager.instance.PlaceCard(playerId, lane, CardLibraryManager.instance.cardFromCardStruct(cardStruct));
+        UnitManager.instance.PlaceCard(playerId, lane, CardLibraryManager.instance.CardFromCardStruct(cardStruct));
     }
     [Rpc(SendTo.NotServer)]
     public void PlaceUnitGAClientRPC(int playerId, int lane, CardStruct cardStruct)
     {
-        UnitManager.instance.PlaceCard(playerId, lane, CardLibraryManager.instance.cardFromCardStruct(cardStruct));
+        UnitManager.instance.PlaceCard(playerId, lane, CardLibraryManager.instance.CardFromCardStruct(cardStruct));
     }
 
     [Rpc(SendTo.Server)]
     public void PlayActionGAServerRPC(int playerId, CardStruct cardStruct)
     {
-        UnitManager.instance.PlayAction(playerId, CardLibraryManager.instance.cardFromCardStruct(cardStruct));
+        UnitManager.instance.PlayAction(playerId, CardLibraryManager.instance.CardFromCardStruct(cardStruct));
     }
     [Rpc(SendTo.NotServer)]
     public void PlayActionGAClientRPC(int playerId, CardStruct cardStruct)
     {
-        UnitManager.instance.PlayAction(playerId, CardLibraryManager.instance.cardFromCardStruct(cardStruct));
+        UnitManager.instance.PlayAction(playerId, CardLibraryManager.instance.CardFromCardStruct(cardStruct));
     }
 
     public IEnumerator StateUpdate()
@@ -112,6 +112,7 @@ public class OnlineManager : NetworkBehaviour
     {
         Debug.Log("StateUpdateClientRPC Called");
         hasUpdated = true;
+        GameManager.instance.UnSubAllEts();
 
         Player player1 = CardLibraryManager.instance.PlayerFromPlayerStruct(hostPlayerStruct);
         Player player2 = CardLibraryManager.instance.PlayerFromPlayerStruct(clientPlayerStruct);

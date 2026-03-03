@@ -148,17 +148,43 @@ public class CardManager : MonoBehaviour
         //find card in hand
 
         int cardToRemove = -1;
+        bool cardRemoved = false;
         int i = 0;
         foreach (Card card in GameManager.instance.players[playerId].hand)
         {
-            if (card.cardData.CardDataId == removedCard.cardData.CardDataId)
+            if (card.cardInstanceId == removedCard.cardInstanceId)
             {
                 //if (card.health == removedCard.health && card.iq == removedCard.iq && card.placementCost == removedCard.placementCost)
                 cardToRemove = i;
+                cardRemoved = true;
                 break;
             }
             i++;
         }
+        if (!cardRemoved)
+        {
+            i=0;
+            foreach (Card card in GameManager.instance.players[playerId].hand)
+            {
+                if (card.cardData.CardDataId == removedCard.cardData.CardDataId)
+                {
+                    //if (card.health == removedCard.health && card.iq == removedCard.iq && card.placementCost == removedCard.placementCost)
+                    cardRemoved = true;
+                    cardToRemove = i;
+                    break;
+                }
+                i++;
+            }
+            if (cardRemoved)
+            {
+                Debug.Log("Card not found by Id, removed identical Card");
+            }
+            else
+            {
+                Debug.Log("removed Card not found");
+            }
+        }
+
 
         //remove card
         bool cardRemovalSuccessful;

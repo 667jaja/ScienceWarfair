@@ -9,17 +9,17 @@ public class EffectTrigger
     public EffectTriggerType effectTriggerType { get => effectTriggerData.effectTriggerType; }
     private bool oneTimeUse { get => effectTriggerData.oneTimeUse; }
     private int countDown { get => effectTriggerData.countDown; }
-    private int countDownVal { get; set;}
+    public int countDownVal { get; set;}
 
     private bool targetEnemyOnly {get => effectTriggerData.targetEnemyOnly;}
     private bool targetMeOnly {get => effectTriggerData.targetMeOnly;}
 
-    public Card originCard{ get; private set;}
+    public int originUnitInstanceId{ get; set;}
+    public Card originCard{ get; set;}
     public int originPlayer;
 
-    private bool triggerDisabled;
-    private bool isInPlay = false;
-    private bool subbed;
+    public bool triggerDisabled;
+    public bool subbed = false;
 
     public EffectTrigger(ActionData actionData, EffectTriggerData newEffectTriggerData)
     {
@@ -27,28 +27,35 @@ public class EffectTrigger
         countDownVal = newEffectTriggerData.countDownVal;
 
         originPlayer = actionData.originPlayerId;
+        if (actionData.originCard != null)originUnitInstanceId = actionData.originCard.cardInstanceId;
         originCard = actionData.originCard;
-        Placement(actionData);
+
+        Sub();
     }
     public void TriggerEffect(ActionData actionData)
     {
-        if (isInPlay)
-        {
-            originCard.PerformAbility(actionData);
-        }
+        if (originCard == null) originCard = UnitManager.instance.GetUnitByInstanceId(originUnitInstanceId);
+        originCard.PerformAbility(actionData);
     }
     public void Placement(ActionData actionData)
     {
-        isInPlay = true;
         PlacementEffect(actionData);
     }
     public void PlacementEffect(ActionData actionData)
-    {
+    { 
         if (effectTriggerType == EffectTriggerType.Simple)
         {
             TriggerEffect(actionData);
+            triggerDisabled = true;
             subbed = false;
         }
+    }
+    public void DestructionEffect()
+    {
+        Unsub();
+    }
+    public void Sub()
+    {
         if (effectTriggerType == EffectTriggerType.StartTurn)
         {
             Debug.Log("subbed card effect to StartTurnGA");
@@ -63,10 +70,6 @@ public class EffectTrigger
             if (pre) ActionManager.SubscribeReaction<CreateUnitGA>(CardPlacedReaction, ReactionTiming.PRE);
             ActionManager.SubscribeReaction<CreateUnitGA>(CardPlacedReaction, ReactionTiming.POST);
         }
-    }
-    public void DestructionEffect()
-    {
-        Unsub();
     }
     public void Unsub()
     {
@@ -90,12 +93,14 @@ public class EffectTrigger
 
     private void StartTurnReaction(StartTurnGA startTurnGA)
     {
+        if (originCard == null) originCard = UnitManager.instance.GetUnitByInstanceId(originUnitInstanceId);
         ActionData actionData = new ActionData(originPlayer, new Vector2Int(0,0), originCard);
         actionData.targetPlayerId = startTurnGA.playerId;
         Reaction(actionData);
     }
     private void CardPlacedReaction(CreateUnitGA createUnitGA)
     {
+        if (originCard == null) originCard = UnitManager.instance.GetUnitByInstanceId(originUnitInstanceId);
         ActionData actionData = new ActionData(originPlayer, new Vector2Int(0,0), originCard);
         actionData.targetPlayerId = createUnitGA.playerId;
         actionData.targetCard = createUnitGA.playedCard;
@@ -112,7 +117,7 @@ public class EffectTrigger
             for (int j = 0; j < UnitManager.instance.rowCount; j++)
             {
                 //for every row
-                if (GameManager.instance.players[originPlayer].units[i,j] == originCard)
+                if (GameManager.instance.players[originPlayer].units[i,j] != null && GameManager.instance.players[originPlayer].units[i,j].cardInstanceId == originUnitInstanceId)
                 {
                     actionData.originPosition = new Vector2Int(i,j);
                     originPositionFound = true;
@@ -136,23 +141,7 @@ public class EffectTrigger
                 countDownVal -= 1;
             }
         }
+        if (originPositionFound) UnitManager.instance.UpdateCardVisual(actionData.originPlayerId, actionData.originPosition);
+        else UnitManager.instance.UpdateAllCardVisuals();
     }
 }
-
-// private void PerformEffect(ActionData actionData)
-// {
-//     if (triggeredEffects.Count > 0)
-//     {
-//         foreach (Effect effect in triggeredEffects)
-//         {
-//             if (effect != null)
-//             {
-//                 effect.actionData = actionData;
-//                 foreach (GameAction action in effect.effect)
-//                 {
-//                     ActionManager.instance.Perform(action);
-//                 }
-//             }
-//         }
-//     } 
-// }

@@ -27,9 +27,10 @@ public class ActionManager : MonoBehaviour
     }
     public void Perform(GameAction action, System.Action OnPerformFinished = null)
     {
-        //Debug.Log("EnQueueAction");
+        if (queueEnd && action.isInputAction) Debug.Log("action " + action.ToString() + "blocked by queueEnd");
+        else Debug.Log("EnQueueAction " + action.ToString());
 
-        if (queueEnd) return;
+        if (queueEnd && action.isInputAction) return;
         if (action.isQueueEnder) queueEnd = true;
 
         actionQueue.Enqueue(action);

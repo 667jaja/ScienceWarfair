@@ -53,8 +53,19 @@ public class CardLibraryManager : MonoBehaviour
         }
         return foundEffectTrigger;
     }
+    public EffectTrigger EffectTriggerFromEffectTriggerStruct(EffectTriggerStruct effectTriggerStruct, Card OriginCard = null)
+    {
+        EffectTrigger newEffectTrigger = new EffectTrigger(new ActionData(effectTriggerStruct.originPlayer, new Vector2Int(-1,-1), OriginCard), GetEffectTriggerDataById(effectTriggerStruct.effectTriggerId))
+        {
+            countDownVal = effectTriggerStruct.countDownVal,
+            originPlayer = effectTriggerStruct.originPlayer,
+            originUnitInstanceId = effectTriggerStruct.originUnitInstanceId,
+            triggerDisabled = effectTriggerStruct.triggerDisabled,
+        };
 
-    public Card cardFromCardStruct(CardStruct cardStruct)
+        return newEffectTrigger;
+    }
+    public Card CardFromCardStruct(CardStruct cardStruct)
     {
         Card newCard = new Card(GetCardDataById(cardStruct.CardDataBaseId))
         {
@@ -74,11 +85,12 @@ public class CardLibraryManager : MonoBehaviour
             if (cardStruct.effects[i] > 0) newCard.effects.Add(GetEffectById(cardStruct.effects[i]));
         }
         
-        // if (cardStruct.effectTriggers != null && cardStruct.effectTriggers.Length > 0)
-        // for (int i = 0; i < cardStruct.effectTriggers.Length; i++)
-        // {
-        //     if (cardStruct.effectTriggers[i] > 0) newCard.effectTriggers.Add(new EffectTrigger(new ActionData(,,newCard),GetEffectTriggerDataById(cardStruct.effectTriggers[i])));
-        // }
+        if (cardStruct.effectTriggers != null && cardStruct.effectTriggers.Length > 0)
+        for (int i = 0; i < cardStruct.effectTriggers.Length; i++)
+        {
+            EffectTrigger newEffectTrigger = EffectTriggerFromEffectTriggerStruct(cardStruct.effectTriggers[i]);
+            newCard.effectTriggers.Add(newEffectTrigger);
+        }
         return newCard;
     }
     public Player PlayerFromPlayerStruct(PlayerStruct playerStruct)
@@ -112,7 +124,7 @@ public class CardLibraryManager : MonoBehaviour
         //hand
         for (int i = 0; i < playerStruct.hand.Length; i++)
         {
-            newPlayer.hand.Add(cardFromCardStruct(playerStruct.hand[i]));
+            newPlayer.hand.Add(CardFromCardStruct(playerStruct.hand[i]));
         }
 
         //units
@@ -120,7 +132,7 @@ public class CardLibraryManager : MonoBehaviour
         {
             for (int j = 0; j < 3; j++)
             {
-                if (playerStruct.units[(i*3) + j].CardDataBaseId > 0) newPlayer.units[i, j] = cardFromCardStruct(playerStruct.units[(i*3) + j]);
+                if (playerStruct.units[(i*3) + j].CardDataBaseId > 0) newPlayer.units[i, j] = CardFromCardStruct(playerStruct.units[(i*3) + j]);
                 else newPlayer.units[i, j] = null;
             }        
         }

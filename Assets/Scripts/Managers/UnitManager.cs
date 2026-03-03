@@ -306,6 +306,30 @@ public class UnitManager : MonoBehaviour
             }
         }
     }
+    public Card GetUnitByInstanceId(int instanceId)
+    {
+        //Card foundCard = null;
+        foreach (Player player in GameManager.instance.players)
+        {
+            //for every player
+            for (int i = 0; i < columnCount; i++)
+            {
+                //for every column
+                for (int j = 0; j < rowCount; j++)
+                {
+                    //for every row
+                    if (player.units[i,j] != null && player.units[i,j].cardInstanceId == instanceId)
+                    {
+                        Debug.Log("found unit by id at " + player.name +": " + i+":"+j);
+                        return player.units[i,j];
+                    }
+                }
+            }
+        }
+        Debug.Log("GetUnitByInstanceId failed. No unit found");
+        return null;
+    }
+
     public void UpdateUnitUI()
     {
         // UpdateLaneUI(laneTransforms[0], 0, GameManager.instance.players[GameManager.instance.currentPlayer].lane1);
@@ -401,17 +425,20 @@ public class UnitManager : MonoBehaviour
     }
     public void UpdateAllCardVisuals()
     {
-        for (int p = 0; p < GameManager.instance.players.Count; p++)
+        foreach (Player player in GameManager.instance.players)
         {
+            bool isCurrentDisplayPlayer = player.id == GameManager.instance.displayPlayer;
+            int playerAdd = (isCurrentDisplayPlayer) ? 0 : columnCount;
+
             for (int i = 0; i < columnCount; i++)
             {
                 //for every column
                 for (int j = 0; j < rowCount; j++)
                 {
                     //for every row
-                    if (unitVisuals[i, j] != null)
+                    if (unitVisuals[i+playerAdd, j] != null)
                     {
-                        UpdateCardVisual(p, new Vector2Int(i,j));
+                        UpdateCardVisual(player.id, new Vector2Int(i,j));
                     }
                 }
             }

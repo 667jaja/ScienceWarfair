@@ -484,8 +484,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1424281058}
   m_HandleRect: {fileID: 1424281057}
   m_Direction: 0
-  m_Value: 0.49871394
-  m_Size: 0.6611024
+  m_Value: 0.49871403
+  m_Size: 0.66446537
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -672,7 +672,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.168457, y: -574.1}
+  m_AnchoredPosition: {x: -5.1674805, y: -574.1}
   m_SizeDelta: {x: 0, y: 1148.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &381640553
@@ -2205,7 +2205,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 1126.5934, y: 285}
+  m_AnchoredPosition: {x: 591.5001, y: 285}
   m_SizeDelta: {x: 2700, y: 560}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &936978761
@@ -2316,8 +2316,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 160277299}
   m_HandleRect: {fileID: 160277298}
   m_Direction: 3
-  m_Value: 0.5
-  m_Size: 0.6666666
+  m_Value: 0.49999988
+  m_Size: 0.6666667
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3556,6 +3556,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5002b3150ce4fb48ab3397d80bd3807, type: 2}
   - {fileID: 11400000, guid: 4f0e2bd875ecbee44ae9809572e39f75, type: 2}
   - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
+  - {fileID: 11400000, guid: e85947f98d9603140b91df80b57ebdec, type: 2}
+  - {fileID: 11400000, guid: 9e4eddcab0b29c54da63d2c2803c99ef, type: 2}
+  - {fileID: 11400000, guid: 24134efa021601149999ce18010a94f1, type: 2}
+  - {fileID: 11400000, guid: 3127d9ae1b79c4a4ab877d2e95d220f7, type: 2}
+  - {fileID: 11400000, guid: 10b5e8fb90feb8b428917308fa3e4e25, type: 2}
   cardVisual: {fileID: 6868798076806503581, guid: 30febd3bb3ece5441882a792accb956f, type: 3}
   cardParent: {fileID: 381640551}
   deckMinimum: 20
@@ -4248,8 +4253,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 32177714}
   m_HandleRect: {fileID: 32177713}
   m_Direction: 0
-  m_Value: -0.000000057032253
-  m_Size: 0.43376365
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
