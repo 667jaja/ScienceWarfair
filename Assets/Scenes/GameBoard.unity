@@ -636,6 +636,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ef7cafc251e245640be0435b813f9770, type: 2}
   - {fileID: 11400000, guid: ef7cafc251e245640be0435b813f9770, type: 2}
   - {fileID: 11400000, guid: ef7cafc251e245640be0435b813f9770, type: 2}
+  defaultOpener:
+  - {fileID: 11400000, guid: 33cf9720279384f4c9bd070a67c1ad82, type: 2}
+  - {fileID: 11400000, guid: b8c4627ce80ef35459d5b1803147d0ac, type: 2}
   startingMoney: 3
   turnOrderBonusMoney: 1
   startingCards: 4

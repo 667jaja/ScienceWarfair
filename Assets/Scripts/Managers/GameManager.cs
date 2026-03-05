@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     //money&Cards
     public List<CardData> defaultDeck;
+    public List<CardData> defaultOpener;
     [SerializeField] private int startingMoney;
     [SerializeField] private int turnOrderBonusMoney = 1;
     [SerializeField] private int startingCards;
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
                 players.Add(new Player(playerDatas[i], i));
                 if (players[i].rawDeck == null || players[i].rawDeck.Count < deckDataSizeMin) players[i].rawDeck = defaultDeck;
                 players[i].deck = CardManager.instance.CreateDeck(players[i].rawDeck);
+                players[i].opener = CreateOpener(players[i]);
             }
         }
 
@@ -71,7 +73,21 @@ public class GameManager : MonoBehaviour
             if (players[i].name == null || players[i].name.Length < 1) players[i].name = "Player" + (i+1);
             players[i].maxMoney = maxMoney;
             players[i].Money = startingMoney + i*turnOrderBonusMoney;
-
+            int c = 0;
+            foreach (CardData item in players[i].opener)
+            {
+                if (c == 3) c = 0;
+                if (item != null)
+                {
+                    CreateUnitGA createUnitGA = new(players[i].id, new Vector2Int(c,0), new Card(item));
+                    createUnitGA.description = players[i].name + " plays opening unit " + item.title;
+                    ActionManager.instance.Perform(createUnitGA);
+                }
+                c++;
+            }
+        }
+        for (int i = 0; i < playerCount; i++)
+        {
             CardManager.instance.DrawCards(i, startingCards + i*turnOrderBonusCards);
         }
 
@@ -157,6 +173,21 @@ public class GameManager : MonoBehaviour
     {
         if (player.rawDeck == null || player.rawDeck.Count < deckDataSizeMin) player.rawDeck = defaultDeck;
         return CardManager.instance.CreateDeck(player.rawDeck);
+    }
+    public List<CardData> CreateOpener(Player player)
+    {
+        if (player.opener == null || player.opener.Count < 1) player.opener = defaultOpener;
+        CardData[] newOpener = new CardData[9];
+        List<int> validPositions = new List<int>() {0,1,2,3,4,5,6,7,8};
+        foreach (CardData data in player.opener)
+        {
+            int rand = Random.Range(0, validPositions.Count);
+            rand = validPositions[rand];
+            validPositions.Remove(rand);
+
+            newOpener[rand] = data;
+        }
+        return newOpener.ToList();
     }
     public void TurnEndButton()
     {

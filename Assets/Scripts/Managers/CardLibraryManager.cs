@@ -105,20 +105,27 @@ public class CardLibraryManager : MonoBehaviour
             Money = playerStruct.money,
             actionPoints = playerStruct.actionPoints
         };
-        newPlayer.deck = new();
         newPlayer.rawDeck = new();
+        newPlayer.opener = new();
+        newPlayer.deck = new();
         newPlayer.hand = new();
+        
+        //rawDeck
+        for (int i = 0; i < playerStruct.rawDeck.Length; i++)
+        {
+            newPlayer.rawDeck.Add(GetCardDataById(playerStruct.rawDeck[i]));
+        }
+
+        //opener
+        for (int i = 0; i < playerStruct.opener.Length; i++)
+        {
+            newPlayer.opener.Add(GetCardDataById(playerStruct.opener[i]));
+        }
 
         //deck
         for (int i = 0; i < playerStruct.deck.Length; i++)
         {
             newPlayer.deck.Add(GetCardDataById(playerStruct.deck[i]));
-        }
-
-        //rawDeck
-        for (int i = 0; i < playerStruct.rawDeck.Length; i++)
-        {
-            newPlayer.rawDeck.Add(GetCardDataById(playerStruct.rawDeck[i]));
         }
 
         //hand

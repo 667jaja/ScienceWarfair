@@ -13,6 +13,7 @@ public class Player
             //this.playerData = playerData;
             name = playerData.playerName;
             rawDeck = playerData.deck;
+            opener = playerData.opener;
         }
 
     }
@@ -24,6 +25,7 @@ public class Player
     public int actionPoints;
 
     public List<CardData> rawDeck;
+    public List<CardData> opener = new List<CardData>();
     public List<CardData> deck = new List<CardData>();
     public List<Card> hand = new List<Card>();
     public Card[,] units = new Card[3, 3];

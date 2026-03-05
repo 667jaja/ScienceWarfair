@@ -11,6 +11,7 @@ public struct PlayerStruct : INetworkSerializable
     public int actionPoints;
 
     public int[] rawDeck;
+    public int[] opener;
     public int[] deck;
     public CardStruct[] hand;
     public CardStruct[] units;// = new Card[3, 3]
@@ -25,6 +26,7 @@ public struct PlayerStruct : INetworkSerializable
         actionPoints = player.actionPoints;
 
         rawDeck = new int[player.rawDeck.Count];
+        opener = new int[player.opener.Count];
         deck = new int[player.deck.Count];
         hand = new CardStruct[player.hand.Count];
         units = new CardStruct[9];
@@ -32,6 +34,11 @@ public struct PlayerStruct : INetworkSerializable
         for (int i = 0; i < player.rawDeck.Count; i++)
         {
             if (player.rawDeck[i] != null) rawDeck[i] = player.rawDeck[i].CardDataId;
+        }
+        
+        for (int i = 0; i < player.opener.Count; i++)
+        {
+            if (player.opener[i] != null) opener[i] = player.opener[i].CardDataId;
         }
 
         for (int i = 0; i < player.deck.Count; i++)
@@ -82,6 +89,16 @@ public struct PlayerStruct : INetworkSerializable
 
         for (int i = 0; i < rawDeckLength; i++)
             serializer.SerializeValue(ref rawDeck[i]);
+
+        // opener[]
+        int openerLength = opener != null ? opener.Length : 0;
+        serializer.SerializeValue(ref openerLength);
+
+        if (serializer.IsReader)
+            opener = new int[openerLength];
+
+        for (int i = 0; i < openerLength; i++)
+            serializer.SerializeValue(ref opener[i]);
 
         // deck[]
         int deckLength = deck != null ? deck.Length : 0;

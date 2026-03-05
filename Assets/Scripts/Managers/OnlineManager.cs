@@ -239,7 +239,7 @@ public class OnlineManager : NetworkBehaviour
     [Rpc(SendTo.Server)]
     public void HostSetupServerRpc(PlayerStruct clientPlayerStruct)
     {
-        Debug.Log("player first Card = " + clientPlayerStruct.deck);
+        //Debug.Log("player first Card = " + clientPlayerStruct.deck);
         // int seed = Random.Range(0, 1000);
         // Random.InitState(seed);
 
@@ -250,6 +250,9 @@ public class OnlineManager : NetworkBehaviour
 
         player1.deck = GameManager.instance.CreateDeck(player1);
         player2.deck = GameManager.instance.CreateDeck(player2);
+
+        player1.opener = GameManager.instance.CreateOpener(player1);
+        player2.opener = GameManager.instance.CreateOpener(player2);
 
         //send to client
         PlayerStruct newHostStruct = new PlayerStruct(player1);
