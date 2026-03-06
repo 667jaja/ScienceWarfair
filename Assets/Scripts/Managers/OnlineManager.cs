@@ -213,7 +213,7 @@ public class OnlineManager : NetworkBehaviour
     {
         SceneLoadManager.instance.LoadMainMenu();
     }
-    public async void ShutDownServer() 
+    public void ShutDownServer() 
     {
         if (IsHost)
         {

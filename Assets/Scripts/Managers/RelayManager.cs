@@ -24,7 +24,7 @@ public class RelayManager : MonoBehaviour
     [SerializeField] private float maxConnectionTime = 300;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private async void Awake()
+    private void Awake()
     {
         instance = this;
         screenBlock.SetActive(false);

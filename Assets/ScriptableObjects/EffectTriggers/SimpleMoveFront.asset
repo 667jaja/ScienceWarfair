@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9feee8a6e1578348913061ebc0e2c49, type: 3}
-  m_Name: EnemyCardPlayed
+  m_Name: SimpleMoveFront
   m_EditorClassIdentifier: 
-  <effectTriggerId>k__BackingField: 2
+  <effectTriggerId>k__BackingField: 202517
+  effectTriggerType: 0
+  <effects>k__BackingField:
+  - {fileID: 11400000, guid: fdbff812916b00a4380efcbfd8053ef9, type: 2}
+  <effectDescription>k__BackingField: Move To Front
   <pre>k__BackingField: 0
-  effectTriggerType: 2
   <oneTimeUse>k__BackingField: 0
   <countDown>k__BackingField: 0
   countDownVal: 0
-  targetEnemyOnly: 1
+  targetEnemyOnly: 0
   targetMeOnly: 0

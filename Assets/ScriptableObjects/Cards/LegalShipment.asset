@@ -23,7 +23,7 @@ MonoBehaviour:
   <noAttack>k__BackingField: 0
   <cardEffect>k__BackingField: Move to Front
   <effectTriggerDatas>k__BackingField:
-  - {fileID: 11400000, guid: f2f1d8ff239888f4bbf2ce5a80dcaf18, type: 2}
+  - {fileID: 11400000, guid: 0fe42aa0c64a3a8428f62c4577b569f8, type: 2}
   <effects>k__BackingField:
   - {fileID: 11400000, guid: fdbff812916b00a4380efcbfd8053ef9, type: 2}
   <containedCard>k__BackingField: {fileID: 11400000, guid: 33cf9720279384f4c9bd070a67c1ad82, type: 2}

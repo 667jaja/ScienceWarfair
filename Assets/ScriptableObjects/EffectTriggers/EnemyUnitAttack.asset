@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9feee8a6e1578348913061ebc0e2c49, type: 3}
-  m_Name: NextCardPlayed
+  m_Name: EnemyUnitAttack
   m_EditorClassIdentifier: 
-  <effectTriggerId>k__BackingField: 4
-  <pre>k__BackingField: 0
+  <effectTriggerId>k__BackingField: 202501
   effectTriggerType: 2
-  <oneTimeUse>k__BackingField: 1
+  <effects>k__BackingField:
+  - {fileID: 11400000, guid: 83e9b1afe9dd00a47bd90f69f9e5eca8, type: 2}
+  <effectDescription>k__BackingField: Attack Opposing
+  <pre>k__BackingField: 0
+  <oneTimeUse>k__BackingField: 0
   <countDown>k__BackingField: 0
-  countDownVal: 1
-  targetEnemyOnly: 0
+  countDownVal: 0
+  targetEnemyOnly: 1
   targetMeOnly: 0

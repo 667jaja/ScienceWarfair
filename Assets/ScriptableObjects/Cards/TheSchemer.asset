@@ -24,7 +24,7 @@ MonoBehaviour:
   <noAttack>k__BackingField: 1
   <cardEffect>k__BackingField: Gain 2k
   <effectTriggerDatas>k__BackingField:
-  - {fileID: 11400000, guid: ef9b49efbed881647a5be2a8f89bedd4, type: 2}
+  - {fileID: 11400000, guid: dc88001c4f199b4439f371f1978e4d23, type: 2}
   <effects>k__BackingField:
   - {fileID: 11400000, guid: 23dcd3450b21b8a478053732cf12b703, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9feee8a6e1578348913061ebc0e2c49, type: 3}
-  m_Name: AllCardsPlayed
+  m_Name: NextUnitIqUp
   m_EditorClassIdentifier: 
-  <effectTriggerId>k__BackingField: 1
-  <pre>k__BackingField: 0
+  <effectTriggerId>k__BackingField: 202505
   effectTriggerType: 2
-  <oneTimeUse>k__BackingField: 0
+  <effects>k__BackingField:
+  - {fileID: 11400000, guid: c066a5400ae303d44ae34e896a6f63da, type: 2}
+  <effectDescription>k__BackingField: Increase Target's Iq
+  <pre>k__BackingField: 0
+  <oneTimeUse>k__BackingField: 1
   <countDown>k__BackingField: 0
   countDownVal: 1
   targetEnemyOnly: 0

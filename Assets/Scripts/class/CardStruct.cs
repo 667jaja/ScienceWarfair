@@ -16,7 +16,6 @@ public struct CardStruct : INetworkSerializable
 
     //abilities
     public EffectTriggerStruct[] effectTriggers;
-    public int[] effects;
     public int containedCardBaseId;
 
     public CardStruct(Card card)
@@ -29,7 +28,6 @@ public struct CardStruct : INetworkSerializable
 
         containedCardBaseId = card.containedCard != null? card.containedCard.CardDataId: -1;
         effectTriggers = new EffectTriggerStruct[card.effectTriggers.Count];
-        effects = new int[card.effects.Count];
 
 
         if (card.effectTriggers == null || card.effectTriggers.Count < 1)
@@ -39,15 +37,6 @@ public struct CardStruct : INetworkSerializable
         else for (int i = 0; i < card.effectTriggers.Count; i++)
         {
             if (card.effectTriggers[i] != null) effectTriggers[i] = new EffectTriggerStruct(card.effectTriggers[i]);
-        }
-
-        if (card.effects == null || card.effects.Count < 1)
-        {
-            effects = new int[1] {0};
-        }
-        else for (int i = 0; i < card.effects.Count; i++)
-        {
-            if (card.effects[i] != null) effects[i] = card.effects[i].effectId;
         }
     }
 
@@ -69,15 +58,5 @@ public struct CardStruct : INetworkSerializable
 
         for (int i = 0; i < triggersLength; i++)
             serializer.SerializeValue(ref effectTriggers[i]);
-
-        // effects
-        int effectsLength = effects != null ? effects.Length : 0;
-        serializer.SerializeValue(ref effectsLength);
-
-        if (serializer.IsReader)
-            effects = new int[effectsLength];
-
-        for (int i = 0; i < effectsLength; i++)
-            serializer.SerializeValue(ref effects[i]);
     }
 };

@@ -23,7 +23,7 @@ MonoBehaviour:
   <noAttack>k__BackingField: 0
   <cardEffect>k__BackingField: Increases card Iq
   <effectTriggerDatas>k__BackingField:
-  - {fileID: 11400000, guid: fa4a1bf9686bff148b811c3e81af1ab4, type: 2}
+  - {fileID: 11400000, guid: 40896d621d3189341814aec52647cee6, type: 2}
   <effects>k__BackingField:
   - {fileID: 11400000, guid: c066a5400ae303d44ae34e896a6f63da, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

@@ -171,7 +171,6 @@ MonoBehaviour:
   effectInfosSpawn: {fileID: 2367221147330095777}
   effectInfoYAdd: -0.6
   effectTriggerInfoPrefab: {fileID: 194527223521135238, guid: 05af7acfe0d0ea742b1ca9bbbdc35846, type: 3}
-  effectInfoPrefab: {fileID: 194527223521135238, guid: 5a6ce55a41a46384983ae3df5bfa1fa2, type: 3}
   containedCardInfoPrefab: {fileID: 194527223521135238, guid: 6b7effc2a6969574a8060cfe2cd78179, type: 3}
 --- !u!61 &6255750677620037767
 BoxCollider2D:
@@ -602,7 +601,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -220}
-  m_SizeDelta: {x: 560, y: 150}
+  m_SizeDelta: {x: 593, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1177475705945490662
 CanvasRenderer:

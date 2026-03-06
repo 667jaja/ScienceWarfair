@@ -24,7 +24,6 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Transform effectInfosSpawn;
     [SerializeField] private float effectInfoYAdd;
     [SerializeField] private GameObject effectTriggerInfoPrefab;
-    [SerializeField] private GameObject effectInfoPrefab;
     [SerializeField] private GameObject containedCardInfoPrefab;
     private List<GameObject> effectInfos = new List<GameObject>();
 
@@ -171,21 +170,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
                 item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y + effectInfoYAdd, item.transform.position.z);
             }
 
-            if (newLoggedAction.GetComponent<EffectInfoVisual>() != null) newLoggedAction.GetComponent<EffectInfoVisual>().InitiateET(ET.effectTriggerType.ToString(), ET.countDownVal, (ET.countDownVal <= 0 && ET.countDown <= 0), ET.originUnitInstanceId, ET.triggerDisabled);
-
-            effectInfos.Add(newLoggedAction);
-        }
-        //Effects
-        foreach (Effect EF in card.effects)
-        {
-            GameObject newLoggedAction = Instantiate(effectInfoPrefab, effectInfosSpawn);
-
-            foreach (GameObject item in effectInfos)
-            {
-                item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y + effectInfoYAdd, item.transform.position.z);
-            }
-
-            if (newLoggedAction.GetComponent<EffectInfoVisual>() != null) newLoggedAction.GetComponent<EffectInfoVisual>().InitiateEF(EF.name);
+            if (newLoggedAction.GetComponent<EffectInfoVisual>() != null) newLoggedAction.GetComponent<EffectInfoVisual>().InitiateET(ET.GetTriggerName(), ET.GetEffectName(), ET.countDownVal, (ET.countDownVal <= 0 && ET.countDown <= 0), ET.triggerDisabled);
 
             effectInfos.Add(newLoggedAction);
         }

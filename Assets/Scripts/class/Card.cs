@@ -17,7 +17,6 @@ public class Card
         Health = cardData.health;
         //noAttack = cardData.noAttack;
         effectTriggers = new List<EffectTrigger>();
-        effects = cardData.effects;
         containedCard = cardData.containedCard;
     }
 
@@ -92,7 +91,6 @@ public class Card
     public bool noAttack { get => cardData.noAttack; }
     public string cardEffect { get => cardData.cardEffect; }
     public List<EffectTrigger> effectTriggers {get; set;}
-    public List<Effect> effects {get; set;}
     public CardData containedCard { get; set; }
 
     //deck Creator
@@ -113,34 +111,6 @@ public class Card
                 }
             }
 
-    }
-    public void PerformAbility(ActionData actionData)
-    {
-        Debug.Log("card " + cardInstanceId.ToString() + " performs " + effects.Count +" effects");
-        bool actionDescribed = false;
-        foreach (Effect effect in effects)
-        {
-            
-            if (effect != null)
-            {
-                
-                effect.actionData = actionData;
-                foreach (GameAction action in effect.effect)
-                {
-                    action.inputPlayerId = actionData.originPlayerId;
-                    if (!actionDescribed)
-                    {
-                        action.description = title + " Performs: " + cardEffect;
-                        actionDescribed = true;
-                    }
-                    ActionManager.instance.Perform(action);
-                }
-            }
-            else
-            {
-                Debug.Log("null effects");
-            }
-        }
     }
     public void Destruciton()
     {
@@ -163,3 +133,32 @@ public class Card
         }
     }
 }
+
+    // public void PerformAbility(ActionData actionData)
+    // {
+    //     // Debug.Log("card " + cardInstanceId.ToString() + " performs " + effects.Count +" effects");
+    //     // bool actionDescribed = false;
+    //     // foreach (Effect effect in effects)
+    //     // {
+            
+    //     //     if (effect != null)
+    //     //     {
+                
+    //     //         effect.actionData = actionData;
+    //     //         foreach (GameAction action in effect.effect)
+    //     //         {
+    //     //             action.inputPlayerId = actionData.originPlayerId;
+    //     //             if (!actionDescribed)
+    //     //             {
+    //     //                 action.description = title + " Performs: " + cardEffect;
+    //     //                 actionDescribed = true;
+    //     //             }
+    //     //             ActionManager.instance.Perform(action);
+    //     //         }
+    //     //     }
+    //     //     else
+    //     //     {
+    //     //         Debug.Log("null effects");
+    //     //     }
+    //     // }
+    // }

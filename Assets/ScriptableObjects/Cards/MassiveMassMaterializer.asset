@@ -23,7 +23,7 @@ MonoBehaviour:
   <noAttack>k__BackingField: 0
   <cardEffect>k__BackingField: Draw Card
   <effectTriggerDatas>k__BackingField:
-  - {fileID: 11400000, guid: ef9b49efbed881647a5be2a8f89bedd4, type: 2}
+  - {fileID: 11400000, guid: 131c218af1f77fe4e88db68de052313e, type: 2}
   <effects>k__BackingField:
   - {fileID: 11400000, guid: cd98d78d218ff504e96bfc96d8ea6570, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

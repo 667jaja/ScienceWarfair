@@ -4,6 +4,7 @@ using UnityEngine;
 public class EffectTrigger
 {
     public EffectTriggerData effectTriggerData;
+    public List<Effect> effects { get; set;}
 
     public bool pre { get => effectTriggerData.pre; }
     public EffectTriggerType effectTriggerType { get => effectTriggerData.effectTriggerType; }
@@ -20,11 +21,13 @@ public class EffectTrigger
 
     public bool triggerDisabled;
     public bool subbed = false;
+    public string effectDescription { get => effectTriggerData.effectDescription; }
 
     public EffectTrigger(ActionData actionData, EffectTriggerData newEffectTriggerData)
     {
         effectTriggerData = newEffectTriggerData;
         countDownVal = newEffectTriggerData.countDownVal;
+        effects = newEffectTriggerData.effects;
 
         originPlayer = actionData.originPlayerId;
         if (actionData.originCard != null)originUnitInstanceId = actionData.originCard.cardInstanceId;
@@ -34,8 +37,30 @@ public class EffectTrigger
     }
     public void TriggerEffect(ActionData actionData)
     {
-        if (originCard == null) originCard = UnitManager.instance.GetUnitByInstanceId(originUnitInstanceId);
-        originCard.PerformAbility(actionData);
+        // if (originCard == null) originCard = UnitManager.instance.GetUnitByInstanceId(originUnitInstanceId);
+        // originCard.PerformAbility(actionData);
+
+        Debug.Log("card " + originUnitInstanceId.ToString() + " performs " + effects.Count +" effects");
+        bool actionDescribed = false;
+        foreach (Effect effect in effects)
+        {
+            
+            if (effect != null)
+            {
+                effect.actionData = actionData;
+                foreach (GameAction action in effect.effect)
+                {
+                    action.inputPlayerId = actionData.originPlayerId;
+                    if (!actionDescribed)
+                    {
+                        action.description = originCard.title + " Performs: " + effectDescription;
+                        actionDescribed = true;
+                    }
+                    ActionManager.instance.Perform(action);
+                }
+            }
+
+        }
     }
     public void Placement(ActionData actionData)
     {
@@ -143,5 +168,42 @@ public class EffectTrigger
         }
         if (originPositionFound) UnitManager.instance.UpdateCardVisual(actionData.originPlayerId, actionData.originPosition);
         else UnitManager.instance.UpdateAllCardVisuals();
+    }
+
+    public string GetTriggerName()
+    {
+        string before = "";
+        string oneTime = "";
+        string team = "";
+        string type = "";
+        //Before Next Friendly Unit Created
+        if (pre) before = "Before "; 
+        if (oneTimeUse) oneTime = "Next "; 
+        if (targetMeOnly) team = "Friendly ";
+        if (targetEnemyOnly) team = "Enemy ";
+        if (effectTriggerType == EffectTriggerType.StartTurn) type = "Turn Start"; 
+        if (effectTriggerType == EffectTriggerType.CardPlaced) type = "Unit Created"; 
+
+        if (effectTriggerType == EffectTriggerType.Placement)
+        {
+            before = "";
+            oneTime = "";
+            team = "";
+            type = "This Played"; 
+        } 
+        if (targetMeOnly && targetEnemyOnly)
+        {
+            before = "";
+            oneTime = "";
+            team = "Never";
+            type = ""; 
+        } 
+
+        return before + oneTime + team + type;
+        
+    }
+    public string GetEffectName()
+    {
+        return effectDescription;
     }
 }

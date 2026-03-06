@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9feee8a6e1578348913061ebc0e2c49, type: 3}
-  m_Name: StartOfTurn
+  m_Name: SimpleGain2
   m_EditorClassIdentifier: 
-  <effectTriggerId>k__BackingField: 6
+  <effectTriggerId>k__BackingField: 202516
+  effectTriggerType: 0
+  <effects>k__BackingField:
+  - {fileID: 11400000, guid: 23dcd3450b21b8a478053732cf12b703, type: 2}
+  <effectDescription>k__BackingField: Gain 2k
   <pre>k__BackingField: 0
-  effectTriggerType: 1
   <oneTimeUse>k__BackingField: 0
   <countDown>k__BackingField: 0
   countDownVal: 0
   targetEnemyOnly: 0
-  targetMeOnly: 1
+  targetMeOnly: 0

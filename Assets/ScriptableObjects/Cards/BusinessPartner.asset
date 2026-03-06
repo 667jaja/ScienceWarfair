@@ -23,7 +23,7 @@ MonoBehaviour:
   <noAttack>k__BackingField: 0
   <cardEffect>k__BackingField: Draw Card And Gain 1k
   <effectTriggerDatas>k__BackingField:
-  - {fileID: 11400000, guid: f2f1d8ff239888f4bbf2ce5a80dcaf18, type: 2}
+  - {fileID: 11400000, guid: 713950c19821ad644bd80397d06014bb, type: 2}
   <effects>k__BackingField:
   - {fileID: 11400000, guid: bcef6269011294643b282999ca228e34, type: 2}
   - {fileID: 11400000, guid: cd98d78d218ff504e96bfc96d8ea6570, type: 2}

@@ -23,7 +23,7 @@ MonoBehaviour:
   <noAttack>k__BackingField: 0
   <cardEffect>k__BackingField: Damage Lane
   <effectTriggerDatas>k__BackingField:
-  - {fileID: 11400000, guid: f2f1d8ff239888f4bbf2ce5a80dcaf18, type: 2}
+  - {fileID: 11400000, guid: 1bf393b65ff67284d9885002f0f0935d, type: 2}
   <effects>k__BackingField:
   - {fileID: 11400000, guid: 8f3236868e8613f4a9d33d3ea2a9053e, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

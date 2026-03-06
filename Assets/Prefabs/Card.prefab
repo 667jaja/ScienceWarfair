@@ -1801,6 +1801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d610fddccca63a14ab2161a29f502ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnit: 0
   cardArtUI:
   - {fileID: 701977647048639495}
   titleUI:
@@ -1822,6 +1823,10 @@ MonoBehaviour:
   - {fileID: 5821900481404503111}
   - {fileID: 3788529969449824926}
   - {fileID: 7916385207928544988}
+  effectInfosSpawn: {fileID: 0}
+  effectInfoYAdd: 0
+  effectTriggerInfoPrefab: {fileID: 0}
+  containedCardInfoPrefab: {fileID: 0}
 --- !u!61 &4709723283097492233
 BoxCollider2D:
   m_ObjectHideFlags: 0

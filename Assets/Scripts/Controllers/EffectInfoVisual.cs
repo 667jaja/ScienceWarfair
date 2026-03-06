@@ -3,25 +3,22 @@ using TMPro;
 
 public class EffectInfoVisual : MonoBehaviour
 {
-    [SerializeField] private TMP_Text type, cooldown, cardInstanceId;
+    [SerializeField] private TMP_Text type, EfType, cooldown;
     [SerializeField] private GameObject cooldownLabel;
     [SerializeField] private TMP_Text cardHealth, cardCost, cardIq, cardDesc;
     [SerializeField] private GameObject disabledCover;
-    public void InitiateEF(string typeVal)
-    {
-        type.text = typeVal;
 
-    }
-    public void InitiateET(string typeVal, int cooldownVal, bool noCountDown, int cardInstanceIdVal, bool isDisabled)
+    public void InitiateET(string typeVal, string EFtypeVal, int cooldownVal, bool noCountDown, bool isDisabled)
     {
         type.text = typeVal;
+        EfType.text = EFtypeVal;
+
         if (noCountDown) 
         {
             cooldown.gameObject.SetActive(false);
             cooldownLabel.SetActive(false);
         }
         cooldown.text = cooldownVal.ToString();
-        cardInstanceId.text = cardInstanceIdVal.ToString();
         disabledCover.SetActive(isDisabled);
     }
     public void InitiateCC(string ccName, int health, int cost, int iq, string description)

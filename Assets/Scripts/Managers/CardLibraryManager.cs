@@ -61,7 +61,14 @@ public class CardLibraryManager : MonoBehaviour
             originPlayer = effectTriggerStruct.originPlayer,
             originUnitInstanceId = effectTriggerStruct.originUnitInstanceId,
             triggerDisabled = effectTriggerStruct.triggerDisabled,
+            effects = new List<Effect>(),
         };
+
+        if (effectTriggerStruct.effects != null && effectTriggerStruct.effects.Length > 0)
+        for (int i = 0; i < effectTriggerStruct.effects.Length; i++)
+        {
+            if (effectTriggerStruct.effects[i] > 0) newEffectTrigger.effects.Add(GetEffectById(effectTriggerStruct.effects[i]));
+        }
 
         return newEffectTrigger;
     }
@@ -76,14 +83,9 @@ public class CardLibraryManager : MonoBehaviour
 
             containedCard = cardStruct.containedCardBaseId>=0? GetCardDataById(cardStruct.containedCardBaseId): null,
 
-            // effectTriggers = cardStruct.health,
-            effects = new List<Effect>(),
+            effectTriggers = new List<EffectTrigger>(),
         };
-        if (cardStruct.effects != null && cardStruct.effects.Length > 0)
-        for (int i = 0; i < cardStruct.effects.Length; i++)
-        {
-            if (cardStruct.effects[i] > 0) newCard.effects.Add(GetEffectById(cardStruct.effects[i]));
-        }
+
         
         if (cardStruct.effectTriggers != null && cardStruct.effectTriggers.Length > 0)
         for (int i = 0; i < cardStruct.effectTriggers.Length; i++)
