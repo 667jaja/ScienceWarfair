@@ -13,7 +13,7 @@ public class DeckBuilderManager : MonoBehaviour
     //LoadButtons
     [SerializeField] private string levelSelectName;
     [SerializeField] private string mainMenuName;
-    [SerializeField] private List<CardData> defaultDeck;
+    [SerializeField] private List<OpenerData> stockOpeners;
 
     //Card list
     public List<CardData> allCards;
@@ -131,6 +131,24 @@ public class DeckBuilderManager : MonoBehaviour
         }
 
         UpdateUI();
+    }
+
+    public void SetOpenerData(string searchedName)
+    {
+        foreach (OpenerData opener in stockOpeners)
+        {
+            if (opener.openerName.ToLower() == searchedName.ToLower())
+            {
+                if (deckSwitched)
+                {
+                    savedPlayers[1].opener = opener.opener;
+                }
+                else
+                {
+                    savedPlayers[0].opener = opener.opener;
+                }
+            }
+        }
     }
 
     public void AddCardToCurrentDeck(CardData addedCard)
