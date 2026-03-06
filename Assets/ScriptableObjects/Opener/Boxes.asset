@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openerName: Shipments
   opener:
-  - {fileID: 11400000, guid: ef7cafc251e245640be0435b813f9770, type: 2}
-  - {fileID: 11400000, guid: ef7cafc251e245640be0435b813f9770, type: 2}
+  - {fileID: 11400000, guid: ba0e8fc85c68d8a44a88b7febc393ec9, type: 2}
+  - {fileID: 11400000, guid: ba0e8fc85c68d8a44a88b7febc393ec9, type: 2}
