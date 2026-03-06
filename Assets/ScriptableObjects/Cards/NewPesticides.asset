@@ -14,16 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardDataId>k__BackingField: 202516
   <title>k__BackingField: New Pesticides
-  <description>k__BackingField: Damage all Enemy units in lane by one
+  <description>k__BackingField: Damage(1) all units a lane and it's opposing lane
   <cardArt>k__BackingField: {fileID: 8477753053699024119, guid: 6959b0c7e2462f1458f03242e6965669, type: 3}
   isAction: 1
   <placementCost>k__BackingField: 0
   <iq>k__BackingField: 0
   <health>k__BackingField: 0
   <noAttack>k__BackingField: 0
-  <cardEffect>k__BackingField: Damage Lane
+  <cardEffect>k__BackingField: Damage Lanes
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: 1bf393b65ff67284d9885002f0f0935d, type: 2}
-  <effects>k__BackingField:
-  - {fileID: 11400000, guid: 8f3236868e8613f4a9d33d3ea2a9053e, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

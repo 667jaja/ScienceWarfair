@@ -19,28 +19,82 @@ public class SelectionManager : MonoBehaviour
     {
         ActionManager.AttachPerformer<SelectLanesGA>(SelectLanePerformer);
         ActionManager.AttachPerformer<SelectUnitsInLanesGA>(SelectUnitsInSelectedLanes);
+        ActionManager.AttachPerformer<SelectOpposingLanesGA>(SelectOpposingLanes);
         ActionManager.AttachPerformer<SelectUnitsGA>(SelectBoardPerformer);
     }
     void OnDisable()
     {
         ActionManager.DetachPerformer<SelectLanesGA>();
+        ActionManager.DetachPerformer<SelectUnitsInLanesGA>();
+        ActionManager.DetachPerformer<SelectOpposingLanesGA>();
+        ActionManager.DetachPerformer<SelectUnitsGA>();
     }
     public List<Vector2Int> EnemyLanes(int playerId)
     {
-        if (playerId == 0)
+        List<Vector2Int> thingToReturn = new();
+        int newZ = GameManager.instance.GetNextPlayerId(playerId);
+        for (int i = 0; i < UnitManager.instance.columnCount; i++)
         {
-            return new List<Vector2Int>{new Vector2Int (0,1), new Vector2Int (1,1), new Vector2Int (2,1)};
+            thingToReturn.Add(new Vector2Int(i, newZ));
         }
-        else
+
+        return thingToReturn;
+    }
+    public List<Vector3Int> UnitsByPlayerRow(int playerId = -1, int row = -1)
+    {
+        List<Vector3Int> thingToReturn = new();
+        int newZ = playerId;
+        for (int i = 0; i < UnitManager.instance.columnCount; i++)
         {
-            return new List<Vector2Int>{new Vector2Int (0,0), new Vector2Int (1,0), new Vector2Int (2,0)};
+            for (int j = 0; j < UnitManager.instance.rowCount; j++)
+            {
+                if (row < 0 || row == j)
+                {
+                    if (newZ < 0)
+                    {
+                        thingToReturn.Add(new Vector3Int(i,j, 0));
+                        thingToReturn.Add(new Vector3Int(i,j, 1));
+                    }
+                    else thingToReturn.Add(new Vector3Int(i,j,newZ));
+                }
+            }
         }
+
+        return thingToReturn;
     }
     public IEnumerator SelectBoardPerformer(SelectUnitsGA selectUnitsGA)
     {
         selectedBoard = new();
+
+        int validUnitsCount = 0;
+        foreach (Vector3Int pos in selectUnitsGA.validPos)
+        {
+            if (GameManager.instance.players[pos.z].units[pos.x, pos.y] != null) validUnitsCount++;
+        }
+        if (validUnitsCount < selectUnitsGA.selectCount) selectUnitsGA.selectCount = validUnitsCount;
+        //make units selectable
+        if (GameManager.instance.displayPlayer == selectUnitsGA.inputPlayerId)
+            UnitManager.instance.MakeUnitsSelectable(selectUnitsGA.validPos);
+
+        //wait for player to select
+        while (selectedBoard.Count < selectUnitsGA.selectCount)
+        {
+            yield return null;
+        }
+
+        //carryover selection to other player
+        if (RelayManager.instance != null && GameManager.instance.displayPlayer == selectUnitsGA.inputPlayerId)
+        {
+            OnlineManager.instance.InputSelection();
+        }
+
+        //make units not selectable
+        UnitManager.instance.MakeAllUnitsNotSelectable();
+
+
         yield return null;
     } 
+    //selects all units in selected lanes
     public IEnumerator SelectUnitsInSelectedLanes(SelectUnitsInLanesGA selectUnitsInLanesGA)
     {
         selectedBoard = new();
@@ -54,6 +108,17 @@ public class SelectionManager : MonoBehaviour
                 }
             }
         }
+        yield return null;
+    }
+    //selects all lanes opposing selected lanes
+    public IEnumerator SelectOpposingLanes(SelectOpposingLanesGA selectOpposingLanesGA)
+    {
+        List<Vector2Int> toAdd = new();
+        foreach (Vector2Int lane in selectedLanes)
+        {
+            toAdd.Add(new Vector2Int(lane.x, GameManager.instance.GetNextPlayerId(lane.y)));
+        }
+        selectedLanes.AddRange(toAdd);
         yield return null;
     }
     public IEnumerator SelectLanePerformer(SelectLanesGA selectLanesGA)

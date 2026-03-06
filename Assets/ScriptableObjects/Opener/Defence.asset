@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b316d096d46229458a17e1a502d4bcb, type: 3}
   m_Name: Defence
   m_EditorClassIdentifier: 
-  openerName: Defence
-  opener:
-  - {fileID: 11400000, guid: 789eaaaa620ba2e4586d073120d1e3ea, type: 2}
-  - {fileID: 11400000, guid: 33cf9720279384f4c9bd070a67c1ad82, type: 2}
+  openerName: null
+  opener: []

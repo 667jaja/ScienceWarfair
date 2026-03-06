@@ -30,6 +30,7 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private float destroyAnimationLength;
     [SerializeField] private string damageAnimationName;
     [SerializeField] private float damageAnimationLength;
+    [SerializeField] private string selectableBool;
 
     void Awake()
     {
@@ -50,6 +51,7 @@ public class UnitManager : MonoBehaviour
         ActionManager.AttachPerformer<PlayActionGA>(PlayActionPerformer);
         ActionManager.AttachPerformer<MoveUnitGA>(MoveUnitPerformer);
         ActionManager.AttachPerformer<ChangeStatsUnitGA>(ChangeStatsUnitPerformer);
+        ActionManager.AttachPerformer<ChangeStatsSelectedGA>(ChangeStatsSelectedPerformer);
     }
     private void OnDisable()
     {
@@ -58,6 +60,7 @@ public class UnitManager : MonoBehaviour
         ActionManager.DetachPerformer<PlayActionGA>();
         ActionManager.DetachPerformer<MoveUnitGA>();
         ActionManager.DetachPerformer<ChangeStatsUnitGA>();
+        ActionManager.DetachPerformer<ChangeStatsSelectedGA>();
     }
 
     public void PlayAction(int playerId, Card card) 
@@ -281,7 +284,15 @@ public class UnitManager : MonoBehaviour
         LaneManager.instance.UpdateLaneVisuals();
         yield return null;
     }
-
+    private IEnumerator ChangeStatsSelectedPerformer(ChangeStatsSelectedGA changeStatsSelectedGA)
+    {
+        foreach (Vector3Int vector in SelectionManager.instance.selectedBoard)
+        {
+            ChangeStatsUnitGA changeStatsUnitGA =  new ChangeStatsUnitGA(vector.z, new Vector2Int(vector.x, vector.y), changeStatsSelectedGA.iqChange, changeStatsSelectedGA.heathChange, changeStatsSelectedGA.costChange);
+            ActionManager.instance.AddReaction(changeStatsUnitGA);
+        }
+        yield return null;
+    }
     public void PushAllUnitsForward()
     {
         foreach (Player player in GameManager.instance.players)
@@ -489,7 +500,65 @@ public class UnitManager : MonoBehaviour
         UnitTriggerAnimation(damageAnimationName, position);
         return damageAnimationLength;
     }
+    public void MakeUnitsSelectable(List<Vector3Int> selectedUnitPositions)
+    {
+        foreach(Vector3Int unitPosition in selectedUnitPositions)
+        {
+            int playerAdd = (unitPosition.z != GameManager.instance.displayPlayer)? columnCount : 0;
+            Vector2Int index = new Vector2Int(playerAdd+unitPosition.x, unitPosition.y);
+            if (unitVisuals[index.x, index.y] != null)
+            {
+                unitVisuals[index.x, index.y].GetComponent<Animator>().SetBool(selectableBool, true);
+            }
+        }
+    }
+    public void MakeAllUnitsNotSelectable()
+    {
+        foreach (Player player in GameManager.instance.players)
+        {
+            bool isCurrentDisplayPlayer = player.id == GameManager.instance.displayPlayer;
+            int playerAdd = (isCurrentDisplayPlayer) ? 0 : columnCount;
 
+            for (int i = 0; i < columnCount; i++)
+            {
+                //for every column
+                for (int j = 0; j < rowCount; j++)
+                {
+                    //for every row
+                    if (unitVisuals[i+playerAdd, j] != null)
+                    {
+                        unitVisuals[i+playerAdd, j].GetComponent<Animator>().SetBool(selectableBool, false);
+                    }
+                }
+            }
+        }
+    }
+    public void UnitSelected(CardVisual selectedUnit)
+    {
+        Vector3Int unitLocation = new Vector3Int(-1,-1);
+
+        foreach (Player player in GameManager.instance.players)
+        {
+            bool isCurrentDisplayPlayer = player.id == GameManager.instance.displayPlayer;
+            int playerAdd = (isCurrentDisplayPlayer) ? 0 : columnCount;
+
+            for (int i = 0; i < columnCount; i++)
+            {
+                //for every column
+                for (int j = 0; j < rowCount; j++)
+                {
+                    //for every row
+                    if (unitVisuals[i+playerAdd, j] == selectedUnit)
+                    {
+                        unitLocation = new Vector3Int(i,j,player.id);
+                    }
+                }
+            }
+        }
+        
+        if (unitLocation.x >= 0 && unitLocation.y >= 0) SelectionManager.instance.selectedBoard.Add(unitLocation);
+        else Debug.Log("Selected Unit Not Found On Board");
+    }
     public int CountPlayerIQ(int playerid)
     {
         int sciencePoints = 0;

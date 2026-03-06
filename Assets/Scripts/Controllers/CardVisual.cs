@@ -33,7 +33,9 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
         anim = GetComponent<Animator>();
     }
     void OnMouseDown()
-    {
+    { 
+        if (isUnit) return;
+        
         startDragPos = transform.position;
         transform.position = MousePos();
         if (LaneManager.instance != null) LaneManager.instance.PlaceActionToggle(card.isAction);
@@ -41,6 +43,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     }
     public void OnMouseEnter()
     {
+        if (isUnit) return;
         if (CardManager.instance != null)
         {
             CardManager.instance.lastHoveredCardPos = CardManager.instance.currentHeldCards.IndexOf(this);
@@ -50,6 +53,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     }
     void OnMouseExit()
     {
+        if (isUnit) return;
         if (CardManager.instance != null)
         {
             CardManager.instance.lastUnhoveredCardPos = CardManager.instance.currentHeldCards.IndexOf(this);
@@ -58,10 +62,12 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     }
     void OnMouseDrag()
     {
+        if (isUnit) return;
         transform.position = MousePos();
     }
     void OnMouseUp()
     {
+        if (isUnit) return;
         // DropCard();
         col.enabled = false;
         Collider2D hitCollider = Physics2D.OverlapPoint(MousePos());
@@ -124,6 +130,14 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventdata)
     {
 
+    }
+    public void UnitSelectionButton()
+    {
+        UnitManager.instance.UnitSelected(this);
+    }
+    public void CardSelectionButton()
+    {
+        
     }
     public void UpdateVisuals()
     {

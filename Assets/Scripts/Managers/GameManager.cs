@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     //money&Cards
     public List<CardData> defaultDeck;
-    public List<CardData> defaultOpener;
+    // public List<CardData> defaultOpener;
     [SerializeField] private int startingMoney;
     [SerializeField] private int turnOrderBonusMoney = 1;
     [SerializeField] private int startingCards;
@@ -176,7 +176,7 @@ public class GameManager : MonoBehaviour
     }
     public List<CardData> CreateOpener(Player player)
     {
-        if (player.opener == null || player.opener.Count < 1) player.opener = defaultOpener;
+        // if (player.opener == null || player.opener.Count < 1) player.opener = defaultOpener;
         CardData[] newOpener = new CardData[9];
         List<int> validPositions = new List<int>() {0,1,2,3,4,5,6,7,8};
         foreach (CardData data in player.opener)

@@ -6,6 +6,7 @@ public class DamageSelectedLaneEF : Effect
 {
     [field: SerializeField] public int attackDamage { get; private set; }
     [field: SerializeField] public int selectCount { get; private set; }
+    [field: SerializeField] public bool alsoOpposingLanes { get; private set; }
 
     public override List<GameAction> effect
     {
@@ -16,6 +17,8 @@ public class DamageSelectedLaneEF : Effect
             SelectLanesGA selectLanesGA = new SelectLanesGA(SelectionManager.instance.EnemyLanes(base.actionData.originPlayerId),selectCount);
             actionList.Add(selectLanesGA);
 
+            if (alsoOpposingLanes) actionList.Add(new SelectOpposingLanesGA());
+            
             actionList.Add(new SelectUnitsInLanesGA());
 
             DamageSelectedGA damageSelectedGA = new DamageSelectedGA(attackDamage);
