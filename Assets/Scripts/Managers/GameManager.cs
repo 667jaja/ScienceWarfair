@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     //manages overarching elements of a game such as players, loss, victory, turn start, turn end
     public static GameManager instance;
     [SerializeField] private int playerCount = 2;
-
+    public int maxSciencePoints;
+    
     //players
     public List<PlayerData> playerDatas;
     public List<Player> players = new List<Player>();
@@ -18,11 +19,18 @@ public class GameManager : MonoBehaviour
     public int displayPlayer;
 
     //ui
-    public int maxSciencePoints;
+    //money
     public Slider moneySlider;
     public Slider moneySliderEnemy;
+
+    //science points
     public Slider plaSciencePointsSlider;
     public Slider oppSciencePointsSlider;
+    public TMP_Text plaSciencePointNeeded;
+    public TMP_Text oppSciencePointNeeded;
+    public Transform plaSciencePointsWarning;
+    public Transform oppSciencePointsWarning;
+
     public TMP_Text plaActionPointsCount;
     public GameObject plaActionPointObject;
 
@@ -217,7 +225,7 @@ public class GameManager : MonoBehaviour
         //iq
         yield return LaneManager.instance.CountIqVisual();
         players[currentPlayer].sciencePoints += UnitManager.instance.CountPlayerIQ(currentPlayer);
-        UpdateSciencePointSliders();
+        UpdateSciencePointsUI();
 
         //stall
         yield return new WaitForSeconds(endOfTurnWait);
@@ -285,7 +293,7 @@ public class GameManager : MonoBehaviour
     {
         yield return LaneManager.instance.AddIqVisual(gainSciencePointsGA.playerId, gainSciencePointsGA.gainCount);
         players[gainSciencePointsGA.playerId].sciencePoints += gainSciencePointsGA.gainCount;
-        UpdateSciencePointSliders();
+        UpdateSciencePointsUI();
     }
     private IEnumerator GainActionPointsPerformer(GainActionPointsGA gainActionPointsGA)
     {
@@ -321,7 +329,7 @@ public class GameManager : MonoBehaviour
         UnitManager.instance.UpdateUnitUI();
         UpdateActionPointUI();
         UpdateMoneyUI();
-        UpdateSciencePointSliders();
+        UpdateSciencePointsUI();
         LaneManager.instance.UpdateLaneVisuals();
     }
     public void UpdateActionPointUI()
@@ -336,10 +344,19 @@ public class GameManager : MonoBehaviour
         moneySlider.value = players[displayPlayer].Money;
         moneySliderEnemy.value = players[GetNextPlayerId(displayPlayer)].Money;
     } 
-    public void UpdateSciencePointSliders()
+    public void UpdateSciencePointsUI()
     {
         plaSciencePointsSlider.value = players[displayPlayer].sciencePoints;
         oppSciencePointsSlider.value = players[GetNextPlayerId(displayPlayer)].sciencePoints;
+
+        plaSciencePointNeeded.text = (maxSciencePoints - players[displayPlayer].sciencePoints).ToString();
+        oppSciencePointNeeded.text = (maxSciencePoints - players[GetNextPlayerId(displayPlayer)].sciencePoints).ToString();
+
+
+        plaSciencePointsWarning.gameObject.SetActive(UnitManager.instance.CountPlayerIQ(displayPlayer) + players[displayPlayer].sciencePoints >= maxSciencePoints);
+        oppSciencePointsWarning.gameObject.SetActive(UnitManager.instance.CountPlayerIQ(GetNextPlayerId(displayPlayer)) + players[GetNextPlayerId(displayPlayer)].sciencePoints >= maxSciencePoints);
+
+        LaneManager.instance.UpdateLaneVisuals();
     }
 
     //get

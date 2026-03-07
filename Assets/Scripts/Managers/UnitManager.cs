@@ -251,6 +251,7 @@ public class UnitManager : MonoBehaviour
         {
             PushAllUnitsForward();
             UpdateUnitUI();
+            GameManager.instance.UpdateSciencePointsUI();
         }
         return unitAddSuccess;
     }
@@ -267,6 +268,7 @@ public class UnitManager : MonoBehaviour
             moveValid = AddUnit(moveUnitGA.playerId, moveUnitGA.destinationPosition, selectedUnit);
 
             if (!moveValid) GameManager.instance.players[moveUnitGA.playerId].units[moveUnitGA.originPosition.x, moveUnitGA.originPosition.y] = selectedUnit;
+            GameManager.instance.UpdateSciencePointsUI();
             LaneManager.instance.UpdateLaneVisuals();
         }
 

@@ -114,6 +114,7 @@ public class DamageManager : MonoBehaviour
             UnitManager.instance.PushAllUnitsForward();
             UnitManager.instance.UpdateUnitUI();
             LaneManager.instance.UpdateLaneVisuals();
+            GameManager.instance.UpdateSciencePointsUI();
         }
     }
     //deal damage to all units in lane 

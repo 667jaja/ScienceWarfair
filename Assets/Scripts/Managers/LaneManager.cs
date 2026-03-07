@@ -142,12 +142,12 @@ public class LaneManager : MonoBehaviour
         {
             lane.UpdateVisual();
         }
-        iqAddSlider.value = 0;
+        iqAddSlider.value = GameManager.instance.players[GameManager.instance.displayPlayer].sciencePoints;
         foreach(LaneVisual lane in enemyLaneVisuals)
         {
             lane.UpdateVisual();
         }
-        iqAddSliderEnemy.value = 0;
+        iqAddSliderEnemy.value = GameManager.instance.players[GameManager.instance.GetNextPlayerId(GameManager.instance.displayPlayer)].sciencePoints;;
     }
     public void PlaceActionToggle(bool isPlacingAction)
     {
