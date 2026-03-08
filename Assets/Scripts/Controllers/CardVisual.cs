@@ -15,6 +15,10 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     private Vector3 startDragPos;
     [SerializeField] private bool isUnit;
 
+    //selectable
+    private bool isSelectable;
+    [SerializeField] private string selectableBool;
+
     //UI
     [SerializeField] private List<Image> cardArtUI = new List<Image>();
     [SerializeField] private List<TMP_Text> titleUI, placementCostUI, iqUI, healthUI, descriptionUI = new List<TMP_Text>();
@@ -131,9 +135,15 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     {
 
     }
+    public void SetSelectable(bool setSelectable)
+    {
+        isSelectable = setSelectable;
+        anim.SetBool(selectableBool, setSelectable);
+    }
     public void UnitSelectionButton()
     {
-        UnitManager.instance.UnitSelected(this);
+        if (isSelectable) UnitManager.instance.UnitSelected(this);
+        SetSelectable(false);
     }
     public void CardSelectionButton()
     {

@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUnit: 1
+  selectableBool: isSelectable
   cardArtUI:
   - {fileID: 6381715276770193922}
   titleUI:
@@ -1566,7 +1567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5637096320164002696
 RectTransform:
   m_ObjectHideFlags: 0

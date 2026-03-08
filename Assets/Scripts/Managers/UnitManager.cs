@@ -30,7 +30,6 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private float destroyAnimationLength;
     [SerializeField] private string damageAnimationName;
     [SerializeField] private float damageAnimationLength;
-    [SerializeField] private string selectableBool;
 
     void Awake()
     {
@@ -510,27 +509,21 @@ public class UnitManager : MonoBehaviour
             Vector2Int index = new Vector2Int(playerAdd+unitPosition.x, unitPosition.y);
             if (unitVisuals[index.x, index.y] != null)
             {
-                unitVisuals[index.x, index.y].GetComponent<Animator>().SetBool(selectableBool, true);
+                unitVisuals[index.x, index.y].SetSelectable(true);
             }
         }
     }
     public void MakeAllUnitsNotSelectable()
     {
-        foreach (Player player in GameManager.instance.players)
+        for (int i = 0; i < columnCount*2; i++)
         {
-            bool isCurrentDisplayPlayer = player.id == GameManager.instance.displayPlayer;
-            int playerAdd = (isCurrentDisplayPlayer) ? 0 : columnCount;
-
-            for (int i = 0; i < columnCount; i++)
+            //for every column
+            for (int j = 0; j < rowCount; j++)
             {
-                //for every column
-                for (int j = 0; j < rowCount; j++)
+                //for every row
+                if (unitVisuals[i, j] != null)
                 {
-                    //for every row
-                    if (unitVisuals[i+playerAdd, j] != null)
-                    {
-                        unitVisuals[i+playerAdd, j].GetComponent<Animator>().SetBool(selectableBool, false);
-                    }
+                    unitVisuals[i, j].SetSelectable(false);
                 }
             }
         }

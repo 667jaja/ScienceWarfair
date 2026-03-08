@@ -27,7 +27,11 @@ public class GameManager : MonoBehaviour
     public Slider plaSciencePointsSlider;
     public Slider oppSciencePointsSlider;
     public TMP_Text plaSciencePointNeeded;
+    public TMP_Text plaCurrentSciencePoints;
     public TMP_Text oppSciencePointNeeded;
+    public TMP_Text oppCurrentSciencePoints;
+
+
     public Transform plaSciencePointsWarning;
     public Transform oppSciencePointsWarning;
 
@@ -350,7 +354,10 @@ public class GameManager : MonoBehaviour
         oppSciencePointsSlider.value = players[GetNextPlayerId(displayPlayer)].sciencePoints;
 
         plaSciencePointNeeded.text = (maxSciencePoints - players[displayPlayer].sciencePoints).ToString();
+        plaCurrentSciencePoints.text = players[displayPlayer].sciencePoints.ToString();
+
         oppSciencePointNeeded.text = (maxSciencePoints - players[GetNextPlayerId(displayPlayer)].sciencePoints).ToString();
+        oppCurrentSciencePoints.text = players[GetNextPlayerId(displayPlayer)].sciencePoints.ToString();
 
 
         plaSciencePointsWarning.gameObject.SetActive(UnitManager.instance.CountPlayerIQ(displayPlayer) + players[displayPlayer].sciencePoints >= maxSciencePoints);

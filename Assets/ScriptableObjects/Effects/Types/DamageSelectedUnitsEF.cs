@@ -16,16 +16,12 @@ public class DamageSelectedUnitsEF : Effect
         {
             List<GameAction> actionList = new List<GameAction>(); 
 
-            if (includeEnemy)
-            {
-                SelectUnitsGA SelectunitsGA = new SelectUnitsGA(SelectionManager.instance.UnitsByPlayerRow(GameManager.instance.GetNextPlayerId(base.actionData.originPlayerId), row), selectCount);
-                actionList.Add(SelectunitsGA);
-            }
-            if (includeFriendly)
-            {
-                SelectUnitsGA SelectunitsGA = new SelectUnitsGA(SelectionManager.instance.UnitsByPlayerRow(base.actionData.originPlayerId, row), selectCount);
-                actionList.Add(SelectunitsGA);
-            }
+            List<Vector3Int> selectedThings = new();
+            if (includeEnemy) selectedThings.AddRange(SelectionManager.instance.UnitsByPlayerRow(GameManager.instance.GetNextPlayerId(base.actionData.originPlayerId), row));
+            if (includeFriendly) selectedThings.AddRange(SelectionManager.instance.UnitsByPlayerRow(base.actionData.originPlayerId, row));
+            
+            SelectUnitsGA SelectunitsGA = new SelectUnitsGA(selectedThings, selectCount);
+            actionList.Add(SelectunitsGA);
 
             DamageSelectedGA damageSelectedGA = new DamageSelectedGA(attackDamage);
             actionList.Add(damageSelectedGA);

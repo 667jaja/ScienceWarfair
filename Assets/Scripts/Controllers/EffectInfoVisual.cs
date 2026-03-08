@@ -28,5 +28,6 @@ public class EffectInfoVisual : MonoBehaviour
         cardCost.text = cost.ToString();
         cardIq.text = iq.ToString();
         cardDesc.text = description;
+        disabledCover.SetActive(false);
     }
 }
