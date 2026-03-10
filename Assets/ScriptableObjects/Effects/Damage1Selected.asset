@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c382c8f9d7db03f479d23b04a12032e9, type: 3}
-  m_Name: Damage2SelectedUnitRow3
+  m_Name: Damage1Selected
   m_EditorClassIdentifier: 
-  <effectId>k__BackingField: 2026030504
-  <attackDamage>k__BackingField: 2
+  <effectId>k__BackingField: 2026030501
+  <attackDamage>k__BackingField: 1
   <selectCount>k__BackingField: 1
-  <includeFriendly>k__BackingField: 0
+  <includeFriendly>k__BackingField: 1
   <includeEnemy>k__BackingField: 1
-  <row>k__BackingField: 2
+  <row>k__BackingField: -1

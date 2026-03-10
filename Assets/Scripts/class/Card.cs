@@ -89,7 +89,6 @@ public class Card
 
     //abilities
     public bool noAttack { get => cardData.noAttack; }
-    public string cardEffect { get => cardData.cardEffect; }
     public List<EffectTrigger> effectTriggers {get; set;}
     public CardData containedCard { get; set; }
 

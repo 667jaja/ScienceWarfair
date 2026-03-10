@@ -10,7 +10,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     //[SerializeField] private SpriteRenderer cardArtUI;
     private Animator anim;
     private Collider2D col;
-    private Card card;
+    public Card card;
     
     private Vector3 startDragPos;
     [SerializeField] private bool isUnit;
@@ -38,7 +38,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     }
     void OnMouseDown()
     { 
-        if (isUnit) return;
+        if (isUnit || isSelectable) return;
         
         startDragPos = transform.position;
         transform.position = MousePos();
@@ -47,7 +47,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     }
     public void OnMouseEnter()
     {
-        if (isUnit) return;
+        if (isUnit || isSelectable) return;
         if (CardManager.instance != null)
         {
             CardManager.instance.lastHoveredCardPos = CardManager.instance.currentHeldCards.IndexOf(this);
@@ -57,7 +57,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     }
     void OnMouseExit()
     {
-        if (isUnit) return;
+        if (isUnit || isSelectable) return;
         if (CardManager.instance != null)
         {
             CardManager.instance.lastUnhoveredCardPos = CardManager.instance.currentHeldCards.IndexOf(this);
@@ -66,12 +66,12 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     }
     void OnMouseDrag()
     {
-        if (isUnit) return;
+        if (isUnit || isSelectable) return;
         transform.position = MousePos();
     }
     void OnMouseUp()
     {
-        if (isUnit) return;
+        if (isUnit || isSelectable) return;
         // DropCard();
         col.enabled = false;
         Collider2D hitCollider = Physics2D.OverlapPoint(MousePos());
@@ -137,6 +137,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     }
     public void SetSelectable(bool setSelectable)
     {
+        anim = GetComponent<Animator>();
         isSelectable = setSelectable;
         anim.SetBool(selectableBool, setSelectable);
     }
@@ -147,7 +148,8 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     }
     public void CardSelectionButton()
     {
-        
+        if (isSelectable) CardManager.instance.HandSelected(this);
+        SetSelectable(false);
     }
     public void UpdateVisuals()
     {

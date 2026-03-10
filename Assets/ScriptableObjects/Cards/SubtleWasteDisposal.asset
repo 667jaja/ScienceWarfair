@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
-  m_Name: Whistle Blower
+  m_Name: SubtleWasteDisposal
   m_EditorClassIdentifier: 
-  <CardDataId>k__BackingField: 20260305
-  <title>k__BackingField: Whistle Blower
-  <description>k__BackingField: deal 3 damage to a selected unit, discard a card
-  <cardArt>k__BackingField: {fileID: 21300000, guid: 165c88d2fb655d14f9b7fa6eda5d9f37, type: 3}
+  <CardDataId>k__BackingField: 2026030901
+  <title>k__BackingField: Subtle Waste Disposal
+  <description>k__BackingField: draw 4 cards then discard 3
+  <cardArt>k__BackingField: {fileID: 21300000, guid: 598896af7294373449d4f8b01c14dfe1, type: 3}
   isAction: 1
   <placementCost>k__BackingField: 0
   <iq>k__BackingField: 0
   <health>k__BackingField: 0
   <noAttack>k__BackingField: 0
   <effectTriggerDatas>k__BackingField:
-  - {fileID: 11400000, guid: 542a9bd4681e29140a2f59e3946fdaf7, type: 2}
-  - {fileID: 11400000, guid: e8ed89baa4fa8f14f92349fc63bdab27, type: 2}
+  - {fileID: 11400000, guid: 080084a68ff8b274bba9aa288fcd2c1e, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

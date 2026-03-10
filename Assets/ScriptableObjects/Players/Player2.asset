@@ -13,27 +13,7 @@ MonoBehaviour:
   m_Name: Player2
   m_EditorClassIdentifier: 
   <playerName>k__BackingField: 
-  <deck>k__BackingField:
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
-  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
+  <deck>k__BackingField: []
   <opener>k__BackingField:
   - {fileID: 11400000, guid: 33cf9720279384f4c9bd070a67c1ad82, type: 2}
   - {fileID: 11400000, guid: b8c4627ce80ef35459d5b1803147d0ac, type: 2}

@@ -15,12 +15,13 @@ public class SelectionManager : MonoBehaviour
     {
         instance = this;
     }
-    void OnEnable()
+    void OnEnable() 
     {
         ActionManager.AttachPerformer<SelectLanesGA>(SelectLanePerformer);
         ActionManager.AttachPerformer<SelectUnitsInLanesGA>(SelectUnitsInSelectedLanes);
         ActionManager.AttachPerformer<SelectOpposingLanesGA>(SelectOpposingLanes);
         ActionManager.AttachPerformer<SelectUnitsGA>(SelectBoardPerformer);
+        ActionManager.AttachPerformer<SelectCardsGA>(SelectHandPerformer);
     }
     void OnDisable()
     {
@@ -28,6 +29,7 @@ public class SelectionManager : MonoBehaviour
         ActionManager.DetachPerformer<SelectUnitsInLanesGA>();
         ActionManager.DetachPerformer<SelectOpposingLanesGA>();
         ActionManager.DetachPerformer<SelectUnitsGA>();
+        ActionManager.DetachPerformer<SelectCardsGA>();
     }
     public List<Vector2Int> EnemyLanes(int playerId)
     {
@@ -66,12 +68,14 @@ public class SelectionManager : MonoBehaviour
     {
         selectedBoard = new();
 
+        //make sure there are enough things to select
         int validUnitsCount = 0;
         foreach (Vector3Int pos in selectUnitsGA.validPos)
         {
             if (GameManager.instance.players[pos.z].units[pos.x, pos.y] != null) validUnitsCount++;
         }
         if (validUnitsCount < selectUnitsGA.selectCount) selectUnitsGA.selectCount = validUnitsCount;
+
         //make units selectable
         if (GameManager.instance.displayPlayer == selectUnitsGA.inputPlayerId)
             UnitManager.instance.MakeUnitsSelectable(selectUnitsGA.validPos);
@@ -146,9 +150,42 @@ public class SelectionManager : MonoBehaviour
         //make lanes not selectable
         LaneManager.instance.LaneSelectOff();
     } 
-    public IEnumerator SelectHandPerformer(List<Card> avaliableOptions, int selectCount)
+    public IEnumerator SelectHandPerformer(SelectCardsGA selectCardsGA)
     {
+        CardManager.instance.UpdateHandUI();
         selectedHand = new();
+
+        //make sure there are enough things to select
+        int validCardsCount = 0;
+        foreach (Card item in selectCardsGA.validCards)
+        {
+            if (CardManager.instance.FindCardInHand(selectCardsGA.inputPlayerId, item.cardInstanceId, item.cardData.CardDataId) != null) validCardsCount++;
+        }
+
+        if (validCardsCount < selectCardsGA.selectCount) selectCardsGA.selectCount = validCardsCount;
+
+        //make cards selectable
+        if (GameManager.instance.displayPlayer == selectCardsGA.inputPlayerId)
+        foreach (Card item in selectCardsGA.validCards)
+        {
+            CardManager.instance.MakeHandSelectable(item);
+        }
+
+        //wait for player to select
+        while (selectedHand.Count < selectCardsGA.selectCount)
+        {
+            yield return null;
+        }
+
+        //carryover selection to other player
+        if (RelayManager.instance != null && GameManager.instance.displayPlayer == selectCardsGA.inputPlayerId)
+        {
+            OnlineManager.instance.InputSelection();
+        }
+
+        //make cards not selectable
+        CardManager.instance.MakeHandUnselectable();
+
         yield return null;
     } 
     public IEnumerator SelectDiscardPerformer(List<Card> avaliableOptions, int selectCount)

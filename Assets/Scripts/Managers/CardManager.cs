@@ -42,11 +42,17 @@ public class CardManager : MonoBehaviour
     {
         ActionManager.AttachPerformer<DrawCardGA>(DrawCardPerformer);
         ActionManager.AttachPerformer<DrawCardsGA>(DrawCardsPerformer);
+        ActionManager.AttachPerformer<DiscardCardGA>(DiscardCardPerformer);
+        ActionManager.AttachPerformer<DiscardCardsGA>(DiscardCardsPerformer);
+        ActionManager.AttachPerformer<DiscardSelectedGA>(DiscardSelectedPerformer);
     }
     private void OnDisable()
     {
         ActionManager.DetachPerformer<DrawCardGA>();
         ActionManager.DetachPerformer<DrawCardsGA>();
+        ActionManager.DetachPerformer<DiscardCardGA>();
+        ActionManager.DetachPerformer<DiscardCardsGA>();
+        ActionManager.DetachPerformer<DiscardSelectedGA>();
     }
     public void DrawCards(int playerId, int count = 1)
     {
@@ -66,7 +72,7 @@ public class CardManager : MonoBehaviour
     }
     private IEnumerator DrawCardsPerformer(DrawCardsGA drawCardsGA)
     {
-        Debug.Log("Multi card Draw");
+        //Debug.Log("Multi card Draw");
 
         for (int i = 0; i < drawCardsGA.drawCount; i++)
         {
@@ -138,11 +144,29 @@ public class CardManager : MonoBehaviour
         GameManager.instance.players[playerId].deck = CreateDeck(GameManager.instance.players[playerId].rawDeck);
         UpdateDeckUI();
     }
-    // private IEnumerator DiscardCard(DiscardCardGA discardCardGA)
-    // {
-    //     RemoveCard(discardCardGA.card);
-    //     yield return null;
-    // }
+    private IEnumerator DiscardSelectedPerformer(DiscardSelectedGA discardSelectedGA)
+    {
+        DiscardCardsGA discardCardsGA =  new DiscardCardsGA(discardSelectedGA.playerId, SelectionManager.instance.selectedHand);
+        ActionManager.instance.AddReaction(discardCardsGA);
+
+        yield return null;
+    }
+    private IEnumerator DiscardCardsPerformer(DiscardCardsGA discardCardsGA)
+    {
+        for (int i = 0; i < discardCardsGA.discardedCards.Count; i++)
+        {
+            DiscardCardGA discardCardGA = new(discardCardsGA.playerId, discardCardsGA.discardedCards[i]);
+            //drawCardGA.description = GameManager.instance.players[drawCardsGA.playerId].name + " draws a card";
+            ActionManager.instance.AddReaction(discardCardGA);
+        }
+        yield return null;
+    }
+    private IEnumerator DiscardCardPerformer(DiscardCardGA discardCardGA)
+    {
+        RemoveCard(discardCardGA.playerId, discardCardGA.discardedCard);
+        UpdateHandUI();
+        yield return null;
+    }
     public bool RemoveCard(int playerId, Card removedCard)
     {
         //find card in hand
@@ -241,6 +265,63 @@ public class CardManager : MonoBehaviour
             }
         }
         return foundCard;
+    }
+    public CardVisual FindCardVisualInHand(int cardInstanceId, int CardDataId)
+    {
+        //find card in hand
+
+        bool cardFound = false;
+        CardVisual foundCard = null;
+        int i = 0;
+        foreach (CardVisual cardVisual in currentHeldCards)
+        {
+            if (cardVisual.card.cardInstanceId == cardInstanceId)
+            {
+                foundCard = cardVisual;
+                cardFound = true;
+                break;
+            }
+            i++;
+        }
+        if (!cardFound)
+        {
+            i=0;
+            foreach (CardVisual card in currentHeldCards)
+            {
+                if (cardVisual.card.cardData.CardDataId == CardDataId)
+                {
+                    foundCard = card;
+                    cardFound = true;
+                    break;
+                }
+                i++;
+            }
+            if (cardFound)
+            {
+                Debug.Log("Card not found by Id, returned identical Card");
+            }
+            else
+            {
+                Debug.Log("Card not found");
+            }
+        }
+        return foundCard;
+    }
+    public void MakeHandSelectable(Card card)
+    {
+        CardVisual cardInHand = FindCardVisualInHand(card.cardInstanceId, card.cardData.CardDataId);
+        cardInHand.SetSelectable(true);
+    }
+    public void MakeHandUnselectable()
+    {
+        foreach(CardVisual card in currentHeldCards)
+        {
+            card.SetSelectable(false);
+        }
+    }
+    public void HandSelected(CardVisual visual)
+    {
+        SelectionManager.instance.selectedHand.Add(visual.card);
     }
     public void UpdateDeckUI()
     {
