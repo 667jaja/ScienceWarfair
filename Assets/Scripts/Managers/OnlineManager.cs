@@ -57,12 +57,14 @@ public class OnlineManager : NetworkBehaviour
         CardStruct[] selectedHand = new CardStruct[SelectionManager.instance.selectedHand.Count];
         for (int i = 0; i < selectedHand.Length; i++)
         {
+            if (SelectionManager.instance.selectedHand[i] != null)
             selectedHand[i] = new CardStruct(SelectionManager.instance.selectedHand[i]);
         }
         //discard
         int[] selectedDiscard = new int[SelectionManager.instance.selectedDiscard.Count];
         for (int i = 0; i < selectedDiscard.Length; i++)
         {
+            if (SelectionManager.instance.selectedDiscard[i] != null)
             selectedDiscard[i] = SelectionManager.instance.selectedDiscard[i].cardData.CardDataId;
         }
         //units
