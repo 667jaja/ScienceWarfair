@@ -17,6 +17,7 @@ MonoBehaviour:
   <effects>k__BackingField:
   - {fileID: 11400000, guid: 644bbd82a53519f40bc050ebf1b5f609, type: 2}
   <effectDescription>k__BackingField: Add 3 Health to target
+  <specialAnimation>k__BackingField: 5
   <pre>k__BackingField: 0
   <oneTimeUse>k__BackingField: 0
   <countDown>k__BackingField: 0

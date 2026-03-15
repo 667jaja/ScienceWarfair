@@ -14,12 +14,20 @@ public class DamageSelectedLaneEF : Effect
         {
             List<GameAction> actionList = new List<GameAction>(); 
 
+            //selection
             SelectLanesGA selectLanesGA = new SelectLanesGA(SelectionManager.instance.EnemyLanes(base.actionData.originPlayerId),selectCount);
             actionList.Add(selectLanesGA);
 
             if (alsoOpposingLanes) actionList.Add(new SelectOpposingLanesGA());
             
             actionList.Add(new SelectUnitsInLanesGA());
+
+            //animation
+            if (base.specialAnimation != SpecialAnimation.Null)
+            {
+                AnimateSelectedLanesGA animateSelectedLanesGA = new AnimateSelectedLanesGA(base.specialAnimation,SpecialAnimationManager.instance.AnimationLength(base.specialAnimation)-0.2f, 0.2f);
+                actionList.Add(animateSelectedLanesGA);
+            }
 
             DamageSelectedGA damageSelectedGA = new DamageSelectedGA(attackDamage);
             actionList.Add(damageSelectedGA);

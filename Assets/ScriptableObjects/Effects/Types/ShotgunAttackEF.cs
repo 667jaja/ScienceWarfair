@@ -16,6 +16,13 @@ public class ShotgunAttackEF : Effect
             List<GameAction> actionList = new List<GameAction>(); 
             int i = 0;
             
+            //animation
+            if (base.specialAnimation != SpecialAnimation.Null)
+            {
+                SpecialAnimationGA specialAnimationGA = new SpecialAnimationGA(base.specialAnimation, new Vector2Int(base.actionData.originPosition.x,0), base.actionData.originPosition.x, GameManager.instance.GetNextPlayerId(base.actionData.originPlayerId), SpecialAnimationManager.instance.AnimationLength(base.specialAnimation));
+                actionList.Add(specialAnimationGA);
+            }
+
             while (remainingDamage > 0)
             {
                 Debug.Log("player: " + targetplayer +" position: " + base.actionData.originPosition.x + " " + i);

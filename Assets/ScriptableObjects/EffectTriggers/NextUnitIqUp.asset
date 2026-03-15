@@ -17,6 +17,7 @@ MonoBehaviour:
   <effects>k__BackingField:
   - {fileID: 11400000, guid: c066a5400ae303d44ae34e896a6f63da, type: 2}
   <effectDescription>k__BackingField: Increase Target's Iq
+  <specialAnimation>k__BackingField: 2
   <pre>k__BackingField: 0
   <oneTimeUse>k__BackingField: 1
   <countDown>k__BackingField: 0

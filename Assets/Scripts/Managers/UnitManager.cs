@@ -342,7 +342,43 @@ public class UnitManager : MonoBehaviour
         Debug.Log("GetUnitByInstanceId failed. No unit found");
         return null;
     }
+    public Vector2 GetBoardPos(Vector3Int position)
+    {
+        bool isDisplay = position.z == GameManager.instance.displayPlayer;
+        int playerAdd = isDisplay? 0 : columnCount;
+        Transform LanePos = laneTransforms[position.x+playerAdd];
+        Vector2 foundLoc = Vector2.zero;
 
+        //find number of units in lane
+        int unitsInLane = 0;
+        int i = 0;
+        for (i = 0; i < rowCount; i++)
+        {
+            if (GameManager.instance.players[position.z].units[position.x, i] != null) unitsInLane++;
+        }
+
+        //use to calculate lane height
+        float laneHeight = -(maxLaneHeight * laneHeightScaleRate) / (unitsInLane + laneHeightScaleRate) + maxLaneHeight;
+
+        //units physically below target (enemy units go up)
+        int unitsBelow = isDisplay? unitsInLane-position.y : position.y;
+
+        foundLoc = new Vector2(LanePos.position.x, LanePos.position.y - laneHeight / 2 + (laneHeight / (unitsInLane + 1)) * (unitsBelow + 1));
+
+        Debug.Log("original position: " + position.x +": "+ position.y);
+        Debug.Log("units below: " + unitsBelow);
+        Debug.Log("added height: " + (foundLoc.y - LanePos.position.y));
+
+        return foundLoc;
+    }
+    public Vector2 GetLanePos(Vector2Int position)
+    {
+        int playerAdd = (position.y == GameManager.instance.displayPlayer)? columnCount : 0;
+        Transform LanePos = laneTransforms[position.x+playerAdd];
+
+
+        return LanePos.transform.position;
+    }
     public void UpdateUnitUI()
     {
         // UpdateLaneUI(laneTransforms[0], 0, GameManager.instance.players[GameManager.instance.currentPlayer].lane1);
@@ -351,19 +387,12 @@ public class UnitManager : MonoBehaviour
             //for every column
             for (int j = 0; j < rowCount; j++)
             {
-                // Debug.Log("player: " + player.id + " index: " + i + ":" + j);
-                // Debug.Log("units height: " + unitVisuals.GetLength(0) + " units width: " + unitVisuals.GetLength(1));
-
                 //for every row
                 if (unitVisuals[i, j] != null)
                 {
                     Destroy(unitVisuals[i, j].gameObject);
-                    //Debug.Log("Destroyed Visuals: " + i + ": " + j);
                 }
-                // else
-                // {
-                //     Debug.Log("Lane: " + i + ": " + j + " empty");
-                // }
+
             }
         }
         unitVisuals = new CardVisual[columnCount * 2, rowCount];
@@ -373,8 +402,6 @@ public class UnitManager : MonoBehaviour
             bool isCurrentDisplayPlayer = player.id == GameManager.instance.displayPlayer;
             int playerAdd = (isCurrentDisplayPlayer) ? 0 : columnCount;
             //empty UI objects
-
-            
 
             //replace UI objects
             for (int i = playerAdd; i < columnCount + playerAdd; i++)

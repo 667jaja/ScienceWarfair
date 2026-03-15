@@ -1,0 +1,574 @@
+fileFormatVersion: 2
+guid: 6f2af8045e5c71748acabc92c4380b5f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5876851589442878491
+    second: Pest_Tubes_0
+  - first:
+      213: -780680826248057599
+    second: Pest_Tubes_1
+  - first:
+      213: -3761808995309374128
+    second: Pest_Tubes_2
+  - first:
+      213: -2308744687532622687
+    second: Pest_Tubes_3
+  - first:
+      213: 8210103829624387722
+    second: Pest_Tubes_4
+  - first:
+      213: -671230634117530117
+    second: Pest_Tubes_5
+  - first:
+      213: 6562934547987977509
+    second: Pest_Tubes_6
+  - first:
+      213: 9183120736482664533
+    second: Pest_Tubes_7
+  - first:
+      213: -7276802388510640576
+    second: Pest_Tubes_8
+  - first:
+      213: -1737007232030915383
+    second: Pest_Tubes_9
+  - first:
+      213: 7088438005370758911
+    second: Pest_Tubes_10
+  - first:
+      213: 9088517517823608375
+    second: Pest_Tubes_11
+  - first:
+      213: -6753512806973694488
+    second: Pest_Tubes_12
+  - first:
+      213: -9199308289736097390
+    second: Pest_Tubes_13
+  - first:
+      213: -8751382340384534860
+    second: Pest_Tubes_14
+  - first:
+      213: 2763567741666372560
+    second: Pest_Tubes_15
+  - first:
+      213: 7214070277117996750
+    second: Pest_Tubes_16
+  - first:
+      213: -5667535645102572975
+    second: Pest_Tubes_17
+  - first:
+      213: 6191333555292816371
+    second: Pest_Tubes_18
+  - first:
+      213: -8858401647577248042
+    second: Pest_Tubes_19
+  - first:
+      213: -6999274894964550615
+    second: Pest_Tubes_20
+  - first:
+      213: 5839982855597794341
+    second: Pest_Tubes_21
+  - first:
+      213: 6524396463746366648
+    second: Pest_Tubes_22
+  - first:
+      213: 1103675890210613588
+    second: Pest_Tubes_23
+  - first:
+      213: -2076074330271370321
+    second: Pest_Tubes_24
+  - first:
+      213: 2784219881180430328
+    second: Pest_Tubes_25
+  - first:
+      213: 1356320087844933909
+    second: Pest_Tubes_26
+  - first:
+      213: -6536101676924673964
+    second: Pest_Tubes_27
+  - first:
+      213: 4880656076400917233
+    second: Pest_Tubes_28
+  - first:
+      213: -5046642212881836592
+    second: Pest_Tubes_29
+  - first:
+      213: 736408913790149135
+    second: Pest_Tubes_30
+  - first:
+      213: -3121305864877317983
+    second: Pest_Tubes_31
+  - first:
+      213: 5504702406846884191
+    second: Pest_Tubes_32
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Pest_Tubes_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4000
+        width: 775
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e34195cd9a317ea0800000000000000
+      internalID: -5876851589442878491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pest_Tubes_1
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 4000
+        width: 775
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10da68cbce67a25f0800000000000000
+      internalID: -780680826248057599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pest_Tubes_2
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 4000
+        width: 775
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05537b156ae5bcbc0800000000000000
+      internalID: -3761808995309374128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pest_Tubes_3
+      rect:
+        serializedVersion: 2
+        x: 2325
+        y: 4000
+        width: 775
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ac3c8e50f0b5ffd0800000000000000
+      internalID: -2308744687532622687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pest_Tubes_4
+      rect:
+        serializedVersion: 2
+        x: 3100
+        y: 4000
+        width: 775
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a88f5dd1fe520f170800000000000000
+      internalID: 8210103829624387722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pest_Tubes_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2000
+        width: 775
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfd701b6b4f4fa6f0800000000000000
+      internalID: -671230634117530117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pest_Tubes_6
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 2000
+        width: 775
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52556f0133a341b50800000000000000
+      internalID: 6562934547987977509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pest_Tubes_7
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 2000
+        width: 775
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 550a293d7aff07f70800000000000000
+      internalID: 9183120736482664533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pest_Tubes_8
+      rect:
+        serializedVersion: 2
+        x: 2325
+        y: 2000
+        width: 775
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 046fb1428ca930b90800000000000000
+      internalID: -7276802388510640576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pest_Tubes_9
+      rect:
+        serializedVersion: 2
+        x: 3100
+        y: 2000
+        width: 775
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c443822029e4e7e0800000000000000
+      internalID: -1737007232030915383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pest_Tubes_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 775
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff6a08a4fc03f5260800000000000000
+      internalID: 7088438005370758911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pest_Tubes_11
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 0
+        width: 775
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7368ac88786e02e70800000000000000
+      internalID: 9088517517823608375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pest_Tubes_12
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 0
+        width: 775
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ed184a32e3b642a0800000000000000
+      internalID: -6753512806973694488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pest_Tubes_13
+      rect:
+        serializedVersion: 2
+        x: 2325
+        y: 0
+        width: 775
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29149fab9dd755080800000000000000
+      internalID: -9199308289736097390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pest_Tubes_14
+      rect:
+        serializedVersion: 2
+        x: 3100
+        y: 0
+        width: 775
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bec0c3d028dc8680800000000000000
+      internalID: -8751382340384534860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 7236f8633b3c03a4297780254a4dcf5f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Pest_Tubes_0: -5876851589442878491
+      Pest_Tubes_1: -780680826248057599
+      Pest_Tubes_10: 7088438005370758911
+      Pest_Tubes_11: 9088517517823608375
+      Pest_Tubes_12: -6753512806973694488
+      Pest_Tubes_13: -9199308289736097390
+      Pest_Tubes_14: -8751382340384534860
+      Pest_Tubes_2: -3761808995309374128
+      Pest_Tubes_3: -2308744687532622687
+      Pest_Tubes_4: 8210103829624387722
+      Pest_Tubes_5: -671230634117530117
+      Pest_Tubes_6: 6562934547987977509
+      Pest_Tubes_7: 9183120736482664533
+      Pest_Tubes_8: -7276802388510640576
+      Pest_Tubes_9: -1737007232030915383
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

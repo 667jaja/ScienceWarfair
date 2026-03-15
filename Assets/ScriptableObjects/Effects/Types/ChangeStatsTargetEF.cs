@@ -13,6 +13,13 @@ public class ChangeStatsTargetEF : Effect
         get
         {
             List<GameAction> actionList = new List<GameAction>(); 
+            
+            //animation
+            if (base.specialAnimation != SpecialAnimation.Null)
+            {
+                SpecialAnimationGA specialAnimationGA = new SpecialAnimationGA(base.specialAnimation, base.actionData.targetPositions[0], base.actionData.targetPositions[0].x, base.actionData.targetPlayerId, SpecialAnimationManager.instance.AnimationLength(base.specialAnimation));
+                actionList.Add(specialAnimationGA);
+            }
 
             ChangeStatsUnitGA changeStatsUnitGA = new ChangeStatsUnitGA(base.actionData.targetPlayerId, base.actionData.targetPositions[0], iq, health, placementCost);
             actionList.Add(changeStatsUnitGA);

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: IncreaseTargetIq
   m_EditorClassIdentifier: 
   <effectId>k__BackingField: 202512
+  specialAnimation: 2
   <iq>k__BackingField: 1
   <health>k__BackingField: 0
   <placementCost>k__BackingField: 0

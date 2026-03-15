@@ -566,6 +566,7 @@ GameObject:
   - component: {fileID: 78848206}
   - component: {fileID: 78848208}
   - component: {fileID: 78848209}
+  - component: {fileID: 78848210}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -990,18 +991,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6df09c7822714434ca902d27180c09b7, type: 2}
   - {fileID: 11400000, guid: c15c874dda0af1c47a64dacdda04256c, type: 2}
   - {fileID: 11400000, guid: 159d0dd6565e84a4db2f59da110bee30, type: 2}
-  - {fileID: 11400000, guid: 8f3236868e8613f4a9d33d3ea2a9053e, type: 2}
   - {fileID: 11400000, guid: adf938b728ce3704ea55b33ac1370708, type: 2}
   - {fileID: 11400000, guid: 2e5224af4da163545a0e052194a677e3, type: 2}
+  - {fileID: 11400000, guid: 5f13eadc7e09f89409cb66111b424a6d, type: 2}
   - {fileID: 11400000, guid: cd98d78d218ff504e96bfc96d8ea6570, type: 2}
   - {fileID: 11400000, guid: b92dfb9577aff7a41a680447d56d3467, type: 2}
   - {fileID: 11400000, guid: 35bf2f424b7fd2b40b8d855d22fc9e44, type: 2}
   - {fileID: 11400000, guid: 91d877122700fd0418e36080be62cffb, type: 2}
   - {fileID: 11400000, guid: bcef6269011294643b282999ca228e34, type: 2}
+  - {fileID: 11400000, guid: d29a19cf01bf9e148b80c1ec3a12bdc4, type: 2}
   - {fileID: 11400000, guid: 23dcd3450b21b8a478053732cf12b703, type: 2}
+  - {fileID: 11400000, guid: 21bcf4b7793db46419993a0cfc0c9db3, type: 2}
   - {fileID: 11400000, guid: cf86e050648ed4f468d112b8b36b4b10, type: 2}
   - {fileID: 11400000, guid: c066a5400ae303d44ae34e896a6f63da, type: 2}
   - {fileID: 11400000, guid: fdbff812916b00a4380efcbfd8053ef9, type: 2}
+  - {fileID: 11400000, guid: 8f3236868e8613f4a9d33d3ea2a9053e, type: 2}
   - {fileID: 11400000, guid: 7094c1f5c1e422344b1064ce2b0fab8a, type: 2}
   EffectTriggerDatas:
   - {fileID: 11400000, guid: e8ed89baa4fa8f14f92349fc63bdab27, type: 2}
@@ -1018,8 +1022,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ab96e31bd433b264aa9b18f0f743bc49, type: 2}
   - {fileID: 11400000, guid: 85003f28e63854940ae14e1e1a151797, type: 2}
   - {fileID: 11400000, guid: 633a9b47a0b9b004c930f2ad114b6003, type: 2}
-  - {fileID: 11400000, guid: 542a9bd4681e29140a2f59e3946fdaf7, type: 2}
   - {fileID: 11400000, guid: bf4c9c889e8bead40bc01d6b48a658a8, type: 2}
+  - {fileID: 11400000, guid: 542a9bd4681e29140a2f59e3946fdaf7, type: 2}
   - {fileID: 11400000, guid: 1bf393b65ff67284d9885002f0f0935d, type: 2}
   - {fileID: 11400000, guid: 4834c39696020d74c850842d7bc8877e, type: 2}
   - {fileID: 11400000, guid: 713950c19821ad644bd80397d06014bb, type: 2}
@@ -1028,6 +1032,37 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7bc8797fea064a14488d7b5bbd62c063, type: 2}
   - {fileID: 11400000, guid: 0fe42aa0c64a3a8428f62c4577b569f8, type: 2}
   - {fileID: 11400000, guid: d1422fc0b4da4424eb87030ad919c3d1, type: 2}
+--- !u!114 &78848210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78848190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537fa672912382b42a624a1c1125177d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animNames:
+  - Null
+  - DestroyMoon
+  - Potion
+  - Laugh
+  - Business
+  - Marriage
+  - Poison
+  animLength:
+  - 0
+  - 1.5
+  - 1
+  - 0.5
+  - 0.75
+  - 3
+  - 1
+  longestAnimLength: 4
+  specialAnimationPrefab: {fileID: 7127771497922264192, guid: aec525a7cb7891140bdca21f96c3b72b, type: 3}
+  specialAnimationTransform: {fileID: 3644842230764564984}
 --- !u!1 &103951456
 GameObject:
   m_ObjectHideFlags: 0
@@ -6133,6 +6168,7 @@ RectTransform:
   - {fileID: 434806903}
   - {fileID: 1514210488}
   - {fileID: 1489308276}
+  - {fileID: 3644842230764564984}
   - {fileID: 1583690793}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12440,6 +12476,41 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 7006228558093512517, guid: d6eaca16c99d889408efbd1688a916b9, type: 3}
   m_PrefabInstance: {fileID: 709873597}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &3644842230764564984
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8735036761087490109}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 956074738}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &8735036761087490109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3644842230764564984}
+  m_Layer: 5
+  m_Name: SpecialAnimationHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!224 &8875439011829756050 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1530173821955974729, guid: d6eaca16c99d889408efbd1688a916b9, type: 3}

@@ -10,6 +10,17 @@ public class AttackAllLanesEF : Effect
         get
         {
             List<GameAction> actionList = new List<GameAction>(); 
+
+            //animation
+            if (base.specialAnimation != SpecialAnimation.Null)
+            {
+                for (int i = 0; i < UnitManager.instance.columnCount; i++)
+                {
+                    SpecialAnimationGA specialAnimationGA = new SpecialAnimationGA(base.specialAnimation, new Vector2Int(i,0), i, GameManager.instance.GetNextPlayerId(base.actionData.originPlayerId), SpecialAnimationManager.instance.AnimationLength(base.specialAnimation));
+                    actionList.Add(specialAnimationGA);
+                }
+            }
+
             for (int i = 0; i < UnitManager.instance.columnCount; i++)
             {
                 AttackLaneGA attackLaneGA = new AttackLaneGA(GameManager.instance.GetNextPlayerId(base.actionData.originPlayerId), i,  attackDamage);

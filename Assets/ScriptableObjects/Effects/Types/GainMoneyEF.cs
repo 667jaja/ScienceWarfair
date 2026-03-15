@@ -11,8 +11,17 @@ public class GainMoneyEF : Effect
         get
         {
             List<GameAction> actionList = new List<GameAction>(); 
+                        
+            //animation
+            if (base.specialAnimation != SpecialAnimation.Null)
+            {
+                SpecialAnimationGA specialAnimationGA = new SpecialAnimationGA(base.specialAnimation, new Vector2Int(base.actionData.originPosition.x, base.actionData.originPosition.y), base.actionData.originPosition.x, base.actionData.originPlayerId, SpecialAnimationManager.instance.AnimationLength(base.specialAnimation));
+                actionList.Add(specialAnimationGA);
+            }
+            
             GainMoneyGA gainMoneyGA = new GainMoneyGA(base.actionData.originPlayerId, gainCount);
             actionList.Add(gainMoneyGA);
+
             return actionList;
         }
     }  

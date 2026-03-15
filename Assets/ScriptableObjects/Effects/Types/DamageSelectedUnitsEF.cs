@@ -16,15 +16,24 @@ public class DamageSelectedUnitsEF : Effect
         {
             List<GameAction> actionList = new List<GameAction>(); 
 
+            //selection
             List<Vector3Int> selectedThings = new();
             if (includeEnemy) selectedThings.AddRange(SelectionManager.instance.UnitsByPlayerRow(GameManager.instance.GetNextPlayerId(base.actionData.originPlayerId), row));
             if (includeFriendly) selectedThings.AddRange(SelectionManager.instance.UnitsByPlayerRow(base.actionData.originPlayerId, row));
             
             SelectUnitsGA SelectunitsGA = new SelectUnitsGA(selectedThings, selectCount);
             actionList.Add(SelectunitsGA);
+            
+            //animation
+            if (base.specialAnimation != SpecialAnimation.Null)
+            {
+                AnimateSelectedUnitsGA animateSelectedUnitsGA = new AnimateSelectedUnitsGA(base.specialAnimation,SpecialAnimationManager.instance.AnimationLength(base.specialAnimation)-0.2f, 0.2f);
+                actionList.Add(animateSelectedUnitsGA);
+            }
 
             DamageSelectedGA damageSelectedGA = new DamageSelectedGA(attackDamage);
             actionList.Add(damageSelectedGA);
+            
 
             return actionList;
         }

@@ -15,7 +15,7 @@ MonoBehaviour:
   <effectTriggerId>k__BackingField: 202514
   effectTriggerType: 0
   <effects>k__BackingField:
-  - {fileID: 11400000, guid: 2e5224af4da163545a0e052194a677e3, type: 2}
+  - {fileID: 11400000, guid: 5f13eadc7e09f89409cb66111b424a6d, type: 2}
   <effectDescription>k__BackingField: Draw 2 Cards
   <pre>k__BackingField: 0
   <oneTimeUse>k__BackingField: 0
