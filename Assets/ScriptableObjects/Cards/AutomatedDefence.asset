@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardDataId>k__BackingField: 202501
   <title>k__BackingField: Automated Defence
-  <description>k__BackingField: Attack when an enemy card is played. Does not attack
+  <description>k__BackingField: Attack when an enemy unit is created. Does not attack
     normally
   <cardArt>k__BackingField: {fileID: 8246177721365669999, guid: 5518f91bb471f254c975bfa72555fa20, type: 3}
   isAction: 0
@@ -22,9 +22,6 @@ MonoBehaviour:
   <iq>k__BackingField: 0
   <health>k__BackingField: 2
   <noAttack>k__BackingField: 1
-  <cardEffect>k__BackingField: Attack Lane
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: 20ffafea93230ec43bb85e2ff7ecc4ba, type: 2}
-  <effects>k__BackingField:
-  - {fileID: 11400000, guid: 83e9b1afe9dd00a47bd90f69f9e5eca8, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

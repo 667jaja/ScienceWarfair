@@ -17,11 +17,10 @@ MonoBehaviour:
   <description>k__BackingField: attack any lane for 2 damage
   <cardArt>k__BackingField: {fileID: 21300000, guid: 66311234ab54935459aa0927d08e84d0, type: 3}
   isAction: 0
-  <placementCost>k__BackingField: 5
+  <placementCost>k__BackingField: 4
   <iq>k__BackingField: 3
   <health>k__BackingField: 2
   <noAttack>k__BackingField: 0
-  <cardEffect>k__BackingField: Attack Selected Lane
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: 85003f28e63854940ae14e1e1a151797, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

@@ -17,11 +17,10 @@ MonoBehaviour:
   <description>k__BackingField: Attacks twice
   <cardArt>k__BackingField: {fileID: -2708123162176763443, guid: ae9642109f6c1994d822c0ba2d97a4d6, type: 3}
   isAction: 0
-  <placementCost>k__BackingField: 5
+  <placementCost>k__BackingField: 4
   <iq>k__BackingField: 1
   <health>k__BackingField: 6
   <noAttack>k__BackingField: 0
-  <cardEffect>k__BackingField: Attack Lane
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: ab96e31bd433b264aa9b18f0f743bc49, type: 2}
   <containedCard>k__BackingField: {fileID: 0}
