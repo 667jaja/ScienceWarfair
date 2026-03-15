@@ -14,15 +14,18 @@ public class ChangeStatsTargetEF : Effect
         {
             List<GameAction> actionList = new List<GameAction>(); 
             
+            SelectSpecificUnitsGA selectSpecificUnits = new SelectSpecificUnitsGA(new List<int>(){base.actionData.targetCard.cardInstanceId}, true);
+            actionList.Add(selectSpecificUnits);
+    
             //animation
             if (base.specialAnimation != SpecialAnimation.Null)
             {
-                SpecialAnimationGA specialAnimationGA = new SpecialAnimationGA(base.specialAnimation, base.actionData.targetPositions[0], base.actionData.targetPositions[0].x, base.actionData.targetPlayerId, SpecialAnimationManager.instance.AnimationLength(base.specialAnimation));
-                actionList.Add(specialAnimationGA);
+                AnimateSelectedUnitsGA animateSelectedUnitsGA = new AnimateSelectedUnitsGA(base.specialAnimation,SpecialAnimationManager.instance.AnimationLength(base.specialAnimation)-0.2f, 0.2f);
+                actionList.Add(animateSelectedUnitsGA);
             }
 
-            ChangeStatsUnitGA changeStatsUnitGA = new ChangeStatsUnitGA(base.actionData.targetPlayerId, base.actionData.targetPositions[0], iq, health, placementCost);
-            actionList.Add(changeStatsUnitGA);
+            ChangeStatsSelectedGA changeStatsSelectedGA = new ChangeStatsSelectedGA(iq, health, placementCost);
+            actionList.Add(changeStatsSelectedGA);
 
             return actionList;
         }

@@ -342,6 +342,29 @@ public class UnitManager : MonoBehaviour
         Debug.Log("GetUnitByInstanceId failed. No unit found");
         return null;
     }
+    public Vector3Int GetBoardPosByInstanceId(int instanceId)
+    {
+        //Card foundCard = null;
+        foreach (Player player in GameManager.instance.players)
+        {
+            //for every player
+            for (int i = 0; i < columnCount; i++)
+            {
+                //for every column
+                for (int j = 0; j < rowCount; j++)
+                {
+                    //for every row
+                    if (player.units[i,j] != null && player.units[i,j].cardInstanceId == instanceId)
+                    {
+                        Debug.Log("found unit by id at " + player.name +": " + i+":"+j);
+                        return new Vector3Int(i,j, player.id);
+                    }
+                }
+            }
+        }
+        Debug.Log("GetUnitByInstanceId failed. No unit found");
+        return new Vector3Int(-1,-1,-1);
+    }
     public Vector2 GetBoardPos(Vector3Int position)
     {
         bool isDisplay = position.z == GameManager.instance.displayPlayer;

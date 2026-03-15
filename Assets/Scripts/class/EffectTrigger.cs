@@ -126,10 +126,13 @@ public class EffectTrigger
     private void CardPlacedReaction(CreateUnitGA createUnitGA)
     {
         if (originCard == null) originCard = UnitManager.instance.GetUnitByInstanceId(originUnitInstanceId);
-        ActionData actionData = new ActionData(originPlayer, new Vector2Int(0,0), originCard);
-        actionData.targetPlayerId = createUnitGA.playerId;
-        actionData.targetCard = createUnitGA.playedCard;
-        actionData.targetPositions = new List<Vector2Int> {createUnitGA.position};
+        ActionData actionData = new ActionData(originPlayer, new Vector2Int(0,0), originCard)
+        {
+            targetPlayerId = createUnitGA.playerId,
+            targetCard = createUnitGA.playedCard,
+            targetPosition = createUnitGA.position,
+        };
+
         Reaction(actionData);
     }
     private void Reaction(ActionData actionData)

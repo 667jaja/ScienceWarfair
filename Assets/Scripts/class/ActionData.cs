@@ -8,8 +8,8 @@ public class ActionData
     public Vector2Int originPosition;
 
     public int targetPlayerId = -1;
-    public List<Vector2Int> targetPositions = null;
-    public List<Card> targetHandCards, targetDiscardCards, targetDeckCards = null;
+    public Vector2Int targetPosition;
+//    public List<Card> targetHandCards, targetDiscardCards, targetDeckCards = null;
     public Card targetCard = null;
     
     public ActionData(int originPlayerId1, Vector2Int originPosition1, Card originCard1)

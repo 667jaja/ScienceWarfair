@@ -18,17 +18,19 @@ public class SelectionManager : MonoBehaviour
     void OnEnable() 
     {
         ActionManager.AttachPerformer<SelectLanesGA>(SelectLanePerformer);
-        ActionManager.AttachPerformer<SelectUnitsInLanesGA>(SelectUnitsInSelectedLanes);
         ActionManager.AttachPerformer<SelectOpposingLanesGA>(SelectOpposingLanes);
         ActionManager.AttachPerformer<SelectUnitsGA>(SelectBoardPerformer);
+        ActionManager.AttachPerformer<SelectUnitsInLanesGA>(SelectUnitsInSelectedLanes);
+        ActionManager.AttachPerformer<SelectSpecificUnitsGA>(SelectSpecificUnitsPerformer);
         ActionManager.AttachPerformer<SelectCardsGA>(SelectHandPerformer);
     }
     void OnDisable()
     {
         ActionManager.DetachPerformer<SelectLanesGA>();
-        ActionManager.DetachPerformer<SelectUnitsInLanesGA>();
         ActionManager.DetachPerformer<SelectOpposingLanesGA>();
         ActionManager.DetachPerformer<SelectUnitsGA>();
+        ActionManager.DetachPerformer<SelectUnitsInLanesGA>();
+        ActionManager.DetachPerformer<SelectSpecificUnitsGA>();
         ActionManager.DetachPerformer<SelectCardsGA>();
     }
     public List<Vector2Int> EnemyLanes(int playerId)
@@ -191,6 +193,16 @@ public class SelectionManager : MonoBehaviour
     public IEnumerator SelectDiscardPerformer(List<Card> avaliableOptions, int selectCount)
     {
         selectedDiscard = new();
+        yield return null;
+    }
+
+    public IEnumerator SelectSpecificUnitsPerformer(SelectSpecificUnitsGA selectSpecificUnitsGA)
+    {
+        if (selectSpecificUnitsGA.newSelection) selectedBoard = new();
+        foreach (int id in selectSpecificUnitsGA.cardIds)
+        {
+            selectedBoard.Add(UnitManager.instance.GetBoardPosByInstanceId(id));
+        }
         yield return null;
     }
 }
