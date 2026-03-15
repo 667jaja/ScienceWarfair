@@ -201,7 +201,7 @@ public class SelectionManager : MonoBehaviour
         if (selectSpecificUnitsGA.newSelection) selectedBoard = new();
         foreach (int id in selectSpecificUnitsGA.cardIds)
         {
-            selectedBoard.Add(UnitManager.instance.GetBoardPosByInstanceId(id));
+            if (UnitManager.instance.GetUnitByInstanceId(id) != null) selectedBoard.Add(UnitManager.instance.GetBoardPosByInstanceId(id));
         }
         yield return null;
     }
