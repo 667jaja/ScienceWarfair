@@ -10,6 +10,8 @@ public enum SpecialAnimation
     Business = 4,
     Mozeltov = 5,
     Pesticide = 6,
+    Shotgun = 7,
+    Flytrap = 8,
 }
 public class SpecialAnimationManager : MonoBehaviour
 {

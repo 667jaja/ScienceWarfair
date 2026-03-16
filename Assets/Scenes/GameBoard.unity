@@ -1052,6 +1052,8 @@ MonoBehaviour:
   - Business
   - Marriage
   - Poison
+  - Shotgun
+  - FlyTrap
   animLength:
   - 0
   - 1.5
@@ -1060,6 +1062,8 @@ MonoBehaviour:
   - 0.75
   - 3
   - 1
+  - 0.1
+  - 0.4
   longestAnimLength: 4
   specialAnimationPrefab: {fileID: 7127771497922264192, guid: aec525a7cb7891140bdca21f96c3b72b, type: 3}
   specialAnimationTransform: {fileID: 3644842230764564984}

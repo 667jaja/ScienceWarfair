@@ -21,7 +21,7 @@ public class ShotgunAttackEF : Effect
             {
                 SpecialAnimationGA specialAnimationGA = new SpecialAnimationGA(base.specialAnimation, new Vector2Int(base.actionData.originPosition.x,0), base.actionData.originPosition.x, GameManager.instance.GetNextPlayerId(base.actionData.originPlayerId), SpecialAnimationManager.instance.AnimationLength(base.specialAnimation));
                 actionList.Add(specialAnimationGA);
-            }
+            } 
 
             while (remainingDamage > 0)
             {

@@ -1,0 +1,513 @@
+fileFormatVersion: 2
+guid: 7ba34fee6a247474e9ab9dcc8164010a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3684882709153486014
+    second: Flytrap_Attacks_0
+  - first:
+      213: 4446994629362833340
+    second: Flytrap_Attacks_1
+  - first:
+      213: 4296899413184024301
+    second: Flytrap_Attacks_2
+  - first:
+      213: -5415599568448771961
+    second: Flytrap_Attacks_3
+  - first:
+      213: 6882779671721232358
+    second: Flytrap_Attacks_4
+  - first:
+      213: 8377730795386927795
+    second: Flytrap_Attacks_5
+  - first:
+      213: 4799596481549321023
+    second: Flytrap_Attacks_6
+  - first:
+      213: -1191633557552729205
+    second: Flytrap_Attacks_7
+  - first:
+      213: -2062539275642445911
+    second: Flytrap_Attacks_8
+  - first:
+      213: -7324011853653173153
+    second: Flytrap_Attacks_9
+  - first:
+      213: -5893367519204890818
+    second: Flytrap_Attacks_10
+  - first:
+      213: -3957461968783139957
+    second: Flytrap_Attacks_11
+  - first:
+      213: 6853589154434353550
+    second: Flytrap_Attacks_12
+  - first:
+      213: 5073228110039720091
+    second: Flytrap_Attacks_13
+  - first:
+      213: 6619043715508003868
+    second: Flytrap_Attacks_14
+  - first:
+      213: 6866806625347215951
+    second: Flytrap_Attacks_15
+  - first:
+      213: -5863525838025633446
+    second: Flytrap_Attacks_16
+  - first:
+      213: 6478165560740981982
+    second: Flytrap_Attacks_17
+  - first:
+      213: 5763362694039411300
+    second: Flytrap_Attacks_18
+  - first:
+      213: 9097506449183994800
+    second: Flytrap_Attacks_19
+  - first:
+      213: -6816692767877819062
+    second: Flytrap_Attacks_20
+  - first:
+      213: 2262606268146186911
+    second: Flytrap_Attacks_21
+  - first:
+      213: -2417491729552509179
+    second: Flytrap_Attacks_22
+  - first:
+      213: 6085248523360390099
+    second: Flytrap_Attacks_23
+  - first:
+      213: -3006984988031797739
+    second: Flytrap_Attacks_24
+  - first:
+      213: 5596823654139709522
+    second: Flytrap_Attacks_25
+  - first:
+      213: 4107336441110880181
+    second: Flytrap_Attacks_26
+  - first:
+      213: -7561200969789446530
+    second: Flytrap_Attacks_27
+  - first:
+      213: -190866921698381149
+    second: Flytrap_Attacks_28
+  - first:
+      213: 7384629798454853848
+    second: Flytrap_Attacks_29
+  - first:
+      213: 2232089084175019975
+    second: Flytrap_Attacks_30
+  - first:
+      213: -7770822281625371186
+    second: Flytrap_Attacks_31
+  - first:
+      213: -774283175212652825
+    second: Flytrap_Attacks_32
+  - first:
+      213: 5347681563880484591
+    second: Flytrap_Attacks_33
+  - first:
+      213: -3629379319644695632
+    second: Flytrap_Attacks_34
+  - first:
+      213: -3733204443388935299
+    second: Flytrap_Attacks_35
+  - first:
+      213: -7704046967131804544
+    second: Flytrap_Attacks_36
+  - first:
+      213: 2097732465293689072
+    second: Flytrap_Attacks_37
+  - first:
+      213: -5473155813810773601
+    second: Flytrap_Attacks_38
+  - first:
+      213: 5918654663817834122
+    second: Flytrap_Attacks_39
+  - first:
+      213: -5717189590688188355
+    second: Flytrap_Attacks_40
+  - first:
+      213: -1663133761516868838
+    second: Flytrap_Attacks_41
+  - first:
+      213: 6355337263651455363
+    second: Flytrap_Attacks_42
+  - first:
+      213: 2309241775644749666
+    second: Flytrap_Attacks_43
+  - first:
+      213: 5266500776973206158
+    second: Flytrap_Attacks_44
+  - first:
+      213: 1740224744180731661
+    second: Flytrap_Attacks_45
+  - first:
+      213: -8392462733940113342
+    second: Flytrap_Attacks_46
+  - first:
+      213: 4797628576205531818
+    second: Flytrap_Attacks_47
+  - first:
+      213: -7094777900067877233
+    second: Flytrap_Attacks_48
+  - first:
+      213: -5892042843557599585
+    second: Flytrap_Attacks_49
+  - first:
+      213: -3571645327432485172
+    second: Flytrap_Attacks_50
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Flytrap_Attacks_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2400
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb49216fc45532330800000000000000
+      internalID: 3684882709153486014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytrap_Attacks_1
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 2400
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb7dd31ed06e6bd30800000000000000
+      internalID: 4446994629362833340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytrap_Attacks_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1800
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dee0b661047a1ab30800000000000000
+      internalID: 4296899413184024301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytrap_Attacks_3
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 1800
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7882ad4b2ece7d4b0800000000000000
+      internalID: -5415599568448771961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytrap_Attacks_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1200
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e7493815ab848f50800000000000000
+      internalID: 6882779671721232358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytrap_Attacks_5
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 1200
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ba73e275cda34470800000000000000
+      internalID: 8377730795386927795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytrap_Attacks_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 600
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3346f312979b9240800000000000000
+      internalID: 4799596481549321023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytrap_Attacks_7
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 600
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8372abc797767fe0800000000000000
+      internalID: -1191633557552729205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytrap_Attacks_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9af5a04e4736063e0800000000000000
+      internalID: -2062539275642445911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytrap_Attacks_9
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 0
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5c904cf502eb5a90800000000000000
+      internalID: -7324011853653173153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ba43903e21f1d0d46ba38a169a48d97e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Flytrap_Attacks_0: 3684882709153486014
+      Flytrap_Attacks_1: 4446994629362833340
+      Flytrap_Attacks_2: 4296899413184024301
+      Flytrap_Attacks_3: -5415599568448771961
+      Flytrap_Attacks_4: 6882779671721232358
+      Flytrap_Attacks_5: 8377730795386927795
+      Flytrap_Attacks_6: 4799596481549321023
+      Flytrap_Attacks_7: -1191633557552729205
+      Flytrap_Attacks_8: -2062539275642445911
+      Flytrap_Attacks_9: -7324011853653173153
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
