@@ -388,15 +388,11 @@ public class UnitManager : MonoBehaviour
 
         foundLoc = new Vector2(LanePos.position.x, LanePos.position.y - laneHeight / 2 + (laneHeight / (unitsInLane + 1)) * (unitsBelow + 1));
 
-        Debug.Log("original position: " + position.x +": "+ position.y);
-        Debug.Log("units below: " + unitsBelow);
-        Debug.Log("added height: " + (foundLoc.y - LanePos.position.y));
-
         return foundLoc;
     }
     public Vector2 GetLanePos(Vector2Int position)
     {
-        int playerAdd = (position.y == GameManager.instance.displayPlayer)? columnCount : 0;
+        int playerAdd = (position.y == GameManager.instance.displayPlayer)? 0 : columnCount;
         Transform LanePos = laneTransforms[position.x+playerAdd];
 
 
