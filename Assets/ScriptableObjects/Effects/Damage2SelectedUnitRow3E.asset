@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Damage2SelectedUnitRow3E
   m_EditorClassIdentifier: 
   <effectId>k__BackingField: 2026030504
+  specialAnimation: 0
   <attackDamage>k__BackingField: 2
   <selectCount>k__BackingField: 1
   <includeFriendly>k__BackingField: 0

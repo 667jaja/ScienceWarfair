@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Shotgun4Damage
   m_EditorClassIdentifier: 
   <effectId>k__BackingField: 202514
+  specialAnimation: 7
   <attackDamage>k__BackingField: 4

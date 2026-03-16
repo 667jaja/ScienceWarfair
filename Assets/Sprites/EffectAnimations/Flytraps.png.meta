@@ -1,0 +1,694 @@
+fileFormatVersion: 2
+guid: 021d4197a628c0446939736058f4a914
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6626817291575550032
+    second: Flytraps_0
+  - first:
+      213: 4192756284888959940
+    second: Flytraps_1
+  - first:
+      213: 6440464811138621046
+    second: Flytraps_2
+  - first:
+      213: 2377575280324690766
+    second: Flytraps_3
+  - first:
+      213: -1029735474683985947
+    second: Flytraps_4
+  - first:
+      213: 5512012992420378947
+    second: Flytraps_5
+  - first:
+      213: 8631606993059198842
+    second: Flytraps_6
+  - first:
+      213: 4908178233635978642
+    second: Flytraps_7
+  - first:
+      213: -6586539985216924260
+    second: Flytraps_8
+  - first:
+      213: -2843676998301769371
+    second: Flytraps_9
+  - first:
+      213: 1207186835477530362
+    second: Flytraps_10
+  - first:
+      213: -5914401015114923019
+    second: Flytraps_11
+  - first:
+      213: -8982665665022169459
+    second: Flytraps_12
+  - first:
+      213: -2896270819086487616
+    second: Flytraps_13
+  - first:
+      213: -159024525113818566
+    second: Flytraps_14
+  - first:
+      213: -919458218425309692
+    second: Flytraps_15
+  - first:
+      213: -2402616544990992152
+    second: Flytraps_16
+  - first:
+      213: 2186850479429645624
+    second: Flytraps_17
+  - first:
+      213: -4993336874361544441
+    second: Flytraps_18
+  - first:
+      213: 8558332137663328105
+    second: Flytraps_19
+  - first:
+      213: 6606494470258849227
+    second: Flytraps_20
+  - first:
+      213: -5094642293218192529
+    second: Flytraps_21
+  - first:
+      213: -2040536756166508407
+    second: Flytraps_22
+  - first:
+      213: -5071923348629904667
+    second: Flytraps_23
+  - first:
+      213: -5129034476996225397
+    second: Flytraps_24
+  - first:
+      213: 2283447944902379875
+    second: Flytraps_25
+  - first:
+      213: -3439915176717168762
+    second: Flytraps_26
+  - first:
+      213: 8747730876792634809
+    second: Flytraps_27
+  - first:
+      213: 6333457360322075501
+    second: Flytraps_28
+  - first:
+      213: 1263672209905571641
+    second: Flytraps_29
+  - first:
+      213: -3330523011962091314
+    second: Flytraps_30
+  - first:
+      213: -7098737885165512220
+    second: Flytraps_31
+  - first:
+      213: 2185135137995966469
+    second: Flytraps_32
+  - first:
+      213: 736195517505047624
+    second: Flytraps_33
+  - first:
+      213: 5275058772160026221
+    second: Flytraps_34
+  - first:
+      213: 3010958151085149488
+    second: Flytraps_35
+  - first:
+      213: 196725542832926839
+    second: Flytraps_36
+  - first:
+      213: 7488295009373429222
+    second: Flytraps_37
+  - first:
+      213: 2730789305255453023
+    second: Flytraps_38
+  - first:
+      213: 9091052480922056627
+    second: Flytraps_39
+  - first:
+      213: -7472719353730338093
+    second: Flytraps_40
+  - first:
+      213: -7077306951757256853
+    second: Flytraps_41
+  - first:
+      213: -2661982479621434572
+    second: Flytraps_42
+  - first:
+      213: 2675247405705232905
+    second: Flytraps_43
+  - first:
+      213: -1009430911520007703
+    second: Flytraps_44
+  - first:
+      213: -6142328211798578144
+    second: Flytraps_45
+  - first:
+      213: -3950040547572009757
+    second: Flytraps_46
+  - first:
+      213: 2983152934392538467
+    second: Flytraps_47
+  - first:
+      213: -8228037745313733203
+    second: Flytraps_48
+  - first:
+      213: 4503394105165711086
+    second: Flytraps_49
+  - first:
+      213: -1954259149381899730
+    second: Flytraps_50
+  - first:
+      213: 2044038881107970048
+    second: Flytraps_51
+  - first:
+      213: -6768773546794804228
+    second: Flytraps_52
+  - first:
+      213: 7537492577622630649
+    second: Flytraps_53
+  - first:
+      213: -5146550021174507857
+    second: Flytraps_54
+  - first:
+      213: 3730242498544325196
+    second: Flytraps_55
+  - first:
+      213: 2601812325727947476
+    second: Flytraps_56
+  - first:
+      213: -4942180768754101753
+    second: Flytraps_57
+  - first:
+      213: -1918770804775270665
+    second: Flytraps_58
+  - first:
+      213: 2384040735671870365
+    second: Flytraps_59
+  - first:
+      213: -8494623989140901976
+    second: Flytraps_60
+  - first:
+      213: 8724031588798466956
+    second: Flytraps_61
+  - first:
+      213: 7732178668392032991
+    second: Flytraps_62
+  - first:
+      213: 3605251170317198279
+    second: Flytraps_63
+  - first:
+      213: 4755477484771971651
+    second: Flytraps_64
+  - first:
+      213: 6820680568382336500
+    second: Flytraps_65
+  - first:
+      213: -4483214413667265396
+    second: Flytraps_66
+  - first:
+      213: -5011197898765636551
+    second: Flytraps_67
+  - first:
+      213: -7554852320855880827
+    second: Flytraps_68
+  - first:
+      213: 4680835824189301967
+    second: Flytraps_69
+  - first:
+      213: -4561771695111652445
+    second: Flytraps_70
+  - first:
+      213: -7285547469438810517
+    second: Flytraps_71
+  - first:
+      213: 7624225802415729370
+    second: Flytraps_72
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Flytraps_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1800
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bf1930a8c0d804a0800000000000000
+      internalID: -6626817291575550032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytraps_1
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 1800
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cbc79e70a9af2a30800000000000000
+      internalID: 4192756284888959940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytraps_2
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 1800
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67e12586f90216950800000000000000
+      internalID: 6440464811138621046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytraps_3
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 1800
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e43c08ade18def020800000000000000
+      internalID: 2377575280324690766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytraps_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1200
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5efb7d2aa05a5b1f0800000000000000
+      internalID: -1029735474683985947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytraps_5
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 1200
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 349fd8adc9a9e7c40800000000000000
+      internalID: 5512012992420378947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytraps_6
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 1200
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a773216f3d0a9c770800000000000000
+      internalID: 8631606993059198842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytraps_7
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 1200
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29d3d2e491a5d1440800000000000000
+      internalID: 4908178233635978642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytraps_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 600
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c951d3ac7c8e794a0800000000000000
+      internalID: -6586539985216924260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytraps_9
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 600
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 561264426da3988d0800000000000000
+      internalID: -2843676998301769371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytraps_10
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 600
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af68a2ae70ac0c010800000000000000
+      internalID: 1207186835477530362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytraps_11
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 600
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f38dd2dc93dbeda0800000000000000
+      internalID: -5914401015114923019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytraps_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8e614c7b29275380800000000000000
+      internalID: -8982665665022169459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytraps_13
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 0
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cf250ff8016ec7d0800000000000000
+      internalID: -2896270819086487616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flytraps_14
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 0
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a32040679080bcdf0800000000000000
+      internalID: -159024525113818566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: b5802f09281eff24fb4e4f4f1d7d5405
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Flytraps_0: -6626817291575550032
+      Flytraps_1: 4192756284888959940
+      Flytraps_10: 1207186835477530362
+      Flytraps_11: -5914401015114923019
+      Flytraps_12: -8982665665022169459
+      Flytraps_13: -2896270819086487616
+      Flytraps_14: -159024525113818566
+      Flytraps_2: 6440464811138621046
+      Flytraps_3: 2377575280324690766
+      Flytraps_4: -1029735474683985947
+      Flytraps_5: 5512012992420378947
+      Flytraps_6: 8631606993059198842
+      Flytraps_7: 4908178233635978642
+      Flytraps_8: -6586539985216924260
+      Flytraps_9: -2843676998301769371
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

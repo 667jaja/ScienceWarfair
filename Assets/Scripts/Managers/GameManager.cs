@@ -20,8 +20,13 @@ public class GameManager : MonoBehaviour
 
     //ui
     //money
-    public Slider moneySlider;
-    public Slider moneySliderEnemy;
+    [SerializeField] private Slider moneySlider;
+    [SerializeField] private Slider moneySliderEnemy;
+    [SerializeField] private Animator moneyAnimator;
+    [SerializeField] private Animator moneyAnimatorEnemy;
+    [SerializeField] private string MoneyIncreasingAnimbool;
+    [SerializeField] private string MoneyDecreasingAnimbool;
+    [SerializeField] private float moneySpeed;
 
     //science points
     public Slider plaSciencePointsSlider;
@@ -290,8 +295,8 @@ public class GameManager : MonoBehaviour
     private IEnumerator GainMoneyPerformer(GainMoneyGA gainMoneyGA)
     {
         players[gainMoneyGA.playerId].Money += gainMoneyGA.gainCount;
+        yield return SetMoneyVisual(true, moneySlider.value, players[displayPlayer].Money);
         UpdateMoneyUI();
-        yield return null;
     }
     private IEnumerator GainSciencePointsPerformer(GainSciencePointsGA gainSciencePointsGA)
     {
@@ -326,6 +331,47 @@ public class GameManager : MonoBehaviour
     }
 
     //ui
+    public IEnumerator SetMoneyVisual(bool currentPlayer, float oldMoneyVal, float newMoneyVal)
+    {
+        if (oldMoneyVal != newMoneyVal)
+        {        
+            bool isIncreasing = oldMoneyVal<newMoneyVal;
+            if (currentPlayer)
+            {
+                moneyAnimator.SetBool(MoneyIncreasingAnimbool, isIncreasing);
+                moneyAnimator.SetBool(MoneyDecreasingAnimbool, !isIncreasing);
+            } 
+            else 
+            {
+                moneyAnimatorEnemy.SetBool(MoneyIncreasingAnimbool, isIncreasing);
+                moneyAnimatorEnemy.SetBool(MoneyDecreasingAnimbool, !isIncreasing);
+            }
+
+            float timer = 0;
+            float slope =  isIncreasing? moneySpeed: -moneySpeed;
+            while (timer <  Mathf.Abs((newMoneyVal-oldMoneyVal)/moneySpeed))
+            {
+                timer += Time.deltaTime;
+                if (currentPlayer) moneySlider.value = oldMoneyVal + slope*timer;
+                else moneySliderEnemy.value = oldMoneyVal + slope*timer;
+                yield return null;
+            }
+        }
+
+        if (currentPlayer) moneySlider.value = newMoneyVal;
+        else moneySliderEnemy.value = newMoneyVal;
+        if (currentPlayer)
+        {
+            moneyAnimator.SetBool(MoneyIncreasingAnimbool, false);
+            moneyAnimator.SetBool(MoneyDecreasingAnimbool, false);
+        } 
+        else 
+        {
+            moneyAnimatorEnemy.SetBool(MoneyIncreasingAnimbool, false);
+            moneyAnimatorEnemy.SetBool(MoneyDecreasingAnimbool, false);
+        }
+    }
+
     public void GlobalUIUpdate()
     {
         CardManager.instance.UpdateDeckUI();
@@ -345,8 +391,8 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateMoneyUI()
     {
-        moneySlider.value = players[displayPlayer].Money;
-        moneySliderEnemy.value = players[GetNextPlayerId(displayPlayer)].Money;
+        StartCoroutine(SetMoneyVisual(true, moneySlider.value, players[displayPlayer].Money));
+        StartCoroutine(SetMoneyVisual(false, moneySliderEnemy.value, players[GetNextPlayerId(displayPlayer)].Money));
     } 
     public void UpdateSciencePointsUI()
     {
