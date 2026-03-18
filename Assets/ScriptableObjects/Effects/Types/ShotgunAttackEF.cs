@@ -12,9 +12,7 @@ public class ShotgunAttackEF : Effect
         get
         {
             int targetplayer = GameManager.instance.GetNextPlayerId(base.actionData.originPlayerId);
-            int remainingDamage = attackDamage;
             List<GameAction> actionList = new List<GameAction>(); 
-            int i = 0;
             
             //animation
             if (base.specialAnimation != SpecialAnimation.Null)
@@ -23,30 +21,8 @@ public class ShotgunAttackEF : Effect
                 actionList.Add(specialAnimationGA);
             } 
 
-            while (remainingDamage > 0)
-            {
-                Debug.Log("player: " + targetplayer +" position: " + base.actionData.originPosition.x + " " + i);
-                if ( i < UnitManager.instance.rowCount && GameManager.instance.players[targetplayer].units[base.actionData.originPosition.x, i] != null)
-                {
-                    AttackLaneGA attackLaneGA = new AttackLaneGA(targetplayer, base.actionData.originPosition.x, remainingDamage);
-                    actionList.Add(attackLaneGA);
-                    remainingDamage -= GameManager.instance.players[targetplayer].units[base.actionData.originPosition.x, i].Health;
-                    Debug.Log("remainingDamage: " + remainingDamage);
-
-                    if (remainingDamage > 0 && GameManager.instance.players[targetplayer].units[base.actionData.originPosition.x, i].containedCard != null)
-                    {
-                        attackLaneGA = new AttackLaneGA(targetplayer, base.actionData.originPosition.x, remainingDamage);
-                        actionList.Add(attackLaneGA);
-                        remainingDamage -= GameManager.instance.players[targetplayer].units[base.actionData.originPosition.x, i].containedCard.health;
-                        Debug.Log("remainingDamage: " + remainingDamage);
-                    }
-                }
-                else
-                {
-                    remainingDamage = 0;
-                }
-                i++;
-            }
+            AttackLaneShotgunGA attackLaneShotgunGA = new AttackLaneShotgunGA(targetplayer, base.actionData.originPosition.x, attackDamage);
+            actionList.Add(attackLaneShotgunGA);
 
             return actionList;
         }

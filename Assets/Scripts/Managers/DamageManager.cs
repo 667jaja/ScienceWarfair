@@ -9,6 +9,7 @@ public class DamageManager : MonoBehaviour
     {
         ActionManager.AttachPerformer<DamageUnitGA>(DamageUnitPerformer);
         ActionManager.AttachPerformer<AttackLaneGA>(AttackLanePerformer);
+        ActionManager.AttachPerformer<AttackLaneShotgunGA>(AttackLaneShotgunPerformer);
         ActionManager.AttachPerformer<DestroyUnitGA>(DestroyUnitPerformer);
         ActionManager.AttachPerformer<AttackSelectedGA>(AttackSelectedPerformer);
         ActionManager.AttachPerformer<DamageSelectedGA>(DamageSelectedPerformer);
@@ -17,6 +18,7 @@ public class DamageManager : MonoBehaviour
     {
         ActionManager.DetachPerformer<DamageUnitGA>();
         ActionManager.DetachPerformer<AttackLaneGA>();
+        ActionManager.DetachPerformer<AttackLaneShotgunGA>();
         ActionManager.DetachPerformer<DestroyUnitGA>();
         ActionManager.DetachPerformer<AttackSelectedGA>();
         ActionManager.DetachPerformer<DamageSelectedGA>();
@@ -42,6 +44,21 @@ public class DamageManager : MonoBehaviour
         yield return null;
     }
     //deal damage to front unit in lane 
+    private IEnumerator AttackLaneShotgunPerformer(AttackLaneShotgunGA attackLaneShotgunGA)
+    {
+        if (GameManager.instance.players[attackLaneShotgunGA.playerId].units[attackLaneShotgunGA.lane, 0] != null)
+        {
+            int remainingDamage = attackLaneShotgunGA.amount;
+            AttackLaneGA attackLaneGA = new(attackLaneShotgunGA.playerId, attackLaneShotgunGA.lane, remainingDamage);
+            ActionManager.instance.AddReaction(attackLaneGA);
+
+            remainingDamage -= GameManager.instance.players[attackLaneShotgunGA.playerId].units[attackLaneShotgunGA.lane, 0].health;
+            AttackLaneShotgunGA nextAttackLaneShotgunGA = new(attackLaneShotgunGA.playerId, attackLaneShotgunGA.lane, remainingDamage);
+            if (remainingDamage > 0) ActionManager.instance.AddReaction(nextAttackLaneShotgunGA);
+            yield return null;
+        }
+
+    }
     private IEnumerator AttackLanePerformer(AttackLaneGA attackLaneGA)
     {
         int damageAmount = attackLaneGA.amount;
