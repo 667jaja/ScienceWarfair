@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
+  m_Name: Existentialism
+  m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 2026021701
+  <title>k__BackingField: Existentialism
+  <description>k__BackingField: does nothing. (and we all die eventually)
+  <cardArt>k__BackingField: {fileID: 1314522525, guid: b04ea9afd3a5f444480bedb21c24423f, type: 3}
+  isAction: 1
+  <placementCost>k__BackingField: 0
+  <iq>k__BackingField: 0
+  <health>k__BackingField: 0
+  <noAttack>k__BackingField: 0
+  <effectTriggerDatas>k__BackingField: []
+  <containedCard>k__BackingField: {fileID: 0}

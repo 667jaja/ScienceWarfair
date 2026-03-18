@@ -8,6 +8,7 @@ public class ChangeStatsSelectedUnitsEF : Effect
     [field: SerializeField] public int iq { get; private set; }
     [field: SerializeField] public int health { get; private set; }
     [field: SerializeField] public int placementCost { get; private set; }
+    [field: SerializeField] public EffectTriggerData et { get; private set; }
 
     [field: SerializeField] public int selectCount { get; private set; }
     [field: SerializeField] public bool includeFriendly { get; private set; }
@@ -35,8 +36,18 @@ public class ChangeStatsSelectedUnitsEF : Effect
                 actionList.Add(animateSelectedUnitsGA);
             }
 
-            ChangeStatsSelectedGA changeStatsSelectedGA = new ChangeStatsSelectedGA(iq, health, placementCost);
-            actionList.Add(changeStatsSelectedGA);
+            //stats
+            if (iq> 0 || health > 0 || placementCost > 0)
+            {
+                ChangeStatsSelectedGA changeStatsSelectedGA = new ChangeStatsSelectedGA(iq, health, placementCost);
+                actionList.Add(changeStatsSelectedGA);
+            }
+            //effects
+            if (et != null)
+            {
+                GiveSelectedEffectGA giveSelectedEffectGA = new GiveSelectedEffectGA(et);
+                actionList.Add(giveSelectedEffectGA);
+            }
 
             return actionList;
         }

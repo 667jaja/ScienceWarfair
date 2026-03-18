@@ -7,6 +7,7 @@ public class ChangeStatsTargetEF : Effect
     [field: SerializeField] public int iq { get; private set; }
     [field: SerializeField] public int health { get; private set; }
     [field: SerializeField] public int placementCost { get; private set; }
+    [field: SerializeField] public EffectTriggerData et { get; private set; }
 
     public override List<GameAction> effect
     {
@@ -23,10 +24,19 @@ public class ChangeStatsTargetEF : Effect
                 AnimateSelectedUnitsGA animateSelectedUnitsGA = new AnimateSelectedUnitsGA(base.specialAnimation,SpecialAnimationManager.instance.AnimationLength(base.specialAnimation)-0.2f, 0.2f);
                 actionList.Add(animateSelectedUnitsGA);
             }
-
-            ChangeStatsSelectedGA changeStatsSelectedGA = new ChangeStatsSelectedGA(iq, health, placementCost);
-            actionList.Add(changeStatsSelectedGA);
-
+            
+            //stats
+            if (iq> 0 || health > 0 || placementCost > 0)
+            {
+                ChangeStatsSelectedGA changeStatsSelectedGA = new ChangeStatsSelectedGA(iq, health, placementCost);
+                actionList.Add(changeStatsSelectedGA);
+            }
+            //effects
+            if (et != null)
+            {
+                GiveSelectedEffectGA giveSelectedEffectGA = new GiveSelectedEffectGA(et);
+                actionList.Add(giveSelectedEffectGA);
+            }
             return actionList;
         }
     }  

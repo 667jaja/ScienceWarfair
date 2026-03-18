@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
+  m_Name: Samuel
+  m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 888
+  <title>k__BackingField: Stolen Valor
+  <description>k__BackingField: Gives "gain 1k at turn start" to two units
+  <cardArt>k__BackingField: {fileID: 1472304627952033455, guid: 3baa4621a3cc88e44a7c69c318449874, type: 3}
+  isAction: 1
+  <placementCost>k__BackingField: 0
+  <iq>k__BackingField: 0
+  <health>k__BackingField: 0
+  <noAttack>k__BackingField: 0
+  <effectTriggerDatas>k__BackingField:
+  - {fileID: 11400000, guid: 02070cd6d9579e0419f74054671f499a, type: 2}
+  <containedCard>k__BackingField: {fileID: 0}

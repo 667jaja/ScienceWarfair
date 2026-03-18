@@ -51,6 +51,8 @@ public class UnitManager : MonoBehaviour
         ActionManager.AttachPerformer<MoveUnitGA>(MoveUnitPerformer);
         ActionManager.AttachPerformer<ChangeStatsUnitGA>(ChangeStatsUnitPerformer);
         ActionManager.AttachPerformer<ChangeStatsSelectedGA>(ChangeStatsSelectedPerformer);
+        ActionManager.AttachPerformer<GiveUnitEffectGA>(GiveUnitEffectPerformer);
+        ActionManager.AttachPerformer<GiveSelectedEffectGA>(GiveSelectedEffectPerformer);
     }
     private void OnDisable()
     {
@@ -60,6 +62,8 @@ public class UnitManager : MonoBehaviour
         ActionManager.DetachPerformer<MoveUnitGA>();
         ActionManager.DetachPerformer<ChangeStatsUnitGA>();
         ActionManager.DetachPerformer<ChangeStatsSelectedGA>();
+        ActionManager.DetachPerformer<GiveUnitEffectGA>();
+        ActionManager.DetachPerformer<GiveSelectedEffectGA>();
     }
 
     public void PlayAction(int playerId, Card card) 
@@ -291,6 +295,26 @@ public class UnitManager : MonoBehaviour
         {
             ChangeStatsUnitGA changeStatsUnitGA =  new ChangeStatsUnitGA(vector.z, new Vector2Int(vector.x, vector.y), changeStatsSelectedGA.iqChange, changeStatsSelectedGA.heathChange, changeStatsSelectedGA.costChange);
             ActionManager.instance.AddReaction(changeStatsUnitGA);
+        }
+        yield return null;
+    }
+    private IEnumerator GiveUnitEffectPerformer(GiveUnitEffectGA giveUnitEffectGA)
+    {
+        Card selectedUnit = GameManager.instance.players[giveUnitEffectGA.playerId].units[giveUnitEffectGA.position.x, giveUnitEffectGA.position.y]; //get only reference
+        
+        EffectTrigger addedEF = new EffectTrigger(new ActionData(giveUnitEffectGA.playerId, giveUnitEffectGA.position, selectedUnit), giveUnitEffectGA.ET);
+        selectedUnit.effectTriggers.Add(addedEF);
+
+        UpdateCardVisual(giveUnitEffectGA.playerId, giveUnitEffectGA.position);
+        LaneManager.instance.UpdateLaneVisuals();
+        yield return null;
+    }
+    private IEnumerator GiveSelectedEffectPerformer(GiveSelectedEffectGA giveSelectedEffectGA)
+    {
+        foreach (Vector3Int vector in SelectionManager.instance.selectedBoard)
+        {
+            GiveUnitEffectGA giveUnitEffectGA =  new GiveUnitEffectGA(vector.z, new Vector2Int(vector.x, vector.y), giveSelectedEffectGA.ET, giveSelectedEffectGA.savedCard);
+            ActionManager.instance.AddReaction(giveUnitEffectGA);
         }
         yield return null;
     }

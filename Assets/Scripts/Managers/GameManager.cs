@@ -116,6 +116,11 @@ public class GameManager : MonoBehaviour
                 players[i].name = "Jackal";
                 players[i].hand.Add(new Card(CardLibraryManager.instance.GetCardDataById(secretCardIds[0])));
             }
+            if (players[i].name.Contains("Samuel88"))
+            {
+                players[i].name = "Samuel";
+                players[i].hand.Add(new Card(CardLibraryManager.instance.GetCardDataById(secretCardIds[2])));
+            }
             if (players[i].name.Contains("Miles1"))
             {
                 players[i].name = "Miles";
