@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MyStartGain2
   m_EditorClassIdentifier: 
   <effectTriggerId>k__BackingField: 202503
-  effectTriggerType: 1
+  effectTriggerType: 4
   <effects>k__BackingField:
   - {fileID: 11400000, guid: 23dcd3450b21b8a478053732cf12b703, type: 2}
   <effectDescription>k__BackingField: Gain 2k

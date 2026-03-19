@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MyStartDraw1
   m_EditorClassIdentifier: 
   <effectTriggerId>k__BackingField: 202502
-  effectTriggerType: 1
+  effectTriggerType: 4
   <effects>k__BackingField:
   - {fileID: 11400000, guid: cd98d78d218ff504e96bfc96d8ea6570, type: 2}
   <effectDescription>k__BackingField: Draw Card
