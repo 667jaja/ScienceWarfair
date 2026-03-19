@@ -285,6 +285,7 @@ public class UnitManager : MonoBehaviour
         selectedUnit.Iq += changeStatsUnitGA.iqChange;
         selectedUnit.Health += changeStatsUnitGA.heathChange;
         selectedUnit.PlacementCost += changeStatsUnitGA.costChange;
+        if (changeStatsUnitGA.tag != null) selectedUnit.tags.Add(changeStatsUnitGA.tag);
 
         UpdateCardVisual(changeStatsUnitGA.playerId, changeStatsUnitGA.position);
         LaneManager.instance.UpdateLaneVisuals();
@@ -294,7 +295,7 @@ public class UnitManager : MonoBehaviour
     {
         foreach (Vector3Int vector in SelectionManager.instance.selectedBoard)
         {
-            ChangeStatsUnitGA changeStatsUnitGA =  new ChangeStatsUnitGA(vector.z, new Vector2Int(vector.x, vector.y), changeStatsSelectedGA.iqChange, changeStatsSelectedGA.heathChange, changeStatsSelectedGA.costChange);
+            ChangeStatsUnitGA changeStatsUnitGA =  new ChangeStatsUnitGA(vector.z, new Vector2Int(vector.x, vector.y), changeStatsSelectedGA.iqChange, changeStatsSelectedGA.heathChange, changeStatsSelectedGA.costChange, changeStatsSelectedGA.tag);
             ActionManager.instance.AddReaction(changeStatsUnitGA);
         }
         yield return null;

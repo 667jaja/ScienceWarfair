@@ -14,7 +14,7 @@ public class CardData : ScriptableObject
     [field: SerializeField] public int iq { get; private set; }
     [field: SerializeField] public int health { get; private set; }
     [field: SerializeField] public bool noAttack { get; private set; }
-    // [field: SerializeField] public List<EffectTrigger> effectTriggers {get; private set; }
+    [field: SerializeField] public List<CardTag> tags {get; private set; }
     [field: SerializeField] public List<EffectTriggerData> effectTriggerDatas {get; private set; }
     [field: SerializeField] public CardData containedCard {get; private set; }
 

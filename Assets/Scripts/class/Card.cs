@@ -9,14 +9,19 @@ public class Card
     //constructor
     public Card(CardData cardData)
     {
+        //basic
         this.cardData = cardData;
         cardInstanceId = Random.Range(0, 2000000000);
-        //cardEffect = cardData.cardEffect;
+
+        //stats
         PlacementCost = cardData.placementCost;
         Iq = cardData.iq;
         Health = cardData.health;
-        //noAttack = cardData.noAttack;
+
+        //powers
         effectTriggers = new List<EffectTrigger>();
+        tags = new();
+        foreach (CardTag tag in cardData.tags) tags.Add(tag);
         containedCard = cardData.containedCard;
     }
 
@@ -90,6 +95,7 @@ public class Card
     //abilities
     public bool noAttack { get => cardData.noAttack; }
     public List<EffectTrigger> effectTriggers {get; set;}
+    public List<CardTag> tags {get; set;}
     public CardData containedCard { get; set; }
 
     //deck Creator
@@ -130,6 +136,18 @@ public class Card
                 effectTrigger.Unsub();
             }
         }
+    }
+    public string GetTagList()
+    {
+        string tagList = "";
+        bool first = true;
+        foreach (CardTag tag in tags)
+        {
+            if (!first) tagList += ", ";
+            tagList += tag.name;
+            first = false;
+        }
+        return tagList;
     }
 }
 

@@ -15,6 +15,7 @@ public struct CardStruct : INetworkSerializable
     public int health;
 
     //abilities
+    public int[] tagIds;
     public EffectTriggerStruct[] effectTriggers;
     public int containedCardBaseId;
 
@@ -27,14 +28,17 @@ public struct CardStruct : INetworkSerializable
         health = card.Health;
 
         containedCardBaseId = card.containedCard != null? card.containedCard.CardDataId: -1;
-        effectTriggers = new EffectTriggerStruct[card.effectTriggers.Count];
+        
+        int i;
 
-
-        if (card.effectTriggers == null || card.effectTriggers.Count < 1)
+        tagIds = new int[card.tags.Count];
+        if (card.tags != null && card.tags.Count > 0) for (i = 0; i < card.tags.Count; i++)
         {
-            effectTriggers = new EffectTriggerStruct[0];
+            if (card.tags[i] != null) tagIds[i] = card.tags[i].tagId;
         }
-        else for (int i = 0; i < card.effectTriggers.Count; i++)
+
+        effectTriggers = new EffectTriggerStruct[card.effectTriggers.Count];
+        if (card.effectTriggers != null && card.effectTriggers.Count > 0) for (i = 0; i < card.effectTriggers.Count; i++)
         {
             if (card.effectTriggers[i] != null) effectTriggers[i] = new EffectTriggerStruct(card.effectTriggers[i]);
         }
@@ -48,6 +52,16 @@ public struct CardStruct : INetworkSerializable
         serializer.SerializeValue(ref iq);
         serializer.SerializeValue(ref health);
         serializer.SerializeValue(ref containedCardBaseId);
+
+        // tags
+        int tagsLength = tagIds != null ? tagIds.Length : 0;
+        serializer.SerializeValue(ref tagsLength);
+
+        if (serializer.IsReader)
+            tagIds = new int[tagsLength];
+
+        for (int i = 0; i < tagsLength; i++)
+            serializer.SerializeValue(ref tagIds[i]);
 
         // effectTriggers
         int triggersLength = effectTriggers != null ? effectTriggers.Length : 0;

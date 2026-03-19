@@ -18,6 +18,7 @@ MonoBehaviour:
   <health>k__BackingField: 0
   <placementCost>k__BackingField: 0
   <et>k__BackingField: {fileID: 11400000, guid: 66e61d89fcd3f31498358a725a4d960b, type: 2}
+  <tag>k__BackingField: {fileID: 11400000, guid: 4c32a0ea825944e4194740c84abb303e, type: 2}
   <isUnitedEffect>k__BackingField: 1
   <selectCount>k__BackingField: 2
   <includeFriendly>k__BackingField: 1

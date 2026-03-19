@@ -110,6 +110,7 @@ public class OnlineManager : NetworkBehaviour
         {
             SelectionManager.instance.selectedLanes.Add(vector);
         }
+        SelectionManager.instance.endSelectionOverride = true;
     }
     [Rpc(SendTo.NotServer)]
     public void InputSelectionClientRPC(int selectingPlayerId, CardStruct[] selectedHand, int[] selectedDiscard, Vector3Int[] selectedBoard, Vector2Int[] selectedLanes)
@@ -136,6 +137,7 @@ public class OnlineManager : NetworkBehaviour
         {
             SelectionManager.instance.selectedLanes.Add(vector);
         }
+        SelectionManager.instance.endSelectionOverride = true;
     }
 
     [Rpc(SendTo.Server)]

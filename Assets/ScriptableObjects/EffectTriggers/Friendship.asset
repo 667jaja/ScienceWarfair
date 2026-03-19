@@ -16,7 +16,7 @@ MonoBehaviour:
   effectTriggerType: 1
   <effects>k__BackingField:
   - {fileID: 11400000, guid: 20fcbccd0900d96408258efd96c8418a, type: 2}
-  <effectDescription>k__BackingField: When destroyed give 2iq 1hp to friend
+  <effectDescription>k__BackingField: Increase target Iq and Health
   <pre>k__BackingField: 0
   <oneTimeUse>k__BackingField: 0
   <countDown>k__BackingField: 0

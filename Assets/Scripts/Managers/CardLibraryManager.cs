@@ -7,9 +7,65 @@ public class CardLibraryManager : MonoBehaviour
     public List<CardData> cardDatas;
     public List<Effect> effects = new List<Effect>();
     public List<EffectTriggerData> EffectTriggerDatas;
+    public List<CardTag> cardTags;
     void Awake()
     {
         instance = this;
+    }
+    void Start()
+    {
+        List<string> duplicateNames = new();
+        int i;
+        int j;
+        for (i = 0; i < cardDatas.Count; i++)
+        {
+            for (j = i+1; j < cardDatas.Count; j++)
+            {
+                if (cardDatas[i].CardDataId == cardDatas[j].CardDataId)
+                {
+                    duplicateNames.Add(cardDatas[i].name);
+                    break;
+                }
+            }
+        }
+        for (i = 0; i < effects.Count; i++)
+        {
+            for (j = i+1; j < effects.Count; j++)
+            {
+                if (effects[i].effectId == effects[j].effectId)
+                {
+                    duplicateNames.Add(effects[i].name);
+                    break;
+                }
+            }
+        }
+        for (i = 0; i < EffectTriggerDatas.Count; i++)
+        {
+            for (j = i+1; j < EffectTriggerDatas.Count; j++)
+            {
+                if (EffectTriggerDatas[i].effectTriggerId == EffectTriggerDatas[j].effectTriggerId)
+                {
+                    duplicateNames.Add(EffectTriggerDatas[i].name);
+                    break;
+                }
+            }
+        }
+        for (i = 0; i < cardTags.Count; i++)
+        {
+            for (j = i+1; j < cardTags.Count; j++)
+            {
+                if (cardTags[i].tagId == cardTags[j].tagId)
+                {
+                    duplicateNames.Add(cardTags[i].name);
+                    break;
+                }
+            }
+        }
+        foreach (string name in duplicateNames)
+        {
+            Debug.Log("DUPLICATE FOUND: " + name);
+        }
+
     }
     public CardData GetCardDataById(int cardId)
     {
@@ -38,6 +94,20 @@ public class CardLibraryManager : MonoBehaviour
             }
         }
         return foundEffect;
+    }
+    public CardTag TagById(int cardTagId)
+    {
+        CardTag foundCardTag = null;
+
+        foreach(CardTag cardTag in cardTags)
+        {
+            if (cardTag.tagId == cardTagId)
+            {
+                foundCardTag = cardTag;
+                break;
+            }
+        }
+        return foundCardTag;
     }
     public EffectTriggerData GetEffectTriggerDataById(int EffectTriggerId)
     {
@@ -84,9 +154,16 @@ public class CardLibraryManager : MonoBehaviour
 
             containedCard = cardStruct.containedCardBaseId>=0? GetCardDataById(cardStruct.containedCardBaseId): null,
 
+            tags = new List<CardTag>(),
             effectTriggers = new List<EffectTrigger>(),
         };
-
+        
+        if (cardStruct.tagIds != null && cardStruct.tagIds.Length > 0)
+        for (int i = 0; i < cardStruct.tagIds.Length; i++)
+        {
+            CardTag newCardTag = TagById(cardStruct.tagIds[i]);
+            newCard.tags.Add(newCardTag);
+        }
         
         if (cardStruct.effectTriggers != null && cardStruct.effectTriggers.Length > 0)
         for (int i = 0; i < cardStruct.effectTriggers.Length; i++)

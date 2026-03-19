@@ -10,6 +10,7 @@ public class SelectionManager : MonoBehaviour
     public List<Card> selectedDiscard = new();
     public List<Vector3Int> selectedBoard = new(); //x, y, playerId
     public List<Vector2Int> selectedLanes = new(); //x, playerId
+    public bool endSelectionOverride;
 
     void Awake()
     {
@@ -44,30 +45,45 @@ public class SelectionManager : MonoBehaviour
 
         return thingToReturn;
     }
-    public List<Vector3Int> UnitsByPlayerRow(int playerId = -1, int row = -1)
+    public List<Vector3Int> PositionsFromConditions(int playerId = -1, int row = -1, CardTag tag = null)
     {
         List<Vector3Int> thingToReturn = new();
-        int newZ = playerId;
-        for (int i = 0; i < UnitManager.instance.columnCount; i++)
+        for (int p = 0; p < GameManager.instance.players.Count; p++)
         {
-            for (int j = 0; j < UnitManager.instance.rowCount; j++)
+            if (p == playerId || playerId < 0)
+            for (int i = 0; i < UnitManager.instance.columnCount; i++)
             {
-                if (row < 0 || row == j)
+                for (int j = 0; j < UnitManager.instance.rowCount; j++)
                 {
-                    if (newZ < 0)
+                    if ((row < 0 || row == j) && GameManager.instance.players[p].units[i,j] != null)
                     {
-                        thingToReturn.Add(new Vector3Int(i,j, 0));
-                        thingToReturn.Add(new Vector3Int(i,j, 1));
+                        if (tag != null)
+                        {
+                            foreach (CardTag cardTag in GameManager.instance.players[p].units[i,j].tags)
+                            {
+                                if (cardTag.tagId == tag.tagId) 
+                                {
+                                    thingToReturn.Add(new Vector3Int(i,j, p));
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            thingToReturn.Add(new Vector3Int(i,j,p));
+                            
+                        }
                     }
-                    else thingToReturn.Add(new Vector3Int(i,j,newZ));
                 }
             }
         }
 
         return thingToReturn;
     }
+
     public IEnumerator SelectBoardPerformer(SelectUnitsGA selectUnitsGA)
     {
+        endSelectionOverride = false;
         selectedBoard = new();
 
         //make sure there are enough things to select
@@ -83,8 +99,10 @@ public class SelectionManager : MonoBehaviour
             UnitManager.instance.MakeUnitsSelectable(selectUnitsGA.validPos);
 
         //wait for player to select
-        while (selectedBoard.Count < selectUnitsGA.selectCount)
+        float overrideTimer = 0;
+        while (selectedBoard.Count < selectUnitsGA.selectCount || overrideTimer>15)
         {
+            if (endSelectionOverride) overrideTimer += Time.deltaTime;
             yield return null;
         }
 
@@ -98,7 +116,7 @@ public class SelectionManager : MonoBehaviour
         UnitManager.instance.MakeAllUnitsNotSelectable();
 
 
-        yield return null;
+        endSelectionOverride = false;
     } 
     //selects all units in selected lanes
     public IEnumerator SelectUnitsInSelectedLanes(SelectUnitsInLanesGA selectUnitsInLanesGA)
@@ -130,6 +148,7 @@ public class SelectionManager : MonoBehaviour
     public IEnumerator SelectLanePerformer(SelectLanesGA selectLanesGA)
     {
         selectedLanes = new();
+        endSelectionOverride = false;
         //make lanes selectable
         if (GameManager.instance.displayPlayer == selectLanesGA.inputPlayerId)
         foreach (Vector2Int item in selectLanesGA.validLanes)
@@ -138,8 +157,10 @@ public class SelectionManager : MonoBehaviour
         }
 
         //wait for player to select
-        while (selectedLanes.Count < selectLanesGA.selectCount)
+        float overrideTimer = 0;
+        while (selectedLanes.Count < selectLanesGA.selectCount || overrideTimer>15)
         {
+            if (endSelectionOverride) overrideTimer += Time.deltaTime;
             yield return null;
         }
 
@@ -151,9 +172,11 @@ public class SelectionManager : MonoBehaviour
 
         //make lanes not selectable
         LaneManager.instance.LaneSelectOff();
+        endSelectionOverride = false;
     } 
     public IEnumerator SelectHandPerformer(SelectCardsGA selectCardsGA)
     {
+        endSelectionOverride = false;
         CardManager.instance.UpdateHandUI();
         selectedHand = new();
 
@@ -174,8 +197,10 @@ public class SelectionManager : MonoBehaviour
         }
 
         //wait for player to select
-        while (selectedHand.Count < selectCardsGA.selectCount)
+        float overrideTimer = 0;
+        while (selectedHand.Count < selectCardsGA.selectCount  || overrideTimer>15)
         {
+            if (endSelectionOverride) overrideTimer += Time.deltaTime;
             yield return null;
         }
 
@@ -188,7 +213,7 @@ public class SelectionManager : MonoBehaviour
         //make cards not selectable
         CardManager.instance.MakeHandUnselectable();
 
-        yield return null;
+        endSelectionOverride = false;
     } 
     public IEnumerator SelectDiscardPerformer(List<Card> avaliableOptions, int selectCount)
     {

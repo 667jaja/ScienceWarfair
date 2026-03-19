@@ -16,15 +16,13 @@ MonoBehaviour:
   <title>k__BackingField: The Schemer
   <description>k__BackingField: Does Not Attack Normally. Gain 2k at the start of
     every turn
-  <cardArt>k__BackingField: {fileID: -8567022068340828743, guid: 7a0976be7d0760c438397fa23cad7357, type: 3}
+  <cardArt>k__BackingField: {fileID: -3920607472644100382, guid: 005403ad9a487954ba50e7a3a08427f6, type: 3}
   isAction: 0
   <placementCost>k__BackingField: 3
   <iq>k__BackingField: 0
   <health>k__BackingField: 1
   <noAttack>k__BackingField: 1
-  <cardEffect>k__BackingField: Gain 2k
+  <tags>k__BackingField: []
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: dc88001c4f199b4439f371f1978e4d23, type: 2}
-  <effects>k__BackingField:
-  - {fileID: 11400000, guid: 23dcd3450b21b8a478053732cf12b703, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

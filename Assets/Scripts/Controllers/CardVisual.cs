@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System;
 
 public class CardVisual : MonoBehaviour, IPointerClickHandler
 {
@@ -30,7 +29,12 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject effectTriggerInfoPrefab;
     [SerializeField] private GameObject containedCardInfoPrefab;
     private List<GameObject> effectInfos = new List<GameObject>();
-
+    //tagStickers
+    [SerializeField] private Transform tagStickerSpawn;
+    [SerializeField] private float tagStickersXAdd;
+    [SerializeField] private GameObject tagSticker;
+    private List<GameObject> tagStickers = new List<GameObject>();
+    [SerializeField] private float tagStickerRotationMax = 30;
     void Start()
     {
         col = GetComponent<Collider2D>();
@@ -105,7 +109,10 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
         }
         foreach (TMP_Text item in descriptionUI)
         {
-            item.text = newCard.description;
+            string newDesc = card.description;
+            if (card.tags.Count > 0) newDesc += "\n tagged as: " + card.GetTagList();
+
+            item.text = newDesc;
         }
         foreach (TMP_Text item in placementCostUI)
         {
@@ -126,6 +133,8 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
                 item.SetActive(false);
             }
         }
+
+        UpdateTagStickers();
         if (isUnit)
         {
             UpdateEffectInfos();
@@ -163,7 +172,10 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
         }
         foreach (TMP_Text item in descriptionUI)
         {
-            item.text = card.description;
+            string newDesc = card.description;
+            if (card.tags.Count > 0) newDesc += "\n tagged as: " + card.GetTagList();
+
+            item.text = newDesc;
         }
         foreach (TMP_Text item in placementCostUI)
         {
@@ -178,6 +190,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
             item.text = card.Health.ToString();
         }
         UpdateEffectInfos();
+        UpdateTagStickers();
     }
     private void UpdateEffectInfos()
     {
@@ -214,5 +227,33 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
 
             effectInfos.Add(newLoggedAction);
         }
+    }
+    private void UpdateTagStickers()
+    {
+        foreach (GameObject item in tagStickers)
+        {
+            Destroy(item);
+        }
+        tagStickers = new();
+        //Create Stickers
+        foreach (CardTag tag in card.tags)
+        {
+            GameObject newTagSticker = Instantiate(tagSticker, tagStickerSpawn);
+            newTagSticker.transform.rotation = Quaternion.Euler(0,0, Random.Range(-30, 30));
+
+            foreach (GameObject item in tagStickers)
+            {
+                item.transform.position = new Vector3(item.transform.position.x + tagStickersXAdd, item.transform.position.y, item.transform.position.z);
+            }
+
+            if (newTagSticker.GetComponent<Image>() != null)
+            {
+                newTagSticker.GetComponent<Image>().sprite = tag.tagImage;
+                newTagSticker.GetComponent<Image>().color = tag.tagColor;
+            } 
+
+            tagStickers.Add(newTagSticker);
+        }
+
     }
 }

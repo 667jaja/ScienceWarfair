@@ -9,6 +9,7 @@ public class ChangeStatsTargetEF : Effect
     [field: SerializeField] public int health { get; private set; }
     [field: SerializeField] public int placementCost { get; private set; }
     [field: SerializeField] public EffectTriggerData et { get; private set; }
+    [field: SerializeField] public CardTag tag { get; private set; }
 
     //target
     [field: SerializeField] public bool targetSaved { get; private set; }
@@ -38,7 +39,7 @@ public class ChangeStatsTargetEF : Effect
                 //stats
                 if (iq != 0 || health != 0 || placementCost != 0)
                 {
-                    ChangeStatsSelectedGA changeStatsSelectedGA = new ChangeStatsSelectedGA(iq, health, placementCost);
+                    ChangeStatsSelectedGA changeStatsSelectedGA = new ChangeStatsSelectedGA(iq, health, placementCost, tag);
                     actionList.Add(changeStatsSelectedGA);
                 }
                 //effects

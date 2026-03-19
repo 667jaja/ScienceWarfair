@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardDataId>k__BackingField: 2026031801
   <title>k__BackingField: Distilled Friendship
-  <description>k__BackingField: give two units "on death give friends +2 iq +1 health"
+  <description>k__BackingField: Select two units, tag them as friends, when one is
+    destroyed it gives the other +2Iq +1Health.
   <cardArt>k__BackingField: {fileID: 2524687595630518909, guid: 1a757d7b0b4a0a84ea6061905d0666c8, type: 3}
   isAction: 1
   <placementCost>k__BackingField: 0
   <iq>k__BackingField: 0
   <health>k__BackingField: 0
   <noAttack>k__BackingField: 0
+  <tags>k__BackingField: []
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: d869b2f5b8fa077478b9509b1ef70423, type: 2}
   <containedCard>k__BackingField: {fileID: 0}
