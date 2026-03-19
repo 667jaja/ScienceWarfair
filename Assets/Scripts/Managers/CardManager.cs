@@ -113,9 +113,9 @@ public class CardManager : MonoBehaviour
         {
             ShuffleDiscardIntoDeck(drawCardGA.playerId);
         }
-        Card drawnCard = new(GameManager.instance.players[drawCardGA.playerId].deck[0]);
+        
+        AddtoHand(drawCardGA.playerId,  GameManager.instance.players[drawCardGA.playerId].deck[0]);
         GameManager.instance.players[drawCardGA.playerId].deck.RemoveAt(0);
-        GameManager.instance.players[drawCardGA.playerId].hand.Add(drawnCard);
 
         //frontend
         UpdateHandUI();
@@ -134,6 +134,11 @@ public class CardManager : MonoBehaviour
 
         Debug.Log("Draw Card Ended");
         yield return null;
+    }
+    public void AddtoHand(int playerId, CardData carddata)
+    {
+        Card drawnCard = new(carddata);
+        GameManager.instance.players[playerId].hand.Add(drawnCard);
     }
     public List<CardData> CreateDeck(List<CardData> deckData)
     {

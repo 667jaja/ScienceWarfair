@@ -234,7 +234,6 @@ public class EffectTrigger
         if (originPositionFound) UnitManager.instance.UpdateCardVisual(actionData.originPlayerId, actionData.originPosition);
         else UnitManager.instance.UpdateAllCardVisuals();
     }
-
     public string GetTriggerName()
     {
         string before = "";
