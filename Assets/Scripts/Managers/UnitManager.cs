@@ -220,7 +220,7 @@ public class UnitManager : MonoBehaviour
             yield return new WaitForSeconds(1/3);
         }
     }
-    private bool AddUnit(int playerId, Vector2Int position, Card AddedCard)
+    public bool AddUnit(int playerId, Vector2Int position, Card AddedCard)
     {
         bool unitAddSuccess = false;
 

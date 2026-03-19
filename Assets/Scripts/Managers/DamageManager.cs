@@ -122,10 +122,8 @@ public class DamageManager : MonoBehaviour
 
             if (containedCard != null)
             {
-                CreateUnitGA createUnitGA = new(destroyUnitGA.playerId, destroyUnitGA.position, containedCard);
-                createUnitGA.description = "Destroyed unit contained unit "+ createUnitGA.playedCard.title;
-
-                ActionManager.instance.AddReaction(createUnitGA);
+                UnitManager.instance.AddUnit(destroyUnitGA.playerId, destroyUnitGA.position, containedCard);
+                if (ActionLogManager.instance != null) ActionLogManager.instance.LogAction("Destroyed unit contained unit "+ containedCard.title);
             }
 
             UnitManager.instance.PushAllUnitsForward();
