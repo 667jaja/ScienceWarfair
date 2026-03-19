@@ -120,21 +120,21 @@ public class EffectTrigger
     {
         if (effectTriggerType == EffectTriggerType.StartTurn)
         {
-            Debug.Log("subbed card effect to StartTurnGA");
+            // Debug.Log("subbed card effect to StartTurnGA");
             subbed = true;
             if (pre) ActionManager.SubscribeReaction<StartTurnGA>(StartTurnReaction, ReactionTiming.PRE);
             ActionManager.SubscribeReaction<StartTurnGA>(StartTurnReaction, ReactionTiming.POST);
         }
         if (effectTriggerType == EffectTriggerType.CardPlaced)
         {
-            Debug.Log("subbed card effect to CreateUnitGA");
+            // Debug.Log("subbed card effect to CreateUnitGA");
             subbed = true;
             if (pre) ActionManager.SubscribeReaction<CreateUnitGA>(CardPlacedReaction, ReactionTiming.PRE);
             ActionManager.SubscribeReaction<CreateUnitGA>(CardPlacedReaction, ReactionTiming.POST);
         }
         if (effectTriggerType == EffectTriggerType.CardDestroyed)
         {
-            Debug.Log("subbed card effect to DestroyUnitGA");
+            // Debug.Log("subbed card effect to DestroyUnitGA");
             subbed = true;
             if (pre) ActionManager.SubscribeReaction<DestroyUnitGA>(CardDestroyedReaction, ReactionTiming.PRE);
             ActionManager.SubscribeReaction<DestroyUnitGA>(CardDestroyedReaction, ReactionTiming.POST);
@@ -147,19 +147,19 @@ public class EffectTrigger
             subbed = false;
             if (effectTriggerType == EffectTriggerType.StartTurn)
             {
-                Debug.Log("unsubbed card effect from StartTurnGA");
+                // Debug.Log("unsubbed card effect from StartTurnGA");
                 if (pre) ActionManager.UnsubscribeReaction<StartTurnGA>(StartTurnReaction, ReactionTiming.PRE);
                 ActionManager.UnsubscribeReaction<StartTurnGA>(StartTurnReaction, ReactionTiming.POST);
             }
             if (effectTriggerType == EffectTriggerType.CardPlaced)
             {
-                Debug.Log("unsubbed card effect from CreateUnitGA");
+                // Debug.Log("unsubbed card effect from CreateUnitGA");
                 if (pre) ActionManager.UnsubscribeReaction<CreateUnitGA>(CardPlacedReaction, ReactionTiming.PRE);
                 ActionManager.UnsubscribeReaction<CreateUnitGA>(CardPlacedReaction, ReactionTiming.POST);
             }
             if (effectTriggerType == EffectTriggerType.CardDestroyed)
             {
-                Debug.Log("unsubbed card effect from DestroyUnitGA");
+                // Debug.Log("unsubbed card effect from DestroyUnitGA");
                 if (pre) ActionManager.UnsubscribeReaction<DestroyUnitGA>(CardDestroyedReaction, ReactionTiming.PRE);
                 ActionManager.UnsubscribeReaction<DestroyUnitGA>(CardDestroyedReaction, ReactionTiming.POST);
             }

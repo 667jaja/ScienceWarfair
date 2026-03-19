@@ -10,6 +10,7 @@ public class OnlineManager : NetworkBehaviour
     public static OnlineManager instance;
     [SerializeField] private float maxStateUpdateWait = 5;
     private bool hasUpdated;
+    private bool awaitingStateUpdate;
     // private NetworkVariable<PlayerStruct> hostPlayer = new (writePerm: NetworkVariableWritePermission.Server);
     // private NetworkVariable<PlayerStruct> clientPlayer = new (writePerm: NetworkVariableWritePermission.Server);
 
@@ -174,6 +175,7 @@ public class OnlineManager : NetworkBehaviour
     {
         if (IsHost)
         {
+            Debug.Log("StateUpdate Sent");
             PlayerStruct newplayer1 = new PlayerStruct(GameManager.instance.players[0]);
             PlayerStruct newplayer2 = new PlayerStruct(GameManager.instance.players[1]);
             //Debug.Log(newplayer1.name.ArrayToString() +" has "+ newplayer1.hand[0].CardDataBaseId + " and " + newplayer2.name.ArrayToString() +" has "+ newplayer2.hand[0].CardDataBaseId);
@@ -181,13 +183,16 @@ public class OnlineManager : NetworkBehaviour
         }
         else
         {
+            Debug.Log("StateUpdate Requested");
             float timer = 0;
+            awaitingStateUpdate = true;
             while (timer < maxStateUpdateWait && !hasUpdated)
             {
                 timer += Time.unscaledDeltaTime;
                 yield return null;
             }
             hasUpdated = false;
+            awaitingStateUpdate = false;
         }
     }
 
@@ -195,7 +200,13 @@ public class OnlineManager : NetworkBehaviour
     [Rpc(SendTo.NotServer)]
     public void StateUpdateClientRPC(PlayerStruct hostPlayerStruct, PlayerStruct clientPlayerStruct)
     {
-        Debug.Log("StateUpdateClientRPC Called");
+        StartCoroutine(StateUpdateClient(hostPlayerStruct, clientPlayerStruct));
+    }
+    public IEnumerator StateUpdateClient(PlayerStruct hostPlayerStruct, PlayerStruct clientPlayerStruct)
+    {
+        if (!awaitingStateUpdate)Debug.Log("StateUpdate awaiting request...");
+        while (!awaitingStateUpdate) yield return null;
+        Debug.Log("StateUpdate Recieved");
         hasUpdated = true;
         GameManager.instance.UnSubAllEts();
 
@@ -209,7 +220,6 @@ public class OnlineManager : NetworkBehaviour
         };
         GameManager.instance.GlobalUIUpdate();
     }
-
     //setup
     public void ConnectionFailure()
     {
