@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f27f589e1c43364583337f0e7e51fe9, type: 3}
-  m_Name: AddSchemer1Selected2
+  m_Name: AddFriendshipToSelected2
   m_EditorClassIdentifier: 
-  <effectId>k__BackingField: 2026031703
-  specialAnimation: 2
+  <effectId>k__BackingField: 2026031801
+  specialAnimation: 0
   <iq>k__BackingField: 0
   <health>k__BackingField: 0
   <placementCost>k__BackingField: 0
-  <et>k__BackingField: {fileID: 11400000, guid: afdf0e5e6be02e043aaa5d5255f122a1, type: 2}
-  <isUnitedEffect>k__BackingField: 0
+  <et>k__BackingField: {fileID: 11400000, guid: 66e61d89fcd3f31498358a725a4d960b, type: 2}
+  <isUnitedEffect>k__BackingField: 1
   <selectCount>k__BackingField: 2
   <includeFriendly>k__BackingField: 1
   <includeEnemy>k__BackingField: 0

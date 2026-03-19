@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9feee8a6e1578348913061ebc0e2c49, type: 3}
-  m_Name: MyStartGain1
+  m_Name: SimpleAddFriendshipSelected2
   m_EditorClassIdentifier: 
-  <effectTriggerId>k__BackingField: 2026031803
-  effectTriggerType: 1
+  <effectTriggerId>k__BackingField: 2026031801
+  effectTriggerType: 0
   <effects>k__BackingField:
-  - {fileID: 11400000, guid: bcef6269011294643b282999ca228e34, type: 2}
-  <effectDescription>k__BackingField: Gain 1k
+  - {fileID: 11400000, guid: 2b4e41c82636a124792feca476b171c1, type: 2}
+  <effectDescription>k__BackingField: Give Friendship to selected
   <pre>k__BackingField: 0
   <oneTimeUse>k__BackingField: 0
   <countDown>k__BackingField: 0
   countDownVal: 0
   targetEnemyOnly: 0
-  targetMeOnly: 1
+  targetMeOnly: 0

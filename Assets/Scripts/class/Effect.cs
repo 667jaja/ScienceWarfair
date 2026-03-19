@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Effect : ScriptableObject
 { 
     [field: SerializeField] public int effectId {get; private set;}
+    public Card savedCard;
     public ActionData actionData { get; set;}
     [field: SerializeField] public SpecialAnimation specialAnimation;
     //[field: SerializeField] public GameAction trigger { get; private set; }

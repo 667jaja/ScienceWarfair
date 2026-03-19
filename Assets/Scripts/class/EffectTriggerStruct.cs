@@ -9,6 +9,7 @@ public struct EffectTriggerStruct : INetworkSerializable
     public int originPlayer;
     public int originUnitInstanceId;
     //public int originPosition;
+    public int savedCardInstanceId;
     public bool triggerDisabled;
     public int[] effects;
 
@@ -18,6 +19,7 @@ public struct EffectTriggerStruct : INetworkSerializable
         countDownVal = effectTrigger.countDownVal;
         originPlayer = effectTrigger.originPlayer;
         originUnitInstanceId = effectTrigger.originUnitInstanceId;
+        savedCardInstanceId = effectTrigger.savedCardInstanceId;
         triggerDisabled = effectTrigger.triggerDisabled;
         effects = new int[effectTrigger.effects.Count];
 
@@ -33,6 +35,7 @@ public struct EffectTriggerStruct : INetworkSerializable
         serializer.SerializeValue(ref countDownVal);
         serializer.SerializeValue(ref originPlayer);
         serializer.SerializeValue(ref originUnitInstanceId);
+        serializer.SerializeValue(ref savedCardInstanceId);
         serializer.SerializeValue(ref triggerDisabled);
 
         // effects

@@ -60,6 +60,7 @@ public class CardLibraryManager : MonoBehaviour
             countDownVal = effectTriggerStruct.countDownVal,
             originPlayer = effectTriggerStruct.originPlayer,
             originUnitInstanceId = effectTriggerStruct.originUnitInstanceId,
+            savedCardInstanceId = effectTriggerStruct.savedCardInstanceId,
             triggerDisabled = effectTriggerStruct.triggerDisabled,
             effects = new List<Effect>(),
         };

@@ -18,6 +18,7 @@ public class EffectTrigger
     public int originUnitInstanceId{ get; set;}
     public Card originCard{ get; set;}
     public int originPlayer;
+    public int savedCardInstanceId;
 
     public bool triggerDisabled;
     public bool subbed = false;
@@ -37,7 +38,7 @@ public class EffectTrigger
     }
     public void TriggerEffect(ActionData actionData)
     {
-        // if (originCard == null) originCard = UnitManager.instance.GetUnitByInstanceId(originUnitInstanceId);
+        if (originCard == null) originCard = UnitManager.instance.GetUnitByInstanceId(originUnitInstanceId);
         // originCard.PerformAbility(actionData);
 
         Debug.Log("card " + originUnitInstanceId.ToString() + " performs " + effects.Count +" effects");
@@ -48,6 +49,7 @@ public class EffectTrigger
             if (effect != null)
             {
                 effect.actionData = actionData;
+                effect.savedCard = UnitManager.instance.GetUnitByInstanceId(savedCardInstanceId);
                 foreach (GameAction action in effect.effect)
                 {
                     action.inputPlayerId = actionData.originPlayerId;
@@ -57,6 +59,34 @@ public class EffectTrigger
                         actionDescribed = true;
                     }
                     ActionManager.instance.Perform(action);
+                }
+            }
+
+        }
+    }
+    public void TriggerEffectAsReaction(ActionData actionData)
+    {
+        if (originCard == null) originCard = UnitManager.instance.GetUnitByInstanceId(originUnitInstanceId);
+        // originCard.PerformAbility(actionData);
+
+        Debug.Log("card " + originUnitInstanceId.ToString() + " performs " + effects.Count +" effects");
+        bool actionDescribed = false;
+        foreach (Effect effect in effects)
+        {
+            
+            if (effect != null)
+            {
+                effect.actionData = actionData;
+                effect.savedCard = UnitManager.instance.GetUnitByInstanceId(savedCardInstanceId);
+                foreach (GameAction action in effect.effect)
+                {
+                    action.inputPlayerId = actionData.originPlayerId;
+                    if (!actionDescribed)
+                    {
+                        action.description = originCard.title + " Performs: " + effectDescription;
+                        actionDescribed = true;
+                    }
+                    ActionManager.instance.AddReaction(action);
                 }
             }
 
@@ -77,6 +107,13 @@ public class EffectTrigger
     }
     public void DestructionEffect()
     {
+        if (effectTriggerType == EffectTriggerType.Destruction)
+        {
+            ActionData actionData = new ActionData(originPlayer, new Vector2Int(0,0), originCard);
+            TriggerEffectAsReaction(actionData);
+            triggerDisabled = true;
+            subbed = false;
+        }
         Unsub();
     }
     public void Sub()
@@ -90,10 +127,17 @@ public class EffectTrigger
         }
         if (effectTriggerType == EffectTriggerType.CardPlaced)
         {
-            Debug.Log("subbed card effect to CardPlacedGA");
+            Debug.Log("subbed card effect to CreateUnitGA");
             subbed = true;
             if (pre) ActionManager.SubscribeReaction<CreateUnitGA>(CardPlacedReaction, ReactionTiming.PRE);
             ActionManager.SubscribeReaction<CreateUnitGA>(CardPlacedReaction, ReactionTiming.POST);
+        }
+        if (effectTriggerType == EffectTriggerType.CardDestroyed)
+        {
+            Debug.Log("subbed card effect to DestroyUnitGA");
+            subbed = true;
+            if (pre) ActionManager.SubscribeReaction<DestroyUnitGA>(CardDestroyedReaction, ReactionTiming.PRE);
+            ActionManager.SubscribeReaction<DestroyUnitGA>(CardDestroyedReaction, ReactionTiming.POST);
         }
     }
     public void Unsub()
@@ -113,6 +157,12 @@ public class EffectTrigger
                 if (pre) ActionManager.UnsubscribeReaction<CreateUnitGA>(CardPlacedReaction, ReactionTiming.PRE);
                 ActionManager.UnsubscribeReaction<CreateUnitGA>(CardPlacedReaction, ReactionTiming.POST);
             }
+            if (effectTriggerType == EffectTriggerType.CardDestroyed)
+            {
+                Debug.Log("unsubbed card effect from DestroyUnitGA");
+                if (pre) ActionManager.UnsubscribeReaction<DestroyUnitGA>(CardDestroyedReaction, ReactionTiming.PRE);
+                ActionManager.UnsubscribeReaction<DestroyUnitGA>(CardDestroyedReaction, ReactionTiming.POST);
+            }
         }
     }
 
@@ -131,6 +181,18 @@ public class EffectTrigger
             targetPlayerId = createUnitGA.playerId,
             targetCard = createUnitGA.playedCard,
             targetPosition = createUnitGA.position,
+        };
+
+        Reaction(actionData);
+    }
+    private void CardDestroyedReaction(DestroyUnitGA destroyUnitGA)
+    {
+        if (originCard == null) originCard = UnitManager.instance.GetUnitByInstanceId(originUnitInstanceId);
+        ActionData actionData = new ActionData(originPlayer, new Vector2Int(0,0), originCard)
+        {
+            targetPlayerId = destroyUnitGA.playerId,
+            targetCard = GameManager.instance.players[destroyUnitGA.playerId].units[destroyUnitGA.position.x, destroyUnitGA.position.y],
+            targetPosition = destroyUnitGA.position,
         };
 
         Reaction(actionData);
@@ -160,7 +222,7 @@ public class EffectTrigger
         {
             if (countDownVal <= 0)
             {
-                TriggerEffect(actionData);
+                TriggerEffectAsReaction(actionData);
                 if (oneTimeUse) triggerDisabled = true;
                 countDownVal = countDown;
             }
@@ -186,6 +248,7 @@ public class EffectTrigger
         if (targetEnemyOnly) team = "Enemy ";
         if (effectTriggerType == EffectTriggerType.StartTurn) type = "Turn Start"; 
         if (effectTriggerType == EffectTriggerType.CardPlaced) type = "Unit Created"; 
+        if (effectTriggerType == EffectTriggerType.CardDestroyed) type = "Unit Destroyed"; 
 
         if (effectTriggerType == EffectTriggerType.Placement)
         {
@@ -193,6 +256,13 @@ public class EffectTrigger
             oneTime = "";
             team = "";
             type = "This Played"; 
+        } 
+        if (effectTriggerType == EffectTriggerType.Destruction)
+        {
+            before = "";
+            oneTime = "";
+            team = "";
+            type = "This Destroyed"; 
         } 
         if (targetMeOnly && targetEnemyOnly)
         {

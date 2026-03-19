@@ -1,18 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
-[CreateAssetMenu(fileName = "ChangeStatsSelectedUnitsEffect", menuName = "Change Stats Selected Units Effect")]
-public class ChangeStatsSelectedUnitsEF : Effect
+[CreateAssetMenu(fileName = "AddUnitedETSelectedEffect", menuName = "Add United ET Selected Effect")]
+public class AddUnitedEffectSelectedEF : Effect
 {
-    //statchanges
-    [field: SerializeField] public int iq { get; private set; }
-    [field: SerializeField] public int health { get; private set; }
-    [field: SerializeField] public int placementCost { get; private set; }
     [field: SerializeField] public EffectTriggerData et { get; private set; }
-    [field: SerializeField] public bool isUnitedEffect { get; private set; }
 
-    //selection
     [field: SerializeField] public int selectCount { get; private set; }
     [field: SerializeField] public bool includeFriendly { get; private set; }
     [field: SerializeField] public bool includeEnemy { get; private set; }
@@ -39,25 +32,14 @@ public class ChangeStatsSelectedUnitsEF : Effect
                 actionList.Add(animateSelectedUnitsGA);
             }
 
-            //stats
-            if (iq != 0 || health != 0 || placementCost != 0)
-            {
-                ChangeStatsSelectedGA changeStatsSelectedGA = new ChangeStatsSelectedGA(iq, health, placementCost);
-                actionList.Add(changeStatsSelectedGA);
-            }
             //effects
-            if (et != null && !isUnitedEffect)
+            if (et != null)
             {
                 GiveSelectedEffectGA giveSelectedEffectGA = new GiveSelectedEffectGA(et);
-                actionList.Add(giveSelectedEffectGA);
-            }
-            if (et != null && isUnitedEffect)
-            {
-                GiveSelectedUnitedEffectGA giveSelectedEffectGA = new GiveSelectedUnitedEffectGA(et);
                 actionList.Add(giveSelectedEffectGA);
             }
 
             return actionList;
         }
-    }  
+    }   
 }

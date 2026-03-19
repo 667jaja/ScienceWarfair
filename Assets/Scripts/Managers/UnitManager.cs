@@ -53,6 +53,7 @@ public class UnitManager : MonoBehaviour
         ActionManager.AttachPerformer<ChangeStatsSelectedGA>(ChangeStatsSelectedPerformer);
         ActionManager.AttachPerformer<GiveUnitEffectGA>(GiveUnitEffectPerformer);
         ActionManager.AttachPerformer<GiveSelectedEffectGA>(GiveSelectedEffectPerformer);
+        ActionManager.AttachPerformer<GiveSelectedUnitedEffectGA>(GiveSelectedUnitedEffectPerformer);
     }
     private void OnDisable()
     {
@@ -63,7 +64,7 @@ public class UnitManager : MonoBehaviour
         ActionManager.DetachPerformer<ChangeStatsUnitGA>();
         ActionManager.DetachPerformer<ChangeStatsSelectedGA>();
         ActionManager.DetachPerformer<GiveUnitEffectGA>();
-        ActionManager.DetachPerformer<GiveSelectedEffectGA>();
+        ActionManager.DetachPerformer<GiveSelectedUnitedEffectGA>();
     }
 
     public void PlayAction(int playerId, Card card) 
@@ -301,13 +302,16 @@ public class UnitManager : MonoBehaviour
     private IEnumerator GiveUnitEffectPerformer(GiveUnitEffectGA giveUnitEffectGA)
     {
         Card selectedUnit = GameManager.instance.players[giveUnitEffectGA.playerId].units[giveUnitEffectGA.position.x, giveUnitEffectGA.position.y]; //get only reference
-        
-        EffectTrigger addedEF = new EffectTrigger(new ActionData(giveUnitEffectGA.playerId, giveUnitEffectGA.position, selectedUnit), giveUnitEffectGA.ET);
-        selectedUnit.effectTriggers.Add(addedEF);
+        if (selectedUnit != null)
+        {
+            EffectTrigger addedEF = new EffectTrigger(new ActionData(giveUnitEffectGA.playerId, giveUnitEffectGA.position, selectedUnit), giveUnitEffectGA.ET);
+            if (giveUnitEffectGA.savedCard != null) addedEF.savedCardInstanceId = giveUnitEffectGA.savedCard.cardInstanceId;
+            selectedUnit.effectTriggers.Add(addedEF);
 
-        UpdateCardVisual(giveUnitEffectGA.playerId, giveUnitEffectGA.position);
-        LaneManager.instance.UpdateLaneVisuals();
-        yield return null;
+            UpdateCardVisual(giveUnitEffectGA.playerId, giveUnitEffectGA.position);
+            LaneManager.instance.UpdateLaneVisuals();
+            yield return null;
+        }
     }
     private IEnumerator GiveSelectedEffectPerformer(GiveSelectedEffectGA giveSelectedEffectGA)
     {
@@ -315,6 +319,23 @@ public class UnitManager : MonoBehaviour
         {
             GiveUnitEffectGA giveUnitEffectGA =  new GiveUnitEffectGA(vector.z, new Vector2Int(vector.x, vector.y), giveSelectedEffectGA.ET, giveSelectedEffectGA.savedCard);
             ActionManager.instance.AddReaction(giveUnitEffectGA);
+        }
+        yield return null;
+    }
+    private IEnumerator GiveSelectedUnitedEffectPerformer(GiveSelectedUnitedEffectGA giveSelectedUnitedEffectGA)
+    {
+        foreach (Vector3Int vector in SelectionManager.instance.selectedBoard)
+        {
+            foreach (Vector3Int mector in SelectionManager.instance.selectedBoard)
+            {
+                if (mector != vector)
+                {
+                    Card mectorCard = GameManager.instance.players[mector.z].units[mector.x, mector.y];
+                    GiveUnitEffectGA giveUnitEffectGA =  new GiveUnitEffectGA(vector.z, new Vector2Int(vector.x, vector.y), giveSelectedUnitedEffectGA.ET, mectorCard);
+                    ActionManager.instance.AddReaction(giveUnitEffectGA);
+                }
+            }
+
         }
         yield return null;
     }

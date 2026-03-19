@@ -3,8 +3,10 @@ using UnityEngine;
 public enum EffectTriggerType
 {
     Placement = 0,
-    StartTurn = 1,
-    CardPlaced = 2
+    Destruction = 1,
+    CardPlaced = 2,
+    CardDestroyed = 3,
+    StartTurn = 4,
 }
 //GameAction.GetType() & typeof(GameAction) is potential solution to enum issue
 [CreateAssetMenu(fileName = "EffectTriggerData", menuName = "Effect Trigger Data")]
