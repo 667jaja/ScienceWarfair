@@ -14,16 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardDataId>k__BackingField: 202521
   <title>k__BackingField: Unnatural Disaster
-  <description>k__BackingField: attack all lanes for 1 damage
+  <description>k__BackingField: attack all enemy lanes for 1 damage twice
   <cardArt>k__BackingField: {fileID: 8653345269905921841, guid: 035a6ba5ba196c945a2c29c21309ffe3, type: 3}
   isAction: 1
   <placementCost>k__BackingField: 0
   <iq>k__BackingField: 0
   <health>k__BackingField: 0
   <noAttack>k__BackingField: 0
-  <cardEffect>k__BackingField: Attack all lanes
+  <tags>k__BackingField: []
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: 633a9b47a0b9b004c930f2ad114b6003, type: 2}
-  <effects>k__BackingField:
-  - {fileID: 11400000, guid: a2dfb809fb2f3d045bd7d08ed5b53eac, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

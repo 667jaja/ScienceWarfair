@@ -20,11 +20,9 @@ MonoBehaviour:
   isAction: 0
   <placementCost>k__BackingField: 4
   <iq>k__BackingField: 1
-  <health>k__BackingField: 2
+  <health>k__BackingField: 3
   <noAttack>k__BackingField: 1
-  <cardEffect>k__BackingField: 4 Shotgun Damage
+  <tags>k__BackingField: []
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: d1422fc0b4da4424eb87030ad919c3d1, type: 2}
-  <effects>k__BackingField:
-  - {fileID: 11400000, guid: 7094c1f5c1e422344b1064ce2b0fab8a, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9feee8a6e1578348913061ebc0e2c49, type: 3}
-  m_Name: Damage2SelectUnitLane3
+  m_Name: AttackAll2
   m_EditorClassIdentifier: 
-  <effectTriggerId>k__BackingField: 2026030504
+  <effectTriggerId>k__BackingField: 202510
   effectTriggerType: 0
   <effects>k__BackingField:
-  - {fileID: 11400000, guid: c15c874dda0af1c47a64dacdda04256c, type: 2}
-  <effectDescription>k__BackingField: deal 2 damage
+  - {fileID: 11400000, guid: a2dfb809fb2f3d045bd7d08ed5b53eac, type: 2}
+  - {fileID: 11400000, guid: a2dfb809fb2f3d045bd7d08ed5b53eac, type: 2}
+  <effectDescription>k__BackingField: Attack All Enemy Lanes twice
   <pre>k__BackingField: 0
   <oneTimeUse>k__BackingField: 0
   <countDown>k__BackingField: 0

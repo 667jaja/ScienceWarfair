@@ -9,14 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f27f589e1c43364583337f0e7e51fe9, type: 3}
-  m_Name: AddHealth2Selected
+  m_Script: {fileID: 11500000, guid: c382c8f9d7db03f479d23b04a12032e9, type: 3}
+  m_Name: Damage4Selected
   m_EditorClassIdentifier: 
-  <effectId>k__BackingField: 2026030503
-  <iq>k__BackingField: 0
-  <health>k__BackingField: 2
-  <placementCost>k__BackingField: 0
+  <effectId>k__BackingField: 2026030904
+  specialAnimation: 0
+  <attackDamage>k__BackingField: 4
+  <targetTag>k__BackingField: {fileID: 0}
   <selectCount>k__BackingField: 1
   <includeFriendly>k__BackingField: 1
-  <includeEnemy>k__BackingField: 0
+  <includeEnemy>k__BackingField: 1
+  <includeSelf>k__BackingField: 0
+  <selectAll>k__BackingField: 0
   <row>k__BackingField: -1
