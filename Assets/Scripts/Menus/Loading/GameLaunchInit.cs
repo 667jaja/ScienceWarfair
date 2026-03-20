@@ -14,6 +14,7 @@ public class GameLaunchInit : MonoBehaviour
             {
                 data.changeName("");
                 data.deck = new();
+                data.opener = new();
             }
             hasResetName = true;
         }
