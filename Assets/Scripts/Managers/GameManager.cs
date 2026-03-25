@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
             if (players[i].name == null || players[i].name.Length < 1) players[i].name = "Player" + (i+1);
             players[i].maxMoney = maxMoney;
             players[i].Money = startingMoney + i*turnOrderBonusMoney;
+            UpdateMoneyUI(true);
             int c = 0;
             foreach (CardData item in players[i].opener)
             {
@@ -383,7 +384,7 @@ public class GameManager : MonoBehaviour
         CardManager.instance.UpdateHandUI();
         UnitManager.instance.UpdateUnitUI();
         UpdateActionPointUI();
-        UpdateMoneyUI();
+        UpdateMoneyUI(true);
         UpdateSciencePointsUI();
         LaneManager.instance.UpdateLaneVisuals();
     }
@@ -394,10 +395,24 @@ public class GameManager : MonoBehaviour
 
         plaActionPointsCount.text = players[displayPlayer].actionPoints.ToString();
     }
-    public void UpdateMoneyUI()
+    public void UpdateMoneyUI(bool skipAnim = false)
     {
-        StartCoroutine(SetMoneyVisual(true, moneySlider.value, players[displayPlayer].Money));
-        StartCoroutine(SetMoneyVisual(false, moneySliderEnemy.value, players[GetNextPlayerId(displayPlayer)].Money));
+        if (skipAnim)
+        {
+            moneySlider.value = players[displayPlayer].Money;
+            moneySliderEnemy.value = players[GetNextPlayerId(displayPlayer)].Money;
+
+            moneyAnimator.SetBool(MoneyIncreasingAnimbool, false);
+            moneyAnimator.SetBool(MoneyDecreasingAnimbool, false);
+            moneyAnimatorEnemy.SetBool(MoneyIncreasingAnimbool, false);
+            moneyAnimatorEnemy.SetBool(MoneyDecreasingAnimbool, false);
+        }
+        else
+        {
+            StartCoroutine(SetMoneyVisual(true, moneySlider.value, players[displayPlayer].Money));
+            StartCoroutine(SetMoneyVisual(false, moneySliderEnemy.value, players[GetNextPlayerId(displayPlayer)].Money));
+        }
+
     } 
     public void UpdateSciencePointsUI()
     {

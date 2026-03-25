@@ -21,7 +21,6 @@ MonoBehaviour:
   <iq>k__BackingField: 1
   <health>k__BackingField: 1
   <noAttack>k__BackingField: 0
-  <tags>k__BackingField:
-  - {fileID: 11400000, guid: 3364fc738e272b249939a68864905cb3, type: 2}
+  <tags>k__BackingField: []
   <effectTriggerDatas>k__BackingField: []
   <containedCard>k__BackingField: {fileID: 0}

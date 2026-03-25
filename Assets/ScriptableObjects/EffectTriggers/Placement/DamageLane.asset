@@ -15,7 +15,7 @@ MonoBehaviour:
   <effectTriggerId>k__BackingField: 202511
   effectTriggerType: 0
   <effects>k__BackingField:
-  - {fileID: 11400000, guid: 3e6a331eae2b46e47a60f132ea4c3e9c, type: 2}
+  - {fileID: 11400000, guid: 3c8d44f87b16b2b48b5cdaef11caa443, type: 2}
   - {fileID: 11400000, guid: 5343d56a3d4e578429a95b1eeffa7d59, type: 2}
   - {fileID: 11400000, guid: f01ecdec68b828a4fa46be16650fb953, type: 2}
   <effectDescription>k__BackingField: Damage(1) All Units In Selected And Opposing
