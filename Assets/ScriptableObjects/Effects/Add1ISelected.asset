@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f27f589e1c43364583337f0e7e51fe9, type: 3}
-  m_Name: Add1IQInterns
+  m_Name: Add1ISelected
   m_EditorClassIdentifier: 
-  <effectId>k__BackingField: 2026031809
+  <effectId>k__BackingField: 2026031808
   specialAnimation: 0
   <iq>k__BackingField: 1
   <health>k__BackingField: 0
@@ -20,10 +20,10 @@ MonoBehaviour:
   <et>k__BackingField: {fileID: 0}
   <tag>k__BackingField: {fileID: 0}
   <isUnitedEffect>k__BackingField: 0
-  <targetTag>k__BackingField: {fileID: 11400000, guid: 3364fc738e272b249939a68864905cb3, type: 2}
-  <selectCount>k__BackingField: 0
+  <targetTag>k__BackingField: {fileID: 11400000, guid: 6332b7aa9c39902479f5202fd7fec5e4, type: 2}
+  <selectCount>k__BackingField: 1
   <includeFriendly>k__BackingField: 1
   <includeEnemy>k__BackingField: 0
   <includeSelf>k__BackingField: 0
-  <selectAll>k__BackingField: 1
+  <selectAll>k__BackingField: 0
   <row>k__BackingField: -1

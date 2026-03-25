@@ -19,7 +19,7 @@ MonoBehaviour:
   isAction: 0
   <placementCost>k__BackingField: 4
   <iq>k__BackingField: 0
-  <health>k__BackingField: 2
+  <health>k__BackingField: 3
   <noAttack>k__BackingField: 0
   <tags>k__BackingField: []
   <effectTriggerDatas>k__BackingField:

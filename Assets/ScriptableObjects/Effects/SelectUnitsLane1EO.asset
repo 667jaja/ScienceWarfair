@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d7859cdec14744d93d94fdcd73544a, type: 3}
+  m_Name: SelectUnitsLane1EO
+  m_EditorClassIdentifier: 
+  <effectId>k__BackingField: 2026032316
+  specialAnimation: 0
+  <selectCount>k__BackingField: 1
+  <alsoOpposingLanes>k__BackingField: 1
+  <unitsInLanes>k__BackingField: 1
+  <includeFriendly>k__BackingField: 0
+  <includeEnemy>k__BackingField: 1
+  <includeSelf>k__BackingField: 1
+  <includeOpp>k__BackingField: 1

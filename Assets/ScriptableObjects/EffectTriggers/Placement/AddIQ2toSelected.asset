@@ -15,9 +15,10 @@ MonoBehaviour:
   <effectTriggerId>k__BackingField: 2026030502
   effectTriggerType: 0
   <effects>k__BackingField:
+  - {fileID: 11400000, guid: d33aedff72a9ea3448b95bd7e0a25f49, type: 2}
+  - {fileID: 11400000, guid: bdfdc74e74adc65459b433c4604985c0, type: 2}
   - {fileID: 11400000, guid: 644bbd82a53519f40bc050ebf1b5f609, type: 2}
   <effectDescription>k__BackingField: Add 3 Health to target
-  <specialAnimation>k__BackingField: 5
   <pre>k__BackingField: 0
   <oneTimeUse>k__BackingField: 0
   <countDown>k__BackingField: 0

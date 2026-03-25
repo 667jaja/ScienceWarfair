@@ -15,6 +15,7 @@ MonoBehaviour:
   <effectTriggerId>k__BackingField: 2026032810
   effectTriggerType: 0
   <effects>k__BackingField:
+  - {fileID: 11400000, guid: d33aedff72a9ea3448b95bd7e0a25f49, type: 2}
   - {fileID: 11400000, guid: d4c0cfd7434abbd47b0352b32ed05b5e, type: 2}
   <effectDescription>k__BackingField: +1Iq +1health +Robot to selected unit
   <pre>k__BackingField: 0

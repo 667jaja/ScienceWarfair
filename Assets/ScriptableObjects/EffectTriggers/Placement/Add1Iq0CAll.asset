@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9feee8a6e1578348913061ebc0e2c49, type: 3}
-  m_Name: Add1IqInterns
+  m_Name: Add1Iq0CAll
   m_EditorClassIdentifier: 
   <effectTriggerId>k__BackingField: 2026031804
   effectTriggerType: 0
   <effects>k__BackingField:
-  - {fileID: 11400000, guid: 26fcddfab0d54204fbe63a919cc96ff0, type: 2}
+  - {fileID: 11400000, guid: 62c29f22a662de94dbaa9c56525698d5, type: 2}
+  - {fileID: 11400000, guid: 65604007c466d664aa13b73809388044, type: 2}
   <effectDescription>k__BackingField: Increase Intern Iq
   <pre>k__BackingField: 0
   <oneTimeUse>k__BackingField: 0

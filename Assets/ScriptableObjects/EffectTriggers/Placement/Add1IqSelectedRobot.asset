@@ -15,6 +15,7 @@ MonoBehaviour:
   <effectTriggerId>k__BackingField: 2026031811
   effectTriggerType: 0
   <effects>k__BackingField:
+  - {fileID: 11400000, guid: 5e174ea87917cbb4a9256395f7041d70, type: 2}
   - {fileID: 11400000, guid: 65604007c466d664aa13b73809388044, type: 2}
   <effectDescription>k__BackingField: Increase iq of selected robot
   <pre>k__BackingField: 0

@@ -15,6 +15,8 @@ MonoBehaviour:
   <effectTriggerId>k__BackingField: 202509
   effectTriggerType: 0
   <effects>k__BackingField:
+  - {fileID: 11400000, guid: 9cfd904f4115cde4d84f3db2ebf55a0d, type: 2}
+  - {fileID: 11400000, guid: 53ecf00489454aa4c9901301d7e47fbd, type: 2}
   - {fileID: 11400000, guid: a132b51faaba6b94dbe792807be72c37, type: 2}
   <effectDescription>k__BackingField: Attack(2) Selected
   <pre>k__BackingField: 0

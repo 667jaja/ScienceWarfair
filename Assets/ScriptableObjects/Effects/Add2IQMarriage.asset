@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: Add2IQMarriage
   m_EditorClassIdentifier: 
   <effectId>k__BackingField: 2026030502
-  specialAnimation: 5
+  specialAnimation: 0
   <iq>k__BackingField: 2
   <health>k__BackingField: 0
   <placementCost>k__BackingField: 0
-  <selectCount>k__BackingField: 1
-  <includeFriendly>k__BackingField: 1
-  <includeEnemy>k__BackingField: 0
-  <row>k__BackingField: -1
+  <et>k__BackingField: {fileID: 0}
+  <tag>k__BackingField: {fileID: 0}
+  <isUnitedEffect>k__BackingField: 0

@@ -285,10 +285,11 @@ public class UnitManager : MonoBehaviour
         selectedUnit.Iq += changeStatsUnitGA.iqChange;
         selectedUnit.Health += changeStatsUnitGA.heathChange;
         selectedUnit.PlacementCost += changeStatsUnitGA.costChange;
-        if (changeStatsUnitGA.tag != null) selectedUnit.tags.Add(changeStatsUnitGA.tag);
+        if (changeStatsUnitGA.tag != null && !selectedUnit.tags.Contains(changeStatsUnitGA.tag)) selectedUnit.tags.Add(changeStatsUnitGA.tag);
 
         UpdateCardVisual(changeStatsUnitGA.playerId, changeStatsUnitGA.position);
         LaneManager.instance.UpdateLaneVisuals();
+        GameManager.instance.UpdateSciencePointsUI();
         yield return null;
     }
     private IEnumerator ChangeStatsSelectedPerformer(ChangeStatsSelectedGA changeStatsSelectedGA)

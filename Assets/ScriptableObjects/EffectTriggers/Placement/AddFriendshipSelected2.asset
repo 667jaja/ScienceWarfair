@@ -15,6 +15,7 @@ MonoBehaviour:
   <effectTriggerId>k__BackingField: 2026031801
   effectTriggerType: 0
   <effects>k__BackingField:
+  - {fileID: 11400000, guid: 1a52c23ec8aa19e47813f821a7138a7d, type: 2}
   - {fileID: 11400000, guid: 2b4e41c82636a124792feca476b171c1, type: 2}
   <effectDescription>k__BackingField: Give Friendship to selected
   <pre>k__BackingField: 0

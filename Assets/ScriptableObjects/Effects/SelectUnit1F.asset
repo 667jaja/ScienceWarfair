@@ -9,21 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f27f589e1c43364583337f0e7e51fe9, type: 3}
-  m_Name: Add1ISelectedRobot
+  m_Script: {fileID: 11500000, guid: 7748ca281b74b594685a2529365a457d, type: 3}
+  m_Name: SelectUnit1F
   m_EditorClassIdentifier: 
-  <effectId>k__BackingField: 2026031808
+  <effectId>k__BackingField: 2026032309
   specialAnimation: 0
-  <iq>k__BackingField: 1
-  <health>k__BackingField: 0
-  <placementCost>k__BackingField: 0
-  <et>k__BackingField: {fileID: 0}
-  <tag>k__BackingField: {fileID: 0}
-  <isUnitedEffect>k__BackingField: 0
-  <targetTag>k__BackingField: {fileID: 11400000, guid: 6332b7aa9c39902479f5202fd7fec5e4, type: 2}
+  <targetTag>k__BackingField: {fileID: 0}
+  <targetIqRange>k__BackingField: {x: -1, y: -1}
+  <targetHealthRange>k__BackingField: {x: -1, y: -1}
+  <targetPlacementCostRange>k__BackingField: {x: -1, y: -1}
   <selectCount>k__BackingField: 1
   <includeFriendly>k__BackingField: 1
   <includeEnemy>k__BackingField: 0
-  <includeSelf>k__BackingField: 0
+  <includeSelf>k__BackingField: 1
   <selectAll>k__BackingField: 0
   <row>k__BackingField: -1

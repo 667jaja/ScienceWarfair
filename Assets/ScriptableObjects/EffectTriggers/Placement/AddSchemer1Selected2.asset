@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9feee8a6e1578348913061ebc0e2c49, type: 3}
-  m_Name: Give2Schemer1
+  m_Name: AddSchemer1Selected2
   m_EditorClassIdentifier: 
   <effectTriggerId>k__BackingField: 20260316
   effectTriggerType: 0
   <effects>k__BackingField:
+  - {fileID: 11400000, guid: 1a52c23ec8aa19e47813f821a7138a7d, type: 2}
+  - {fileID: 11400000, guid: 98d7563a87d9a0f478ebaa638c658faf, type: 2}
   - {fileID: 11400000, guid: 594d40ae28179f04695e6daaaab62a10, type: 2}
   <effectDescription>k__BackingField: Gives 2 units "Gain 1k on turn start"
   <pre>k__BackingField: 0

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c382c8f9d7db03f479d23b04a12032e9, type: 3}
-  m_Name: Damage3SelectedUnitRow3E
+  m_Name: Damage3Selected
   m_EditorClassIdentifier: 
   <effectId>k__BackingField: 2026030504
   specialAnimation: 0

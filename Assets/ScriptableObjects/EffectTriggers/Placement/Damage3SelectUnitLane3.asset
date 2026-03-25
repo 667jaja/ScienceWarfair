@@ -15,8 +15,9 @@ MonoBehaviour:
   <effectTriggerId>k__BackingField: 2026030504
   effectTriggerType: 0
   <effects>k__BackingField:
+  - {fileID: 11400000, guid: 52e1bfc6ea7e82b44be48f49a7e5cf1c, type: 2}
   - {fileID: 11400000, guid: c15c874dda0af1c47a64dacdda04256c, type: 2}
-  <effectDescription>k__BackingField: deal 3 damage
+  <effectDescription>k__BackingField: Damage(3) Selected Unit
   <pre>k__BackingField: 0
   <oneTimeUse>k__BackingField: 0
   <countDown>k__BackingField: 0

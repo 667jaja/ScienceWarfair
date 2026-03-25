@@ -34,45 +34,61 @@ public class SelectionManager : MonoBehaviour
         ActionManager.DetachPerformer<SelectSpecificUnitsGA>();
         ActionManager.DetachPerformer<SelectCardsGA>();
     }
-    public List<Vector2Int> EnemyLanes(int playerId)
+    public List<Vector2Int> LanesFromConditions(int playerId = -1)
     {
         List<Vector2Int> thingToReturn = new();
-        int newZ = GameManager.instance.GetNextPlayerId(playerId);
-        for (int i = 0; i < UnitManager.instance.columnCount; i++)
+        for (int p = 0; p < GameManager.instance.players.Count; p++)
         {
-            thingToReturn.Add(new Vector2Int(i, newZ));
+            //check player
+            if (p == playerId || playerId < 0)
+            for (int i = 0; i < UnitManager.instance.columnCount; i++)
+            {
+                thingToReturn.Add(new Vector2Int(i, p));
+            }
         }
 
         return thingToReturn;
     }
-    public List<Vector3Int> PositionsFromConditions(int playerId = -1, int row = -1, CardTag tag = null)
+    public List<Vector3Int> PositionsFromConditions(int playerId = -1, int row = -1, CardTag tag = null, int minIq = -1, int maxIq = -1, int minHealth = -1, int maxHealth = -1, int minCost = -1, int maxCost = -1)
     {
         List<Vector3Int> thingToReturn = new();
         for (int p = 0; p < GameManager.instance.players.Count; p++)
         {
+            //check player
             if (p == playerId || playerId < 0)
             for (int i = 0; i < UnitManager.instance.columnCount; i++)
             {
                 for (int j = 0; j < UnitManager.instance.rowCount; j++)
                 {
+                    //every unit 
+                    //check if exists and is in correct row
                     if ((row < 0 || row == j) && GameManager.instance.players[p].units[i,j] != null)
                     {
+                        Card inspectedUnit = GameManager.instance.players[p].units[i,j];
+                        bool addCurrent = true;
+                        //check tags
                         if (tag != null)
                         {
-                            foreach (CardTag cardTag in GameManager.instance.players[p].units[i,j].tags)
-                            {
-                                if (cardTag.tagId == tag.tagId) 
+                            addCurrent = false;
+                            foreach (CardTag cardTag in inspectedUnit.tags)
+                                if (cardTag.tagId == tag.tagId)
                                 {
-                                    thingToReturn.Add(new Vector3Int(i,j, p));
+                                    addCurrent = true;
                                     break;
                                 }
-                            }
                         }
-                        else
-                        {
-                            thingToReturn.Add(new Vector3Int(i,j,p));
-                            
-                        }
+                        //check stats
+                        //iq
+                        if ((minIq >= 0 && inspectedUnit.iq < minIq) || (maxIq >= 0 && inspectedUnit.iq > maxIq))
+                            addCurrent = false;
+                        //health
+                        if ((minHealth >= 0 && inspectedUnit.health < minHealth) || (maxHealth >= 0 && inspectedUnit.health > maxHealth))
+                            addCurrent = false;
+                        //cost
+                        if ((minCost >= 0 && inspectedUnit.placementCost < minCost) || (maxCost >= 0 && inspectedUnit.placementCost > maxCost))
+                            addCurrent = false;
+                        
+                        if (addCurrent) thingToReturn.Add(new Vector3Int(i,j,p));
                     }
                 }
             }

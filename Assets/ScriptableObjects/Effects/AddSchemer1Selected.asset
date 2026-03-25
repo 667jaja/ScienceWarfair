@@ -10,16 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f27f589e1c43364583337f0e7e51fe9, type: 3}
-  m_Name: AddSchemer1Selected2
+  m_Name: AddSchemer1Selected
   m_EditorClassIdentifier: 
   <effectId>k__BackingField: 2026031703
-  specialAnimation: 2
+  specialAnimation: 0
   <iq>k__BackingField: 0
   <health>k__BackingField: 0
   <placementCost>k__BackingField: 0
   <et>k__BackingField: {fileID: 11400000, guid: afdf0e5e6be02e043aaa5d5255f122a1, type: 2}
+  <tag>k__BackingField: {fileID: 0}
   <isUnitedEffect>k__BackingField: 0
-  <selectCount>k__BackingField: 2
-  <includeFriendly>k__BackingField: 1
-  <includeEnemy>k__BackingField: 0
-  <row>k__BackingField: -1
