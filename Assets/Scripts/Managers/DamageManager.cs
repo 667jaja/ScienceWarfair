@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class DamageManager : MonoBehaviour
 {
+    public static DamageManager instance;
+    void Awake()
+    {
+        instance = this;
+    }
     //Controls card damage and death
     void OnEnable()
     {
@@ -118,6 +123,7 @@ public class DamageManager : MonoBehaviour
             GameManager.instance.players[destroyUnitGA.playerId].units[destroyUnitGA.position.x, destroyUnitGA.position.y].Destruciton();
 
             Card containedCard = (selectedUnit.containedCard != null)? new Card(selectedUnit.containedCard): null;
+            // RemoveUnit(destroyUnitGA.playerId, destroyUnitGA.position);
             GameManager.instance.players[destroyUnitGA.playerId].units[destroyUnitGA.position.x, destroyUnitGA.position.y] = null;
 
             if (containedCard != null)
@@ -132,6 +138,7 @@ public class DamageManager : MonoBehaviour
             GameManager.instance.UpdateSciencePointsUI();
         }
     }
+
     //deal damage to all units in lane 
 
 }

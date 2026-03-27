@@ -118,7 +118,6 @@ public class CardManager : MonoBehaviour
         GameManager.instance.players[drawCardGA.playerId].deck.RemoveAt(0);
 
         //frontend
-        UpdateHandUI();
         UpdateDeckUI();
 
         // if (drawCardGA.playerId == GameManager.instance.)
@@ -139,6 +138,7 @@ public class CardManager : MonoBehaviour
     {
         Card drawnCard = new(carddata);
         GameManager.instance.players[playerId].hand.Add(drawnCard);
+        UpdateHandUI();
     }
     public List<CardData> CreateDeck(List<CardData> deckData)
     {

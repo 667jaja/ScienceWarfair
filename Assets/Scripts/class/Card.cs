@@ -106,15 +106,13 @@ public class Card
         actionData.originCard = this;
         Debug.Log("placementCalled");
 
-            foreach (EffectTriggerData effectTriggerData in cardData.effectTriggerDatas)
+        foreach (EffectTrigger effectTrigger in effectTriggers)
+        {
+            if (effectTrigger != null)
             {
-                if (effectTriggerData != null)
-                {
-                    EffectTrigger newEffectTrigger = new EffectTrigger(actionData, effectTriggerData);
-                    newEffectTrigger.Placement(actionData);
-                    effectTriggers.Add(newEffectTrigger);
-                }
+                effectTrigger.Placement(actionData);
             }
+        }
 
     }
     public void Destruciton()
@@ -124,6 +122,19 @@ public class Card
             if (effectTrigger != null)
             {
                 effectTrigger.DestructionEffect();
+            }
+        }
+    }
+    public void subET(ActionData actionData)
+    {
+        UnsubET();
+        effectTriggers = new();
+        foreach (EffectTriggerData effectTriggerData in cardData.effectTriggerDatas)
+        {
+            if (effectTriggerData != null)
+            {
+                EffectTrigger newEffectTrigger = new EffectTrigger(actionData, effectTriggerData);
+                effectTriggers.Add(newEffectTrigger);
             }
         }
     }

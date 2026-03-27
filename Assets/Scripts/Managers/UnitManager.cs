@@ -45,10 +45,17 @@ public class UnitManager : MonoBehaviour
     }
     private void OnEnable()
     {
+        //play
         ActionManager.AttachPerformer<PlaceUnitGA>(PlaceUnitPerformer);
         ActionManager.AttachPerformer<CreateUnitGA>(CreateUnitPerformer);
         ActionManager.AttachPerformer<PlayActionGA>(PlayActionPerformer);
+
+        //move
         ActionManager.AttachPerformer<MoveUnitGA>(MoveUnitPerformer);
+        ActionManager.AttachPerformer<BoardToHandGA>(BoardToHandPerformer);
+        ActionManager.AttachPerformer<BoardToHandSelectedGA>(BoardToHandSelectedPerformer);
+
+        //change
         ActionManager.AttachPerformer<ChangeStatsUnitGA>(ChangeStatsUnitPerformer);
         ActionManager.AttachPerformer<ChangeStatsSelectedGA>(ChangeStatsSelectedPerformer);
         ActionManager.AttachPerformer<GiveUnitEffectGA>(GiveUnitEffectPerformer);
@@ -57,10 +64,17 @@ public class UnitManager : MonoBehaviour
     }
     private void OnDisable()
     {
+        //play
         ActionManager.DetachPerformer<PlaceUnitGA>();
         ActionManager.DetachPerformer<CreateUnitGA>();
         ActionManager.DetachPerformer<PlayActionGA>();
+
+        //move
         ActionManager.DetachPerformer<MoveUnitGA>();
+        ActionManager.DetachPerformer<BoardToHandGA>();
+        ActionManager.DetachPerformer<BoardToHandSelectedGA>();
+
+        //change
         ActionManager.DetachPerformer<ChangeStatsUnitGA>();
         ActionManager.DetachPerformer<ChangeStatsSelectedGA>();
         ActionManager.DetachPerformer<GiveUnitEffectGA>();
@@ -106,6 +120,7 @@ public class UnitManager : MonoBehaviour
                 Debug.Log("Action Play success: Player:" + playActionGA.playerId + " Card:" + playActionGA.playedCard.title);
                 
                 //backend
+                playActionGA.playedCard.subET(new ActionData(playActionGA.playerId, new Vector2Int (-1,-1), playActionGA.playedCard));
                 playActionGA.playedCard.PlacementAbility(new ActionData(playActionGA.playerId, new Vector2Int (-1,-1), playActionGA.playedCard));
                 GameManager.instance.players[playActionGA.playerId].actionPoints -= 1;
                 GameManager.instance.UpdateActionPointUI();
@@ -228,6 +243,7 @@ public class UnitManager : MonoBehaviour
         if (GameManager.instance.players[playerId].units[position.x, position.y] == null)
         {
             GameManager.instance.players[playerId].units[position.x, position.y] = AddedCard;
+            GameManager.instance.players[playerId].units[position.x, position.y].subET(new ActionData(playerId, position, AddedCard));
             unitAddSuccess = true;
         }
         // else, check backmost space, if empty move all behind back 1
@@ -243,6 +259,8 @@ public class UnitManager : MonoBehaviour
                 }
             }
             GameManager.instance.players[playerId].units[position.x, position.y] = AddedCard;
+            GameManager.instance.players[playerId].units[position.x, position.y].subET(new ActionData(playerId, position, AddedCard));
+
             unitAddSuccess = true;
         }
         // else, pack it up we lost
@@ -266,16 +284,50 @@ public class UnitManager : MonoBehaviour
 
         if (selectedUnit != null)
         {
-            bool moveValid = false;
-            GameManager.instance.players[moveUnitGA.playerId].units[moveUnitGA.originPosition.x, moveUnitGA.originPosition.y] = null;
+            RemoveUnit(moveUnitGA.playerId, moveUnitGA.originPosition);
 
-            moveValid = AddUnit(moveUnitGA.playerId, moveUnitGA.destinationPosition, selectedUnit);
+            bool moveValid = AddUnit(moveUnitGA.playerId, moveUnitGA.destinationPosition, selectedUnit);
 
-            if (!moveValid) GameManager.instance.players[moveUnitGA.playerId].units[moveUnitGA.originPosition.x, moveUnitGA.originPosition.y] = selectedUnit;
+            if (!moveValid) AddUnit(moveUnitGA.playerId, moveUnitGA.originPosition, selectedUnit);
+
             GameManager.instance.UpdateSciencePointsUI();
             LaneManager.instance.UpdateLaneVisuals();
         }
 
+        yield return null;
+    }
+    private IEnumerator BoardToHandPerformer(BoardToHandGA boardToHandGA)
+    {
+        Card selectedUnit = GameManager.instance.players[boardToHandGA.position.z].units[boardToHandGA.position.x, boardToHandGA.position.y]; //get only reference
+
+        if (selectedUnit != null)
+        {
+            RemoveUnit(boardToHandGA.position.z, new Vector2Int(boardToHandGA.position.x, boardToHandGA.position.y));
+
+            CardManager.instance.AddtoHand(boardToHandGA.recieverId, selectedUnit.cardData);
+
+            UpdateUnitUI();
+            PushAllUnitsForward();
+            LaneManager.instance.UpdateLaneVisuals();
+            GameManager.instance.UpdateSciencePointsUI();
+        }
+
+        yield return null;
+    }
+    private IEnumerator BoardToHandSelectedPerformer(BoardToHandSelectedGA boardToHandSelectedGA)
+    {
+        foreach (Vector3Int vector in SelectionManager.instance.selectedBoard)
+        {
+            BoardToHandGA boardToHandGA =  new BoardToHandGA((boardToHandSelectedGA.ownersHand)? vector.z : boardToHandSelectedGA.recieverId, vector);
+            ActionManager.instance.AddReaction(boardToHandGA);
+
+            if (boardToHandSelectedGA.refundOwner)
+            {
+                GainMoneyGA gainMoneyGA =  new GainMoneyGA(vector.z, GameManager.instance.players[vector.z].units[vector.x, vector.y].PlacementCost);
+                ActionManager.instance.AddReaction(gainMoneyGA);
+            }
+
+        }
         yield return null;
     }
     private IEnumerator ChangeStatsUnitPerformer(ChangeStatsUnitGA changeStatsUnitGA)
@@ -341,6 +393,7 @@ public class UnitManager : MonoBehaviour
         }
         yield return null;
     }
+
     public void PushAllUnitsForward()
     {
         foreach (Player player in GameManager.instance.players)
@@ -366,6 +419,12 @@ public class UnitManager : MonoBehaviour
             }
         }
     }
+    public void RemoveUnit(int playerId, Vector2Int pos)
+    {
+        GameManager.instance.players[playerId].units[pos.x, pos.y].UnsubET();
+        GameManager.instance.players[playerId].units[pos.x, pos.y] = null;
+    }
+
     public Card GetUnitByInstanceId(int instanceId)
     {
         //Card foundCard = null;
