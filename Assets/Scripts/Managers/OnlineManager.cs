@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using TMPro;
 using System.Threading.Tasks;
+using System.Linq;
 
 public class OnlineManager : NetworkBehaviour
 {
@@ -139,6 +140,29 @@ public class OnlineManager : NetworkBehaviour
         }
         SelectionManager.instance.endSelectionOverride = true;
     }
+    public void InputRandom(List<int> randRangeList, float randVal)
+    {
+        int[] randRangeArr = new int[randRangeList.Count];
+
+        for (int i = 0; i < randRangeArr.Length; i++)
+        {
+            randRangeArr[i] = randRangeList[i];
+        }
+
+
+        //send rpc
+        Debug.Log("InputRandomSent");
+        InputRandomClientRPC(randRangeArr, randVal);
+
+    }
+
+    [Rpc(SendTo.NotServer)]
+    public void InputRandomClientRPC(int[] rangeRand, float valRand)
+    {
+        Debug.Log("InputRandomClientRPC Recieved");
+        GameManager.instance.SetRandomRangeVal(rangeRand.ToList());
+        GameManager.instance.SetRandVal(valRand);
+    }
 
     [Rpc(SendTo.Server)]
     public void EndTurnGAServerRPC(int playerId)
@@ -253,6 +277,10 @@ public class OnlineManager : NetworkBehaviour
     [Rpc(SendTo.Server)]
     public void HostSetupServerRpc(PlayerStruct clientPlayerStruct)
     {
+        StartCoroutine(HostSetupCoroutine(clientPlayerStruct));
+    }
+    public IEnumerator HostSetupCoroutine(PlayerStruct clientPlayerStruct)
+    {
         //Debug.Log("player first Card = " + clientPlayerStruct.deck);
         // int seed = Random.Range(0, 1000);
         // Random.InitState(seed);
@@ -262,8 +290,10 @@ public class OnlineManager : NetworkBehaviour
         Player player2 = CardLibraryManager.instance.PlayerFromPlayerStruct(clientPlayerStruct);
         player2.id = 1;
 
-        player1.deck = GameManager.instance.CreateDeck(player1);
-        player2.deck = GameManager.instance.CreateDeck(player2);
+        yield return GameManager.instance.AwaitCreateDeckPlayer(player1);
+        player1.deck = CardManager.instance.CreateDeck();
+        yield return GameManager.instance.AwaitCreateDeckPlayer(player2);
+        player2.deck = CardManager.instance.CreateDeck();  
 
         player1.opener = GameManager.instance.CreateOpener(player1);
         player2.opener = GameManager.instance.CreateOpener(player2);
@@ -280,9 +310,8 @@ public class OnlineManager : NetworkBehaviour
             player2
         };
         GameManager.instance.displayPlayer = 0;
-        GameManager.instance.BeginGame();
+        StartCoroutine(GameManager.instance.BeginGame());
     }
-
     [Rpc(SendTo.NotServer)]
     public void ClientSetupClientRpc(PlayerStruct hostPlayerStruct, PlayerStruct clientPlayerStruct)
     {
@@ -300,6 +329,6 @@ public class OnlineManager : NetworkBehaviour
             player2
         };
         GameManager.instance.displayPlayer = 1;
-        GameManager.instance.BeginGame();
+        StartCoroutine(GameManager.instance.BeginGame());
     }
 }

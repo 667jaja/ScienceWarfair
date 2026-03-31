@@ -10,6 +10,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     private Animator anim;
     private Collider2D col;
     public Card card;
+    private List<float> stickerRotations;
     
     private Vector3 startDragPos;
     [SerializeField] private bool isUnit;

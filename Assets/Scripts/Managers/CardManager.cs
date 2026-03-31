@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System;
 using System.Linq;
 using System.Collections;
 
@@ -34,6 +33,9 @@ public class CardManager : MonoBehaviour
     private bool cardIsHovered;
     private int deckSize = 10;
 
+    //await create deck
+    private List<CardData> savedDeckData;
+
     void Awake()
     {
         instance = this;
@@ -56,7 +58,7 @@ public class CardManager : MonoBehaviour
     }
     public void DrawCards(int playerId, int count = 1)
     {
-        Debug.Log("card Draws");
+        //Debug.Log("card Draws");
 
         for (int i = 0; i < count; i++)
         {
@@ -66,7 +68,7 @@ public class CardManager : MonoBehaviour
     }
     public void CurrentPlayerDrawCards(int count = 1)
     {
-        Debug.Log("Current Player card Draw");
+       // Debug.Log("Current Player card Draw");
 
         DrawCards(GameManager.instance.currentPlayer, count);
     }
@@ -86,7 +88,18 @@ public class CardManager : MonoBehaviour
     {
         Debug.Log("card Draw Started");
 
-        //
+
+
+        //backend
+        if (GameManager.instance.players[drawCardGA.playerId].deck.Count < 1)
+        {
+            yield return ShuffleDiscardIntoDeck(drawCardGA.playerId);
+        }
+        //Debug.Log("playerId: " + drawCardGA.playerId + " deck size " + GameManager.instance.players[drawCardGA.playerId].deck.Count);
+        AddtoHand(drawCardGA.playerId,  GameManager.instance.players[drawCardGA.playerId].deck[0]);
+        GameManager.instance.players[drawCardGA.playerId].deck.RemoveAt(0);
+
+        //cardFlip animation
         if (drawCardGA.playerId == GameManager.instance.displayPlayer)
         {
             if (cardFlip == null)
@@ -107,15 +120,6 @@ public class CardManager : MonoBehaviour
             }
             cardFlip.SetActive(false);
         }
-
-        //backend
-        if (GameManager.instance.players[drawCardGA.playerId].deck.Count < 1)
-        {
-            ShuffleDiscardIntoDeck(drawCardGA.playerId);
-        }
-        
-        AddtoHand(drawCardGA.playerId,  GameManager.instance.players[drawCardGA.playerId].deck[0]);
-        GameManager.instance.players[drawCardGA.playerId].deck.RemoveAt(0);
 
         //frontend
         UpdateDeckUI();
@@ -140,13 +144,60 @@ public class CardManager : MonoBehaviour
         GameManager.instance.players[playerId].hand.Add(drawnCard);
         UpdateHandUI();
     }
-    public List<CardData> CreateDeck(List<CardData> deckData)
+    public IEnumerator AwaitCreateDeck(List<CardData> deckData)
     {
-        return deckData.OrderBy(i => Guid.NewGuid()).ToList();
+        // yield return GameManager.instance.AwaitNewRandomVal();
+        // Debug.Log("Ranmdom Val is " + GameManager.instance.GetRandVal());
+        // savedDeckData = deckData.OrderBy( x => GameManager.instance.GetRandVal()).ToList( );
+        // savedDeckData = savedDeckData.OrderBy( x => GameManager.instance.GetRandVal()).ToList();
+        // Debug.Log("savedDeckData first card is " + savedDeckData[0].title);
+
+
+        List<CardData> returnVal = new();
+        List<Vector2Int> ranges = new();
+        for (int i = deckData.Count; i>0; i--)
+        {
+            ranges.Add(new Vector2Int(0, i));
+        }
+
+        yield return GameManager.instance.AwaitNewRandomRange(ranges);
+        List<int> randomVals = GameManager.instance.GetRandomRangeVal();
+        
+        int deckSize = deckData.Count;
+        for (int i = 0; i < deckSize; i++)
+        {
+            //Debug.Log("adding " + (randomVals[i]+1) + " of " + deckData.Count());
+            returnVal.Add(deckData[randomVals[i]]);
+            deckData.RemoveAt(randomVals[i]);
+        }
+        savedDeckData = returnVal;
     }
-    public void ShuffleDiscardIntoDeck(int playerId)
+    public List<CardData> CreateDeck()
     {
-        GameManager.instance.players[playerId].deck = CreateDeck(GameManager.instance.players[playerId].rawDeck);
+        //Debug.Log("Ranmdom Val is " + GameManager.instance.GetRandVal()); 
+        //return deckData.OrderBy(i => Guid.NewGuid()).ToList();
+        return savedDeckData;
+
+        // List<CardData> returnVal = new();
+        // List<Vector2Int> ranges = new();
+        // for (int i = deckData.Count; i>0; i--)
+        // {
+        //     ranges.Add(new Vector2Int(0, i));
+        // }
+
+        // List<int> randomVals = GameManager.instance.RandomRange(ranges);
+
+        // for (int i = 0; i > deckData.Count; i++)
+        // {
+        //     Debug.Log("adding " + randomVals[i] + " of " + deckData.Count());
+        //     returnVal.Add(deckData[randomVals[i]]);
+        // }
+        // return returnVal;
+    }
+    public IEnumerator ShuffleDiscardIntoDeck(int playerId)
+    {
+        yield return AwaitCreateDeck(GameManager.instance.players[playerId].rawDeck.ToList());
+        GameManager.instance.players[playerId].deck = CreateDeck();
         UpdateDeckUI();
     }
     private IEnumerator DiscardSelectedPerformer(DiscardSelectedGA discardSelectedGA)

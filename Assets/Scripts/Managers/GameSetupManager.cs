@@ -78,7 +78,7 @@ public class GameSetupManager : MonoBehaviour
                 RelayManager.instance = null;
             }
 
-            GameManager.instance.BeginGame();
+            StartCoroutine(GameManager.instance.BeginGame());
             whileSceneLoading.SetActive(false);
         }
     }

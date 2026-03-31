@@ -90,7 +90,7 @@ public class HotseatScreenManager : MonoBehaviour
 // Buttons
     public void StartScreenButton()
     {
-        GameManager.instance.BeginGame();
+        StartCoroutine(GameManager.instance.BeginGame());
 
         foreach (GameObject item in startScreenObjects)
         {
