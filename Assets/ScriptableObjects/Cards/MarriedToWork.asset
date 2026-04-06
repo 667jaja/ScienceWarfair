@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardDataId>k__BackingField: 2026030502
   <title>k__BackingField: Married To Work
-  <description>k__BackingField: Add 2 IQ to a friendly unit
+  <description>k__BackingField: Add +2IQ to a friendly unit
   <cardArt>k__BackingField: {fileID: 7151357533440086096, guid: 9a36b7bbee753404084b457c47f60e02, type: 3}
   isAction: 1
   <placementCost>k__BackingField: 0
   <iq>k__BackingField: 0
   <health>k__BackingField: 0
   <noAttack>k__BackingField: 0
-  <cardEffect>k__BackingField: Add 2 Iq
+  <tags>k__BackingField: []
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: 6088846d6d6eb8c448d61a829fb9edb0, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

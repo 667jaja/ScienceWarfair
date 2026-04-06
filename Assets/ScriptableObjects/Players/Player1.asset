@@ -13,5 +13,25 @@ MonoBehaviour:
   m_Name: Player1
   m_EditorClassIdentifier: 
   <playerName>k__BackingField: 
-  <deck>k__BackingField: []
+  <deck>k__BackingField:
+  - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
+  - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
+  - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
+  - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
+  - {fileID: 11400000, guid: e633ccbbe04fc7b4ba005915a13eab06, type: 2}
+  - {fileID: 11400000, guid: e633ccbbe04fc7b4ba005915a13eab06, type: 2}
+  - {fileID: 11400000, guid: e633ccbbe04fc7b4ba005915a13eab06, type: 2}
+  - {fileID: 11400000, guid: e633ccbbe04fc7b4ba005915a13eab06, type: 2}
+  - {fileID: 11400000, guid: e633ccbbe04fc7b4ba005915a13eab06, type: 2}
+  - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
+  - {fileID: 11400000, guid: b8c4627ce80ef35459d5b1803147d0ac, type: 2}
+  - {fileID: 11400000, guid: cf37a98ab2e92ef4eae9be224f434fc5, type: 2}
+  - {fileID: 11400000, guid: ea1873d23da18a0448c87a213d8ed9e1, type: 2}
+  - {fileID: 11400000, guid: 9187a2ba65e49d140b0289c6ada9cc68, type: 2}
+  - {fileID: 11400000, guid: 789eaaaa620ba2e4586d073120d1e3ea, type: 2}
+  - {fileID: 11400000, guid: cf37a98ab2e92ef4eae9be224f434fc5, type: 2}
+  - {fileID: 11400000, guid: a4c461b2e9a43bf4897ea0d8d72b1aba, type: 2}
+  - {fileID: 11400000, guid: a4c461b2e9a43bf4897ea0d8d72b1aba, type: 2}
+  - {fileID: 11400000, guid: cf37a98ab2e92ef4eae9be224f434fc5, type: 2}
+  - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
   <opener>k__BackingField: []

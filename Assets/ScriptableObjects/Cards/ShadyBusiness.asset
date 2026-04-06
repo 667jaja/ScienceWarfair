@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardDataId>k__BackingField: 2026032501
   <title>k__BackingField: Shady Business
-  <description>k__BackingField: Place enemy unit costing 2k or less into your hand
+  <description>k__BackingField: Place an enemy unit with 2 or less Health into your
+    hand
   <cardArt>k__BackingField: {fileID: 21300000, guid: 165c88d2fb655d14f9b7fa6eda5d9f37, type: 3}
   isAction: 1
   <placementCost>k__BackingField: 0

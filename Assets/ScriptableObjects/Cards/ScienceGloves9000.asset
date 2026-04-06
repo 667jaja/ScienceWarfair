@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardDataId>k__BackingField: 2026030503
   <title>k__BackingField: ScienceGloves9000
-  <description>k__BackingField: Add 3 health to a friendly unit
+  <description>k__BackingField: Add +3Health to a friendly unit
   <cardArt>k__BackingField: {fileID: -3646568496823040751, guid: ab529935d3b51854b8fabda565bbdfaf, type: 3}
   isAction: 1
   <placementCost>k__BackingField: 0

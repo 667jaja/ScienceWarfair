@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7748ca281b74b594685a2529365a457d, type: 3}
-  m_Name: SelectUnit1ECle2
+  m_Name: SelectUnit1EHle2
   m_EditorClassIdentifier: 
   <effectId>k__BackingField: 2026032502
   specialAnimation: 0
   <targetTag>k__BackingField: {fileID: 0}
   <targetIqRange>k__BackingField: {x: -1, y: -1}
-  <targetHealthRange>k__BackingField: {x: -1, y: -1}
-  <targetPlacementCostRange>k__BackingField: {x: 0, y: 2}
+  <targetHealthRange>k__BackingField: {x: -1, y: 2}
+  <targetPlacementCostRange>k__BackingField: {x: -1, y: -1}
   <selectCount>k__BackingField: 1
   <includeFriendly>k__BackingField: 0
   <includeEnemy>k__BackingField: 1

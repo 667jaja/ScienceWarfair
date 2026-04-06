@@ -27,14 +27,9 @@ public class ChangeStatsSelectedUnitsEF : Effect
             }
 
             //effects
-            if (et != null && !isUnitedEffect)
+            if (et != null)
             {
-                GiveSelectedEffectGA giveSelectedEffectGA = new GiveSelectedEffectGA(et);
-                actionList.Add(giveSelectedEffectGA);
-            }
-            if (et != null && isUnitedEffect)
-            {
-                GiveSelectedUnitedEffectGA giveSelectedEffectGA = new GiveSelectedUnitedEffectGA(et);
+                GiveSelectedEffectGA giveSelectedEffectGA = new GiveSelectedEffectGA(et, null, isUnitedEffect);
                 actionList.Add(giveSelectedEffectGA);
             }
 

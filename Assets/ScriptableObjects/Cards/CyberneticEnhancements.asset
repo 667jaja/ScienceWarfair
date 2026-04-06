@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardDataId>k__BackingField: 2026031804
   <title>k__BackingField: Cybernetic Enhancements
-  <description>k__BackingField: Give a unit +1Iq +1Health and make it a robot
+  <description>k__BackingField: Give a unit +1IQ +1Health and make it a robot
   <cardArt>k__BackingField: {fileID: 6418832221384090808, guid: 1b2179bcb0bf324438fb01266d733ec0, type: 3}
   isAction: 1
   <placementCost>k__BackingField: 0

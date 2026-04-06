@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardDataId>k__BackingField: 2026031803
   <title>k__BackingField: Tech Wizard
-  <description>k__BackingField: Add 1 Iq to friendly robot
+  <description>k__BackingField: Add +1 Iq to friendly robot
   <cardArt>k__BackingField: {fileID: -7293887232785878662, guid: dc82c7b8e687f5f45b2cf57be1cd6c62, type: 3}
   isAction: 0
   <placementCost>k__BackingField: 2

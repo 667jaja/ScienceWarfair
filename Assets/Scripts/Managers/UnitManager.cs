@@ -60,7 +60,6 @@ public class UnitManager : MonoBehaviour
         ActionManager.AttachPerformer<ChangeStatsSelectedGA>(ChangeStatsSelectedPerformer);
         ActionManager.AttachPerformer<GiveUnitEffectGA>(GiveUnitEffectPerformer);
         ActionManager.AttachPerformer<GiveSelectedEffectGA>(GiveSelectedEffectPerformer);
-        ActionManager.AttachPerformer<GiveSelectedUnitedEffectGA>(GiveSelectedUnitedEffectPerformer);
     }
     private void OnDisable()
     {
@@ -78,7 +77,7 @@ public class UnitManager : MonoBehaviour
         ActionManager.DetachPerformer<ChangeStatsUnitGA>();
         ActionManager.DetachPerformer<ChangeStatsSelectedGA>();
         ActionManager.DetachPerformer<GiveUnitEffectGA>();
-        ActionManager.DetachPerformer<GiveSelectedUnitedEffectGA>();
+        ActionManager.DetachPerformer<GiveSelectedEffectGA>();
     }
 
     public void PlayAction(int playerId, Card card) 
@@ -109,6 +108,8 @@ public class UnitManager : MonoBehaviour
         createUnitGA.description = card.title + " is placed";
         ActionManager.instance.AddReaction(createUnitGA);
     }
+
+
     private IEnumerator PlayActionPerformer(PlayActionGA playActionGA)
     {
 
@@ -302,7 +303,7 @@ public class UnitManager : MonoBehaviour
 
         if (selectedUnit != null)
         {
-            RemoveUnit(boardToHandGA.position.z, new Vector2Int(boardToHandGA.position.x, boardToHandGA.position.y));
+            if (!boardToHandGA.clone) RemoveUnit(boardToHandGA.position.z, new Vector2Int(boardToHandGA.position.x, boardToHandGA.position.y));
 
             CardManager.instance.AddtoHand(boardToHandGA.recieverId, selectedUnit.cardData);
 
@@ -318,7 +319,7 @@ public class UnitManager : MonoBehaviour
     {
         foreach (Vector3Int vector in SelectionManager.instance.selectedBoard)
         {
-            BoardToHandGA boardToHandGA =  new BoardToHandGA((boardToHandSelectedGA.ownersHand)? vector.z : boardToHandSelectedGA.recieverId, vector);
+            BoardToHandGA boardToHandGA =  new BoardToHandGA((boardToHandSelectedGA.ownersHand)? vector.z : boardToHandSelectedGA.recieverId, vector, boardToHandSelectedGA.clone);
             ActionManager.instance.AddReaction(boardToHandGA);
 
             if (boardToHandSelectedGA.refundOwner)
@@ -330,6 +331,7 @@ public class UnitManager : MonoBehaviour
         }
         yield return null;
     }
+
     private IEnumerator ChangeStatsUnitPerformer(ChangeStatsUnitGA changeStatsUnitGA)
     {
         Card selectedUnit = GameManager.instance.players[changeStatsUnitGA.playerId].units[changeStatsUnitGA.position.x, changeStatsUnitGA.position.y]; //get only reference
@@ -372,27 +374,36 @@ public class UnitManager : MonoBehaviour
         foreach (Vector3Int vector in SelectionManager.instance.selectedBoard)
         {
             GiveUnitEffectGA giveUnitEffectGA =  new GiveUnitEffectGA(vector.z, new Vector2Int(vector.x, vector.y), giveSelectedEffectGA.ET, giveSelectedEffectGA.savedCard);
-            ActionManager.instance.AddReaction(giveUnitEffectGA);
-        }
-        yield return null;
-    }
-    private IEnumerator GiveSelectedUnitedEffectPerformer(GiveSelectedUnitedEffectGA giveSelectedUnitedEffectGA)
-    {
-        foreach (Vector3Int vector in SelectionManager.instance.selectedBoard)
-        {
-            foreach (Vector3Int mector in SelectionManager.instance.selectedBoard)
-            {
-                if (mector != vector)
-                {
-                    Card mectorCard = GameManager.instance.players[mector.z].units[mector.x, mector.y];
-                    GiveUnitEffectGA giveUnitEffectGA =  new GiveUnitEffectGA(vector.z, new Vector2Int(vector.x, vector.y), giveSelectedUnitedEffectGA.ET, mectorCard);
-                    ActionManager.instance.AddReaction(giveUnitEffectGA);
-                }
-            }
 
+            if (giveSelectedEffectGA.isUnited)
+                foreach (Vector3Int mector in SelectionManager.instance.selectedBoard)
+                {
+                    if (mector != vector)
+                    {
+                        Card mectorCard = GameManager.instance.players[mector.z].units[mector.x, mector.y];
+                        giveUnitEffectGA.savedCard = mectorCard;
+                        ActionManager.instance.AddReaction(giveUnitEffectGA);
+                    }
+                }
+            else ActionManager.instance.AddReaction(giveUnitEffectGA);
         }
         yield return null;
     }
+    // private IEnumerator ResetUnitPerformer(ResetUnitGA ResetUnitGA)
+    // {
+    //     Card selectedUnit = GameManager.instance.players[changeStatsUnitGA.playerId].units[changeStatsUnitGA.position.x, changeStatsUnitGA.position.y]; //get only reference
+        
+    //     selectedUnit.Iq += changeStatsUnitGA.iqChange;
+    //     selectedUnit.Health += changeStatsUnitGA.heathChange;
+    //     selectedUnit.PlacementCost += changeStatsUnitGA.costChange;
+    //     if (changeStatsUnitGA.tag != null && !selectedUnit.tags.Contains(changeStatsUnitGA.tag)) selectedUnit.tags.Add(changeStatsUnitGA.tag);
+
+    //     UpdateCardVisual(changeStatsUnitGA.playerId, changeStatsUnitGA.position);
+    //     LaneManager.instance.UpdateLaneVisuals();
+    //     GameManager.instance.UpdateSciencePointsUI();
+    //     yield return null;
+    // }
+
 
     public void PushAllUnitsForward()
     {

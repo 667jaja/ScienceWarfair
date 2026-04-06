@@ -15,7 +15,7 @@ MonoBehaviour:
   <CardDataId>k__BackingField: 2026031801
   <title>k__BackingField: Distilled Friendship
   <description>k__BackingField: Select two units, tag them as friends, when one is
-    destroyed it gives the other +2Iq +1Health.
+    destroyed it gives the other +2IQ +1Health
   <cardArt>k__BackingField: {fileID: 2524687595630518909, guid: 1a757d7b0b4a0a84ea6061905d0666c8, type: 3}
   isAction: 1
   <placementCost>k__BackingField: 0

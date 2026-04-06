@@ -20,10 +20,3 @@ MonoBehaviour:
   <et>k__BackingField: {fileID: 0}
   <tag>k__BackingField: {fileID: 11400000, guid: 6332b7aa9c39902479f5202fd7fec5e4, type: 2}
   <isUnitedEffect>k__BackingField: 0
-  <targetTag>k__BackingField: {fileID: 0}
-  <selectCount>k__BackingField: 1
-  <includeFriendly>k__BackingField: 1
-  <includeEnemy>k__BackingField: 0
-  <includeSelf>k__BackingField: 0
-  <selectAll>k__BackingField: 0
-  <row>k__BackingField: -1
