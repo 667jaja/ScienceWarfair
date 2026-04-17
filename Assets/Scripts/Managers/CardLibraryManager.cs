@@ -181,7 +181,7 @@ public class CardLibraryManager : MonoBehaviour
             name = new string(playerStruct.name),
             maxMoney = playerStruct.maxMoney,
             id = playerStruct.id,
-            sciencePoints = playerStruct.sciencePoints,
+            SciencePoints = playerStruct.sciencePoints,
             Money = playerStruct.money,
             actionPoints = playerStruct.actionPoints
         };

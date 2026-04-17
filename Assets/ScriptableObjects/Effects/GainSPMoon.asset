@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06de392ce3db7204fb3fdb2467e220f6, type: 3}
-  m_Name: GainSciencePointsMoon
+  m_Name: GainSPMoon
   m_EditorClassIdentifier: 
   <effectId>k__BackingField: 202511
   specialAnimation: 1

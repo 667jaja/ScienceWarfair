@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <effectId>k__BackingField: 2026031703
   specialAnimation: 0
-  <modDescription>k__BackingField: On the start of your turn start gain 1k
+  <modDescription>k__BackingField: On the start of your turn gain 1k
   <iq>k__BackingField: 0
   <health>k__BackingField: 0
   <placementCost>k__BackingField: 0

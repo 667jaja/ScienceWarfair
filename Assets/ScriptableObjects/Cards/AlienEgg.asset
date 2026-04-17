@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c47c8c5f56d9a4693a97c8c0d3d78a, type: 3}
+  m_Name: AlienEgg
+  m_EditorClassIdentifier: 
+  <CardDataId>k__BackingField: 2026041603
+  <title>k__BackingField: Alien Egg
+  <description>k__BackingField: Select an enemy unit to contain "Alien Crab"
+  <cardArt>k__BackingField: {fileID: 2273660326662538580, guid: 23505eeb97f58d24e842282f7215bf4d, type: 3}
+  isAction: 1
+  <placementCost>k__BackingField: 0
+  <iq>k__BackingField: 0
+  <health>k__BackingField: 0
+  <noAttack>k__BackingField: 0
+  <tags>k__BackingField: []
+  <effectTriggerDatas>k__BackingField:
+  - {fileID: 11400000, guid: 4391c9af8a901ce439cb07a89c1d55f3, type: 2}
+  <containedCard>k__BackingField: {fileID: 0}

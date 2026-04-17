@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardDataId>k__BackingField: 2026032602
   <title>k__BackingField: Uninspired
-  <description>k__BackingField: Refund a enemy unit and return it to thier hand
+  <description>k__BackingField: Remove all modifiers from an enemy unit
   <cardArt>k__BackingField: {fileID: -7695449196829628223, guid: d9ce21241949c4d48aef8dcfc814586a, type: 3}
   isAction: 1
   <placementCost>k__BackingField: 0
@@ -23,5 +23,5 @@ MonoBehaviour:
   <noAttack>k__BackingField: 0
   <tags>k__BackingField: []
   <effectTriggerDatas>k__BackingField:
-  - {fileID: 11400000, guid: 9b58fce3f3c7a7b4ebc487a18cfc7f8c, type: 2}
+  - {fileID: 11400000, guid: 49b64a2e66169254099693cdda5dba9e, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

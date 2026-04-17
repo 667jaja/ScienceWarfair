@@ -58,8 +58,12 @@ public class UnitManager : MonoBehaviour
         //change
         ActionManager.AttachPerformer<ChangeStatsUnitGA>(ChangeStatsUnitPerformer);
         ActionManager.AttachPerformer<ChangeStatsSelectedGA>(ChangeStatsSelectedPerformer);
-        // ActionManager.AttachPerformer<GiveUnitEffectGA>(GiveUnitEffectPerformer);
-        // ActionManager.AttachPerformer<GiveSelectedEffectGA>(GiveSelectedEffectPerformer);
+
+        ActionManager.AttachPerformer<RemoveModifiersUnitGA>(UnmodUnitPerformer);
+        ActionManager.AttachPerformer<RemoveModifiersSelectedGA>(UnmodSelectedPerformer);
+
+        ActionManager.AttachPerformer<ChangeContainedUnitGA>(ChangeContainedUnitPerformer);
+        ActionManager.AttachPerformer<ChangeContainedSelectedGA>(ChangeContainedSelectedPerformer);
     }
     private void OnDisable()
     {
@@ -76,8 +80,12 @@ public class UnitManager : MonoBehaviour
         //change
         ActionManager.DetachPerformer<ChangeStatsUnitGA>();
         ActionManager.DetachPerformer<ChangeStatsSelectedGA>();
-        // ActionManager.DetachPerformer<GiveUnitEffectGA>();
-        // ActionManager.DetachPerformer<GiveSelectedEffectGA>();
+
+        ActionManager.DetachPerformer<RemoveModifiersUnitGA>();
+        ActionManager.DetachPerformer<RemoveModifiersSelectedGA>();
+
+        ActionManager.DetachPerformer<ChangeContainedUnitGA>();
+        ActionManager.DetachPerformer<ChangeContainedSelectedGA>();
     }
 
     public void PlayAction(int playerId, Card card) 
@@ -334,7 +342,7 @@ public class UnitManager : MonoBehaviour
 
     private IEnumerator ChangeStatsUnitPerformer(ChangeStatsUnitGA changeStatsUnitGA)
     {
-        Card selectedUnit = GameManager.instance.players[changeStatsUnitGA.playerId].units[changeStatsUnitGA.position.x, changeStatsUnitGA.position.y]; //get only reference
+        Card selectedUnit = GameManager.instance.players[changeStatsUnitGA.playerId].units[changeStatsUnitGA.position.x, changeStatsUnitGA.position.y]; //get reference
         
         //effects
         if (changeStatsUnitGA.ET != null && changeStatsUnitGA.ET.Count > 0)
@@ -395,40 +403,45 @@ public class UnitManager : MonoBehaviour
         }
         yield return null;
     }
-    // private IEnumerator GiveUnitEffectPerformer(GiveUnitEffectGA giveUnitEffectGA)
-    // {
-    //     Card selectedUnit = GameManager.instance.players[giveUnitEffectGA.playerId].units[giveUnitEffectGA.position.x, giveUnitEffectGA.position.y]; //get only reference
-    //     if (selectedUnit != null)
-    //     {
-    //         EffectTrigger addedEF = new EffectTrigger(new ActionData(giveUnitEffectGA.playerId, giveUnitEffectGA.position, selectedUnit), giveUnitEffectGA.ET);
-    //         if (giveUnitEffectGA.savedCard != null) addedEF.savedCardInstanceId = giveUnitEffectGA.savedCard.cardInstanceId;
-    //         selectedUnit.effectTriggers.Add(addedEF);
+    private IEnumerator UnmodUnitPerformer(RemoveModifiersUnitGA removeModifiersUnitGA)
+    {
+        GameManager.instance.players[removeModifiersUnitGA.playerId].units[removeModifiersUnitGA.position.x, removeModifiersUnitGA.position.y].RemoveAllModifiers();
+        
+        yield return null;
+        UpdateCardVisual(removeModifiersUnitGA.playerId, removeModifiersUnitGA.position);
+        LaneManager.instance.UpdateLaneVisuals();
+        GameManager.instance.UpdateSciencePointsUI();        
+    }
+    private IEnumerator UnmodSelectedPerformer(RemoveModifiersSelectedGA removeModifiersSelectedGA)
+    {
+        foreach (Vector3Int vector in SelectionManager.instance.selectedBoard)
+        {
+            RemoveModifiersUnitGA removeModifiersUnitGA =  new RemoveModifiersUnitGA(vector.z, new Vector2Int(vector.x, vector.y));
+            ActionManager.instance.AddReaction(removeModifiersUnitGA);
+        }
+        yield return null;
+    }
+    private IEnumerator ChangeContainedUnitPerformer(ChangeContainedUnitGA changeContainedUnitGA)
+    {
+        Card selectedUnit = GameManager.instance.players[changeContainedUnitGA.playerId].units[changeContainedUnitGA.position.x, changeContainedUnitGA.position.y]; //get reference
+        if (selectedUnit != null)
+        {
+            selectedUnit.containedCard = changeContainedUnitGA.newContainedCard;
 
-    //         UpdateCardVisual(giveUnitEffectGA.playerId, giveUnitEffectGA.position);
-    //         LaneManager.instance.UpdateLaneVisuals();
-    //         yield return null;
-    //     }
-    // }
-    // private IEnumerator GiveSelectedEffectPerformer(GiveSelectedEffectGA giveSelectedEffectGA)
-    // {
-    //     foreach (Vector3Int vector in SelectionManager.instance.selectedBoard)
-    //     {
-    //         GiveUnitEffectGA giveUnitEffectGA =  new GiveUnitEffectGA(vector.z, new Vector2Int(vector.x, vector.y), giveSelectedEffectGA.ET, giveSelectedEffectGA.savedCard);
-
-    //         if (giveSelectedEffectGA.isUnited)
-    //             foreach (Vector3Int mector in SelectionManager.instance.selectedBoard)
-    //             {
-    //                 if (mector != vector)
-    //                 {
-    //                     Card mectorCard = GameManager.instance.players[mector.z].units[mector.x, mector.y];
-    //                     giveUnitEffectGA.savedCard = mectorCard;
-    //                     ActionManager.instance.AddReaction(giveUnitEffectGA);
-    //                 }
-    //             }
-    //         else ActionManager.instance.AddReaction(giveUnitEffectGA);
-    //     }
-    //     yield return null;
-    // }
+            UpdateCardVisual(changeContainedUnitGA.playerId, changeContainedUnitGA.position);
+            LaneManager.instance.UpdateLaneVisuals();
+            yield return null;
+        }
+    }
+    private IEnumerator ChangeContainedSelectedPerformer(ChangeContainedSelectedGA changeContainedSelectedGA)
+    {
+        foreach (Vector3Int vector in SelectionManager.instance.selectedBoard)
+        {
+            ChangeContainedUnitGA changeContainedUnitGA =  new ChangeContainedUnitGA(vector.z, new Vector2Int(vector.x, vector.y), changeContainedSelectedGA.newContainedCard);
+            ActionManager.instance.AddReaction(changeContainedUnitGA);
+        }
+        yield return null;
+    }
     // private IEnumerator ResetUnitPerformer(ResetUnitGA ResetUnitGA)
     // {
     //     Card selectedUnit = GameManager.instance.players[changeStatsUnitGA.playerId].units[changeStatsUnitGA.position.x, changeStatsUnitGA.position.y]; //get only reference

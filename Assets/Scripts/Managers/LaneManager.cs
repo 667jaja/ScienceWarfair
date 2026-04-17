@@ -89,7 +89,7 @@ public class LaneManager : MonoBehaviour
 
     public IEnumerator CountIqVisual()
     {
-        int currentPlayerSP = GameManager.instance.players[GameManager.instance.currentPlayer].sciencePoints;
+        int currentPlayerSP = GameManager.instance.players[GameManager.instance.currentPlayer].SciencePoints;
         int sciencePointsSum = currentPlayerSP;
         bool isEnemyTurn = GameManager.instance.currentPlayer != GameManager.instance.displayPlayer;
         //if (currentPlayer == displayPlayer) {all}
@@ -127,11 +127,11 @@ public class LaneManager : MonoBehaviour
     {
         if (playerId != GameManager.instance.displayPlayer)
         {
-            iqAddSliderEnemy.value = GameManager.instance.players[playerId].sciencePoints + AddAmount;
+            iqAddSliderEnemy.value = GameManager.instance.players[playerId].SciencePoints + AddAmount;
         }
         else
         {
-            iqAddSlider.value = GameManager.instance.players[playerId].sciencePoints + AddAmount;
+            iqAddSlider.value = GameManager.instance.players[playerId].SciencePoints + AddAmount;
         }
         //iqAddSliderEnemy
         yield return new WaitForSeconds(countIqAnimationLength);
@@ -142,12 +142,12 @@ public class LaneManager : MonoBehaviour
         {
             lane.UpdateVisual();
         }
-        iqAddSlider.value = GameManager.instance.players[GameManager.instance.displayPlayer].sciencePoints;
+        iqAddSlider.value = GameManager.instance.players[GameManager.instance.displayPlayer].SciencePoints;
         foreach(LaneVisual lane in enemyLaneVisuals)
         {
             lane.UpdateVisual();
         }
-        iqAddSliderEnemy.value = GameManager.instance.players[GameManager.instance.GetNextPlayerId(GameManager.instance.displayPlayer)].sciencePoints;;
+        iqAddSliderEnemy.value = GameManager.instance.players[GameManager.instance.GetNextPlayerId(GameManager.instance.displayPlayer)].SciencePoints;;
     }
     public void PlaceActionToggle(bool isPlacingAction)
     {

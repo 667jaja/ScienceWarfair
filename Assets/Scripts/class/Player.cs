@@ -21,6 +21,24 @@ public class Player
     public int maxMoney = 10;
     public int id;
     public int sciencePoints;
+    public int SciencePoints
+    {
+        get
+        {
+            return sciencePoints;
+        }
+        set
+        {
+            if (value < 0)
+            {
+                sciencePoints = 0;
+            }
+            else
+            {
+                sciencePoints = value;
+            }
+        }
+    }
     private int money;
     public int actionPoints;
 

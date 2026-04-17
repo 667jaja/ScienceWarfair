@@ -251,7 +251,7 @@ public class GameManager : MonoBehaviour
 
         //iq
         yield return LaneManager.instance.CountIqVisual();
-        players[currentPlayer].sciencePoints += UnitManager.instance.CountPlayerIQ(currentPlayer);
+        players[currentPlayer].SciencePoints += UnitManager.instance.CountPlayerIQ(currentPlayer);
         UpdateSciencePointsUI();
 
         //stall
@@ -266,9 +266,9 @@ public class GameManager : MonoBehaviour
         int highestSciencePointsPlayerId = 0;
         foreach (Player player in players)
         {
-            if (player.sciencePoints > highestPlayerSciencePoints)
+            if (player.SciencePoints > highestPlayerSciencePoints)
             {
-                highestPlayerSciencePoints = player.sciencePoints;
+                highestPlayerSciencePoints = player.SciencePoints;
                 highestSciencePointsPlayerId = player.id;
             }
         }
@@ -319,7 +319,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator GainSciencePointsPerformer(GainSciencePointsGA gainSciencePointsGA)
     {
         yield return LaneManager.instance.AddIqVisual(gainSciencePointsGA.playerId, gainSciencePointsGA.gainCount);
-        players[gainSciencePointsGA.playerId].sciencePoints += gainSciencePointsGA.gainCount;
+        players[gainSciencePointsGA.playerId].SciencePoints += gainSciencePointsGA.gainCount;
         UpdateSciencePointsUI();
     }
     private IEnumerator GainActionPointsPerformer(GainActionPointsGA gainActionPointsGA)
@@ -429,18 +429,18 @@ public class GameManager : MonoBehaviour
     } 
     public void UpdateSciencePointsUI()
     {
-        plaSciencePointsSlider.value = players[displayPlayer].sciencePoints;
-        oppSciencePointsSlider.value = players[GetNextPlayerId(displayPlayer)].sciencePoints;
+        plaSciencePointsSlider.value = players[displayPlayer].SciencePoints;
+        oppSciencePointsSlider.value = players[GetNextPlayerId(displayPlayer)].SciencePoints;
 
-        plaSciencePointNeeded.text = (maxSciencePoints - players[displayPlayer].sciencePoints).ToString();
-        plaCurrentSciencePoints.text = players[displayPlayer].sciencePoints.ToString();
+        plaSciencePointNeeded.text = (maxSciencePoints - players[displayPlayer].SciencePoints).ToString();
+        plaCurrentSciencePoints.text = players[displayPlayer].SciencePoints.ToString();
 
-        oppSciencePointNeeded.text = (maxSciencePoints - players[GetNextPlayerId(displayPlayer)].sciencePoints).ToString();
-        oppCurrentSciencePoints.text = players[GetNextPlayerId(displayPlayer)].sciencePoints.ToString();
+        oppSciencePointNeeded.text = (maxSciencePoints - players[GetNextPlayerId(displayPlayer)].SciencePoints).ToString();
+        oppCurrentSciencePoints.text = players[GetNextPlayerId(displayPlayer)].SciencePoints.ToString();
 
 
-        plaSciencePointsWarning.gameObject.SetActive(UnitManager.instance.CountPlayerIQ(displayPlayer) + players[displayPlayer].sciencePoints >= maxSciencePoints);
-        oppSciencePointsWarning.gameObject.SetActive(UnitManager.instance.CountPlayerIQ(GetNextPlayerId(displayPlayer)) + players[GetNextPlayerId(displayPlayer)].sciencePoints >= maxSciencePoints);
+        plaSciencePointsWarning.gameObject.SetActive(UnitManager.instance.CountPlayerIQ(displayPlayer) + players[displayPlayer].SciencePoints >= maxSciencePoints);
+        oppSciencePointsWarning.gameObject.SetActive(UnitManager.instance.CountPlayerIQ(GetNextPlayerId(displayPlayer)) + players[GetNextPlayerId(displayPlayer)].SciencePoints >= maxSciencePoints);
 
         LaneManager.instance.UpdateLaneVisuals();
     }

@@ -174,6 +174,52 @@ public class Card
         }
         return tagList;
     }
+    public void RemoveModifier(int index)
+    {
+        //remove associated effects
+        foreach (int ETId in modifiers[index].effectTriggerDatas)
+        {
+            int toBeRemoved = -1;
+            for (int i = 0; i < effectTriggers.Count; i++)
+            {
+                if (effectTriggers[i].effectTriggerData.effectTriggerId == ETId)
+                {
+                    toBeRemoved = i;
+                }
+            }
+            if (toBeRemoved >= 0)
+            {
+                effectTriggers.RemoveAt(toBeRemoved);
+            }
+        }
+
+        //remove associated tags
+        foreach (int tagId in modifiers[index].tagIds)
+        {
+            int toBeRemoved = -1;
+            for (int i = 0; i < tags.Count; i++)
+            {
+                if (tags[i].tagId == tagId)
+                {
+                    toBeRemoved = i;
+                }
+            }
+            if (toBeRemoved >= 0)
+            {
+                tags.RemoveAt(toBeRemoved);
+            }
+        }
+        //actual modifier
+        modifiers.RemoveAt(index);
+    }
+    public void RemoveAllModifiers()
+    {
+        for (int i = modifiers.Count-1; i >= 0; i--)
+        {
+            RemoveModifier(i);
+        }
+    }
+
 }
 
     // public void PerformAbility(ActionData actionData)

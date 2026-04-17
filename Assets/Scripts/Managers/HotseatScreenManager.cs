@@ -41,11 +41,11 @@ public class HotseatScreenManager : MonoBehaviour
 
     public IEnumerator OnTurnEnd()
     {
-        if (GameManager.instance.players[0].sciencePoints >= GameManager.instance.maxSciencePoints && GameManager.instance.players[0].sciencePoints > GameManager.instance.players[1].sciencePoints)
+        if (GameManager.instance.players[0].SciencePoints >= GameManager.instance.maxSciencePoints && GameManager.instance.players[0].SciencePoints > GameManager.instance.players[1].SciencePoints)
         {
             YouWin(0);
         }
-        else if (GameManager.instance.players[1].sciencePoints >= GameManager.instance.maxSciencePoints && GameManager.instance.players[1].sciencePoints > GameManager.instance.players[0].sciencePoints)
+        else if (GameManager.instance.players[1].SciencePoints >= GameManager.instance.maxSciencePoints && GameManager.instance.players[1].SciencePoints > GameManager.instance.players[0].SciencePoints)
         {
             YouWin(1);
         }
@@ -77,8 +77,8 @@ public class HotseatScreenManager : MonoBehaviour
 
     public void YouWin(int winnerId)
     {
-        scienceSlider1.value = GameManager.instance.players[0].sciencePoints;
-        scienceSlider2.value = GameManager.instance.players[1].sciencePoints;
+        scienceSlider1.value = GameManager.instance.players[0].SciencePoints;
+        scienceSlider2.value = GameManager.instance.players[1].SciencePoints;
 
         Text.text = "The Winner is "+ GameManager.instance.players[winnerId].name+"!";
         foreach (GameObject item in winScreenObjects)
