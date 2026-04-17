@@ -24,3 +24,6 @@ MonoBehaviour:
   <tags>k__BackingField: []
   <effectTriggerDatas>k__BackingField: []
   <containedCard>k__BackingField: {fileID: 0}
+  <placementCostMod>k__BackingField: 0
+  <iqMod>k__BackingField: 0
+  <healthMod>k__BackingField: 0

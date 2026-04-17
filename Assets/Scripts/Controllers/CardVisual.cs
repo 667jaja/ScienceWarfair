@@ -27,9 +27,11 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
     //effectInfos
     [SerializeField] private Transform effectInfosSpawn;
     [SerializeField] private float effectInfoYAdd;
+    [SerializeField] private GameObject modifierInfoPrefab;
     [SerializeField] private GameObject effectTriggerInfoPrefab;
     [SerializeField] private GameObject containedCardInfoPrefab;
     private List<GameObject> effectInfos = new List<GameObject>();
+
     //tagStickers
     [SerializeField] private Transform tagStickerSpawn;
     [SerializeField] private float tagStickersXAdd;
@@ -200,21 +202,37 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
             Destroy(item);
         }
         effectInfos = new();
-        //Effect Triggers (bottom)
-        foreach (EffectTrigger ET in card.effectTriggers)
+        //Modifiers (bottom)
+        foreach (CardModifier mod in card.modifiers)
         {
-            GameObject newLoggedAction = Instantiate(effectTriggerInfoPrefab, effectInfosSpawn);
+            GameObject newLoggedAction = Instantiate(modifierInfoPrefab, effectInfosSpawn);
 
             foreach (GameObject item in effectInfos)
             {
                 item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y + effectInfoYAdd, item.transform.position.z);
             }
 
-            if (newLoggedAction.GetComponent<EffectInfoVisual>() != null) newLoggedAction.GetComponent<EffectInfoVisual>().InitiateET(ET.GetTriggerName(), ET.GetEffectName(), ET.countDownVal, (ET.countDownVal <= 0 && ET.countDown <= 0), ET.triggerDisabled);
+            if (newLoggedAction.GetComponent<EffectInfoVisual>() != null) newLoggedAction.GetComponent<EffectInfoVisual>().InitiateM(mod.modDescription);
 
             effectInfos.Add(newLoggedAction);
         }
-        //Contained Cards (top)
+
+        effectInfos = new();
+        // //Effect Triggers (middle)
+        // foreach (EffectTrigger ET in card.effectTriggers)
+        // {
+        //     GameObject newLoggedAction = Instantiate(effectTriggerInfoPrefab, effectInfosSpawn);
+
+        //     foreach (GameObject item in effectInfos)
+        //     {
+        //         item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y + effectInfoYAdd, item.transform.position.z);
+        //     }
+
+        //     if (newLoggedAction.GetComponent<EffectInfoVisual>() != null) newLoggedAction.GetComponent<EffectInfoVisual>().InitiateET(ET.GetTriggerName(), ET.GetEffectName(), ET.countDownVal, (ET.countDownVal <= 0 && ET.countDown <= 0), ET.triggerDisabled);
+
+        //     effectInfos.Add(newLoggedAction);
+        // }
+        // //Contained Cards (top)
         if (card.containedCard != null)
         {
             GameObject newLoggedAction = Instantiate(containedCardInfoPrefab, effectInfosSpawn);

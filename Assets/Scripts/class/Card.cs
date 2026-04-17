@@ -13,16 +13,13 @@ public class Card
         this.cardData = cardData;
         cardInstanceId = Random.Range(0, 2000000000);
 
-        //stats
-        PlacementCost = cardData.placementCost;
-        Iq = cardData.iq;
-        Health = cardData.health;
-
         //powers
         effectTriggers = new List<EffectTrigger>();
         tags = new();
         foreach (CardTag tag in cardData.tags) tags.Add(tag);
         containedCard = cardData.containedCard;
+
+        modifiers = new();
     }
 
     //non gameplay elements
@@ -34,65 +31,82 @@ public class Card
     public bool isAction { get => cardData.isAction; }
 
     //stats
-    public int placementCost { get; set; }
-    public int iq { get; set; }
-    public int health { get; set; }
-    public int PlacementCost
+    public int placementCost { get => cardData.placementCost; }
+    public int iq { get => cardData.iq; }// private set
+    public int health { get => cardData.health; }
+    public int damageTaken { get; private set; }
+    public int DamageTaken
     {
         get
         {
-            return placementCost;
+            return damageTaken;
         }
         set
         {
             if (value < 0)
             {
-                placementCost = 0;
+                value = 0;
             }
-            else
+            damageTaken = value;
+        }
+    }
+    public int PlacementCost
+    {
+        get
+        {
+            int returnVal = placementCost;
+            foreach (CardModifier mod in modifiers)
             {
-                placementCost = value;
+                returnVal += mod.placementCost;
             }
+
+            if (returnVal < 0)
+            {
+                returnVal = 0;
+            }
+            return returnVal;
         }
     }
     public int Iq
     {
         get
         {
-            return iq;
-        }
-        set
-        {
-            if (value < 0)
+            int returnVal = iq;
+            foreach (CardModifier mod in modifiers)
             {
-                iq = 0;
+                returnVal += mod.iq;
             }
-            else
+
+            if (returnVal < 0)
             {
-                iq = value;
+                returnVal = 0;
             }
+
+            return returnVal;
         }
     }
     public int Health
     {
         get
         {
-            return health;
-        }
-        set
-        {
-            if (value < 0)
+            int returnVal = health;
+            foreach (CardModifier mod in modifiers)
             {
-                health = 0;
+                returnVal += mod.health;
             }
-            else
+            returnVal -= damageTaken;
+
+            if (returnVal < 0)
             {
-                health = value;
+                returnVal = 0;
             }
+
+            return returnVal;
         }
     }
 
     //abilities
+    public List<CardModifier> modifiers {get; set;}
     public bool noAttack { get => cardData.noAttack; }
     public List<EffectTrigger> effectTriggers {get; set;}
     public List<CardTag> tags {get; set;}

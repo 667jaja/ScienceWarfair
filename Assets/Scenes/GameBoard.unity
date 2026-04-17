@@ -580,7 +580,6 @@ MonoBehaviour:
   moneyGain: 2
   cardGain: 2
   maxMoney: 10
-  deckDataSizeMin: 20
   endOfTurnWait: 0.2
 --- !u!114 &78848196
 MonoBehaviour:
@@ -917,6 +916,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4f0e2bd875ecbee44ae9809572e39f75, type: 2}
   - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
   - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
+  - {fileID: 11400000, guid: 4f088147232cc48479d49b9197a52c9b, type: 2}
+  - {fileID: 11400000, guid: b7528bbfb519c534baed7c63fb7d6486, type: 2}
+  - {fileID: 11400000, guid: ac4ccbcfcae2121409016d29a5eb8849, type: 2}
+  - {fileID: 11400000, guid: f44e7f8f109309644bba1bec8d63e551, type: 2}
   effects:
   - {fileID: 11400000, guid: 53b60123c61500b44b8f9eb74eca11a8, type: 2}
   - {fileID: 11400000, guid: d4c0cfd7434abbd47b0352b32ed05b5e, type: 2}

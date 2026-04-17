@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bf1afe7c8d616143abb4a4734010d6a, type: 3}
-  m_Name: IncreaseTargetIq
+  m_Name: Add1ITarget
   m_EditorClassIdentifier: 
   <effectId>k__BackingField: 202512
   specialAnimation: 2
+  <modDescription>k__BackingField: +1Iq
   <iq>k__BackingField: 1
   <health>k__BackingField: 0
   <placementCost>k__BackingField: 0
+  <et>k__BackingField: {fileID: 0}
+  <tags>k__BackingField: []
+  <targetSaved>k__BackingField: 0

@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <effectId>k__BackingField: 2026031803
   specialAnimation: 0
+  <modDescription>k__BackingField: '+2Iq +1Health '
   <iq>k__BackingField: 2
   <health>k__BackingField: 1
   <placementCost>k__BackingField: 0
   <et>k__BackingField: {fileID: 0}
-  <tag>k__BackingField: {fileID: 0}
+  <tags>k__BackingField: []
   <targetSaved>k__BackingField: 1

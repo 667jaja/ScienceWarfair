@@ -21,6 +21,10 @@ public class EffectInfoVisual : MonoBehaviour
         cooldown.text = cooldownVal.ToString();
         disabledCover.SetActive(isDisabled);
     }
+    public void InitiateM(string description)//, string EFtypeVal, int cooldownVal, bool noCountDown, bool isDisabled)
+    {
+        type.text = description;
+    }
     public void InitiateCC(string ccName, int health, int cost, int iq, string description)
     {
         type.text = ccName;

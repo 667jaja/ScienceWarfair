@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <effectId>k__BackingField: 2026031806
   specialAnimation: 0
+  <modDescription>k__BackingField: +1Iq +1Health Tagged as Robot
   <iq>k__BackingField: 1
   <health>k__BackingField: 1
   <placementCost>k__BackingField: 0
   <et>k__BackingField: {fileID: 0}
-  <tag>k__BackingField: {fileID: 11400000, guid: 6332b7aa9c39902479f5202fd7fec5e4, type: 2}
+  <tags>k__BackingField:
+  - {fileID: 11400000, guid: 6332b7aa9c39902479f5202fd7fec5e4, type: 2}
   <isUnitedEffect>k__BackingField: 0

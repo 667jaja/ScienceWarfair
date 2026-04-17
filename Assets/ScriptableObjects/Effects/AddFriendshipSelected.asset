@@ -14,13 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <effectId>k__BackingField: 2026031801
   specialAnimation: 0
+  <modDescription>k__BackingField: On death +2Iq +1Health to friend
   <iq>k__BackingField: 0
   <health>k__BackingField: 0
   <placementCost>k__BackingField: 0
   <et>k__BackingField: {fileID: 11400000, guid: 66e61d89fcd3f31498358a725a4d960b, type: 2}
-  <tag>k__BackingField: {fileID: 11400000, guid: 4c32a0ea825944e4194740c84abb303e, type: 2}
+  <tags>k__BackingField: []
   <isUnitedEffect>k__BackingField: 1
-  <selectCount>k__BackingField: 2
-  <includeFriendly>k__BackingField: 1
-  <includeEnemy>k__BackingField: 0
-  <row>k__BackingField: -1

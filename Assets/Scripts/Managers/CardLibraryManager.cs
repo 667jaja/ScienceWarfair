@@ -148,9 +148,9 @@ public class CardLibraryManager : MonoBehaviour
         Card newCard = new Card(GetCardDataById(cardStruct.CardDataBaseId))
         {
             cardInstanceId = cardStruct.cardInstanceId,
-            Iq = cardStruct.iq,
-            PlacementCost = cardStruct.placementCost,
-            Health = cardStruct.health,
+            // Iq = cardStruct.iq,
+            // PlacementCost = cardStruct.placementCost,
+            // Health = cardStruct.health,
 
             containedCard = cardStruct.containedCardBaseId>=0? GetCardDataById(cardStruct.containedCardBaseId): null,
 

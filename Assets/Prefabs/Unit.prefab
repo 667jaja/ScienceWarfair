@@ -160,11 +160,13 @@ MonoBehaviour:
   actionDisable: []
   effectInfosSpawn: {fileID: 2367221147330095777}
   effectInfoYAdd: -1
+  modifierInfoPrefab: {fileID: 194527223521135238, guid: 3af5a970e345e784ca23628274671416, type: 3}
   effectTriggerInfoPrefab: {fileID: 194527223521135238, guid: 05af7acfe0d0ea742b1ca9bbbdc35846, type: 3}
   containedCardInfoPrefab: {fileID: 194527223521135238, guid: 6b7effc2a6969574a8060cfe2cd78179, type: 3}
   tagStickerSpawn: {fileID: 1954466745603920230}
   tagStickersXAdd: -0.5
   tagSticker: {fileID: 8089201397112682664, guid: 8c0adfca365901542a16e4c841f746ef, type: 3}
+  tagStickerRotationMax: 30
 --- !u!61 &6255750677620037767
 BoxCollider2D:
   m_ObjectHideFlags: 0

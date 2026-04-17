@@ -25,3 +25,6 @@ MonoBehaviour:
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: 36a0778dc0e087848ab8d5cb522e6d3b, type: 2}
   <containedCard>k__BackingField: {fileID: 0}
+  <placementCostMod>k__BackingField: 0
+  <iqMod>k__BackingField: 0
+  <healthMod>k__BackingField: 0

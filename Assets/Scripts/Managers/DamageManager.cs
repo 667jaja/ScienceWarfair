@@ -105,7 +105,8 @@ public class DamageManager : MonoBehaviour
             }
             else
             {
-                GameManager.instance.players[damageUnitGA.playerId].units[damageUnitGA.position.x, damageUnitGA.position.y].Health -= damageAmount;  
+                //GameManager.instance.players[damageUnitGA.playerId].units[damageUnitGA.position.x, damageUnitGA.position.y].Health -= damageAmount;  
+                GameManager.instance.players[damageUnitGA.playerId].units[damageUnitGA.position.x, damageUnitGA.position.y].DamageTaken += damageAmount;  
                 UnitManager.instance.UpdateCardVisual(damageUnitGA.playerId, damageUnitGA.position);
             }
         }
