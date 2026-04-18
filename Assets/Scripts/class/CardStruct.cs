@@ -9,27 +9,26 @@ public struct CardStruct : INetworkSerializable
     public int CardDataBaseId;
     public int cardInstanceId;
 
-    //stats
-    public int placementCost;
-    public int iq;
-    public int health;
-
     //abilities
+    public int containedCardBaseId;
+    public CardModifier[] cardModifiers;
     public int[] tagIds;
     public EffectTriggerStruct[] effectTriggers;
-    public int containedCardBaseId;
 
     public CardStruct(Card card)
     {
         CardDataBaseId = card.cardData.CardDataId;
         cardInstanceId = card.cardInstanceId;
-        placementCost = card.PlacementCost;
-        iq = card.Iq;
-        health = card.Health;
 
         containedCardBaseId = card.containedCard != null? card.containedCard.CardDataId: -1;
         
         int i;
+
+        cardModifiers = new CardModifier[card.modifiers.Count];
+        if (card.modifiers != null && card.modifiers.Count > 0) for (i = 0; i < card.modifiers.Count; i++)
+        {
+            cardModifiers[i] = card.modifiers[i];
+        }
 
         tagIds = new int[card.tags.Count];
         if (card.tags != null && card.tags.Count > 0) for (i = 0; i < card.tags.Count; i++)
@@ -48,10 +47,17 @@ public struct CardStruct : INetworkSerializable
     {
         serializer.SerializeValue(ref CardDataBaseId);
         serializer.SerializeValue(ref cardInstanceId);
-        serializer.SerializeValue(ref placementCost);
-        serializer.SerializeValue(ref iq);
-        serializer.SerializeValue(ref health);
         serializer.SerializeValue(ref containedCardBaseId);
+
+        // modifiers
+        int modifiersLength = cardModifiers != null ? cardModifiers.Length : 0;
+        serializer.SerializeValue(ref modifiersLength);
+
+        if (serializer.IsReader)
+            cardModifiers = new CardModifier[modifiersLength];
+
+        for (int i = 0; i < modifiersLength; i++)
+            serializer.SerializeValue(ref cardModifiers[i]);
 
         // tags
         int tagsLength = tagIds != null ? tagIds.Length : 0;

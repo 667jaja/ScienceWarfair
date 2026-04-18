@@ -212,7 +212,7 @@ public class CardVisual : MonoBehaviour, IPointerClickHandler
                 item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y + effectInfoYAdd, item.transform.position.z);
             }
 
-            if (newLoggedAction.GetComponent<EffectInfoVisual>() != null) newLoggedAction.GetComponent<EffectInfoVisual>().InitiateM(mod.modDescription);
+            if (newLoggedAction.GetComponent<EffectInfoVisual>() != null) newLoggedAction.GetComponent<EffectInfoVisual>().InitiateM(mod.modDescription.ArrayToString());
 
             effectInfos.Add(newLoggedAction);
         }

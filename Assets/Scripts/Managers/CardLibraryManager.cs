@@ -148,16 +148,23 @@ public class CardLibraryManager : MonoBehaviour
         Card newCard = new Card(GetCardDataById(cardStruct.CardDataBaseId))
         {
             cardInstanceId = cardStruct.cardInstanceId,
-            // Iq = cardStruct.iq,
-            // PlacementCost = cardStruct.placementCost,
-            // Health = cardStruct.health,
-
             containedCard = cardStruct.containedCardBaseId>=0? GetCardDataById(cardStruct.containedCardBaseId): null,
 
+            //arrays
+            modifiers = new List<CardModifier>(),
             tags = new List<CardTag>(),
             effectTriggers = new List<EffectTrigger>(),
         };
-        
+
+        //modifiers
+        if (cardStruct.cardModifiers != null && cardStruct.cardModifiers.Length > 0)
+        for (int i = 0; i < cardStruct.cardModifiers.Length; i++)
+        {
+            CardModifier newCardMod = cardStruct.cardModifiers[i];
+            newCard.modifiers.Add(newCardMod);
+        }
+
+        //tags
         if (cardStruct.tagIds != null && cardStruct.tagIds.Length > 0)
         for (int i = 0; i < cardStruct.tagIds.Length; i++)
         {
@@ -165,6 +172,7 @@ public class CardLibraryManager : MonoBehaviour
             newCard.tags.Add(newCardTag);
         }
         
+        //Effect Triggers
         if (cardStruct.effectTriggers != null && cardStruct.effectTriggers.Length > 0)
         for (int i = 0; i < cardStruct.effectTriggers.Length; i++)
         {
