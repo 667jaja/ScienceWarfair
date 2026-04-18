@@ -79,13 +79,13 @@ public class SelectionManager : MonoBehaviour
                         }
                         //check stats
                         //iq
-                        if ((minIq >= 0 && inspectedUnit.iq < minIq) || (maxIq >= 0 && inspectedUnit.iq > maxIq))
+                        if ((minIq >= 0 && inspectedUnit.Iq < minIq) || (maxIq >= 0 && inspectedUnit.Iq > maxIq))
                             addCurrent = false;
                         //health
-                        if ((minHealth >= 0 && inspectedUnit.health < minHealth) || (maxHealth >= 0 && inspectedUnit.health > maxHealth))
+                        if ((minHealth >= 0 && inspectedUnit.Health < minHealth) || (maxHealth >= 0 && inspectedUnit.Health > maxHealth))
                             addCurrent = false;
                         //cost
-                        if ((minCost >= 0 && inspectedUnit.placementCost < minCost) || (maxCost >= 0 && inspectedUnit.placementCost > maxCost))
+                        if ((minCost >= 0 && inspectedUnit.PlacementCost < minCost) || (maxCost >= 0 && inspectedUnit.PlacementCost > maxCost))
                             addCurrent = false;
                         
                         if (addCurrent) thingToReturn.Add(new Vector3Int(i,j,p));
