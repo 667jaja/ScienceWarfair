@@ -272,7 +272,7 @@ public class GameManager : MonoBehaviour
                 highestSciencePointsPlayerId = player.id;
             }
         }
-        if (highestPlayerSciencePoints > maxSciencePoints)
+        if (highestPlayerSciencePoints >= maxSciencePoints)
         {
             PlayerWon(highestSciencePointsPlayerId);
         }
