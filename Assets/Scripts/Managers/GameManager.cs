@@ -5,20 +5,21 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Linq;
 
+    //manages overarching elements of a game such as players, loss, victory, turn start, turn end
 public class GameManager : MonoBehaviour
 {
-    //manages overarching elements of a game such as players, loss, victory, turn start, turn end
     public static GameManager instance;
-    [SerializeField] private int playerCount = 2;
-    public int maxSciencePoints;
     
     //players
+    [SerializeField] private int playerCount = 2;
     public List<PlayerData> playerDatas;
     public List<Player> players = new List<Player>();
     public int currentPlayer;
     public int displayPlayer;
 
     //ui
+    [SerializeField] private GameObject ifCurrentPlayerIsNotDisplay;
+
     //money
     [SerializeField] private Slider moneySlider;
     [SerializeField] private Slider moneySliderEnemy;
@@ -29,6 +30,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float moneySpeed;
 
     //science points
+    public int maxSciencePoints;
+
     public Slider plaSciencePointsSlider;
     public Slider oppSciencePointsSlider;
     public TMP_Text plaSciencePointNeeded;
@@ -40,14 +43,14 @@ public class GameManager : MonoBehaviour
     public Transform plaSciencePointsWarning;
     public Transform oppSciencePointsWarning;
 
+    //action points
     public TMP_Text plaActionPointsCount;
     public GameObject plaActionPointObject;
 
-    [SerializeField] private GameObject ifCurrentPlayerIsNotDisplay;
-    [SerializeField] private List<int> secretCardIds;
 
     //money&Cards
     public List<CardData> defaultDeck;
+    [SerializeField] private List<int> secretCardIds;
     // public List<CardData> defaultOpener;
     [SerializeField] private int startingMoney;
     [SerializeField] private int turnOrderBonusMoney = 1;
@@ -63,8 +66,8 @@ public class GameManager : MonoBehaviour
     //random
     private float randomVal = -1;
     private float savedRandomVal = -1;
-    private List<int> randomRangedInts = null;
-    private List<int> savedRandomRangedInts = new();
+    private List<List<int>> randomRangeResults = new();
+
 
     //public int perspective player
     void Awake()
@@ -77,28 +80,42 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator BeginGame()
     {
-        //local game only setup
+        //setup only run on local games
         if (RelayManager.instance == null)
         {
             players = new();
             for (int i = 0; i < playerCount; i++)
             {
+            // - for each player
+
+                //create player from player data (scriptable object)
                 players.Add(new Player(playerDatas[i], i));
-                if (players[i].rawDeck == null || players[i].rawDeck.Count < deckDataSizeMin) players[i].rawDeck = defaultDeck.ToList();
-                // Debug.Log ("player " + i + " deck size " + players[i].rawDeck.Count);
-                yield return CardManager.instance.AwaitCreateDeck(players[i].rawDeck.ToList());
-                players[i].deck = CardManager.instance.CreateDeck();
+
+                //setup opener
                 players[i].opener = CreateOpener(players[i]);
             }
         }
 
-        //standard setup
+        //general setup
         for (int i = 0; i < playerCount; i++)
         {
+        // - for each player
+            //replace invalid name
             if (players[i].name == null || players[i].name.Length < 1) players[i].name = "Player" + (i+1);
+
+            //manage money
             players[i].maxMoney = maxMoney;
             players[i].Money = startingMoney + i*turnOrderBonusMoney;
             UpdateMoneyUI(true);
+
+            //replace raw deck
+            if (players[i].rawDeck == null || players[i].rawDeck.Count < deckDataSizeMin) players[i].rawDeck = defaultDeck.ToList();
+
+            //shuffle raw deck into actual deck
+            yield return CardManager.instance.AwaitCreateDeck(players[i].rawDeck.ToList());
+            players[i].deck = CardManager.instance.CreateDeck();
+
+            //spawn opener units
             int c = 0;
             foreach (CardData item in players[i].opener)
             {
@@ -112,8 +129,12 @@ public class GameManager : MonoBehaviour
                 c++;
             }
         }
+
+        //draw
         for (int i = 0; i < playerCount; i++)
         {
+        // - for each player
+            //draw starting hand
             CardManager.instance.DrawCards(i, startingCards + i*turnOrderBonusCards);
         }
 
@@ -143,8 +164,12 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        //p1 goes first (change to random later)
         currentPlayer = 0;
+        //if local display currentPlayer
         if (RelayManager.instance == null) displayPlayer = currentPlayer;
+
+        //queue start of currentPlayer's turn 
         StartTurnGA startTurnGA = new(currentPlayer);
         startTurnGA.description = "Game start. "+players[0].name+" plays first. money: " + startingMoney + "-" + (startingMoney+turnOrderBonusMoney) + " cards: " + startingCards + "-" + (startingCards + turnOrderBonusCards);
         ActionManager.instance.Perform(startTurnGA);
@@ -160,7 +185,6 @@ public class GameManager : MonoBehaviour
         {
             OnlineManager.instance.ShutDownServer();
         }
-        //StartTurn();
     }
     public void ExitGame()
     {
@@ -169,20 +193,20 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerWon(int winningPlayer)
     {
+        //trigger the you win screen for local
         if (HotseatScreenManager.instance != null)
         {
             HotseatScreenManager.instance.YouWin(winningPlayer);
         }
-        EndGameCleanup();
 
+        //cleanup
+        EndGameCleanup();
+        
+        // for online load menu
         if (HotseatScreenManager.instance == null)
         {
             SceneLoadManager.instance.LoadMainMenu();
         }
-        // if (HotseatScreenManager.instance == null)
-        // {
-            
-        // }
     }
     public void UnSubAllEts()
     {
@@ -207,7 +231,7 @@ public class GameManager : MonoBehaviour
     }
     public List<CardData> CreateOpener(Player player)
     {
-        // if (player.opener == null || player.opener.Count < 1) player.opener = defaultOpener;
+        //assigns positions to the units in opener
         CardData[] newOpener = new CardData[9];
         List<int> validPositions = new List<int>() {0,1,2,3,4,5,6,7,8};
         foreach (CardData data in player.opener)
@@ -222,15 +246,14 @@ public class GameManager : MonoBehaviour
     }
     public void TurnEndButton()
     {
-        //if (ActionManager.instance.isPerforming) return;
         EndTurn(displayPlayer);
     }
     public void EndTurn(int playerId)
     {
+        //if called by the current player
         if (playerId == currentPlayer)
         {
-            //CardManager.instance.CurrentPlayerDrawCards(cardGain);
-
+            //queue end of turn
             EndTurnGA endTurnGA = new(playerId);
             ActionManager.instance.Perform(endTurnGA);
         }
@@ -451,69 +474,84 @@ public class GameManager : MonoBehaviour
         if (playerId < 0) playerId = currentPlayer;
         return (playerId < players.Count - 1) ? playerId + 1 : 0;
     }
+
+    //when other script needs random variables they call this with: yield return AwaitNewRandomRange(ranges);
     public IEnumerator AwaitNewRandomRange(List<Vector2Int> ranges)
     {
-        //if host send random Ints
-        List<int> returnList = new();
+        // Host generates and sends
         if (RelayManager.instance == null || OnlineManager.instance.IsHost)
         {
             Debug.Log("is host or offline, generating randRanges");
+            // Generate values
+            List<int> values = new();
             foreach (Vector2Int range in ranges)
-            {
-                //Debug.Log("randomRange min: "+ range.x +" max: " + range.y);
-                returnList.Add(Random.Range(range.x,range.y));
-            }
-            randomRangedInts = returnList;
-            if (RelayManager.instance != null) OnlineManager.instance.InputRandom(randomRangedInts, 0);
+                values.Add(Random.Range(range.x,range.y));
+
+            // Rpc send to Client
+            if (RelayManager.instance != null) OnlineManager.instance.InputRandom(values);
+            randomRangeResults = new List<List<int>> {values};
         }
 
-        Debug.Log("started randRange wait phase");
-        //await random Ints set
-        while (randomRangedInts == null)
+        // await random Ints set
+        if (RelayManager.instance != null && !OnlineManager.instance.IsHost) Debug.Log("started randRange wait phase. " + randomRangeResults.Count + " value set(s) already saved");
+        else Debug.Log("started randRange wait phase");
+
+        float timer = 0;
+        float timerLoopCount = 0;
+        float timerAlertFreq = 3;
+        while (randomRangeResults.Count == 0)
         {
+            timer += Time.deltaTime;
+            if (timer > timerAlertFreq)
+            {
+                timer = 0;
+                timerLoopCount++;
+                Debug.LogError("unresolved randRange while loop from " + (timerLoopCount*timerAlertFreq) + "seconds ago");
+            }
             yield return null;
         }
-        Debug.Log("ended randRange wait phase " + randomRangedInts.Count + " values Generated" + (randomRangedInts.Count>1? ", first is: " + randomRangedInts[0] : "."));
+        Debug.Log("ended randRange wait phase " + randomRangeResults[0].Count + " values Generated" + (randomRangeResults[0].Count>1? ", first is: " + randomRangeResults[0][0] : "."));
 
-        //save value for use
-        savedRandomRangedInts = randomRangedInts;
-        randomRangedInts = null;
     }
+    //when yield return AwaitNewRandomRange is done other scripts fet their results here
     public List<int> GetRandomRangeVal()
     {
-        return savedRandomRangedInts;
+        List<int> returnVal = randomRangeResults[0];
+        randomRangeResults.RemoveAt(0);
+        return returnVal;
     }
-    public void SetRandomRangeVal(List<int> setVal)
+    public void AddRandomRangeVal(List<int> setVal)
     {
-        randomRangedInts = setVal;
+        randomRangeResults.Add(setVal);
     }
-    public IEnumerator AwaitNewRandomVal()
-    {
-        //if host send random val
-        if (RelayManager.instance == null || OnlineManager.instance.IsHost)
-        {
-            randomVal = Random.value;
-            if (RelayManager.instance != null) OnlineManager.instance.InputRandom(null, randomVal);
-        }
-        
-        Debug.Log("started randVal wait phase");
-        //await randomVal set
-        while (randomVal < 0)
-        {
-            yield return null;
-        }
-        Debug.Log("ended randVal wait phase Value Generated: " + randomVal);
+  }
 
-        //save value for use
-        savedRandomVal = randomVal;
-        randomVal = -1;
-    }
-    public float GetRandVal()
-    {
-        return savedRandomVal;
-    }
-    public void SetRandVal(float setVal)
-    {
-        randomVal = setVal;
-    }
-}
+    // public IEnumerator AwaitNewRandomVal()
+    // {
+    //     //if host send random val
+    //     if (RelayManager.instance == null || OnlineManager.instance.IsHost)
+    //     {
+    //         randomVal = Random.value;
+    //         if (RelayManager.instance != null) OnlineManager.instance.InputRandom(null, randomVal);
+    //     }
+        
+    //     Debug.Log("started randVal wait phase");
+    //     //await randomVal set
+    //     while (randomVal < 0)
+    //     {
+    //         yield return null;
+    //     }
+    //     Debug.Log("ended randVal wait phase Value Generated: " + randomVal);
+
+    //     //save value for use
+    //     savedRandomVal = randomVal;
+    //     randomVal = -1;
+    // }
+    // public float GetRandVal()
+    // {
+    //     return savedRandomVal;
+    // }
+    // public void SetRandVal(float setVal)
+    // {
+    //     randomVal = setVal;
+    // }

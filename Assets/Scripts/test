@@ -1,0 +1,155 @@
+//original method
+/*
+using System.Collections;
+using Unity.Netcode;
+
+public class Thing : MonoBehaviour
+{
+    public static Thing instance;
+    private List<int> randomRangedInts = null;
+    private List<int> savedRandomRangedInts = new();
+
+    void Awake()
+    {
+        instance = this;
+    }
+    //when other script needs random variables they call this with: yield return AwaitNewRandomRange(ranges);
+    //this will be called by the client and the host, but not exactly at the same time
+    public IEnumerator AwaitNewRandomRange(List<Vector2Int> ranges)
+    {
+        // Host generates and sends
+        if (OtherThing.instance == null || OtherThing.instance.IsHost)
+        {
+            // Generate values
+            List<int> values = new();
+            foreach (Vector2Int range in ranges)
+                values.Add(Random.Range(range.x,range.y));
+
+
+            // Rpc send to everyone (including myself)
+            if (OtherThing.instance != null) OtherThing.instance.InputRandom(values);
+        }
+
+        // await random Ints set
+        while (randomRangedInts == null)
+        {
+            yield return null;
+        }
+
+        //save value for use
+        savedRandomRangedInts = randomRangedInts;
+        randomRangedInts = null;
+    }
+
+    //when yield return AwaitNewRandomRange is done other scripts fet their results here
+    public List<int> GetRandomRangeVal()
+    {
+        return savedRandomRangedInts;
+    }
+    //method otherthing uses to set values
+    public void SetRandomRangeVal(List<int> setVal)
+    {
+        randomRangedInts = setVal;
+    }
+}
+
+//the script that manages Online functionality
+public class OtherThing : NetworkBehaviour
+{
+    public static OtherThing instance;
+
+    void Awake()
+    {
+        // WeAreOnline is true before awake if the game is in online mode
+        if (WeAreOnline)
+        instance = this;
+        else
+        instance = null;
+    }
+    public void InputRandom(List<int> randRangeList)
+    {
+        int[] randRangeArr = randRangeList.ToArray();
+        //send rpc
+        InputRandomClientRPC(randRangeArr);
+    }
+
+    [Rpc(SendTo.Everyone)]
+    public void InputRandomRPC(int[] rangeRand)
+    {
+        Thing.instance.SetRandomRangeVal(rangeRand.ToList());
+    }
+}
+*/
+//new method
+using System.Collections;
+using Unity.Netcode;
+
+public class Thing : MonoBehaviour
+{
+    public static Thing instance;
+    public List<List<int>> randomRangeResults;
+    void Awake()
+    {
+        instance = this;
+    }
+
+    //when other script needs random variables they call this with: yield return AwaitNewRandomRange(ranges);
+    public IEnumerator AwaitNewRandomRange(List<Vector2Int> ranges)
+    {
+        // Host generates and sends
+        if (OtherThing.instance == null || OtherThing.instance.IsHost)
+        {
+            // Generate values
+            List<int> values = GetRandomRangeVal();
+
+            // Rpc send to Client
+            if (OtherThing.instance != null) OtherThing.instance.InputRandom(values);
+            randomRangeResults = new List<List<int>> {values};
+        }
+
+        // await random Ints set
+        while (randomRangeResults.Count == 0)
+        {
+            yield return null;
+        }
+    }
+
+    //when yield return AwaitNewRandomRange is done other scripts fet their results here
+    public List<int> GetRandomRangeVal()
+    {
+        List<int> returnVal = randomRangeResults[0];
+        randomRangeResults.RemoveAt(0);
+        return returnVal;
+    }
+    public void AddRandomRangeVal(List<int> setVal)
+    {
+        randomRangeResults.Add(setVal);
+    }
+}
+
+//the script that manages Online functionality
+public class OtherThing : NetworkBehaviour
+{
+    public static OtherThing instance;
+
+    void Awake()
+    {
+        // WeAreOnline is true before awake if the game is in online mode
+        if (WeAreOnline)
+        instance = this;
+        else
+        instance = null;
+    }
+    public void InputRandom(List<int> randRangeList)
+    {
+        int[] randRangeArr = randRangeList.ToArray();
+        //send rpc
+        InputRandomClientRPC(randRangeArr);
+    }
+
+    [Rpc(SendTo.NotServer)]
+    public void InputRandomClientRPC(int[] rangeRand)
+    {
+        Thing.instance.AddRandomRangeVal(rangeRand.ToList());
+    }
+}

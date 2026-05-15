@@ -146,15 +146,10 @@ public class CardManager : MonoBehaviour
     }
     public IEnumerator AwaitCreateDeck(List<CardData> deckData)
     {
-        // yield return GameManager.instance.AwaitNewRandomVal();
-        // Debug.Log("Ranmdom Val is " + GameManager.instance.GetRandVal());
-        // savedDeckData = deckData.OrderBy( x => GameManager.instance.GetRandVal()).ToList( );
-        // savedDeckData = savedDeckData.OrderBy( x => GameManager.instance.GetRandVal()).ToList();
-        // Debug.Log("savedDeckData first card is " + savedDeckData[0].title);
-
-
+        Debug.Log("await Create deck started");
         List<CardData> returnVal = new();
         List<Vector2Int> ranges = new();
+        // min inclusive max exclusive
         for (int i = deckData.Count; i>0; i--)
         {
             ranges.Add(new Vector2Int(0, i));
@@ -166,11 +161,12 @@ public class CardManager : MonoBehaviour
         int deckSize = deckData.Count;
         for (int i = 0; i < deckSize; i++)
         {
-            //Debug.Log("adding " + (randomVals[i]+1) + " of " + deckData.Count());
+            Debug.Log("adding " + (randomVals[i]+1) + " of " + deckData.Count());
             returnVal.Add(deckData[randomVals[i]]);
             deckData.RemoveAt(randomVals[i]);
         }
         savedDeckData = returnVal;
+        Debug.Log("await Create deck ended");
     }
     public List<CardData> CreateDeck()
     {

@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardDataId>k__BackingField: 2026041602
   <title>k__BackingField: Alien Crab
-  <description>k__BackingField: select two two enemy cards to contain "Alien Crab". 
-    On your turn start lose 3 science points
+  <description>k__BackingField: Turn start lose 3 science points
   <cardArt>k__BackingField: {fileID: -4692384784339883219, guid: 4b91dcb329fcada4288f5abca805c23e, type: 3}
   isAction: 0
   <placementCost>k__BackingField: 2
@@ -25,4 +24,5 @@ MonoBehaviour:
   <tags>k__BackingField: []
   <effectTriggerDatas>k__BackingField:
   - {fileID: 11400000, guid: 70661360f39f33348b55fa5824eef612, type: 2}
+  - {fileID: 11400000, guid: f3699850fb0890242b24911dfa3ddb70, type: 2}
   <containedCard>k__BackingField: {fileID: 0}

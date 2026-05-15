@@ -14,24 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <playerName>k__BackingField: 
   <deck>k__BackingField:
-  - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
-  - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
-  - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
-  - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
-  - {fileID: 11400000, guid: e633ccbbe04fc7b4ba005915a13eab06, type: 2}
-  - {fileID: 11400000, guid: e633ccbbe04fc7b4ba005915a13eab06, type: 2}
-  - {fileID: 11400000, guid: e633ccbbe04fc7b4ba005915a13eab06, type: 2}
-  - {fileID: 11400000, guid: e633ccbbe04fc7b4ba005915a13eab06, type: 2}
-  - {fileID: 11400000, guid: e633ccbbe04fc7b4ba005915a13eab06, type: 2}
-  - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
-  - {fileID: 11400000, guid: b8c4627ce80ef35459d5b1803147d0ac, type: 2}
-  - {fileID: 11400000, guid: cf37a98ab2e92ef4eae9be224f434fc5, type: 2}
-  - {fileID: 11400000, guid: ea1873d23da18a0448c87a213d8ed9e1, type: 2}
-  - {fileID: 11400000, guid: 9187a2ba65e49d140b0289c6ada9cc68, type: 2}
+  - {fileID: 11400000, guid: 038a28fc54fa3284295c24c7bb05e9d5, type: 2}
   - {fileID: 11400000, guid: 789eaaaa620ba2e4586d073120d1e3ea, type: 2}
+  - {fileID: 11400000, guid: 3127d9ae1b79c4a4ab877d2e95d220f7, type: 2}
+  - {fileID: 11400000, guid: 10b5e8fb90feb8b428917308fa3e4e25, type: 2}
   - {fileID: 11400000, guid: cf37a98ab2e92ef4eae9be224f434fc5, type: 2}
-  - {fileID: 11400000, guid: a4c461b2e9a43bf4897ea0d8d72b1aba, type: 2}
-  - {fileID: 11400000, guid: a4c461b2e9a43bf4897ea0d8d72b1aba, type: 2}
-  - {fileID: 11400000, guid: cf37a98ab2e92ef4eae9be224f434fc5, type: 2}
+  - {fileID: 11400000, guid: 73dcb6236d82f644fa1099eb669cf195, type: 2}
+  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
+  - {fileID: 11400000, guid: e3dad6bfe801d4241a915f7063eff627, type: 2}
+  - {fileID: 11400000, guid: 5819e4ae64de1594da0a50f63c5a361c, type: 2}
+  - {fileID: 11400000, guid: f4e0c8253c2125448bebba799d80a6db, type: 2}
+  - {fileID: 11400000, guid: ef7cafc251e245640be0435b813f9770, type: 2}
+  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
+  - {fileID: 11400000, guid: 10b5e8fb90feb8b428917308fa3e4e25, type: 2}
+  - {fileID: 11400000, guid: 3a87129b2fa86be4fb51268e484a883b, type: 2}
+  - {fileID: 11400000, guid: 80cf6c128ffeefc4dade7d427ed0373d, type: 2}
   - {fileID: 11400000, guid: 3b892df5ef81aea4f83b1f378048b59b, type: 2}
-  <opener>k__BackingField: []
+  - {fileID: 11400000, guid: ba0e8fc85c68d8a44a88b7febc393ec9, type: 2}
+  - {fileID: 11400000, guid: 24134efa021601149999ce18010a94f1, type: 2}
+  - {fileID: 11400000, guid: ccb3caa03dc80154aaa05331bc77398b, type: 2}
+  - {fileID: 11400000, guid: e467301a186a97b48ac8cc33905b2e80, type: 2}
+  <opener>k__BackingField:
+  - {fileID: 11400000, guid: 33cf9720279384f4c9bd070a67c1ad82, type: 2}
+  - {fileID: 11400000, guid: b8c4627ce80ef35459d5b1803147d0ac, type: 2}
+  - {fileID: 11400000, guid: 33cf9720279384f4c9bd070a67c1ad82, type: 2}
